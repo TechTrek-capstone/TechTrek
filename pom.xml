@@ -12,7 +12,7 @@
     <artifactId>techtrek</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>TechTrek</name>
-    <description>Applicaiton for streamlining web development student job placement</description>
+    <description>Application for streamlining web development student job placement</description>
 
     <properties>
         <java.version>11</java.version>
