@@ -63,7 +63,7 @@ public class User {
     private Date modifyDate;
 
     @ManyToOne
-    @JoinColumn (name = "cohort_id")
+    @JoinColumn(name = "cohort_id")
     private Cohort cohort;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -73,7 +73,7 @@ public class User {
     private List<EventListing> eventListingList;
 
     @ManyToOne
-    @JoinColumn (name = "user_role_id")
+    @JoinColumn(name = "user_role_id")
     private UserRole userRole;
 
     public String getFullName() {

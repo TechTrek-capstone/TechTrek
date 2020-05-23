@@ -45,12 +45,4 @@ public class EventListing {
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="event_listings_users_join",
-            joinColumns={@JoinColumn(name="event_listings_id")},
-            inverseJoinColumns={@JoinColumn(name="users_id")}
-    )
-    private List<User> attendeeList;
 }
