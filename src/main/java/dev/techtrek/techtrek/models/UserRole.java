@@ -19,6 +19,6 @@ public class UserRole {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_role")
-//    private List<User> userList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_role")
+    private List<User> userList;
 }
