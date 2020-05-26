@@ -32,7 +32,7 @@ public class JobCategory {
 
     // FIXME: does not create the many-to-many relationship
 
-    @ManyToMany(mappedBy = "job_categories")
-    private List<JobListing> jobListings;
+//    @ManyToMany(mappedBy = "job_categories")
+//    private List<JobListing> jobListings;
 
 }
