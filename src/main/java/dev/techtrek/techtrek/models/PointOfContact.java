@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Data
 @EqualsAndHashCode
 @Entity
+@Table(name = "points_of_contact")
 public class PointOfContact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

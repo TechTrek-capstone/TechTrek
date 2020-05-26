@@ -1,6 +1,6 @@
 package dev.techtrek.techtrek;
 
-import dev.techtrek.techtrek.models.EmploymentStatus;
+//import dev.techtrek.techtrek.models.EmploymentStatus;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
