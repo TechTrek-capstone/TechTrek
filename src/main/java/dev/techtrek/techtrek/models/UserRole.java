@@ -21,6 +21,7 @@ public class UserRole extends User implements UserDetails {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+<<<<<<< HEAD
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<User> userList;
 
@@ -96,4 +97,8 @@ public class UserRole extends User implements UserDetails {
 
     public UserRole(){}
 
+=======
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_role")
+    private List<User> userList;
+>>>>>>> 99f6dee92c867a4feac761fdf678eef70073c60d
 }
