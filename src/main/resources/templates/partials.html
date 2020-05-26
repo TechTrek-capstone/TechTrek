@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- Head -->
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <!-- include stylesheets, etc here -->
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<!-- All Modals -->
+<div th:fragment="allModals">
+
+    <!-- Register Modal -->
+    <div th:fragment="registerModal" class="modal fade" id="registerModal" tabindex="-1" role="dialog"
+         aria-labelledby="registerModalLabel"
+         aria-hidden="true">
+        <!-- Create Form -->
+        <form th:action="@{/register}" th:method="post" th:object="${user}">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title text-center" id="registerModalLabel">Register</h2>
+                    </div>
+                    <div class="modal-body">
+                        <h3 class="">Create Username</h3>
+                        <!-- Create Username Here -->
+                        <input type="text" class="form-control" th:field="*{username}"/>
+                        <h3 class="">Create Password</h3>
+                        <!-- Create Password Here -->
+                        <input type="password" class="form-control" th:field="*{password}"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="create">Register</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Login Modal -->
+    <div th:fragment="loginModal" class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+         aria-labelledby="loginModalLabel"
+         aria-hidden="true">
+        <!-- Login Form -->
+        <form th:action="@{/login}" th:method="post" th:object="${user}">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title text-center" id="loginModalLabel">Login</h2>
+                    </div>
+                    <div class="modal-body">
+                        <h3 class="">Username</h3>
+                        <!-- Grab Username Here -->
+                        <input type="text" class="form-control" th:field="*{username}"/>
+                        <h3 class="">Password</h3>
+                        <!-- Grab Password Here -->
+                        <input type="password" class="form-control" th:field="*{password}"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="create">Login</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- JS scripts -->
+<standard_scripts th:fragment="footer">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+</standard_scripts>
+</body>
+</html>
