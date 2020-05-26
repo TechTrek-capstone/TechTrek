@@ -1,13 +1,22 @@
 <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Index</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="partials/partials :: head">
+    <title>TechTrek - Begin your journey</title>
 </head>
+
 <body>
-<h1>This is the index.</h1>
+
+<div id="landing-container">
+    <div class="landing-text-div">
+        <div class="landing-text">
+            <h1>TechTrek</h1>
+            <h3>Begin your journey</h3>
+        </div>
+    </div>
+</div>
+
+
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>
