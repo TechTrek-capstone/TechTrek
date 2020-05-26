@@ -35,9 +35,6 @@ public class JobListing {
     @Column(name = "preferred_skills", length = 3000)
     private String preferredSkills;
 
-    @Column(name = "categories", length = 1000)
-    private JobCategory jobCategory;
-
     @Column(name = "apply_url", nullable = false, length = 2000, unique = true)
     private String applyUrl;
 
@@ -57,11 +54,15 @@ public class JobListing {
     @JoinColumn (name = "user_id")
     private User user;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name="job_listings_users_join",
-//            joinColumns={@JoinColumn(name="job_listings_id")},
-//            inverseJoinColumns={@JoinColumn(name="users_id")}
-//    )
-//    private List<User> applicantList;
+
+
+    // FIXME: does not create the many-to-many relationship or joins table :(
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="job_listings_job_categories_join",
+            joinColumns={@JoinColumn(name="job_listing_id")},
+            inverseJoinColumns={@JoinColumn(name="job_category_id")}
+    )
+    private List<JobCategory> jobCategoriesList;
 }

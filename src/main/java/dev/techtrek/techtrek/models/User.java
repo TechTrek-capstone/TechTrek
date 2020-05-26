@@ -62,20 +62,19 @@ public class User {
     @Column(name = "modify_date")
     private Date modifyDate;
 
+    @ManyToOne
+    @JoinColumn(name = "cohort_id")
+    private Cohort cohort;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<JobListing> jobListingList;
-//
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-//    private List<EventListing> eventListingList;
-//
-//    @ManyToOne
-//    @JoinColumn (name = "cohort_id")
-//    private Cohort cohort;
-//
-//    @OneToOne
-//    @JoinColumn (name = "role_id")
-//    private UserRole userRole;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<EventListing> eventListingList;
+
+    @ManyToOne
+    @JoinColumn(name = "user_role_id")
+    private UserRole userRole;
 
     public String getFullName() {
         return firstName + " " + lastName;
