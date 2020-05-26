@@ -122,6 +122,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.webjars.bowergithub.juliangarnier</groupId>
+            <artifactId>anime</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

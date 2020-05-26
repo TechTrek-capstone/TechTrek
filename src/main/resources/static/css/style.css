@@ -1,0 +1,27 @@
+:root {
+    --codeup-green: rgb(104, 186, 46);
+}
+
+#landing-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--codeup-green);
+}
+
+.landing-text-div {
+    height: 75%;
+    width: 80%;
+    text-align: center;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.landing-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
