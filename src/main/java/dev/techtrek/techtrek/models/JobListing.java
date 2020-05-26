@@ -53,11 +53,15 @@ public class JobListing {
     @JoinColumn (name = "company_id")
     private Company company;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="job_listings_users_join",
-            joinColumns={@JoinColumn(name="job_listings_id")},
-            inverseJoinColumns={@JoinColumn(name="users_id")}
-    )
-    private List<User> applicantList;
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
+
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name="job_listings_users_join",
+//            joinColumns={@JoinColumn(name="job_listings_id")},
+//            inverseJoinColumns={@JoinColumn(name="users_id")}
+//    )
+//    private List<User> applicantList;
 }

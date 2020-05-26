@@ -1,8 +1,11 @@
 package dev.techtrek.techtrek.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "user_roles")
 public class UserRole {
@@ -13,9 +16,7 @@ public class UserRole {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_roles")
-    private List<User> userList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "role")
+    private User user;
 
-    public UserRole() {
-    }
 }
