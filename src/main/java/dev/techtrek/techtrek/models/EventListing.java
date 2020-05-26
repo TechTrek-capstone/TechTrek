@@ -42,9 +42,9 @@ public class EventListing {
     @Column(name = "is_archived", nullable = false)
     private boolean isArchived;
 
-    @ManyToOne
-    @JoinColumn (name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn (name = "user_id")
+//    private User user;
 
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    @JoinTable(
