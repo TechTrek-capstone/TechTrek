@@ -1,32 +1,39 @@
-<<<<<<< HEAD
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="partials/partials :: head">
     <title>TechTrek - Begin your journey</title>
-=======
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/partials :: head">
-    <title>TechTrek - Start your journey</title>
->>>>>>> 99f6dee92c867a4feac761fdf678eef70073c60d
-</head>
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="partials/partials :: head">
+        <title>TechTrek - Start your journey</title>
+    </head>
 
 <body>
 
-<<<<<<< HEAD
+<!-- Modals -->
+<div th:replace="partials/partials :: allModals"></div>
+
 <div id="landing-container">
     <div class="landing-text-div">
         <div class="landing-text">
             <h1>TechTrek</h1>
             <h3>Begin your journey</h3>
+            <!-- Button Register Modal -->
+            <button type="button" class="btn btn-primary registerButton" name="register" data-toggle="modal"
+                    data-target="#registerModal">
+                Register
+            </button>
+            <!-- Button Login Modal -->
+            <button type="button" class="btn btn-primary LoginButton" name="login" data-toggle="modal"
+                    data-target="#loginModal">
+                Login
+            </button>
         </div>
     </div>
 </div>
 
-=======
 <div><h1>TechTrek</h1></div>
->>>>>>> 99f6dee92c867a4feac761fdf678eef70073c60d
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
