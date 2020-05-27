@@ -17,20 +17,39 @@
     <div th:fragment="registerModal" class="modal fade" id="registerModal" tabindex="-1" role="dialog"
          aria-labelledby="registerModalLabel"
          aria-hidden="true">
-        <!-- Create Form -->
-<!--        <form th:action="" th:method="post" th:object="${user}">-->
+        <!-- Register Form -->
+        <form th:action="@{/register}" th:method="post" th:object="${user}">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2 class="modal-title text-center" id="registerModalLabel">Register</h2>
                     </div>
                     <div class="modal-body">
-                        <h3 class="">Create Username</h3>
-                        <!-- Create Username Here -->
-                        <input type="text" class=""/>
+
+                        <!-- Dropdown for Cohort -->
+                        <select name="cohort" id="cohort" th:field="*{cohortName}">
+                            <option value="Fortuna">Fortuna</option>
+                            <option value="Ganymede">Ganymede</option>
+                            <option value="Hyperion">Hyperion</option>
+                        </select>
+                        <!-- First Name -->
+                        <h3>Enter First Name</h3>
+                        <input type="text" th:field="*{firstName}"/>
+                        <!-- Last Name -->
+                        <h3>Enter Last Name</h3>
+                        <input type="text" th:field="*{lastName}"/>
+                        <!-- Create Password -->
                         <h3 class="">Create Password</h3>
-                        <!-- Create Password Here -->
-                        <input type="password" class=""/>
+                        <input type="password" th:field="*{password}"/>
+                        <!-- Confirm Password -->
+                        <h3>Confirm Password</h3>
+                        <input type="confirm-password" th:name="confirm_password"/>
+                        <!-- Email -->
+                        <h3>Email</h3>
+                        <input type="email" name="email" th:field="*{email}"/>
+                        <!-- Phone Number -->
+                        <h3>Phone Number</h3>
+                        <input type="text" th:field="*{phone_number}"/>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" name="create">Register</button>
@@ -38,7 +57,7 @@
                     </div>
                 </div>
             </div>
-<!--        </form>-->
+        </form>
     </div>
 
 

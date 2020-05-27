@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS `cohorts`
 CREATE TABLE IF NOT EXISTS `users`
 (
     `id`                BIGINT(20)   NOT NULL AUTO_INCREMENT,
-    `username`          varchar(255) NOT NULL UNIQUE,
     `bio_summary`       VARCHAR(500) NULL DEFAULT NULL,
     `cohort_name`       VARCHAR(255) NULL DEFAULT NULL,
     `create_date`       DATETIME(6)  NULL DEFAULT NULL,

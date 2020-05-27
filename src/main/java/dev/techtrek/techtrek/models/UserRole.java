@@ -1,5 +1,6 @@
 package dev.techtrek.techtrek.models;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "roles")
 public class UserRole extends User implements UserDetails {
@@ -23,6 +25,11 @@ public class UserRole extends User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String roles = ""; // Since we're not using the authorization part of the component
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
     }
 
     @Override
