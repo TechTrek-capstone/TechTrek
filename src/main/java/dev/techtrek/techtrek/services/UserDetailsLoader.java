@@ -2,6 +2,7 @@ package dev.techtrek.techtrek.services;
 
 import dev.techtrek.techtrek.models.User;
 import dev.techtrek.techtrek.models.UserRole;
+import dev.techtrek.techtrek.models.UserSecurityRoles;
 import dev.techtrek.techtrek.repositories.UsersRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,6 +24,6 @@ public class UserDetailsLoader implements UserDetailsService {
             throw new UsernameNotFoundException("No user found for " + email);
         }
 
-        return new UserRole(user);
+        return new UserSecurityRoles(user);
     }
 }

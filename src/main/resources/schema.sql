@@ -38,19 +38,21 @@ CREATE TABLE IF NOT EXISTS `users`
     `phone_number`      VARCHAR(255) NOT NULL,
     `employment_status` INT(11)      NULL DEFAULT NULL,
     `cohort_id`         BIGINT(20)   NULL DEFAULT NULL,
+    `role`              BIGINT(20)   NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE (`email`),
+--     FOREIGN KEY (`role`) REFERENCES `roles` (`id`),
     FOREIGN KEY (`cohort_id`) REFERENCES `cohorts` (`id`)
 );
 
 -- -----------------------------------------------------
--- user_roles table
+-- roles table
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `roles`
 (
     `id`       BIGINT(20)   NOT NULL AUTO_INCREMENT,
-    `name`     VARCHAR(255) NOT NULL,
+    `name`     VARCHAR(255) NOT NULL DEFAULT "Unassigned",
     `users_id` BIGINT(20)   NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)

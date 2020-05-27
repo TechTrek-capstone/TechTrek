@@ -77,7 +77,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private UserRole role;
+    private UserRole userRole;
 
     public String getFullName() {
         return firstName + " " + lastName;
