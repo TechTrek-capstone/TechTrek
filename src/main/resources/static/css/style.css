@@ -7,17 +7,17 @@
     --codeup-green: rgb(104, 186, 46);
 }
 
-#landing-container {
-    height: 100vh;
-    width: 100vw;
-}
+/*#landing-container {*/
+/*    height: 100vh;*/
+/*    width: 100vw;*/
+/*}*/
 
-.landing-text-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+/*.landing-text-container {*/
+/*    position: page;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*}*/
 
 .landing-div {
     text-align: center;
