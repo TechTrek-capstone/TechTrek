@@ -50,7 +50,7 @@
     width: 4.5rem;
     height: 4.5rem;
     border-radius: 50%;
-    margin: auto;
+    margin: .5rem auto 1rem auto;
     line-height: 4.5rem;
 }
 
@@ -75,6 +75,7 @@ hr {
 }
 
 .icon-circle > svg {
+    width: 70%;
     width: 70%;
     height: 70%;
 }
