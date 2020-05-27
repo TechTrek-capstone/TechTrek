@@ -32,3 +32,5 @@ build/
 
 ### application.properties ###
 src/main/resources/application.properties
+/dan_pubkey.pub
+/kal_pubkey.pub
