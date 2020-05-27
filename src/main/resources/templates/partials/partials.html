@@ -6,7 +6,7 @@
     <meta charset="UTF-8"/>
     <!-- include stylesheets, etc here -->
     <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
-    <link th:href="@{/css/custom.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
          aria-labelledby="registerModalLabel"
          aria-hidden="true">
         <!-- Create Form -->
-        <form th:action="@{/register}" th:method="post" th:object="${user}">
+<!--        <form th:action="" th:method="post" th:object="${user}">-->
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -27,10 +27,10 @@
                     <div class="modal-body">
                         <h3 class="">Create Username</h3>
                         <!-- Create Username Here -->
-                        <input type="text" class="form-control" th:field="*{username}"/>
+                        <input type="text" class=""/>
                         <h3 class="">Create Password</h3>
                         <!-- Create Password Here -->
-                        <input type="password" class="form-control" th:field="*{password}"/>
+                        <input type="password" class=""/>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" name="create">Register</button>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+<!--        </form>-->
     </div>
 
 
@@ -47,7 +47,7 @@
          aria-labelledby="loginModalLabel"
          aria-hidden="true">
         <!-- Login Form -->
-        <form th:action="@{/login}" th:method="post" th:object="${user}">
+<!--        <form th:action="" th:method="post" th:object="${user}">-->
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -56,10 +56,10 @@
                     <div class="modal-body">
                         <h3 class="">Username</h3>
                         <!-- Grab Username Here -->
-                        <input type="text" class="form-control" th:field="*{username}"/>
+                        <input type="text" class=""/>
                         <h3 class="">Password</h3>
                         <!-- Grab Password Here -->
-                        <input type="password" class="form-control" th:field="*{password}"/>
+                        <input type="password" class=""/>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" name="create">Login</button>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+<!--        </form>-->
     </div>
 </div>
 

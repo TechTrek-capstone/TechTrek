@@ -5,11 +5,8 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-
 import java.util.Collection;
 import java.util.List;
-
-
 
 @Entity
 @Table(name = "roles")
@@ -17,10 +14,8 @@ public class UserRole extends User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @Column(name = "name", nullable = false, unique = true)
     private String name;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<User> userList;
 
@@ -53,7 +48,6 @@ public class UserRole extends User implements UserDetails {
     public UserRole(User user) {
         super(user);  // Call the copy constructor defined in User
     }
-
 
     @Override
     public long getId() {
@@ -94,6 +88,6 @@ public class UserRole extends User implements UserDetails {
         this.userList = userList;
     }
 
-    public UserRole(){}
-
+    public UserRole() {
+    }
 }
