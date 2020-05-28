@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -26,12 +27,22 @@ public class UserController {
         return "index";
     }
 
+    @PostMapping("/login")
+    public String login(@ModelAttribute User user) {
+    return "redirect:/test";
+    }
+
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user) {
 
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         users.save(user);
-        return "redirect:/login";
+        return "redirect:/test";
+    }
+
+    @GetMapping("/test")
+    public String test(@ModelAttribute User user) {
+            return "test";
     }
 }
