@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
+<head th:replace="partials/partials :: head">
+    <title>Jobs</title>
+</head>
+
+<body>
+<!--<nav th:replace="partials/partials :: navbar"></nav>-->
+
+<container class="text-center">
+    <h1>All Job Listings</h1>
+    <p>This page will show all the job listings as a card group. Each card be a hyperlink to the individual job page, and will include:
+    <ul>
+        <li>Company image (or placeholder)</li>
+        <li>Title</li>
+        <li>Company</li>
+        <li>Location</li>
+        <li>Listing date</li>
+        <li>Description snippit</li>
+    </ul>
+    </p>
+</container>
+
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+</body>
+</html>

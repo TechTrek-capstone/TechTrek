@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
+<head th:replace="partials/partials :: head">
+    <title>Jobs</title>
+</head>
+
+<body>
+<!--<nav th:replace="partials/partials :: navbar"></nav>-->
+
+<container class="text-center">
+    <h1>Individual Job Listing</h1>
+    <p>This page will show an individual job listing. Should include:
+        <ul>
+            <li>Title</li>
+            <li>Company</li>
+            <li>Location</li>
+            <li>Listing date</li>
+            <li>Description</li>
+            <li>Required skills</li>
+            <li>Preferred skills</li>
+            <li>Point of contact</li>
+            <li>Hyperlink to external application URL</li>
+        </ul>
+
+    <br /><b>Additionally, for Users with the placement role, there should be buttons for edit, delete, and archive on this view.</b>
+
+    </p>
+</container>
+
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+</body>
+</html>

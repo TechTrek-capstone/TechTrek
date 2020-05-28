@@ -38,11 +38,18 @@ public class UserController {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         users.save(user);
-        return "redirect:/test";
+        return "redirect:/profile";
     }
 
-    @GetMapping("/test")
-    public String test(@ModelAttribute User user) {
-            return "test";
+    @GetMapping("/home")
+    public String showDashboard(Model model){
+        model.addAttribute("user", new User());
+        return "users/index";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(Model model){
+        model.addAttribute("user", new User());
+        return "users/profile";
     }
 }

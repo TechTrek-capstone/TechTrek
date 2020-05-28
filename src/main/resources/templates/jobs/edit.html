@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
+<head th:replace="partials/partials :: head">
+    <title>Jobs - Edit</title>
+</head>
+
+<body>
+<!--<nav th:replace="partials/partials :: navbar"></nav>-->
+
+<container class="text-center">
+    <h1>Edit Job Listing</h1>
+    <p><b>This page will only be visible to Users of the placement role.</b> If edit on the individual listing is clicked, should bring up a form pre-loaded with:
+
+    <br/>
+    <ul>
+        <li>Title</li>
+        <li>Company</li>
+        <li>Location</li>
+        <li>Listing date</li>
+        <li>Description</li>
+        <li>Required skills</li>
+        <li>Preferred skills</li>
+        <li>Point of contact</li>
+        <li>Hyperlink to external application URL</li>
+    </ul>
+
+    And a button to save changes.
+    </p>
+</container>
+
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+</body>
+</html>

@@ -3,6 +3,7 @@ package dev.techtrek.techtrek.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -16,6 +17,9 @@ public class Cohort {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
+
+    @Column(name = "graduation_date")
+    private Date graduationDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cohort")
     private List<User> studentList;
