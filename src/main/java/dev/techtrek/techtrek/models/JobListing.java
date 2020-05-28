@@ -55,14 +55,4 @@ public class JobListing {
     private User user;
 
 
-
-    // FIXME: does not create the many-to-many relationship or joins table :(
-
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name="job_listings_job_categories_join",
-//            joinColumns={@JoinColumn(name="job_listing_id")},
-//            inverseJoinColumns={@JoinColumn(name="job_category_id")}
-//    )
-//    private List<JobCategory> jobCategoriesList;
 }
