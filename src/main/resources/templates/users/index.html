@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
+<head th:replace="partials/partials :: head">
+    <title>Dashboard</title>
+</head>
+
+<body>
+<nav th:replace="partials/partials :: navbar"></nav>
+
+<h1>User Dashboard</h1>
+<p>This page will show the dashboard view for users including recent job postings, recent events, a mini profile to the right and possible notifications.</p>
+
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+</body>
+</html>
