@@ -139,4 +139,12 @@ public class JobListingController {
         // Redirect to the jobs index
         return "redirect:/jobs";
     }
+
+
+    // (Placement roles only) Delete a job listing
+    @PostMapping("/jobs/{id}/delete")
+    public String deleteJobListing(@PathVariable long id) {
+        jobsRepo.deleteById(id);
+        return "redirect:/jobs";
+    }
 }
