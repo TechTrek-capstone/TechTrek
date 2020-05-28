@@ -29,7 +29,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute User user) {
-    return "redirect:/test";
+        return "redirect:/home";
     }
 
     @PostMapping("/register")
