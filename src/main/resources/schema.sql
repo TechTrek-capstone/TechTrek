@@ -11,8 +11,9 @@ USE `techtrek_db`;
 
 CREATE TABLE IF NOT EXISTS `cohorts`
 (
-    `id`   BIGINT(20)   NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(255) NOT NULL,
+    `id`              BIGINT(20)   NOT NULL AUTO_INCREMENT,
+    `name`            VARCHAR(255) NOT NULL,
+    `graduation_date` DATETIME(6)  NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE (`name`)
 );
@@ -25,12 +26,10 @@ CREATE TABLE IF NOT EXISTS `users`
 (
     `id`                BIGINT(20)   NOT NULL AUTO_INCREMENT,
     `bio_summary`       VARCHAR(500) NULL DEFAULT NULL,
-    `cohort_name`       VARCHAR(255) NULL DEFAULT NULL,
     `create_date`       DATETIME(6)  NULL DEFAULT NULL,
     `email`             VARCHAR(255) NOT NULL,
     `first_name`        VARCHAR(255) NOT NULL,
     `github_username`   VARCHAR(255) NULL DEFAULT NULL,
-    `graduation_date`   DATETIME(6)  NULL DEFAULT NULL,
     `last_name`         VARCHAR(255) NOT NULL,
     `linkedin_username` VARCHAR(255) NULL DEFAULT NULL,
     `modify_date`       DATETIME(6)  NULL DEFAULT NULL,

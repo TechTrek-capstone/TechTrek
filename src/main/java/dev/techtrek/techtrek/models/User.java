@@ -49,9 +49,6 @@ public class User {
     @Column(name = "employment_status")
     private EmploymentStatus employmentStatus;
 
-    @Column(name = "graduation_date")
-    private Date graduationDate;
-
     @Column(name = "bio_summary", length = 500)
     private String bioSummary;
 

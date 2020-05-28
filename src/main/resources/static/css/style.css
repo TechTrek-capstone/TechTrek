@@ -84,3 +84,7 @@ hr {
     transform: scale(1.15);
     z-index: 100;
 }
+
+@media screen {
+
+}
