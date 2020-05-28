@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+
+<!-- ########### Jobs Card ############## -->
+<!--Basic job listing fragment used to show all jobs in cards.-->
+<div th:fragment="jobsListFrag">
+
+    <div th:each="jobs : ${jobs}" class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 th:text="${jobs.title}" class="card-title">Card title</h5>
+
+            <!--            Limiting the jobs text (description) to 100 chars for readability in the card and to prevent -->
+            <!--            growing the div. -->
+            <p th:utext="${#strings.abbreviate(jobs.description, 100)}" class="card-text">Some quick example text.</p>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" th:text="${jobs.location}">Location</li>
+
+            <!--           Is_remote is boolean so we are trying to produce the word "yes" if it true. -->
+            <!--           Null if false. -->
+            <li class="list-group-item">Remote: <span th:text="${jobs.is_remote}? #{true} : #{false}">yes</span></li>
+            <li class="list-group-item" th:text="${jobs.listing_date}">Listing date</li>
+        </ul>
+
+        <div class="card-body">
+            <!--            Added the apply url using thymeleafs literal annotation. The bars might not work for linking outside sites. -->
+            <!--            This setup assumes the URL is exterior to localhost.-->
+            <!--            https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#link-urls -->
+            <a th:href="@{|${jobs.apply_url}|}" class="card-link">Application</a>
+            <!--            <a href="#" class="card-link">Another link</a>-->
+        </div>
+    </div>
+</div>
+<!-- ########### End Jobs Card ############## -->
+
+

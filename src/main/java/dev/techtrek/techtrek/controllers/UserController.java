@@ -34,4 +34,16 @@ public class UserController {
         users.save(user);
         return "redirect:/profile";
     }
+
+    @GetMapping("/home")
+    public String showDashboard(Model model){
+        model.addAttribute("user", new User());
+        return "users/index";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(Model model){
+        model.addAttribute("user", new User());
+        return "users/profile";
+    }
 }

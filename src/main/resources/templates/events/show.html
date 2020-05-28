@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
+<head th:replace="partials/partials :: head">
+    <title>Events</title>
 </head>
-<body>
 
+<body>
+<!--<nav th:replace="partials/partials :: navbar"></nav>-->
+
+<h1>Individual Event Listing</h1>
+<p>This page will show an individual event listing. Should include:
+    <ul>
+        <li>Title</li>
+        <li>Location</li>
+        <li>Date</li>
+        <li>Time</li>
+        <li>Description</li>
+        <li>Hyperlink to RSVP URL (if applicable)</li>
+    </ul>
+</p>
+
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>
