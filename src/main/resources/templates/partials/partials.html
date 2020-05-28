@@ -43,18 +43,6 @@
 <!-- All Modals -->
 <div th:fragment="allModals">
 
-
-<!--    <label for="title">Title:</label>-->
-<!--    <input th:field="*{title}" name="title" id="title" />-->
-<!--    <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />-->
-<!--    <br/>-->
-<!--    <label for="body">Description:</label>-->
-<!--    <input th:field="*{description}" name="description" id="description" />-->
-<!--    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" />-->
-<!--    <br />-->
-
-
-
     <!-- Register Modal -->
     <div th:fragment="registerModal" class="modal fade" id="registerModal" tabindex="-1" role="dialog"
          aria-labelledby="registerModalLabel"
@@ -83,7 +71,10 @@
                         <input type="text" th:field="*{lastName}" required/>
                         <!-- Create Password -->
                         <h3 class="">Create Password</h3>
-                        <input type="password" th:field="*{password}" name="password" required/>
+                        <input class="" id="pwd" type="password" th:field="*{password}" name="password" required/>
+                        <div id="progress">
+                            <div id="progress-bar"></div>
+                        </div>
                         <!-- Confirm Password -->
                         <h3>Confirm Password</h3>
                         <input type="password" name="confirmPassword" required/>
@@ -92,7 +83,7 @@
                         <input type="email" name="email" th:field="*{email}" required/>
                         <!-- Phone Number -->
                         <h3>Phone Number</h3>
-                        <input type="text" th:field="*{phone_number}" required oninvalid="this.setCustomValidity('No dashes please.'/>
+                        <input type="text" th:field="*{phone_number}" required oninvalid="this.setCustomValidity('No dashes please.')"/>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" name="create">Register</button>
@@ -138,6 +129,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"></script>
+    <script th:src="@{/js/custom.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             crossorigin="anonymous"></script>

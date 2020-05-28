@@ -88,3 +88,29 @@ hr {
 @media screen {
 
 }
+
+/* PROGRESS BAR TEST */
+#progress {
+    height: 20px;
+    width: 100%;
+    margin-top: 0.6em;
+}
+
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    transition: width 500ms linear;
+}
+
+.progress-bar-danger {
+    background: #d00;
+}
+
+.progress-bar-warning {
+    background: #f50;
+}
+
+.progress-bar-success {
+    background: #080;
+}
+/* END PROGRESS BAR */
