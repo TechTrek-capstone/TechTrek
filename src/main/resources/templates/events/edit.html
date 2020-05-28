@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
+<head th:replace="partials/partials :: head">
+    <title>Events - Edit</title>
 </head>
-<body>
 
+<body>
+<nav th:replace="partials/partials :: navbar"></nav>
+
+<container class="text-center">
+    <h1>Edit Event Listing</h1>
+    <p><b>This page will only be visible to Users of the placement role.</b> If edit on the individual listing is clicked, should bring up a form pre-loaded with:
+
+        <br/>
+    <ul>
+        <li>Image re-upload (overwrites existing image uploaded)</li>
+        <li>Title</li>
+        <li>Location</li>
+        <li>Date</li>
+        <li>Time</li>
+        <li>Description</li>
+        <li>RSVP URL (if applicable)</li>
+    </ul>
+
+    And a button to save changes.
+    </p>
+</container>
+
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>

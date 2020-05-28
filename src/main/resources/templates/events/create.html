@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
+<head th:replace="partials/partials :: head">
+    <title>Post an event</title>
 </head>
-<body>
 
+<body>
+<nav th:replace="partials/partials :: navbar"></nav>
+
+<container class="text-center">
+    <h1>Create Event</h1>
+    <p><b>This page will only be visible to Users of the placement role.</b> Should load a form with the following input fields:
+
+        <br/>
+    <ul>
+        <li>Image upload</li>
+        <li>Title</li>
+        <li>Date</li>
+        <li>Time</li>
+        <li>Location</li>
+        <li>Description</li>
+        <li>RSVP URL</li>
+    </ul>
+
+    And a button to submit the event.
+    </p>
+</container>
+
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>

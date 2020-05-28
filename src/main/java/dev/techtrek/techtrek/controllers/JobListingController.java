@@ -4,6 +4,7 @@ import dev.techtrek.techtrek.models.Company;
 import dev.techtrek.techtrek.models.JobListing;
 import dev.techtrek.techtrek.models.User;
 import dev.techtrek.techtrek.repositories.JobsRepo;
+import dev.techtrek.techtrek.repositories.UsersRepo;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +20,11 @@ public class JobListingController {
     // Dependency injection
 
     private JobsRepo jobsRepo;
+    private UsersRepo usersRepo;
 
-    public JobListingController(JobsRepo jobsRepo){
+    public JobListingController(JobsRepo jobsRepo, UsersRepo usersRepo){
         this.jobsRepo = jobsRepo;
+        this.usersRepo = usersRepo;
     }
 
 
@@ -61,7 +64,7 @@ public class JobListingController {
             Errors validation,
             Model model
     ) {
-        // Check if errors present given title and body requirements defined in Post.java
+        // Check if errors present given requirements defined in JobListing.java
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("job", jobListing);
@@ -83,7 +86,7 @@ public class JobListingController {
 
     // (Placement roles only) Edit a job listing
 
-    // View the post info to be edited
+    // View the job info to be edited
     @GetMapping("/jobs/{id}/edit")
     public String viewEditJobListingForm(@PathVariable long id, Model model) {
         model.addAttribute("job", jobsRepo.getOne(id));
