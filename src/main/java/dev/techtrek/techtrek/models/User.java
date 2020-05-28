@@ -22,8 +22,8 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+//    @Column(name = "username", nullable = false, unique = true)
+//    private String username;
 
     @Column(name = "user_password", nullable = false)
     private String password;
@@ -77,7 +77,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private UserRole role;
+    private UserRole userRole;
 
     public String getFullName() {
         return firstName + " " + lastName;
@@ -86,7 +86,7 @@ public class User {
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
-        username = copy.username;
+//        username = copy.username;
         password = copy.password;
     }
     public User(){}
