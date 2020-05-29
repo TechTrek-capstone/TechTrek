@@ -7,8 +7,72 @@
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
 
+<div class="container mt-3 mb-3" id="individual-job-listing">
+    <ul class="list-group list-group-flush">
+
+    <!-- JOB TITLE, COMPANY, LOCATION, AND LISTING DATE -->
+        <li class="list-group-item">
+
+            <!--   Title   -->
+            <h2 class="text-center mb-1" th:text="${job.title}"></h2>
+
+                <!--   Company   -->
+                <br><h5 class="text-black-50 text-center"><span th:text="${job.company}"></span> |
+
+                <!--   Location   -->
+                <span th:text="${job.location}"></span></h5>
+
+                <!--   Listing date   -->
+                <br><b>Posted: <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}"></span></b>
+        </li>
+
+        <!-- JOB DESCRIPTION -->
+        <li class="list-group-item">
+            <h4>Description</h4>
+            <p th:text="${job.description}"></p>
+        </li>
+
+        <!-- JOB SKILLS -->
+        <li class="list-group-item">
+            <h4>Skills</h4>
+            <b>Required</b>
+            <p th:text="${job.requiredSkills}"></p>
+
+            <br><br><b>Preferred</b>
+            <p th:text="${job.preferredSkills}"></p>
+        </li>
+
+        <!-- POINT OF CONTACT -->
+        <li class="list-group-item">
+            <h4>Additional Information</h4>
+
+            <b>Remote available?: </b><span th:text="${job.isRemote}? Yes : No ">N/A</span>
+
+            <br><b>Point of Contact: </b>
+<!--            <br><p th:text="${job.requiredSkills}"></p>-->
+        </li>
+
+        <!-- APPLY URL LINK -->
+        <li class="list-group-item">
+            <a href="${job.applyUrl}" target="_blank">
+                <button type="button" class="btn btn-primary btn-lg btn-block">Apply</button>
+            </a>
+        </li>
+    </ul>
+
+    <!--<div sec:authorize="isAuthenticated()" style="display: flex" class="ml-auto mr-auto w-100">-->
+    <!--    <form method="GET" th:action="@{'/posts/' + ${post.getId()} + '/edit'}">-->
+    <!--        <button class="btn btn-outline-primary">Edit</button>-->
+    <!--    </form>-->
+
+    <!--    <form method="POST" th:action="@{'/posts/' + ${post.getId()} + '/delete'}">-->
+    <!--        <button class="btn btn-danger">Delete</button>-->
+    <!--    </form>-->
+    <!--</div>-->
+</div>
+
+
 <container class="text-center">
-    <h1>Individual Job Listing</h1>
     <p>This page will show an individual job listing. Should include:
         <ul>
             <li>Title</li>
@@ -30,3 +94,31 @@
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">-->
+<!--<head th:replace="partials/partials :: head"></head>-->
+<!--<body>-->
+<!--<header th:replace="partials/partials :: header"></header>-->
+<!--<nav th:replace="partials/partials :: navbar"></nav>-->
+
+<!--<h2 th:text="${post.title}"></h2>-->
+<!--<p th:text="${post.body}"></p>-->
+
+<!--<p>Posted by: <span th:text="${post.getUser().getEmail()}"></span>-->
+
+
+<!--<div sec:authorize="isAuthenticated()" style="display: flex" class="ml-auto mr-auto w-100">-->
+<!--    <form method="GET" th:action="@{'/posts/' + ${post.getId()} + '/edit'}">-->
+<!--        <button class="btn btn-outline-primary">Edit</button>-->
+<!--    </form>-->
+
+<!--    <form method="POST" th:action="@{'/posts/' + ${post.getId()} + '/delete'}">-->
+<!--        <button class="btn btn-danger">Delete</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>-->
+<!--</body>-->
+<!--</html>-->
