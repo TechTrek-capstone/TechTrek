@@ -43,20 +43,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /* Logout configuration */
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login?logout") // append a query string value
+                .logoutSuccessUrl("/") // append a query string value
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeRequests()
                 .antMatchers("/") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers(
-//                        "/ads/create", // only authenticated users can create ads
-//                        "/ads/{id}/edit" // only authenticated users can edit ads
-//                )
-//                .authenticated()
+                .and()
+                .authorizeRequests()
+                .antMatchers(
+                        "/jobs", // only authenticated users can view ads
+                        "/resume" // only authenticated users can view resume
+                )
+                .authenticated()
         ;
     }
 }
