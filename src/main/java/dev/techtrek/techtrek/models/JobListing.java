@@ -49,7 +49,7 @@ public class JobListing {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "listing_date", nullable = false)
-    private Date listingDate;
+    private Date listingDate = new Date();
 
     @Column(name = "is_archived", nullable = false)
     private boolean isArchived;
