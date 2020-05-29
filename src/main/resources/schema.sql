@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `users`
     `linkedin_username` VARCHAR(255) NULL DEFAULT NULL,
     `modify_date`       DATETIME(6)  NULL DEFAULT NULL,
     `user_password`     VARCHAR(255) NOT NULL,
-    `phone_number`      VARCHAR(255) NOT NULL,
+    `phone_number`      VARCHAR(255) NULL DEFAULT NULL,
     `employment_status` INT(11)      NULL DEFAULT NULL,
     `cohort_id`         BIGINT(20)   NULL DEFAULT NULL,
     `role`              BIGINT(20)   NULL DEFAULT NULL,
