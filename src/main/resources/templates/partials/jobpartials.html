@@ -17,19 +17,21 @@
         </div>
 
         <ul class="list-group list-group-flush">
-            <li class="list-group-item" th:text="${jobs.location}">Location</li>
+            <li class="list-group-item"><a th:href="|http://google.com/maps/place/${jobs.location}|" target="_blank">
+                <span th:text="${jobs.location}"></span> </a></li>
 
             <!--           Is_remote is boolean so we are trying to produce the word "yes" if it true. -->
             <!--           Null if false. -->
-            <li class="list-group-item">Remote: <span th:text="${jobs.is_remote}? #{true} : #{false}">yes</span></li>
-            <li class="list-group-item" th:text="${jobs.listing_date}">Listing date</li>
+            <li class="list-group-item">Remote: <span th:text="${jobs.isRemote}? yes : no ">yes</span></li>
+            <li class="list-group-item" th:text="${#dates.format(jobs.listingDate, 'dd-MM-yyyy HH:mm')}">Listing date
+            </li>
         </ul>
 
         <div class="card-body">
             <!--            Added the apply url using thymeleafs literal annotation. The bars might not work for linking outside sites. -->
             <!--            This setup assumes the URL is exterior to localhost.-->
             <!--            https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#link-urls -->
-            <a th:href="@{|${jobs.apply_url}|}" class="card-link">Application</a>
+            <a th:href="@{|${jobs.applyUrl}|}" class="card-link">Application</a>
             <!--            <a href="#" class="card-link">Another link</a>-->
         </div>
     </div>
