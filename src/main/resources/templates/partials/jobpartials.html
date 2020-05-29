@@ -7,6 +7,7 @@
 <div th:fragment="jobsListFrag">
 
     <div th:each="jobs : ${jobs}" class="card" style="width: 18rem;">
+        <a th:href="@{|/jobs/${jobs.id}|}">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
             <h5 th:text="${jobs.title}" class="card-title">Card title</h5>
@@ -23,7 +24,7 @@
             <!--           Is_remote is boolean so we are trying to produce the word "yes" if it true. -->
             <!--           Null if false. -->
             <li class="list-group-item">Remote: <span th:text="${jobs.isRemote}? yes : no ">yes</span></li>
-            <li class="list-group-item" th:text="${#dates.format(jobs.listingDate, 'dd-MM-yyyy HH:mm')}">Listing date
+            <li class="list-group-item" th:text="${#dates.format(jobs.listingDate, 'MM-dd-yyyy HH:mm')}">Listing date
             </li>
         </ul>
 
@@ -34,6 +35,7 @@
             <a th:href="@{|${jobs.applyUrl}|}" class="card-link">Application</a>
             <!--            <a href="#" class="card-link">Another link</a>-->
         </div>
+        </a>
     </div>
 </div>
 <!-- ########### End Jobs Card ############## -->
