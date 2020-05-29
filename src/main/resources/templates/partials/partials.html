@@ -82,8 +82,8 @@
                         <h3>Email</h3>
                         <input type="email" name="email" th:field="*{email}" required/>
                         <!-- Phone Number -->
-                        <h3>Phone Number</h3>
-                        <input type="text" th:field="*{phone_number}" required oninvalid="this.setCustomValidity('No dashes please.')"/>
+<!--                        <h3>Phone Number</h3> -->
+<!--                        <input type="text" th:field="*{phone_number}" required oninvalid="this.setCustomValidity('No dashes please.')"/> -->
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" name="create">Register</button>
@@ -121,6 +121,29 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Event Listings Fragment -->
+<div th:fragment="eventsList">
+
+    <div th:each="event : ${eventsList}" class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 th:text="${event.title}" class="card-title">Card title</h5>
+            <p th:utext="${#strings.abbreviate(event.description, 100)}" class="card-text">Test.</p>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><a th:href="|http://google.com/maps/place/${event.location}|" target="_blank">
+                <span th:text="${event.location}"></span></a></li>
+            <li class="list-group-item" th:text="${#dates.format(event.listingDate, 'dd-MM-yyyy HH:mm')}">Listing date
+            </li>
+        </ul>
+
+        <div class="card-body">
+            <a th:href="@{|${event.rsvpUrl}|}" class="card-link">RSVP</a>
+        </div>
     </div>
 </div>
 

@@ -37,7 +37,7 @@ public class EventListingController {
     @GetMapping("/events")
     public String showAllEventListings(Model model){
         List<EventListing> eventList = eventsRepo.findAll();
-        model.addAttribute("events", eventList);
+        model.addAttribute("eventsList", eventList);
         return "events/index";
     }
 
