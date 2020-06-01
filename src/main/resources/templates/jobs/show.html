@@ -17,7 +17,7 @@
             <h2 class="text-center mb-1" th:text="${job.title}"></h2>
 
                 <!--   Company   -->
-                <br><h5 class="text-black-50 text-center"><span th:text="${job.company}"></span> |
+                <br><h5 class="text-black-50 text-center"><span th:text="${job.getCompany().getName()}"></span> |
 
                 <!--   Location   -->
                 <span th:text="${job.location}"></span></h5>

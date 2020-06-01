@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `cohorts`
     `id`              BIGINT(20)   NOT NULL AUTO_INCREMENT,
     `name`            VARCHAR(255) NOT NULL,
     `graduation_date` DATETIME(6)  NULL DEFAULT NULL,
+    `location`        VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE (`name`)
 );
@@ -40,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `users`
     `role`              BIGINT(20)   NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE (`email`),
---     FOREIGN KEY (`role`) REFERENCES `roles` (`id`),
+    FOREIGN KEY (`role`) REFERENCES `roles` (`id`),
     FOREIGN KEY (`cohort_id`) REFERENCES `cohorts` (`id`)
 );
 

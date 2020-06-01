@@ -56,7 +56,7 @@
         <!-- Register Form -->
         <form th:action="@{/register}" th:method="post" th:object="${user}"
               oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match." : "")'>
-            >
+
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
