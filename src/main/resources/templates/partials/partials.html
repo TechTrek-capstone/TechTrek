@@ -96,6 +96,10 @@
                         <!-- Email -->
                         <h3>Email</h3>
                         <input type="email" name="email" th:field="*{email}" required/>
+
+                        <!-- User role (hidden - for landing register page this will always be Student (id role 3) -->
+                        <input type="hidden" value="3" th:field="*{userRole}"/>
+
                     </div>
 
                     <div class="modal-footer">
