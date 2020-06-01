@@ -1,6 +1,5 @@
 package dev.techtrek.techtrek.controllers;
 
-
 import dev.techtrek.techtrek.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
 
     @GetMapping("/")
-    public String showSignupForm(Model model){
+    public String showLandingPage(Model model){
         model.addAttribute("user", new User());
         return "index";
     }
