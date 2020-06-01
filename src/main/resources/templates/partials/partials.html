@@ -65,34 +65,39 @@
                     <div class="modal-body">
 
                         <!-- Dropdown for Cohort -->
-                        <select name="cohort" id="cohort" th:field="*{cohort}">
-                            <option value="1">Fortuna</option>
-                            <option value="2">Apex</option>
-                            <option value="3">Ganymede</option>
-                            <option value="4">Hyperion</option>
-                        </select>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="cohort">Cohort</label>
+                            </div>
+                            <select class="custom-select" id="cohort" th:field="*{cohort}">
+                                <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>
+                            </select>
+                        </div>
+
                         <!-- First Name -->
                         <h3>Enter First Name</h3>
                         <input type="text" th:field="*{firstName}" required/>
+
                         <!-- Last Name -->
                         <h3>Enter Last Name</h3>
                         <input type="text" th:field="*{lastName}" required/>
+
                         <!-- Create Password -->
                         <h3 class="">Create Password</h3>
                         <input class="" id="pwd" type="password" th:field="*{password}" name="password" required/>
                         <div id="progress">
                             <div id="progress-bar"></div>
                         </div>
+
                         <!-- Confirm Password -->
                         <h3>Confirm Password</h3>
                         <input type="password" name="confirmPassword" required/>
+
                         <!-- Email -->
                         <h3>Email</h3>
                         <input type="email" name="email" th:field="*{email}" required/>
-                        <!-- Phone Number -->
-                        <!--                        <h3>Phone Number</h3> -->
-                        <!--                        <input type="text" th:field="*{phone_number}" required oninvalid="this.setCustomValidity('No dashes please.')"/> -->
                     </div>
+
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" name="create">Register</button>
                         <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>

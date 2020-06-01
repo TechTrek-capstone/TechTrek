@@ -29,13 +29,13 @@
         <!-- JOB DESCRIPTION -->
         <li class="list-group-item">
             <h4>Description</h4>
-            <p th:text="${job.description}"></p>
+            <p class="pl-5" th:text="${job.description}"></p>
         </li>
 
         <!-- JOB SKILLS -->
         <li class="list-group-item">
             <h4>Skills</h4>
-            <b>Required</b>
+            <b class="mt-5">Required</b>
             <p th:text="${job.requiredSkills}"></p>
 
             <br><br><b>Preferred</b>
@@ -46,7 +46,8 @@
         <li class="list-group-item">
             <h4>Additional Information</h4>
 
-            <b>Remote available?: </b><span th:text="${job.isRemote}? Yes : No ">N/A</span>
+            <b>Remote available?</b>
+            <br /><span class="pl-5" th:text="${job.isRemote}? Yes : No ">N/A</span>
 
             <br><b>Point of Contact: </b>
 <!--            <br><p th:text="${job.requiredSkills}"></p>-->
@@ -94,31 +95,3 @@
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">-->
-<!--<head th:replace="partials/partials :: head"></head>-->
-<!--<body>-->
-<!--<header th:replace="partials/partials :: header"></header>-->
-<!--<nav th:replace="partials/partials :: navbar"></nav>-->
-
-<!--<h2 th:text="${post.title}"></h2>-->
-<!--<p th:text="${post.body}"></p>-->
-
-<!--<p>Posted by: <span th:text="${post.getUser().getEmail()}"></span>-->
-
-
-<!--<div sec:authorize="isAuthenticated()" style="display: flex" class="ml-auto mr-auto w-100">-->
-<!--    <form method="GET" th:action="@{'/posts/' + ${post.getId()} + '/edit'}">-->
-<!--        <button class="btn btn-outline-primary">Edit</button>-->
-<!--    </form>-->
-
-<!--    <form method="POST" th:action="@{'/posts/' + ${post.getId()} + '/delete'}">-->
-<!--        <button class="btn btn-danger">Delete</button>-->
-<!--    </form>-->
-<!--</div>-->
-
-<!--<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>-->
-<!--</body>-->
-<!--</html>-->
