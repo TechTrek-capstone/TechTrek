@@ -54,9 +54,10 @@
 
         <!-- APPLY URL LINK -->
         <li class="list-group-item">
-            <a href="${job.applyUrl}" target="_blank">
+            <a th:href="@{${job.applyUrl}}" target="_blank">
                 <button type="button" class="btn btn-primary btn-lg btn-block">Apply</button>
             </a>
+            <span th:text="${job.applyUrl}"></span>
         </li>
     </ul>
 
