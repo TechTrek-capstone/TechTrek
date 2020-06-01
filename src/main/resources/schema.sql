@@ -2,6 +2,7 @@
 -- Schema techtrek_db
 -- -----------------------------------------------------
 
+
 CREATE DATABASE IF NOT EXISTS `techtrek_db`;
 USE `techtrek_db`;
 
