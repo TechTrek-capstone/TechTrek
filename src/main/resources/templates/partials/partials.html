@@ -56,7 +56,7 @@
         <!-- Register Form -->
         <form th:action="@{/register}" th:method="post" th:object="${user}"
               oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match." : "")'>
-            >
+
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -65,10 +65,11 @@
                     <div class="modal-body">
 
                         <!-- Dropdown for Cohort -->
-                        <select name="cohort" id="cohort" th:field="*{cohortName}">
-                            <option value="Fortuna">Fortuna</option>
-                            <option value="Ganymede">Ganymede</option>
-                            <option value="Hyperion">Hyperion</option>
+                        <select name="cohort" id="cohort" th:field="*{cohort}">
+                            <option value="1">Fortuna</option>
+                            <option value="2">Apex</option>
+                            <option value="3">Ganymede</option>
+                            <option value="4">Hyperion</option>
                         </select>
                         <!-- First Name -->
                         <h3>Enter First Name</h3>

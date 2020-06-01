@@ -17,7 +17,7 @@
             <h2 class="text-center mb-1" th:text="${job.title}"></h2>
 
                 <!--   Company   -->
-                <br><h5 class="text-black-50 text-center"><span th:text="${job.company}"></span> |
+                <br><h5 class="text-black-50 text-center"><span th:text="${job.getCompany().getName()}"></span> |
 
                 <!--   Location   -->
                 <span th:text="${job.location}"></span></h5>
@@ -54,9 +54,10 @@
 
         <!-- APPLY URL LINK -->
         <li class="list-group-item">
-            <a href="${job.applyUrl}" target="_blank">
+            <a th:href="@{${job.applyUrl}}" target="_blank">
                 <button type="button" class="btn btn-primary btn-lg btn-block">Apply</button>
             </a>
+            <span th:text="${job.applyUrl}"></span>
         </li>
     </ul>
 

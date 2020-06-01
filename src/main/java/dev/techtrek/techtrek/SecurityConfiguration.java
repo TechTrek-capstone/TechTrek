@@ -49,14 +49,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/") // anyone can see the home and the ads pages
                 .permitAll()
-                /* Pages that require authentication */
-                .and()
-                .authorizeRequests()
-                .antMatchers(
-                        "/jobs", // only authenticated users can view ads
-                        "/resume" // only authenticated users can view resume
-                )
-                .authenticated()
+//                /* Pages that require authentication */
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers(
+//                        "/jobs", // only authenticated users can view ads
+//                        "/resume" // only authenticated users can view resume
+//                )
+//                .authenticated()
         ;
     }
 }

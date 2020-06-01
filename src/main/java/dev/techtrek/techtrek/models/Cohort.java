@@ -21,6 +21,9 @@ public class Cohort {
     @Column(name = "graduation_date")
     private Date graduationDate;
 
+    @Column(name = "location")
+    private String location;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cohort")
     private List<User> studentList;
 }
