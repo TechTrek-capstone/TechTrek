@@ -1,11 +1,8 @@
 package dev.techtrek.techtrek.controllers;
 
-import dev.techtrek.techtrek.models.Company;
 import dev.techtrek.techtrek.models.EventListing;
-import dev.techtrek.techtrek.models.JobListing;
 import dev.techtrek.techtrek.models.User;
 import dev.techtrek.techtrek.repositories.EventsRepo;
-import dev.techtrek.techtrek.repositories.JobsRepo;
 import dev.techtrek.techtrek.repositories.UsersRepo;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

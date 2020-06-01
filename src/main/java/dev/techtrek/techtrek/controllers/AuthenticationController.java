@@ -1,21 +1,25 @@
 package dev.techtrek.techtrek.controllers;
 
-
+import dev.techtrek.techtrek.models.Cohort;
+import dev.techtrek.techtrek.models.JobListing;
 import dev.techtrek.techtrek.models.User;
+import dev.techtrek.techtrek.repositories.CohortsRepo;
 import dev.techtrek.techtrek.repositories.UsersRepo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
 
 @Controller
 public class AuthenticationController {
-        private UsersRepo users;
+        private UsersRepo usersRepo;
         private PasswordEncoder passwordEncoder;
 
-    public AuthenticationController(UsersRepo users, PasswordEncoder passwordEncoder) {
-        this.users = users;
+    public AuthenticationController(UsersRepo usersRepo, PasswordEncoder passwordEncoder) {
+        this.usersRepo = usersRepo;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -25,11 +29,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user) {
-
+    public String saveUser(@ModelAttribute User user, Model model) {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
-        users.save(user);
+        usersRepo.save(user);
         return "redirect:/profile";
     }
 }
