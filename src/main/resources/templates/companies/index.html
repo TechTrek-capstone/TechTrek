@@ -32,12 +32,42 @@
             <td>Logo</td>
             <td th:text="${company.name}">Company name</td>
             <td>
-                    <span style="font-size: 1.5rem; display: flex; justify-content: space-evenly">
+                    <span style="display: flex; justify-content: space-evenly">
 
-                        <a th:href="@{'/companies/' + ${company.getId()} + '/edit'}"><i class="fa fa-edit"></i></a>
+                        <a th:href="@{'/companies/' + ${company.getId()} + '/edit'}"><button class="btn btn-link" style="font-size: 1.5rem"><i class="fa fa-edit"></i></button></a>
+
+
                         <!--                        <form method="POST" th:action="@{'/companies/' + ${company.getId()} + '/delete'}"></form>-->
 
+
                             <button data-toggle="modal" data-target="#companyDeleteModal" class="btn btn-link text-danger" style="font-size: 1.5rem"><i class="fa fa-trash"></i></button>
+
+
+                        <div class="modal fade" id="companyDeleteModal" tabindex="-1" role="dialog"
+                             aria-labelledby="companyDeleteModalLabel"
+                             aria-hidden="true">
+
+                            <form th:action="@{'/companies/' + ${company.getId()} + '/delete'}" th:method="POST" th:object="${company}">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 class="modal-title text-center text-danger" id="companyDeleteModalLabel">Warning</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="lead">
+                                                Deleting the company is a <u>permanent</u> action and will also <span class="text-danger">delete all job listings by this company.</span> Please confirm to proceed.
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
                     </span>
             </td>
         </tr>
