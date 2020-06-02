@@ -51,6 +51,7 @@ create table if not exists users
     bio_summary varchar(500) null,
     create_date datetime(6) null,
     email varchar(255) not null,
+    username varchar(255) not null,
     employment_status int null,
     first_name varchar(255) not null,
     github_username varchar(255) null,

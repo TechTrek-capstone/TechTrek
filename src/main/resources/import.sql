@@ -4,9 +4,9 @@
 
 INSERT INTO techtrek_db.roles (id, name)
 
-VALUES (1, 'Admin'),
-       (2, 'Placement'),
-       (3, 'Student');
+VALUES (1, 'ROLE_ADMIN'),
+       (2, 'ROLE_PLACEMENT'),
+       (3, 'ROLE_USER');
 
 
 # Cohorts seeder

@@ -1,19 +1,25 @@
 package dev.techtrek.techtrek.controllers;
 
 import dev.techtrek.techtrek.models.User;
-import dev.techtrek.techtrek.repositories.UsersRepo;
+import dev.techtrek.techtrek.repositories.Users;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AuthenticationController {
-        private UsersRepo usersRepo;
-        private PasswordEncoder passwordEncoder;
+    private Users usersRepo;
+    private PasswordEncoder passwordEncoder;
 
-    public AuthenticationController(UsersRepo usersRepo, PasswordEncoder passwordEncoder) {
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "users/login";
+    }
+
+    public AuthenticationController(Users usersRepo, PasswordEncoder passwordEncoder) {
         this.usersRepo = usersRepo;
         this.passwordEncoder = passwordEncoder;
     }

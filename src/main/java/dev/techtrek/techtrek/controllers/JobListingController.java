@@ -2,17 +2,13 @@ package dev.techtrek.techtrek.controllers;
 
 import dev.techtrek.techtrek.models.Company;
 import dev.techtrek.techtrek.models.JobListing;
-import dev.techtrek.techtrek.models.User;
 import dev.techtrek.techtrek.repositories.CompaniesRepo;
 import dev.techtrek.techtrek.repositories.JobsRepo;
-import dev.techtrek.techtrek.repositories.UsersRepo;
-import org.springframework.security.core.context.SecurityContextHolder;
+import dev.techtrek.techtrek.repositories.Users;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -21,10 +17,10 @@ public class JobListingController {
     // Dependency injection
 
     private JobsRepo jobsRepo;
-    private UsersRepo usersRepo;
+    private Users usersRepo;
     private CompaniesRepo companiesRepo;
 
-    public JobListingController(JobsRepo jobsRepo, UsersRepo usersRepo, CompaniesRepo companiesRepo){
+    public JobListingController(JobsRepo jobsRepo, Users usersRepo, CompaniesRepo companiesRepo){
         this.jobsRepo = jobsRepo;
         this.usersRepo = usersRepo;
         this.companiesRepo = companiesRepo;
