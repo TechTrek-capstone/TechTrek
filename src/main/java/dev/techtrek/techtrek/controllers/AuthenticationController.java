@@ -1,17 +1,12 @@
 package dev.techtrek.techtrek.controllers;
 
-import dev.techtrek.techtrek.models.Cohort;
-import dev.techtrek.techtrek.models.JobListing;
 import dev.techtrek.techtrek.models.User;
-import dev.techtrek.techtrek.repositories.CohortsRepo;
 import dev.techtrek.techtrek.repositories.UsersRepo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 public class AuthenticationController {

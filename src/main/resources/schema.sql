@@ -108,11 +108,9 @@ create table if not exists job_listings
     apply_url varchar(2000) not null,
     description text not null,
     is_archived bit not null,
-    is_remote bit not null,
+    is_remote bit null,
     listing_date datetime(6) not null,
     location varchar(255) not null,
-    preferred_skills varchar(3000) null,
-    required_skills varchar(3000) null,
     title varchar(255) not null,
     company_id bigint null,
     user_id bigint null,
@@ -121,4 +119,3 @@ create table if not exists job_listings
     constraint FKnsya1yao8u5t25yq9tngy6xv8
         foreign key (company_id) references companies (id)
 );
-

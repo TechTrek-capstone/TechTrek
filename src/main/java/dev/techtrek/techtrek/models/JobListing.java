@@ -18,31 +18,18 @@ public class JobListing {
     private long id;
 
     @Column(name = "location", nullable = false)
-    @NotBlank(message = "Job listing must have a location.")
     private String location;
 
-    @Column(name = "is_remote", nullable = false)
+    @Column(name = "is_remote")
     private Boolean isRemote;
 
     @Column(name = "title", nullable = false)
-    @NotBlank(message = "Job listing must have a title.")
-    @Size(min = 5, message = "A title must be at least 5 characters.")
     private String title;
 
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
-    @NotBlank(message = "Job listing must have a description.")
-    @Size(min = 20, message = "A description must be at least 20 characters.")
     private String description;
 
-    @Column(name = "required_skills", length = 3000)
-    private String requiredSkills;
-
-    @Column(name = "preferred_skills", length = 3000)
-    private String preferredSkills;
-
     @Column(name = "apply_url", nullable = false, length = 2000, unique = true)
-    @NotBlank(message = "Job listing must have an application link.")
-    @Size(min = 20, message = "An application link must be at least 10 characters.")
     private String applyUrl;
 
     @CreationTimestamp

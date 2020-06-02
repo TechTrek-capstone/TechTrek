@@ -32,16 +32,6 @@
             <p class="pl-5" th:text="${job.description}"></p>
         </li>
 
-        <!-- JOB SKILLS -->
-        <li class="list-group-item">
-            <h4>Skills</h4>
-            <b class="mt-5">Required</b>
-            <p th:text="${job.requiredSkills}"></p>
-
-            <br><br><b>Preferred</b>
-            <p th:text="${job.preferredSkills}"></p>
-        </li>
-
         <!-- POINT OF CONTACT -->
         <li class="list-group-item">
             <h4>Additional Information</h4>
@@ -72,25 +62,11 @@
     <!--</div>-->
 </div>
 
-
-<container class="text-center">
-    <p>This page will show an individual job listing. Should include:
-        <ul>
-            <li>Title</li>
-            <li>Company</li>
-            <li>Location</li>
-            <li>Listing date</li>
-            <li>Description</li>
-            <li>Required skills</li>
-            <li>Preferred skills</li>
-            <li>Point of contact</li>
-            <li>Hyperlink to external application URL</li>
-        </ul>
-
-    <br /><b>Additionally, for Users with the placement role, there should be buttons for edit, delete, and archive on this view.</b>
-
-    </p>
-</container>
+<div class="text-center mb-3">
+    <h2>Placement Team Controls</h2>
+    <button type="button" class="btn btn-primary btn-lg">Edit</button>
+    <button type="button" class="btn btn-danger btn-lg">Delete</button>
+</div>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>

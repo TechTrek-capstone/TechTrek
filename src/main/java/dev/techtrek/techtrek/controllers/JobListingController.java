@@ -54,33 +54,21 @@ public class JobListingController {
 
     // View the job listing creation form
     @GetMapping(path = "/jobs/create")
-    public String viewCreateJobListingForm(Model model) {
+    public String viewCreateJobListingForm(@ModelAttribute JobListing jobListing, Model model) {
         List<Company> companies = companiesRepo.findAll();
+        model.addAttribute("jobListing", new JobListing());
         model.addAttribute("companies", companies);
         return "jobs/create";
     }
 
     // Create the job listing
     @PostMapping(path = "/jobs/create")
-    public String createJobListing(
-            @ModelAttribute
-            @Valid JobListing jobListing,
-            Errors validation,
-            Model model
-    ) {
-        // Check if errors present given requirements defined in JobListing.java
-        if (validation.hasErrors()) {
-            model.addAttribute("errors", validation);
-            model.addAttribute("job", jobListing);
-
-            // If errors present, reload the page with the errors listed as alerts above the form.
-            return "jobs/create";
-        }
+    public String createJobListing(@ModelAttribute JobListing jobListing) {
 
         // FIXME: Make sure this has proper authentication
         // Add the user (placement) as the job listing creator
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        jobListing.setUser(user);
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        jobListing.setUser(user);
 
         // Save the job listing and redirect to jobs index
         jobsRepo.save(jobListing);
@@ -125,12 +113,6 @@ public class JobListingController {
 
         // Set if job is remote to the boolean value
         jobListing.setIsRemote(isRemote);
-
-        // Set the required skills to the value in the required skills field
-        jobListing.setRequiredSkills(requiredSkills);
-
-        // Set the preferred skills to the value in the preferred skills field
-        jobListing.setPreferredSkills(preferredSkills);
 
         // Set the application link to the value in the apply url field
         jobListing.setApplyUrl(applyUrl);
