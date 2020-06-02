@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
+<head th:replace="partials/partials :: head">
+    <title>Companies - Edit</title>
+</head>
+
+<body>
+<nav th:replace="partials/partials :: navbar"></nav>
+
+<container>
+    <h1 class="mt-3 text-center">Edit Company</h1>
+
+    <form class="w-75 mx-auto" th:method="POST" th:action="@{'/companies/' + ${company.getId()} + '/edit'}">
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="name">Company name</label>
+                <input type="text" class="form-control text-left" id="name" name="name" th:value="${company.name}" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="logo">Upload logo</label>
+        <!-- TODO: INCLUDE FILESTACK COMPANY LOGO EDIT HERE AS PART OF FORM -->
+<!--        <div class="form-group row">-->
+<!--            <label for="title" class="col-sm-1 col-form-label text-right font-weight-bold">Name</label>-->
+<!--            <div class="col-sm-11">-->
+<!--                <input type="text" class="form-control text-left" id="name" name="name" th:value="${company.name}"/>-->
+<!--            </div>-->
+<!--        </div>-->
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-block btn-primary">Submit</button>
+    </form>
+
+</container>
+
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+</body>
+</html>
