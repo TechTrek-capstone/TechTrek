@@ -111,8 +111,6 @@ create table if not exists job_listings
     is_remote bit not null,
     listing_date datetime(6) not null,
     location varchar(255) not null,
-    preferred_skills varchar(3000) null,
-    required_skills varchar(3000) null,
     title varchar(255) not null,
     company_id bigint null,
     user_id bigint null,

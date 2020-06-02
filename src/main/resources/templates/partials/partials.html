@@ -6,7 +6,8 @@
     <meta charset="UTF-8"/>
     <!-- include stylesheets, etc here -->
     <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
-    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -20,26 +21,51 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/jobs}">Jobs</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Jobs
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{/jobs}">Browse</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/jobs/create}">Create listing</a>
+                    <a class="dropdown-item" th:href="@{/jobs/addco}">Add a company</a>
+                </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/events}">Events</a>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Events
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{/events}">Browse</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/events/create}">Add event</a>
+                </div>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/resume}">Resume</a>
             </li>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </ul>
+
         <ul class="navbar-nav ml-auto">
+
+            <form class="form-inline my-2 my-lg-0 mr-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button" id="button-addon2">Search</button>
+                    </div>
+                </div>
+            </form>
+
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/profile}">Profile<span class="sr-only">(current)</span></a>
             </li>
-            <form th:action="@{/logout}" th:method="post">
-                <button class="btn-link btn btn-warning" style="margin-top: 8px">Logout</button>
+
+            <form class="form-inline" th:action="@{/logout}" th:method="post">
+                <button class="btn btn-link text-danger" type="button">Logout</button>
             </form>
         </ul>
     </div>
@@ -176,6 +202,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+    <script>
+        $('#jobDescription').summernote({
+            height: 200,
+            placeholder: 'Enter description, job duties, required skills, preferred skills, etc...'
+        })
+    </script>
 </standard_scripts>
 </body>
 </html>

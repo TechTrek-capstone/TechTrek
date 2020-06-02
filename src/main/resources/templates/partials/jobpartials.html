@@ -36,17 +36,3 @@
         </a>
     </div>
 </div>
-
-
-
-<!-- ########### Company Dropdown list ############## -->
-<!-- Fragment for a dropdown list of all companies in DB -->
-
-<div class="input-group mb-3 w-25" th:fragment="companyDropdown">
-    <div class="input-group-prepend">
-        <label class="input-group-text" for="company">Company</label>
-    </div>
-    <select class="custom-select" id="company">
-        <option th:each="company : ${companies}" class="dropdown-item" th:text="${company.name}" th:value="${company.id}"></option>
-    </select>
-</div>
