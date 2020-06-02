@@ -47,3 +47,14 @@ $(function() {
     });
 });
 // END PROGRESS BAR
+
+
+$("#uploadResume").click(function () {
+    var client = filestack.init(fileStackKey);
+    client.pick({
+        maxFiles: 1,
+    }).then(function (result) {//Taking the result object in as 'result'
+        //Putting the result in a string, and printing it to the console
+        console.log(JSON.stringify(result));
+    });
+});
