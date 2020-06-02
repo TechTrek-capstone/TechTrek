@@ -36,4 +36,4 @@ src/main/resources/application.properties
 /kal_pubkey.pub
 
 ### FileStack Key ###
-src/main/resources/js/keys.js
+src/main/resources/static/js/keys.js
