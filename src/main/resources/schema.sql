@@ -35,21 +35,6 @@ create table if not exists job_categories
         unique (name)
 );
 
-create table if not exists points_of_contact
-(
-    id bigint auto_increment
-        primary key,
-    email varchar(255) not null,
-    first_name varchar(255) not null,
-    last_name varchar(255) not null,
-    phone_number varchar(255) null,
-    company_id bigint null,
-    constraint UK_j3cm4k7gxkjgtypd6ci7gdxtr
-        unique (email),
-    constraint FKbomjwn9oeb0wu2l41wu7wkpu9
-        foreign key (company_id) references companies (id)
-);
-
 create table if not exists roles
 (
     id bigint auto_increment

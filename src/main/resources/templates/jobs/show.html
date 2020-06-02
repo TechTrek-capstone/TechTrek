@@ -32,15 +32,12 @@
             <p class="pl-5" th:text="${job.description}"></p>
         </li>
 
-        <!-- POINT OF CONTACT -->
+        <!-- ADDITIONAL INFO -->
         <li class="list-group-item">
             <h4>Additional Information</h4>
 
             <b>Remote available?</b>
             <br /><span class="pl-5" th:text="${job.isRemote}? Yes : No ">N/A</span>
-
-            <br><b>Point of Contact: </b>
-<!--            <br><p th:text="${job.requiredSkills}"></p>-->
         </li>
 
         <!-- APPLY URL LINK -->

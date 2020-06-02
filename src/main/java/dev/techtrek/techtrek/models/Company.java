@@ -18,7 +18,4 @@ public class Company {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private List<JobListing> jobListingList;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
-    private List<PointOfContact> pointOfContactList;
 }
