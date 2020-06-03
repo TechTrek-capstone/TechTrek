@@ -2,11 +2,11 @@
 
 # Roles seeder
 
-INSERT INTO techtrek_db.roles (id, name)
-
-VALUES (1, 'ROLE_ADMIN'),
-       (2, 'ROLE_PLACEMENT'),
-       (3, 'ROLE_USER');
+# INSERT INTO techtrek_db.roles (id, name)
+#
+# VALUES (1, 'ROLE_ADMIN'),
+#        (2, 'ROLE_PLACEMENT'),
+#        (3, 'ROLE_USER');
 
 
 # Cohorts seeder
@@ -40,36 +40,36 @@ VALUES (1,
 
 # Users seeder
 
-INSERT INTO techtrek_db.users
-(id,
- bio_summary,
- create_date,
- email,
- employment_status,
- first_name,
- github_username,
- last_name,
- linkedin_username,
- modify_date,
- user_password,
- phone_number,
- cohort_id,
- role_id)
+# INSERT INTO techtrek_db.users
+# (id,
+#  bio_summary,
+#  create_date,
+#  email,
+#  employment_status,
+#  first_name,
+#  github_username,
+#  last_name,
+#  linkedin_username,
+#  modify_date,
+#  user_password,
+#  phone_number,
+#  cohort_id)
+# #     role_id
 
-VALUES (1,
-        'Hello it me',
-        '2020-05-21 00:00:00.000000',
-        'danielle.tobler210@gmail.com',
-        true,
-        'Danielle',
-        'dmtobler',
-        'Tobler',
-        'danielle-tobler',
-        null,
-        'test',
-        '2102322232',
-        1,
-        3);
+# VALUES (1,
+#         'Hello it me',
+#         '2020-05-21 00:00:00.000000',
+#         'danielle.tobler210@gmail.com',
+#         true,
+#         'Danielle',
+#         'dmtobler',
+#         'Tobler',
+#         'danielle-tobler',
+#         null,
+#         'test',
+#         '2102322232',
+#         1);
+# # 3
 
 
 #  Companies seeder
@@ -113,8 +113,8 @@ INSERT INTO techtrek_db.event_listings
  location,
  rsvp_url,
  time,
- title,
- user_id)
+ title)
+#   user_id
 
 VALUES (1,
         '2020-05-21 00:00:00.000000',
@@ -124,8 +124,8 @@ VALUES (1,
         'San Antonio Coffee House',
         'www.google.com',
         '2020-05-21 00:00:00.000000',
-        'The Best Event Ever',
-        1),
+        'The Best Event Ever'),
+#        1
 
        (2,
         '2020-05-21 00:00:00.000000',
@@ -135,8 +135,8 @@ VALUES (1,
         'San Antonio Coffee Haus',
         'www.google.com',
         '2020-05-21 00:00:00.000000',
-        'The Second Best Event Ever',
-        1);
+        'The Second Best Event Ever');
+# 1
 
 
 # Job listings seeder
@@ -150,7 +150,7 @@ INSERT INTO techtrek_db.job_listings
  listing_date,
  location,
  title,
- user_id,
+#  user_id,
  company_id)
 
 VALUES (1,
@@ -161,7 +161,7 @@ VALUES (1,
         '2020-05-21 00:00:00.000000',
         'San Antonio, TX',
         'Test Job',
-        1,
+#         1,
         1),
 
 
@@ -173,7 +173,7 @@ VALUES (1,
         '2020-05-21 00:00:00.000000',
         'Houston, TX',
         'Test Job 2',
-        1,
+#         1,
         2),
 
        (3,
@@ -184,7 +184,7 @@ VALUES (1,
         '2020-05-21 00:00:00.000000',
         'Atlantic City, NJ',
         'Test Job 3 with a much longer title than the other jobs',
-        1,
+#         1,
         1),
 
        (4,
@@ -195,7 +195,7 @@ VALUES (1,
         '2020-05-21 00:00:00.000000',
         'Houston, TX',
         'Test Job Numero Quatro',
-        1,
+#         1,
         3),
 
        (5,
@@ -206,5 +206,5 @@ VALUES (1,
         '2020-05-21 00:00:00.000000',
         'Bernie, TX',
         'Test Job 5',
-        1,
+#         1,
         1);
