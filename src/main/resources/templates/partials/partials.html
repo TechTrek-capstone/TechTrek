@@ -9,7 +9,8 @@
     <!-- Filestack -->
     <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
     <!-- Summernote -->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <title>TechTrek</title>
@@ -64,13 +65,15 @@
                     <input type="text" class="form-control" placeholder="Search" aria-label="Search"
                            aria-describedby="button-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i>
+                        </button>
                     </div>
                 </div>
             </form>
 
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/profile}"><span style="font-size: 1.5rem"><i class="fa fa-user-circle"></i></span><span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/profile}"><span style="font-size: 1.5rem"><i
+                        class="fa fa-user-circle"></i></span><span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -158,8 +161,8 @@
     <div th:fragment="loginModal" class="modal fade" id="loginModal" tabindex="-1" role="dialog"
          aria-labelledby="loginModalLabel"
          aria-hidden="true">
-<!--         Login Form -->
-                <form th:action="@{/login}" th:method="post" th:object="${user}">
+        <!--         Login Form -->
+<!--        <form th:action="@{/login}" th:method="post" th:object="${user}">-->
 
 
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -168,88 +171,86 @@
                         <h2 class="modal-title text-center" id="loginModalLabel">Login</h2>
                     </div>
                     <form th:action="@{/login}" th:method="post">
-                    <div class="modal-body">
-                        <!--                        <h3 class="">Email</h3>-->
-                        <!--                        &lt;!&ndash; Username Here &ndash;&gt;-->
-                        <!--                        <input type="text" th:field="*{email}"/>-->
+                        <div class="modal-body">
 
-                        <!-- Username Here -->
-                        <div class="form-group">
-                            <label for="username" class="col-form-label">Username:</label>
-                            <input class="form-control" id="username" name="username" type="text"/>
+                            <!-- Username Here -->
+                            <div class="form-group">
+                                <label for="username" class="col-form-label">Username:</label>
+                                <input class="form-control" id="username" name="username" type="text"/>
+                            </div>
+
+                            <!-- Password Here -->
+                            <div class="form-group">
+                                <label for="password" class="col-form-label">Password:</label>
+                                <input class="form-control" id="password" name="password" type="password"/>
+                            </div>
+
+
                         </div>
-
-                        <!-- Password Here -->
-                        <div class="form-group">
-                            <label for="password" class="col-form-label">Password:</label>
-                            <input class="form-control" id="password" name="password" type="password"/>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
                         </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                    </div>
                     </form>
                 </div>
             </div>
-
+<!--        </form>-->
     </div>
-</div>
 
-<!-- Event Listings Fragment -->
-<div th:fragment="eventsList">
+    <!-- Event Listings Fragment -->
+    <div th:fragment="eventsList">
 
-    <div th:each="event : ${eventsList}" class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 th:text="${event.title}" class="card-title">Card title</h5>
-            <p th:utext="${#strings.abbreviate(event.description, 100)}" class="card-text">Test.</p>
-        </div>
+        <div th:each="event : ${eventsList}" class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 th:text="${event.title}" class="card-title">Card title</h5>
+                <p th:utext="${#strings.abbreviate(event.description, 100)}" class="card-text">Test.</p>
+            </div>
 
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><a th:href="|http://google.com/maps/place/${event.location}|" target="_blank">
-                <span th:text="${event.location}"></span></a></li>
-            <li class="list-group-item" th:text="${#dates.format(event.listingDate, 'dd-MM-yyyy HH:mm')}">Listing date
-            </li>
-        </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a th:href="|http://google.com/maps/place/${event.location}|"
+                                               target="_blank">
+                    <span th:text="${event.location}"></span></a></li>
+                <li class="list-group-item" th:text="${#dates.format(event.listingDate, 'dd-MM-yyyy HH:mm')}">Listing
+                    date
+                </li>
+            </ul>
 
-        <div class="card-body">
-            <a th:href="@{|${event.rsvpUrl}|}" class="card-link">RSVP</a>
+            <div class="card-body">
+                <a th:href="@{|${event.rsvpUrl}|}" class="card-link">RSVP</a>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- JS scripts -->
-<standard_scripts th:fragment="footer">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <script th:src="@{/js/custom.js}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
-    <script th:src="@{/js/keys.js}"></script>
-    <script th:src="@{/js/custom.js}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
-    <script>
-        $('#jobDescription').summernote({
-            height: 200,
-            placeholder: 'Enter description, job duties, required skills, preferred skills, etc...'
-        })
+    <!-- JS scripts -->
+    <standard_scripts th:fragment="footer">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+                integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+                crossorigin="anonymous"></script>
+        <script th:src="@{/js/custom.js}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                crossorigin="anonymous"></script>
+        <script th:src="@{/js/keys.js}"></script>
+        <script th:src="@{/js/custom.js}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+        <script>
+            $('#jobDescription').summernote({
+                height: 200,
+                placeholder: 'Enter description, job duties, required skills, preferred skills, etc...'
+            })
 
-        $(document).ready(function() {
+            $(document).ready(function () {
 
-            if(window.location.href.indexOf('#login') != -1) {
-                $('#loginModal').modal('show');
-            }
+                if (window.location.href.indexOf('#login') != -1) {
+                    $('#loginModal').modal('show');
+                }
 
-        });
-    </script>
-</standard_scripts>
+            });
+        </script>
+    </standard_scripts>
 </body>
 </html>
