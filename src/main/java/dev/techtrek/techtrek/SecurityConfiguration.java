@@ -53,8 +53,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/jobs/create" // only authenticated users can create jobs
-//                        "/jobs/{id}/edit" // only authenticated users can edit jobs
+                        "/jobs/create", // only authenticated users can create jobs
+                        "/jobs/{id}/edit", // only authenticated users can edit jobs
+                        "/jobs",
+                        "/jobs/{id}",
+                        "/jobs/{id}/edit",
+                        "/jobs/{id}/delete",
+                        "/resume",
+                        "/profile",
+                        "/home",
+                        "/events",
+                        "/events/create",
+                        "/events/{id}",
+                        "/events/{id}/edit",
+                        "/events/{id}/delete"
                 )
                 .authenticated()
         ;
