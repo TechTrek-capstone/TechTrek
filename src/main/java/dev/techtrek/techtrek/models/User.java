@@ -19,6 +19,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "enabled")
+    private Boolean isEnabled;
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
@@ -86,4 +89,7 @@ public class User {
     public User(){}
 
 
+    public void setEnabled(boolean b) {
+        this.isEnabled = b;
+    }
 }

@@ -40,6 +40,7 @@ create table if not exists roles
 create table if not exists users
 (
     id bigint auto_increment primary key,
+    enabled bit NOT NULL DEFAULT 0,
     bio_summary varchar(500) null,
     create_date datetime(6) null,
     email varchar(255) not null,
