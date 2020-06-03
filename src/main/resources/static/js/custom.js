@@ -60,16 +60,18 @@ $("#uploadResume").click(function () {
 
         // store img handle in variable
         let fsHandle = resultJSON.filesUploaded[0].handle;
+
         // store img url in variable
         let fsURL = resultJSON.filesUploaded[0].url;
 
         // print msg after successful upload here
-        $(".message").append("You've successfully uploaded your resume!");
+        $(".success").html("You've successfully uploaded your resume! Please wait for Placement to review.");
 
         // store url inside download link
         $(".downloadLink").attr("href", fsURL);
 
-        img.src = "https://cdn.filestackcontent.com/" + fsHandle;
-        $(".resume").append(img);
+        // bunk - don't need to show pdf of resume
+        // img.src = "https://cdn.filestackcontent.com/" + fsHandle;
+        // $(".resume").append(img);
     });
 });

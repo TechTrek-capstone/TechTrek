@@ -2,20 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
 <head th:replace="partials/partials :: head">
     <title>Resume Portal</title>
+
 </head>
 
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
 
-<container class="text-center">
+<div class="container text-center">
     <h1>Resume Portal</h1>
-    <p>This page show the resume portal, with an option for students to upload their resume pdf and track the progress of their resume. Placement users will be able to download the uploaded PDFs, make corrections, and re-upload.</p>
-</container>
-<button type="button" class="btn btn-primary" id="uploadResume">Upload Resume</button>
-<a class="downloadLink" href="">Download Resume</a>
-<!--<button type="button" class="btn btn-primary" id="downloadResume">Download Resume</button>-->
-<h3 class="message"></h3>
-<div class ="resume"></div>
+    <p>This page show the resume portal, with an option for students to upload their resume pdf and track the progress
+        of their resume. Placement users will be able to download the uploaded PDFs, make corrections, and
+        re-upload.
+    </p>
+
+    <!-- STUDENT VIEW -->
+    <h1>STUDENT VIEW</h1>
+    <!-- Message from placement -->
+    <div class="student-div">
+        <h3 class="success">
+            No resume uploaded yet.
+        </h3>
+    </div>
+    <!-- Upload button / success msg / due date -->
+    <div class="student-div student-msg">
+        <button type="button" class="btn btn-primary" id="uploadResume">Upload Resume</button>
+    </div>
+    <!-- Resume tips/tricks. download for example resume -->
+    <div class="student-div">
+        <p>
+            During your time at Codeup, you will build at least 2 different types of resumes, a “T-Block” and a
+            “Vertical". Today, we are going to go over the T-Block resume. The purpose of the T-Block resume is to have
+            a 1 page, easy to consume resume. Your resume will be made up of 5-6 different sections listed below in
+            order of importance:
+        </p>
+        <ul>
+            <li>Professional Summary</li>
+            <li>Technical Skills</li>
+            <li>Development Projects</li>
+            <li>Professional Experience</li>
+            <li>Military Experience (if warranted)</li>
+            <li>Education</li>
+        </ul>
+    </div>
+
+    <!-- PLACEMENT VIEW -->
+    <h1>PLACEMENT VIEW</h1>
+    <!-- Dropdown for cohorts -> dropdown for students -> button to download student resume -->
+    <div class="student-div">
+        <select>
+
+        </select>
+        <a class="downloadLink" href="">Download Resume</a>
+    </div>
+</div>
+
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>
