@@ -47,3 +47,29 @@ $(function() {
     });
 });
 // END PROGRESS BAR
+
+
+$("#uploadResume").click(function () {
+    var client = filestack.init(fileStackKey);
+    client.pick({
+        // set file type that is uploaded
+        maxFiles: 1,
+    }).then(function (result) {
+        let img = new Image();
+        let resultJSON = JSON.parse(JSON.stringify(result));
+
+        // store img handle in variable
+        let fsHandle = resultJSON.filesUploaded[0].handle;
+        // store img url in variable
+        let fsURL = resultJSON.filesUploaded[0].url;
+
+        // print msg after successful upload here
+        $(".message").append("You've successfully uploaded your resume!");
+
+        // store url inside download link
+        $(".downloadLink").attr("href", fsURL);
+
+        img.src = "https://cdn.filestackcontent.com/" + fsHandle;
+        $(".resume").append(img);
+    });
+});

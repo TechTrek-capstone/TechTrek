@@ -34,3 +34,6 @@ build/
 src/main/resources/application.properties
 /dan_pubkey.pub
 /kal_pubkey.pub
+
+### FileStack Key ###
+src/main/resources/static/js/keys.js

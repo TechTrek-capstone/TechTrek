@@ -114,3 +114,9 @@ hr {
     background: #080;
 }
 /* END PROGRESS BAR */
+
+.resume {
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+}
