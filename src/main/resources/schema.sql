@@ -53,9 +53,9 @@ create table if not exists users
     email varchar(255) not null,
     username varchar(255) not null,
     employment_status int null,
-    first_name varchar(255) not null,
+    first_name varchar(255) null,
     github_username varchar(255) null,
-    last_name varchar(255) not null,
+    last_name varchar(255) null,
     linkedin_username varchar(255) null,
     modify_date datetime(6) null,
     user_password varchar(255) not null,
@@ -105,3 +105,11 @@ create table if not exists job_listings
     constraint FKnsya1yao8u5t25yq9tngy6xv8
         foreign key (company_id) references companies (id)
 );
+
+create table if not exists user_roles
+(
+    id bigint auto_increment
+    primary key,
+    user_id bigint null,
+    role varchar(255) null
+)

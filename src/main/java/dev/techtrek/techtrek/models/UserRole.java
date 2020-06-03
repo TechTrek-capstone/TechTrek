@@ -2,13 +2,11 @@ package dev.techtrek.techtrek.models;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
+@Data
+@EqualsAndHashCode
 @Entity
 @Table(name = "user_roles")
 public class UserRole {
@@ -22,6 +20,12 @@ public class UserRole {
     @Column(name = "role")
     private String role;
 
+    // Default contructor...
+
+    public UserRole() {
+    }
+
+    // Getters and setters...
 
     public long getId() {
         return id;
@@ -45,8 +49,5 @@ public class UserRole {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public UserRole() {
     }
 }

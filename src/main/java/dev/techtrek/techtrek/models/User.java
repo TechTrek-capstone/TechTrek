@@ -69,9 +69,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<EventListing> eventListingList;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private UserRole userRole;
+
 
     public String getFullName() {
         return firstName + " " + lastName;
@@ -85,4 +83,6 @@ public class User {
     }
 
     public User(){}
+
+
 }
