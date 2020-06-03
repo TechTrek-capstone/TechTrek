@@ -11,6 +11,9 @@
 
     <div th:if="${param.error}" class="alert alert-danger" role="alert">
         Invalid username and/or password.
+
+        <small>
+            <br>Not a user? <a th:href="@{/}">Register for an account.</a></small>
     </div>
     <div th:if="${param.logout}" class="alert alert-success" role="alert">
         You have successfully logged out.
