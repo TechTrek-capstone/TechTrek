@@ -6,6 +6,7 @@
     <meta charset="UTF-8"/>
     <!-- include stylesheets, etc here -->
     <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <title>TechTrek</title>
@@ -31,6 +32,7 @@
                     <a class="dropdown-item" th:href="@{/jobs}">Browse</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" th:href="@{/jobs/create}">Create listing</a>
+                    <a class="dropdown-item" th:href="@{/companies}">Companies</a>
                     <a class="dropdown-item" th:href="@{/companies/create}">Add a company</a>
                 </div>
             </li>
@@ -59,13 +61,13 @@
                     <input type="text" class="form-control" placeholder="Search" aria-label="Search"
                            aria-describedby="button-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button" id="button-addon2">Search</button>
+                        <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </form>
 
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/profile}">Profile<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/profile}"><span style="font-size: 1.5rem"><i class="fa fa-user-circle"></i></span><span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link" th:href="@{/logout}">Logout</a>

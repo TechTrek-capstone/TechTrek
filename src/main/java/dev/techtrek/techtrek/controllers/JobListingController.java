@@ -77,6 +77,11 @@ public class JobListingController {
     // View the job info to be edited
     @GetMapping("/jobs/{id}/edit")
     public String viewEditJobListingForm(@PathVariable long id, Model model) {
+        // Get all companies from DB and add to model (for company dropdown)
+        List<Company> companies = companiesRepo.findAll();
+        model.addAttribute("companies", companies);
+
+        // Add job by ID to model
         model.addAttribute("job", jobsRepo.getOne(id));
         return "jobs/edit";
     }
@@ -89,10 +94,7 @@ public class JobListingController {
             @RequestParam(name = "description") String description,
             @RequestParam(name = "location") String location,
             @RequestParam(name = "is_remote") Boolean isRemote,
-            @RequestParam(name = "required_skills") String requiredSkills,
-            @RequestParam(name = "preferred_skills") String preferredSkills,
             @RequestParam(name = "apply_url") String applyUrl,
-            @RequestParam(name = "is_archived") Boolean isArchived,
             @RequestParam(name = "company") Company company) {
 
         // Get the job listing from DB

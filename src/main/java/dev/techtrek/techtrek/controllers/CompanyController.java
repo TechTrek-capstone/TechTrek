@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class CompanyController {
 
@@ -14,6 +16,15 @@ public class CompanyController {
 
     public CompanyController(CompaniesRepo companiesRepo) {
         this.companiesRepo = companiesRepo;
+    }
+
+// (Placement roles only) View all companies
+
+    @GetMapping("/companies")
+    public String viewAllCompanies(Model model){
+        List<Company> companyList = companiesRepo.findAll();
+        model.addAttribute("companies", companyList);
+        return "companies/index";
     }
 
 // (Placement roles only) Add a company
@@ -62,6 +73,17 @@ public class CompanyController {
         companiesRepo.save(company);
 
         // Redirect to the companies index
+        return "redirect:/companies";
+    }
+
+
+    // (Placement only) Delete a company
+    @PostMapping("/companies/{id}/delete")
+    public String postDelete(@PathVariable long id) {
+        // Grab the post by the ID
+        companiesRepo.deleteById(id);
+
+        // Redirect to post index
         return "redirect:/companies";
     }
 }
