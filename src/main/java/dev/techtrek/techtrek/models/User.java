@@ -25,10 +25,10 @@ public class User {
     @Column(name = "user_password", nullable = false)
     private String password;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "phone_number")
@@ -40,8 +40,8 @@ public class User {
     @Column(name = "linkedin_username")
     private String linkedinUsername;
 
-//    @Column(name = "cohort_name")
-//    private String cohortName;
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
 
     @Column(name = "employment_status")
     private EmploymentStatus employmentStatus;
@@ -63,15 +63,13 @@ public class User {
     @JoinColumn(name = "cohort_id")
     private Cohort cohort;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<JobListing> jobListingList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<JobListing> jobListingList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<EventListing> eventListingList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<EventListing> eventListingList;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private UserRole userRole;
+
 
     public String getFullName() {
         return firstName + " " + lastName;
@@ -80,8 +78,11 @@ public class User {
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
-//        username = copy.username;
+        username = copy.username;
         password = copy.password;
     }
+
     public User(){}
+
+
 }

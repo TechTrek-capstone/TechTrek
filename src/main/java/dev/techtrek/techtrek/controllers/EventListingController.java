@@ -3,7 +3,7 @@ package dev.techtrek.techtrek.controllers;
 import dev.techtrek.techtrek.models.EventListing;
 import dev.techtrek.techtrek.models.User;
 import dev.techtrek.techtrek.repositories.EventsRepo;
-import dev.techtrek.techtrek.repositories.UsersRepo;
+import dev.techtrek.techtrek.repositories.Users;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +21,9 @@ public class EventListingController {
     // Dependency injection
 
     private EventsRepo eventsRepo;
-    private UsersRepo usersRepo;
+    private Users usersRepo;
 
-    public EventListingController(EventsRepo eventsRepo, UsersRepo usersRepo){
+    public EventListingController(EventsRepo eventsRepo, Users usersRepo){
         this.eventsRepo = eventsRepo;
         this.usersRepo = usersRepo;
     }
@@ -78,7 +78,7 @@ public class EventListingController {
         // FIXME: Make sure this has proper authentication
         // Add the user (placement) as the event creator
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        eventListing.setUser(user);
+//        eventListing.setUser(user);
 
         // Save the job listing and redirect to events index
         eventsRepo.save(eventListing);

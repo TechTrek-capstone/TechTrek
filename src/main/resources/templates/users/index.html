@@ -11,7 +11,14 @@
     <h1>User Dashboard</h1>
     <p>This page will show the dashboard view for users including recent job postings, recent events, a mini profile to the right and possible notifications.</p>
 </container>
+<div class="container" sec:authorize="isAuthenticated()" style="background-color:#ff5500;">
+    <h3>This content is only shown to authenticated users.</h3>
+    <hr>
 
+    User ID: <p th:text="${#authentication.principal.id}"></p>
+    Username: <p th:text="${#authentication.principal.username}"></p>
+    Email: <p th:text="${#authentication.principal.email}"></p>
+</div>
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>
