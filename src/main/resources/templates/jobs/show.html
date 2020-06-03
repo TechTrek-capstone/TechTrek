@@ -47,21 +47,11 @@
             </a>
         </li>
     </ul>
-
-    <!--<div sec:authorize="isAuthenticated()" style="display: flex" class="ml-auto mr-auto w-100">-->
-    <!--    <form method="GET" th:action="@{'/posts/' + ${post.getId()} + '/edit'}">-->
-    <!--        <button class="btn btn-outline-primary">Edit</button>-->
-    <!--    </form>-->
-
-    <!--    <form method="POST" th:action="@{'/posts/' + ${post.getId()} + '/delete'}">-->
-    <!--        <button class="btn btn-danger">Delete</button>-->
-    <!--    </form>-->
-    <!--</div>-->
 </div>
 
 <div class="text-center mb-3">
     <h2>Placement Team Controls</h2>
-    <button type="button" class="btn btn-primary btn-lg">Edit</button>
+    <a th:href="@{|/jobs/${job.id}/edit|}"><button type="button" class="btn btn-primary btn-lg">Edit</button></a>
     <button type="button" class="btn btn-danger btn-lg">Delete</button>
 </div>
 
