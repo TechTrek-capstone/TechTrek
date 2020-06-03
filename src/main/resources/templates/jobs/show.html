@@ -51,8 +51,36 @@
 
 <div class="text-center mb-3">
     <h2>Placement Team Controls</h2>
+
     <a th:href="@{|/jobs/${job.id}/edit|}"><button type="button" class="btn btn-primary btn-lg">Edit</button></a>
-    <button type="button" class="btn btn-danger btn-lg">Delete</button>
+
+    <button data-toggle="modal" data-target="#modalForJobDelete" class="btn btn-lg btn-danger">Delete</button>
+</div>
+
+<!-- Job delete confirmation modal -->
+
+<div class="modal fade" id="modalForJobDelete" tabindex="-1" role="dialog"
+     aria-labelledby="jobDeleteModalLabel"
+     aria-hidden="true">
+
+    <form th:action="@{'/jobs/' + ${job.id} + '/delete'}" th:method="POST" th:object="${job}">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title text-center text-danger" id="jobDeleteModalLabel">Warning</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="lead text-center">
+                        Deleting this job listing is a permanent action. Please confirm to proceed.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
