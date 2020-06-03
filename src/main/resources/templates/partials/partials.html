@@ -241,6 +241,12 @@
             height: 200,
             placeholder: 'Enter description, job duties, required skills, preferred skills, etc...'
         })
+
+        $(document).ready(function () {
+            if (window.location.href.indexOf('#register') != -1) {
+                $('#registerModal').modal('show');
+            }
+        });
     </script>
 </standard_scripts>
 </body>
