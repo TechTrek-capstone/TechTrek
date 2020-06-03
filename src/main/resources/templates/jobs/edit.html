@@ -44,8 +44,7 @@
                     <label for="company">Company</label>
                     <div class="input-group">
                         <select class="custom-select form-control" name="company" id="company" required>
-<!--                            <option class="dropdown-item" th:text="${job.company.getName()}" th:value="${job.company.getId()}" selected>Current company</option>-->
-                            <option th:each="company : ${companies}" class="dropdown-item" th:text="${company.name}" th:value="${company.id}"></option>
+                            <option th:each="company : ${companies}" class="dropdown-item" th:text="${company.name}" th:value="${company.id}" th:selected="${company.id == job.company.getId()}"></option>
                         </select>
                     </div>
                     <small id="emailHelp" class="form-text text-muted text-right">Don't see your company? <a th:href="@{/companies/create}">Click here to add!</a></small>
