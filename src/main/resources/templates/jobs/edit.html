@@ -7,25 +7,81 @@
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
 
-<container class="text-center">
-    <h1>Edit Job Listing</h1>
-    <p><b>This page will only be visible to Users of the placement role.</b> If edit on the individual listing is clicked, should bring up a form pre-loaded with:
+<container>
 
-    <br/>
-    <ul>
-        <li>Title</li>
-        <li>Company</li>
-        <li>Location</li>
-        <li>Listing date</li>
-        <li>Description</li>
-        <li>Required skills</li>
-        <li>Preferred skills</li>
-        <li>Point of contact</li>
-        <li>Hyperlink to external application URL</li>
-    </ul>
+<!--        <div class="form-row">-->
+<!--            <div class="form-group col-md-12">-->
+<!--                <label for="title">Title</label>-->
+<!--                <input type="text" class="form-control text-left" id="name" name="name" th:value="${job.title}" required>-->
+<!--            </div>-->
+<!--        </div>-->
 
-    And a button to save changes.
-    </p>
+<!--        <div class="form-row">-->
+<!--            <div class="form-group col-md-12">-->
+<!--                <label for="logo">Upload logo</label>-->
+<!--                &lt;!&ndash; TODO: INCLUDE FILESTACK COMPANY LOGO EDIT HERE AS PART OF FORM &ndash;&gt;-->
+<!--                &lt;!&ndash;        <div class="form-group row">&ndash;&gt;-->
+<!--                &lt;!&ndash;            <label for="title" class="col-sm-1 col-form-label text-right font-weight-bold">Name</label>&ndash;&gt;-->
+<!--                &lt;!&ndash;            <div class="col-sm-11">&ndash;&gt;-->
+<!--                &lt;!&ndash;                <input type="text" class="form-control text-left" id="name" name="name" th:value="${company.name}"/>&ndash;&gt;-->
+<!--                &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--                &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <h1 class="mt-3 text-center">Edit Job Listing</h1>
+
+        <form th:method="POST" th:action="@{'/jobs/' + ${job.getId()} + '/edit'}" class="w-50 ml-auto mr-auto" id="editJobForm">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control text-left" id="title" name="title" th:value="${job.title}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="company">Company</label>
+                    <div class="input-group">
+                        <select class="custom-select form-control" name="company" id="company" required>
+                            <option th:each="company : ${companies}" class="dropdown-item" th:text="${company.name}" th:value="${company.id}" th:selected="${company.id == job.company.getId()}"></option>
+                        </select>
+                    </div>
+                    <small id="emailHelp" class="form-text text-muted text-right">Don't see your company? <a th:href="@{/companies/create}">Click here to add!</a></small>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="location">Location</label>
+                    <input type="text" th:value="${job.location}" name="location" class="form-control" id="location" required/>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="jobDescription">Description</label>
+                    <textarea name="description" th:utext="${job.description}" id="jobDescription" class="form-control quill-editor" rows="10" required></textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="jobAppURL">Application URL</label>
+                    <input name="apply_url" type="text" th:value="${job.applyUrl}" class="form-control" id="jobAppURL" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input name="is_remote" type="checkbox" class="custom-control-input" id="remoteWorkCheck" th:checked="${job.isRemote}">
+                        <label class="custom-control-label" for="remoteWorkCheck"><b>Remote position?</b></label>
+                    </div>
+                </div>
+            </div>
+
+        <button type="submit" class="btn btn-block btn-primary">Update listing</button>
+    </form>
+
 </container>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>

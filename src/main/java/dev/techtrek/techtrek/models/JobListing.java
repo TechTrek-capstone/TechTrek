@@ -44,7 +44,7 @@ public class JobListing {
     @JoinColumn (name = "company_id")
     private Company company;
 
-    @ManyToOne
-    @JoinColumn (name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn (name = "user_id")
+//    private User user;
 }

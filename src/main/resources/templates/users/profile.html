@@ -13,6 +13,12 @@
 </container>
 
 <!-- TODO: Add github_username  -->
+<div sec:authorize="isAuthenticated()" style="border:#b52628 2px solid;">
+    This content is only shown to authenticated users.
+    User ID: <span th:text="${#authentication.principal.id}"></span>
+    Username: <span th:text="${#authentication.principal.username}"></span>
+    Email: <span th:text="${#authentication.principal.email}"></span>
+</div>
 <div>
     <img th:src="| https://grass-graph.moshimo.works/images/purnellbp.png |" alt="">
 </div>
