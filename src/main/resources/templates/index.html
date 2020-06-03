@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="partials/partials :: head">
     <title>TechTrek - Begin your journey</title>
@@ -23,8 +23,8 @@
                     developed by former coding bootcamp graduates to provide the necessary resources in a user-friendly,
                     straightforward format to assist you in your expedition. Reach the summit with TechTrek!</p>
 
-
-                <div class="landing-buttons container mt-4">
+                <!-- Not Authenticated View -->
+                <div sec:authorize="isAnonymous()" class="landing-buttons container mt-4">
                     <div class="row">
                         <div class="col-sm w-100">
                             <h3>Start your journey</h3>
@@ -47,6 +47,30 @@
                         </div>
                     </div>
                 </div>
+                <!-- End Not Authenticated View -->
+                <!-- Authenticated View -->
+                <div sec:authorize="isAuthenticated()" class="landing-buttons container mt-4">
+                    <div class="row">
+                        <div class="col-sm w-100">
+                            <h4>Logged in: <span class="badge badge-pill badge-success" th:text="${#authentication.principal.username}"></span></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <button type="button"  name="Logout" class="btn btn-primary w-100">
+                                <a class="text-white" th:href="@{/logout}">Logout</a>
+                            </button>
+                        </div>
+                        <div class="col-sm">
+                            <button type="button"  name="Dashboard" class="btn btn-primary w-100">
+                                <a class="text-white" th:href="@{/home}">Dashboard</a>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- End Authenticated View -->
+
             </div>
 
             <!-- RIGHT SIDE OF UPPER LANDING DIV -->
