@@ -1,67 +1,53 @@
 package dev.techtrek.techtrek.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
-import java.util.List;
 
 @Data
+@EqualsAndHashCode
 @Entity
-@Table(name = "roles")
+@Table(name = "user_roles")
 public class UserRole {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name", nullable = false, unique = true)
-    private String name;
+    @Column(name = "user_id")
+    private long userId;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userRole")
-    private List<User> userList;
+    @Column(name = "role")
+    private String role;
 
-//    @Override
-//    public String getUsername() {
-//        return null;
-//    }
+    // Default contructor...
 
-//    @Override
-//    public long getId() {
-//        return id;
-//    }
-//
-//    @Override
-//    public void setId(long id) {
-//        this.id = id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
+    public UserRole() {
+    }
 
-//    public List<User> getUserList() {
-//        return userList;
-//    }
-//
-//    public void setUserList(List<User> userList) {
-//        this.userList = userList;
-//    }
-//
-//    public UserRole(User copy, long id, String name, List<User> userList) {
-//        super(copy);
-//        this.id = id;
-//        this.name = name;
-//        this.userList = userList;
-//    }
-//
-//    public UserRole(long id, String name, List<User> userList) {
-//        this.id = id;
-//        this.name = name;
-//        this.userList = userList;
-//    }
+    // Getters and setters...
 
-    public UserRole() { }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

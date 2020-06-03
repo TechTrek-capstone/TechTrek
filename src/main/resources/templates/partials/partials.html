@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
 <!-- Head -->
 <head th:fragment="head">
@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
-    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+    <title>TechTrek</title>
 </head>
 <body>
 
@@ -23,7 +24,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     Jobs
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -36,7 +38,8 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     Events
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -55,7 +58,8 @@
 
             <form class="form-inline my-2 my-lg-0 mr-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                           aria-describedby="button-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
                     </div>
@@ -65,10 +69,15 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/profile}"><span style="font-size: 1.5rem"><i class="fa fa-user-circle"></i></span><span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </li>
 
-            <form class="form-inline" th:action="@{/logout}" th:method="post">
-                <button class="btn btn-link text-danger" type="button">Logout</button>
-            </form>
+
+            <!--            <form sec:authorize="isAuthenticated()" class="" th:action="@{/logout}" th:method="post">-->
+            <!--                <button class="btn btn-link" type="button">Logout</button>-->
+            <!--            </form>-->
+
         </ul>
     </div>
 </nav>
@@ -93,22 +102,30 @@
                     <div class="modal-body">
 
                         <!-- Dropdown for Cohort -->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="cohort">Cohort</label>
-                            </div>
-                            <select class="custom-select" id="cohort" th:field="*{cohort}">
-                                <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>
-                            </select>
-                        </div>
+                        <!--                        <div class="input-group mb-3">-->
+                        <!--                            <div class="input-group-prepend">-->
+                        <!--                                <label class="input-group-text" for="cohort">Cohort</label>-->
+                        <!--                            </div>-->
+                        <!--                            <select class="custom-select" id="cohort" th:field="*{cohort}">-->
+                        <!--                                <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>-->
+                        <!--                            </select>-->
+                        <!--                        </div>-->
 
-                        <!-- First Name -->
-                        <h3>Enter First Name</h3>
-                        <input type="text" th:field="*{firstName}" required/>
+                        <!--                        &lt;!&ndash; First Name &ndash;&gt;-->
+                        <!--                        <h3>Enter First Name</h3>-->
+                        <!--                        <input type="text" th:field="*{firstName}" required/>-->
 
-                        <!-- Last Name -->
-                        <h3>Enter Last Name</h3>
-                        <input type="text" th:field="*{lastName}" required/>
+                        <!--                        &lt;!&ndash; Last Name &ndash;&gt;-->
+                        <!--                        <h3>Enter Last Name</h3>-->
+                        <!--                        <input type="text" th:field="*{lastName}" required/>-->
+
+                        <!-- Email -->
+                        <h3>Email</h3>
+                        <input type="email" name="email" th:field="*{email}" required/>
+
+                        <!-- Username -->
+                        <h3>Username</h3>
+                        <input type="text" name="username" th:field="*{username}" value="*{email}">
 
                         <!-- Create Password -->
                         <h3 class="">Create Password</h3>
@@ -121,12 +138,6 @@
                         <h3>Confirm Password</h3>
                         <input type="password" name="confirmPassword" required/>
 
-                        <!-- Email -->
-                        <h3>Email</h3>
-                        <input type="email" name="email" th:field="*{email}" required/>
-
-                        <!-- User role (hidden - for landing register page this will always be Student (id role 3) -->
-                        <input type="hidden" value="3" th:field="*{userRole}"/>
 
                     </div>
 
@@ -145,27 +156,42 @@
          aria-labelledby="loginModalLabel"
          aria-hidden="true">
         <!-- Login Form -->
-        <form th:action="@{/login}" th:method="post" th:object="${user}">
+        <!--        <form th:action="@{/login}" th:method="post" th:object="${user}">-->
+
+
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2 class="modal-title text-center" id="loginModalLabel">Login</h2>
                     </div>
+                    <form th:action="@{/login}" th:method="post">
                     <div class="modal-body">
-                        <h3 class="">Email</h3>
+                        <!--                        <h3 class="">Email</h3>-->
+                        <!--                        &lt;!&ndash; Username Here &ndash;&gt;-->
+                        <!--                        <input type="text" th:field="*{email}"/>-->
+
                         <!-- Username Here -->
-                        <input type="text" th:field="*{email}"/>
-                        <h3 class="">Password</h3>
+                        <div class="form-group">
+                            <label for="username" class="col-form-label">Username:</label>
+                            <input class="form-control" id="username" name="username" type="text"/>
+                        </div>
+
                         <!-- Password Here -->
-                        <input type="password" th:field="*{password}"/>
+                        <div class="form-group">
+                            <label for="password" class="col-form-label">Password:</label>
+                            <input class="form-control" id="password" name="password" type="password"/>
+                        </div>
+
+
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" name="create">Login</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
                         <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
                     </div>
+                    </form>
                 </div>
             </div>
-        </form>
+
     </div>
 </div>
 

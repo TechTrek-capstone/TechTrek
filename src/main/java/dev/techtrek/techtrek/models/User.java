@@ -40,8 +40,8 @@ public class User {
     @Column(name = "linkedin_username")
     private String linkedinUsername;
 
-//    @Column(name = "cohort_name")
-//    private String cohortName;
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
 
     @Column(name = "employment_status")
     private EmploymentStatus employmentStatus;
@@ -69,9 +69,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<EventListing> eventListingList;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private UserRole userRole;
+
 
     public String getFullName() {
         return firstName + " " + lastName;
@@ -80,8 +78,11 @@ public class User {
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
-//        username = copy.username;
+        username = copy.username;
         password = copy.password;
     }
+
     public User(){}
+
+
 }
