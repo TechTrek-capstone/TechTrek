@@ -25,10 +25,10 @@ public class User {
     @Column(name = "user_password", nullable = false)
     private String password;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "phone_number")
@@ -63,11 +63,11 @@ public class User {
     @JoinColumn(name = "cohort_id")
     private Cohort cohort;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<JobListing> jobListingList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<JobListing> jobListingList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<EventListing> eventListingList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<EventListing> eventListingList;
 
 
 

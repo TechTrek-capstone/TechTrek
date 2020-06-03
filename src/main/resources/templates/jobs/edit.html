@@ -35,7 +35,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control text-left" id="title" name="name" th:value="${job.title}" required>
+                    <input type="text" class="form-control text-left" id="title" name="title" th:value="${job.title}" required>
                 </div>
             </div>
 
@@ -44,8 +44,7 @@
                     <label for="company">Company</label>
                     <div class="input-group">
                         <select class="custom-select form-control" name="company" id="company" required>
-                            <option class="dropdown-item" th:text="${job.company.getName()}" th:value="${job.company.getId()}" selected disabled>Current company</option>
-                            <option th:each="company : ${companies}" class="dropdown-item" th:text="${company.name}" th:value="${company.id}"></option>
+                            <option th:each="company : ${companies}" class="dropdown-item" th:text="${company.name}" th:value="${company.id}" th:selected="${company.id == job.company.getId()}"></option>
                         </select>
                     </div>
                     <small id="emailHelp" class="form-text text-muted text-right">Don't see your company? <a th:href="@{/companies/create}">Click here to add!</a></small>
@@ -53,28 +52,28 @@
 
                 <div class="form-group col-md-6">
                     <label for="location">Location</label>
-                    <input type="text" th:value="${job.location}" class="form-control" id="location" required/>
+                    <input type="text" th:value="${job.location}" name="location" class="form-control" id="location" required/>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="jobDescription">Description</label>
-                    <textarea name="jobDescription" th:utext="${job.description}" id="jobDescription" class="form-control quill-editor" rows="10" required></textarea>
+                    <textarea name="description" th:utext="${job.description}" id="jobDescription" class="form-control quill-editor" rows="10" required></textarea>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="jobAppURL">Application URL</label>
-                    <input type="text" th:value="${job.applyUrl}" class="form-control" id="jobAppURL" required>
+                    <input name="apply_url" type="text" th:value="${job.applyUrl}" class="form-control" id="jobAppURL" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="remoteWorkCheck" th:value="${job.isRemote}">
+                        <input name="is_remote" type="checkbox" class="custom-control-input" id="remoteWorkCheck" th:checked="${job.isRemote}">
                         <label class="custom-control-label" for="remoteWorkCheck"><b>Remote position?</b></label>
                     </div>
                 </div>

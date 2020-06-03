@@ -20,14 +20,14 @@ public class AuthenticationController {
     private Users usersRepo;
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "users/login";
-    }
-
     public AuthenticationController(Users usersRepo, PasswordEncoder passwordEncoder) {
         this.usersRepo = usersRepo;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "users/login";
     }
 
     @PostMapping("/login")

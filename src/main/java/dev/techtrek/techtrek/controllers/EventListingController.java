@@ -78,7 +78,7 @@ public class EventListingController {
         // FIXME: Make sure this has proper authentication
         // Add the user (placement) as the event creator
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        eventListing.setUser(user);
+//        eventListing.setUser(user);
 
         // Save the job listing and redirect to events index
         eventsRepo.save(eventListing);
