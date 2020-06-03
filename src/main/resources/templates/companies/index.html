@@ -32,22 +32,19 @@
             <td>Logo</td>
             <td th:text="${company.name}">Company name</td>
             <td>
-                    <span style="display: flex; justify-content: space-evenly">
+                    <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
 
-                        <a th:href="@{'/companies/' + ${company.getId()} + '/edit'}"><button class="btn btn-link" style="font-size: 1.5rem"><i class="fa fa-edit"></i></button></a>
+                        <a th:href="@{'/companies/' + ${company.id} + '/edit'}"><button class="btn btn-link" style="font-size: 1.5rem"><i class="fa fa-edit"></i></button></a>
 
+                        <button data-toggle="modal" th:data-target="'#' + modalForId + ${company.id}"  class="btn btn-link text-danger" style="font-size: 1.5rem"><i class="fa fa-trash"></i></button>
 
-                        <!--                        <form method="POST" th:action="@{'/companies/' + ${company.getId()} + '/delete'}"></form>-->
+                        <!-- Company delete confirmation modal -->
 
-
-                            <button data-toggle="modal" data-target="#companyDeleteModal" class="btn btn-link text-danger" style="font-size: 1.5rem"><i class="fa fa-trash"></i></button>
-
-
-                        <div class="modal fade" id="companyDeleteModal" tabindex="-1" role="dialog"
+                        <div class="modal fade" th:id="modalForId + ${company.id}" tabindex="-1" role="dialog"
                              aria-labelledby="companyDeleteModalLabel"
                              aria-hidden="true">
 
-                            <form th:action="@{'/companies/' + ${company.getId()} + '/delete'}" th:method="POST" th:object="${company}">
+                            <form th:action="@{'/companies/' + ${company.id} + '/delete'}" th:method="POST" th:object="${company}">
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -55,7 +52,8 @@
                                         </div>
                                         <div class="modal-body">
                                             <p class="lead">
-                                                Deleting the company is a <u>permanent</u> action and will also <span class="text-danger">delete all job listings by this company.</span> Please confirm to proceed.
+                                                <span th:text="${company.name}"></span>
+                                                Deleting the company is a permanent action and will also delete all job listings by this company. Please confirm to proceed.
                                             </p>
                                         </div>
                                         <div class="modal-footer">
@@ -67,12 +65,13 @@
                             </form>
                         </div>
 
+                        <!-- /end of modal -->
 
                     </span>
             </td>
         </tr>
         <tr>
-            <td colspan="3" class="mb-5 p-4">
+            <td colspan="3" class="mb-5 p-4 bg-white">
                 <a th:href="@{/companies/create}" style="font-size: 1.5rem"><i class="fa fa-plus-circle"></i> Add new company</a>
             </td>
         </tr>
