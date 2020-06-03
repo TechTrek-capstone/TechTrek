@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service("customUserDetailsService")
+@Service
 public class UserDetailsLoader implements UserDetailsService {
     private final Users users;
 
@@ -24,6 +24,6 @@ public class UserDetailsLoader implements UserDetailsService {
             throw new UsernameNotFoundException("No user found for " + username);
         }
 
-        return new UserWithRoles(user, role.ofUserWith(username));
+        return new UserWithRoles(user);
     }
 }

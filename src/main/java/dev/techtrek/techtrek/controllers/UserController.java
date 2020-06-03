@@ -40,16 +40,7 @@ public class UserController {
 
     }
 
-    private void authenticate(User user) {
-        UserDetails userDetails = new UserWithRoles(user, roles.ofUserWith(user.getUsername()));
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                userDetails,
-                userDetails.getPassword(),
-                userDetails.getAuthorities()
-        );
-        SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(auth);
-    }
+
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
