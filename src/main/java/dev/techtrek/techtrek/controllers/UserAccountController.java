@@ -7,6 +7,7 @@ import dev.techtrek.techtrek.repositories.Users;
 import dev.techtrek.techtrek.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UserAccountController {
 
+
     @Autowired
     private Users users;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @Autowired
     private ConfirmationTokenRepository confirmationTokenRepository;
@@ -25,13 +31,20 @@ public class UserAccountController {
     @Autowired
     private EmailSenderService emailSenderService;
 
-    @RequestMapping(value="/register", method = RequestMethod.GET)
-    public ModelAndView displayRegistration(ModelAndView modelAndView, User user)
-    {
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("register");
-        return modelAndView;
+
+    public UserAccountController(Users users, PasswordEncoder passwordEncoder){
+        this.users = users;
+        this.passwordEncoder = passwordEncoder;
     }
+
+
+//    @RequestMapping(value="/register", method = RequestMethod.GET)
+//    public ModelAndView displayRegistration(ModelAndView modelAndView, User user)
+//    {
+//        modelAndView.addObject("user", user);
+//        modelAndView.setViewName("register");
+//        return modelAndView;
+//    }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public ModelAndView registerUser(ModelAndView modelAndView, User user)
@@ -45,6 +58,8 @@ public class UserAccountController {
         }
         else
         {
+            String hash = passwordEncoder.encode(user.getPassword());
+            user.setPassword(hash);
             users.save(user);
 
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
@@ -54,7 +69,7 @@ public class UserAccountController {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(user.getEmail());
             mailMessage.setSubject("Complete Registration!");
-            mailMessage.setFrom("chand312902@gmail.com");
+            mailMessage.setFrom("no_reply@techtrek.dev");
             mailMessage.setText("To confirm your account, please click here : "
                     +"http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
 
@@ -62,7 +77,7 @@ public class UserAccountController {
 
             modelAndView.addObject("emailId", user.getEmail());
 
-            modelAndView.setViewName("login/#successfulRegistration");
+            modelAndView.setViewName("successfulRegisteration");
         }
 
         return modelAndView;
@@ -78,7 +93,7 @@ public class UserAccountController {
             User user = users.findByEmailIgnoreCase(token.getUser().getEmail());
             user.setEnabled(true);
             users.save(user);
-            modelAndView.setViewName("login/#verified");
+            modelAndView.setViewName("accountVerified");
         }
         else
         {
@@ -92,13 +107,23 @@ public class UserAccountController {
     public UserAccountController() {
     }
 
-    // getters and setters
+
+// getters and setters
+
     public Users getUsers() {
         return users;
     }
 
     public void setUsers(Users users) {
         this.users = users;
+    }
+
+    public PasswordEncoder getPasswordEncoder() {
+        return passwordEncoder;
+    }
+
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     public ConfirmationTokenRepository getConfirmationTokenRepository() {
