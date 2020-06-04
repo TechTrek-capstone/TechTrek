@@ -161,66 +161,105 @@
     <div th:fragment="loginModal" class="modal fade" id="loginModal" tabindex="-1" role="dialog"
          aria-labelledby="loginModalLabel"
          aria-hidden="true">
+
         <!--         Login Form -->
-<!--        <form th:action="@{/login}" th:method="post" th:object="${user}">-->
 
-
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title text-center" id="loginModalLabel">Login</h2>
-                    </div>
-                    <form th:action="@{/login}" th:method="post">
-                        <div class="modal-body">
-
-                            <!-- Username Here -->
-                            <div class="form-group">
-                                <label for="username" class="col-form-label">Username:</label>
-                                <input class="form-control" id="username" name="username" type="text"/>
-                            </div>
-
-                            <!-- Password Here -->
-                            <div class="form-group">
-                                <label for="password" class="col-form-label">Password:</label>
-                                <input class="form-control" id="password" name="password" type="password"/>
-                            </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Login</button>
-                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title text-center" id="loginModalLabel">Login</h2>
                 </div>
-            </div>
-<!--        </form>-->
-    </div>
+                <form th:action="@{/login}" th:method="post">
+                    <div class="modal-body">
 
-    <!-- Event Listings Fragment -->
-    <div th:fragment="eventsList">
+                        <!-- Username Here -->
+                        <div class="form-group">
+                            <label for="username" class="col-form-label">Username:</label>
+                            <input class="form-control" id="username" name="username" type="text"/>
+                        </div>
 
-        <div th:each="event : ${eventsList}" class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 th:text="${event.title}" class="card-title">Card title</h5>
-                <p th:utext="${#strings.abbreviate(event.description, 100)}" class="card-text">Test.</p>
-            </div>
+                        <!-- Password Here -->
+                        <div class="form-group">
+                            <label for="password" class="col-form-label">Password:</label>
+                            <input class="form-control" id="password" name="password" type="password"/>
+                        </div>
 
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a th:href="|http://google.com/maps/place/${event.location}|"
-                                               target="_blank">
-                    <span th:text="${event.location}"></span></a></li>
-                <li class="list-group-item" th:text="${#dates.format(event.listingDate, 'dd-MM-yyyy HH:mm')}">Listing
-                    date
-                </li>
-            </ul>
 
-            <div class="card-body">
-                <a th:href="@{|${event.rsvpUrl}|}" class="card-link">RSVP</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+
+    <!-- Event Listings Fragment -->
+
+    <div class="d-flex justify-content-around flex-wrap w-50-lg" th:fragment="eventsList">
+
+        <div th:each="event : ${eventsList}" class="card mb-5" style="width: 18rem;">
+            <a th:href="@{|/events/${event.id}|}">
+
+                <!-- Event image or placeholder -->
+                <img src="..." class="card-img-top" alt="...">
+
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+
+                            <!-- Event title -->
+                            <h5 th:text="${event.title}" class="card-title">Event title</h5>
+
+                            <!-- Date and Time -->
+                            <span class="text-black-50"><span th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Date of Event</span> | <span th:text="${event.time}">Time of Event</span></span>
+                        </li>
+
+                        <li class="list-group-item">
+                            <!-- Event Location -->
+
+
+                            <!-- Note: Limiting the jobs text (description) to 100 chars for readability in the card and to prevent growing the div. -->
+<!--                            <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description text.</p>-->
+<!--                            <div class="text-right">-->
+<!--                                &lt;!&ndash; Posting date &ndash;&gt;-->
+<!--                                <span class="text-black-50 text-right" style="font-size: .75rem;">Posted: <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Listing date</span></span>-->
+<!--                            </div>-->
+                        </li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+
+<!--    <div th:fragment="eventsList">-->
+
+<!--        <div th:each="event : ${eventsList}" class="card" style="width: 18rem;">-->
+<!--            <img src="..." class="card-img-top" alt="...">-->
+<!--            <div class="card-body">-->
+<!--                <h5 th:text="${event.title}" class="card-title">Card title</h5>-->
+<!--                <p th:utext="${#strings.abbreviate(event.description, 100)}" class="card-text">Test.</p>-->
+<!--            </div>-->
+
+<!--            <ul class="list-group list-group-flush">-->
+<!--                <li class="list-group-item"><a th:href="|http://google.com/maps/place/${event.location}|"-->
+<!--                                               target="_blank">-->
+<!--                    <span th:text="${event.location}"></span></a></li>-->
+<!--                <li class="list-group-item" th:text="${#dates.format(event.listingDate, 'dd-MM-yyyy HH:mm')}">Listing-->
+<!--                    date-->
+<!--                </li>-->
+<!--            </ul>-->
+
+<!--            <div class="card-body">-->
+<!--                <a th:href="@{|${event.rsvpUrl}|}" class="card-link">RSVP</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 
 <!-- JS scripts -->
@@ -241,8 +280,23 @@
     <script>
         $('#jobDescription').summernote({
             height: 200,
-            placeholder: 'Enter description, job duties, required skills, preferred skills, etc...'
-        })
+            placeholder: 'Enter description, job duties, required skills, preferred skills, etc...',
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link']],
+                ['misc', ['undo', 'redo', 'help']]
+            ],
+
+            popover: {
+                air: [
+                    ['color', ['color']],
+                    ['font', ['bold', 'underline', 'clear']]
+                ]
+            }
+        });
 
         $(document).ready(function () {
             if (window.location.href.indexOf('#register') != -1) {
