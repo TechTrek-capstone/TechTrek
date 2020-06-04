@@ -28,20 +28,20 @@ public class User {
     @Column(name = "user_password", nullable = false)
     private String password;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "userfirstname")
+    private String userfirstname = "";
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "last_name")
+    private String lastName = "";
 
-    @Column(name = "phone_number")
-    private String phone_number;
+    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "phone_number")
+    private String phoneNumber = "";
 
-    @Column(name = "github_username")
-    private String githubUsername;
+    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "github_username")
+    private String githubUsername = "";
 
-    @Column(name = "linkedin_username")
-    private String linkedinUsername;
+    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "linkedin_username")
+    private String linkedinUsername = "";
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -49,11 +49,14 @@ public class User {
     @Column(name = "employment_status")
     private EmploymentStatus employmentStatus;
 
-    @Column(name = "bio_summary", length = 500)
-    private String bioSummary;
+    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "bio_summary", length = 500)
+    private String bioSummary = "";
 
     @Column(name = "role_id")
     private Long roleId;
+
+    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "user_website")
+    private String userWebsite = "";
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -79,7 +82,7 @@ public class User {
 
 
     public String getFullName() {
-        return firstName + " " + lastName;
+        return userfirstname + " " + lastName;
     }
 
     public User(User copy) {

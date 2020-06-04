@@ -78,17 +78,34 @@ public class UserController {
     @PostMapping("/profile")
     public String editProfile(
 
-            @RequestParam(name = "github_username") String githubUsername
-    )
-    {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //1. Get the current user
-        User currentUser = new User(user);
-        // Set the github username
-        currentUser.setGithubUsername(githubUsername);
+            @RequestParam(name = "userfirstname") String userFirstName,
+            @RequestParam(name = "last_name") String lastName,
 
-        // save the record
+            @RequestParam(name = "bio_summary") String bioSummary,
+            @RequestParam(name = "phone_number") String phoneNumber,
+
+            @RequestParam(name = "user_website") String userWebsite,
+            @RequestParam(name = "linkedin_username") String linkedinUsername,
+
+            @RequestParam(name = "github_username") String githubUsername
+    ) {
+        // Sets user based off the spring security authentication. This is based on role.
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //1. Get the current user
+        // Sets user as new so that we can properly save to the database. Otherwise the submitted data would only
+        // persist for the current session.
+        User currentUser = new User(user);
+        currentUser.setUserfirstname(userFirstName);
+
+        currentUser.setGithubUsername(githubUsername);
+        currentUser.setBioSummary(bioSummary);
+        currentUser.setUserWebsite(userWebsite);
+        currentUser.setLastName(lastName);
+        currentUser.setPhoneNumber(phoneNumber);
+        currentUser.setLinkedinUsername(linkedinUsername);
+
         users.save(currentUser);
 
+        // Just going to return the same page to view the updates.
         return "redirect:/profile";
     }
 
