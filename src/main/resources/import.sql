@@ -122,7 +122,7 @@ VALUES (1,
         false,
         '2020-05-21 00:00:00.000000',
         'San Antonio Coffee House',
-        'www.google.com',
+        'https://www.google.com',
         '12:00PM - 2:00PM',
         'The Best Event Ever'),
 #        1
@@ -133,7 +133,7 @@ VALUES (1,
         false,
         '2020-05-21 00:00:00.000000',
         'San Antonio Coffee Haus',
-        'www.google.com',
+        'https://www.google.com',
         '2:00PM - 4:00PM',
         'The Second Best Event Ever');
 # 1

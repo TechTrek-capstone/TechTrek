@@ -262,6 +262,26 @@
             }
         });
 
+        $('#eventDescription').summernote({
+            height: 200,
+            placeholder: 'Enter description, job duties, required skills, preferred skills, etc...',
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link']],
+                ['misc', ['undo', 'redo', 'help']]
+            ],
+
+            popover: {
+                air: [
+                    ['color', ['color']],
+                    ['font', ['bold', 'underline', 'clear']]
+                ]
+            }
+        });
+
         $(document).ready(function () {
             if (window.location.href.indexOf('#register') != -1) {
                 $('#registerModal').modal('show');
