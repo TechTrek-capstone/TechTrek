@@ -81,7 +81,7 @@ create table if not exists job_listings
     apply_url varchar(2000) not null,
     description text not null,
     is_archived bit not null,
-    is_remote bit null,
+    is_remote bit not null default false,
     listing_date datetime(6) not null,
     location varchar(255) not null,
     title varchar(255) not null,
