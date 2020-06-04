@@ -75,15 +75,10 @@
                 <a class="nav-link" th:href="@{/profile}"><span style="font-size: 1.5rem"><i
                         class="fa fa-user-circle"></i></span><span class="sr-only">(current)</span></a>
             </li>
+
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link" th:href="@{/logout}"><button class="btn btn-link text-danger">Logout</button></a>
             </li>
-
-
-            <!--            <form sec:authorize="isAuthenticated()" class="" th:action="@{/logout}" th:method="post">-->
-            <!--                <button class="btn btn-link" type="button">Logout</button>-->
-            <!--            </form>-->
-
         </ul>
     </div>
 </nav>
@@ -204,63 +199,32 @@
         <div th:each="event : ${eventsList}" class="card mb-5" style="width: 18rem;">
             <a th:href="@{|/events/${event.id}|}">
 
-                <!-- Event image or placeholder -->
-                <img src="..." class="card-img-top" alt="...">
-
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
 
+                            <!-- Event image or placeholder -->
+                            <img src="..." class="card-img-top" alt="...">
+
                             <!-- Event title -->
                             <h5 th:text="${event.title}" class="card-title">Event title</h5>
 
-                            <!-- Date and Time -->
-                            <span class="text-black-50"><span th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Date of Event</span> | <span th:text="${event.time}">Time of Event</span></span>
                         </li>
 
                         <li class="list-group-item">
+
+                            <!-- Date and Time -->
+                            <span class="text-black-50"><span th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Date of Event</span>
+                                <br /><span th:text="${event.time}">Time of Event</span></span>
+
                             <!-- Event Location -->
-
-
-                            <!-- Note: Limiting the jobs text (description) to 100 chars for readability in the card and to prevent growing the div. -->
-<!--                            <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description text.</p>-->
-<!--                            <div class="text-right">-->
-<!--                                &lt;!&ndash; Posting date &ndash;&gt;-->
-<!--                                <span class="text-black-50 text-right" style="font-size: .75rem;">Posted: <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Listing date</span></span>-->
-<!--                            </div>-->
+                            <br /><a th:href="|http://google.com/maps/place/${event.location}|" target="_blank"><span th:text="${event.location}"></span></a>
                         </li>
                     </ul>
                 </div>
             </a>
         </div>
     </div>
-
-
-
-<!--    <div th:fragment="eventsList">-->
-
-<!--        <div th:each="event : ${eventsList}" class="card" style="width: 18rem;">-->
-<!--            <img src="..." class="card-img-top" alt="...">-->
-<!--            <div class="card-body">-->
-<!--                <h5 th:text="${event.title}" class="card-title">Card title</h5>-->
-<!--                <p th:utext="${#strings.abbreviate(event.description, 100)}" class="card-text">Test.</p>-->
-<!--            </div>-->
-
-<!--            <ul class="list-group list-group-flush">-->
-<!--                <li class="list-group-item"><a th:href="|http://google.com/maps/place/${event.location}|"-->
-<!--                                               target="_blank">-->
-<!--                    <span th:text="${event.location}"></span></a></li>-->
-<!--                <li class="list-group-item" th:text="${#dates.format(event.listingDate, 'dd-MM-yyyy HH:mm')}">Listing-->
-<!--                    date-->
-<!--                </li>-->
-<!--            </ul>-->
-
-<!--            <div class="card-body">-->
-<!--                <a th:href="@{|${event.rsvpUrl}|}" class="card-link">RSVP</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-</div>
 
 <!-- JS scripts -->
 <standard_scripts th:fragment="footer">
