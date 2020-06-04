@@ -1,11 +1,10 @@
 package dev.techtrek.techtrek.controllers;
 
 
-import dev.techtrek.techtrek.models.Cohort;
-import dev.techtrek.techtrek.models.User;
-import dev.techtrek.techtrek.models.UserWithRoles;
+import dev.techtrek.techtrek.models.*;
 import dev.techtrek.techtrek.repositories.CohortsRepo;
-import dev.techtrek.techtrek.repositories.Roles;
+import dev.techtrek.techtrek.repositories.EventsRepo;
+import dev.techtrek.techtrek.repositories.JobsRepo;
 import dev.techtrek.techtrek.repositories.Users;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,16 +23,20 @@ public class UserController {
     private Users users;
     private PasswordEncoder passwordEncoder;
     private CohortsRepo cohortsRepo;
-    //    private UserWithRoles userWithRoles;
+//    private UserWithRoles userWithRoles;
     private Roles roles;
+    private JobsRepo jobsRepo;
+    private EventsRepo eventsRepo;
 
-    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, Roles roles) {
+    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, Roles roles, JobsRepo jobsRepo, EventsRepo eventsRepo) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.cohortsRepo = cohortsRepo;
         this.roles = roles;
-
+        this.jobsRepo = jobsRepo;
+        this.eventsRepo = eventsRepo;
     }
+
 
 
     @GetMapping("/sign-up")
@@ -63,6 +66,10 @@ public class UserController {
     @GetMapping("/home")
     public String showDashboard(Model model) {
         model.addAttribute("user", new User());
+        List<JobListing> jobList = jobsRepo.findAll();
+        model.addAttribute("jobs", jobList);
+        List<EventListing> eventList = eventsRepo.findAll();
+        model.addAttribute("eventsList", eventList);
         return "users/index";
     }
 

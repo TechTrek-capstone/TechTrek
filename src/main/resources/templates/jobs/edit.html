@@ -73,7 +73,7 @@
             <div class="form-row">
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
-                        <input name="is_remote" type="checkbox" class="custom-control-input" id="remoteWorkCheck" th:checked="${job.isRemote}">
+                        <input name="is_remote" type="checkbox" class="custom-control-input" id="remoteWorkCheck" th:checked="${job.isRemote}" th:value="true">
                         <label class="custom-control-label" for="remoteWorkCheck"><b>Remote position?</b></label>
                     </div>
                 </div>
@@ -85,5 +85,8 @@
 </container>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+<script>
+
+</script>
 </body>
 </html>
