@@ -52,6 +52,9 @@ public class User {
     @Column(name = "bio_summary", length = 500)
     private String bioSummary;
 
+    @Column(name = "role_id")
+    private Long roleId;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")
