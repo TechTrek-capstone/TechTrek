@@ -71,7 +71,7 @@ public class UserAccountController {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("no_reply@techtrek.dev");
             mailMessage.setText("To confirm your account, please click here : "
-                    +"http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
+                    +"https://techtrek.dev/confirm-account?token="+confirmationToken.getConfirmationToken());
 
             emailSenderService.sendEmail(mailMessage);
 
