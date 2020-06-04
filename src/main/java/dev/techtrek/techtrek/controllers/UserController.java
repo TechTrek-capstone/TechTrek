@@ -2,12 +2,8 @@ package dev.techtrek.techtrek.controllers;
 
 
 
-import dev.techtrek.techtrek.models.Cohort;
-import dev.techtrek.techtrek.models.UserWithRoles;
-import dev.techtrek.techtrek.repositories.CohortsRepo;
-import dev.techtrek.techtrek.repositories.Roles;
-import dev.techtrek.techtrek.repositories.Users;
-import dev.techtrek.techtrek.models.User;
+import dev.techtrek.techtrek.models.*;
+import dev.techtrek.techtrek.repositories.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -31,13 +27,16 @@ public class UserController {
     private CohortsRepo cohortsRepo;
 //    private UserWithRoles userWithRoles;
     private Roles roles;
+    private JobsRepo jobsRepo;
+    private EventsRepo eventsRepo;
 
-    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, Roles roles) {
+    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, Roles roles, JobsRepo jobsRepo, EventsRepo eventsRepo) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.cohortsRepo = cohortsRepo;
         this.roles = roles;
-
+        this.jobsRepo = jobsRepo;
+        this.eventsRepo = eventsRepo;
     }
 
 
@@ -69,6 +68,10 @@ public class UserController {
     @GetMapping("/home")
     public String showDashboard(Model model) {
         model.addAttribute("user", new User());
+        List<JobListing> jobList = jobsRepo.findAll();
+        model.addAttribute("jobs", jobList);
+        List<EventListing> eventList = eventsRepo.findAll();
+        model.addAttribute("eventsList", eventList);
         return "users/index";
     }
 
@@ -78,7 +81,4 @@ public class UserController {
         model.addAttribute("user", new User());
         return "users/profile";
     }
-
-
-
 }
