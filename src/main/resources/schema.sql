@@ -68,7 +68,7 @@ create table if not exists event_listings
     listing_date datetime(6) not null,
     location varchar(255) null,
     rsvp_url varchar(2000) null,
-    time datetime(6) null,
+    time varchar(255) null,
     title varchar(255) not null,
     user_id bigint null,
     foreign key (user_id) references users (id)

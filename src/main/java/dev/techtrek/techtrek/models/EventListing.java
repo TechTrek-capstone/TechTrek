@@ -23,7 +23,7 @@ public class EventListing {
     private Date date;
 
     @Column(name = "time")
-    private LocalDateTime time;
+    private String time;
 
     @Column(name = "title", nullable = false)
     private String title;
