@@ -93,7 +93,7 @@ public class JobListingController {
             @RequestParam(name = "title") String title,
             @RequestParam(name = "description") String description,
             @RequestParam(name = "location") String location,
-            @RequestParam(name = "is_remote") Boolean isRemote,
+            @RequestParam(name = "is_remote", defaultValue = "false") Boolean isRemote,
             @RequestParam(name = "apply_url") String applyUrl,
             @RequestParam(name = "company") Company company) {
 

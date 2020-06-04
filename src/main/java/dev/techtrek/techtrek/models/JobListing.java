@@ -20,7 +20,7 @@ public class JobListing {
     @Column(name = "location", nullable = false)
     private String location;
 
-    @Column(name = "is_remote")
+    @Column(columnDefinition="BOOLEAN DEFAULT false", name = "is_remote", nullable = false)
     private Boolean isRemote;
 
     @Column(name = "title", nullable = false)
