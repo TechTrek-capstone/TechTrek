@@ -11,7 +11,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -102,7 +101,7 @@ public class EventListingController {
             @RequestParam(name = "title") String title,
             @RequestParam(name = "location") String location,
             @RequestParam(name = "date") Date date,
-            @RequestParam(name = "time") LocalDateTime time,
+            @RequestParam(name = "time") String time,
             @RequestParam(name = "description") String description,
             @RequestParam(name = "rsvp_url") String rsvpUrl,
             @RequestParam(name = "is_archived") Boolean isArchived
