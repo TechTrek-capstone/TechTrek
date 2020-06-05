@@ -7,34 +7,21 @@
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
 
-<container class="text-center">
-    <h1>User Profile</h1>
-    <p>This page will show the user's profile.</p>
-</container>
 
-<!-- TODO: Add github_username  -->
-<!--<div sec:authorize="isAuthenticated()" style="border:#b52628 2px solid;">-->
-<!--    This content is only shown to authenticated users.-->
-<!--    User ID: <span th:text="${user.id}"></span>-->
-<!--    Username: <span th:text="${#authentication.principal.username}"></span>-->
-<!--    Email: <span th:text="${#authentication.principal.email}"></span>-->
-<!--</div>-->
-<div>
-    <img th:src=" 'https://grass-graph.moshimo.works/images/' + ${user.getGithubUsername()} + '.png' " alt="">
-</div>
 
 <!-- Bootstrap Profile -->
 <div class="container-lg">
-
     <div class="container">
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
+                <h1 class="display-4 mt-3" th:text="${user.getFullName()}"></h1>
+
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+                        <a href="" data-target="#documents" data-toggle="tab" class="nav-link">Documents</a>
                     </li>
                     <li class="nav-item">
                         <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
@@ -42,20 +29,50 @@
                 </ul>
                 <div class="tab-content py-4">
                     <div class="tab-pane active" id="profile">
-                        <h5 class="mb-3">User Profile for: <span th:text="${user.getUsername()}"></span></h5>
+                        <h5 class="mb-3">Username: <span class="badge badge-pill badge-primary" th:text="${user.getUsername()}"></span></h5>
                         <div class="row">
                             <div class="col-md-6">
                                 <h6>About</h6>
-                                <p>
-                                    Web Designer, UI/UX Engineer
+                                <p th:text="${user.bioSummary}">
+                                    User bio goes here
                                 </p>
-                                <h6>Hobbies</h6>
-                                <p>
-                                    Indie music, skiing and hiking. I love the great outdoors.
+
+                                <h6>Desired Work Location(s)</h6>
+                                <p th:text="${user.workLocation}">
+                                    Desired work location goes here
                                 </p>
                             </div>
+
+
+
                             <div class="col-md-6">
-                                <h6>Recent badges</h6>
+
+                                <!-- Media links -->
+                                <h6>Media Links</h6>
+                                <div class="d-flex" style="font-size: 2rem">
+
+                                    <!-- Link to Github profile -->
+                                    <a th:href="'https://github.com/' + ${user.githubUsername}" target="_blank">
+                                        <i class="fa fa-github mr-2"></i>
+                                    </a>
+
+                                    <!-- Link to LinkedIn profile -->
+                                    <a th:href="'https://github.com/' + ${user.githubUsername}" target="_blank">
+                                        <i class="fa fa-linkedin-square mr-2"></i>
+                                    </a>
+
+                                    <!-- Link to personal site -->
+                                    <a th:href="${user.userWebsite}" target="_blank">
+                                        <i class="fa fa-globe mr-2"></i>
+                                    </a>
+
+
+                                </div>
+
+                                <hr class="hr-light" />
+
+                                <!-- Skills pill badges -->
+                                <h6>Skills</h6>
                                 <a href="#" class="badge badge-dark badge-pill">html5</a>
                                 <a href="#" class="badge badge-dark badge-pill">react</a>
                                 <a href="#" class="badge badge-dark badge-pill">codeply</a>
@@ -64,50 +81,20 @@
                                 <a href="#" class="badge badge-dark badge-pill">jquery</a>
                                 <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
                                 <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
-                                <hr>
+
+                                <hr class="hr-light">
+
                                 <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
                                 <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
                                 <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
                             </div>
-                            <div class="col-md-12">
-                                <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Recent
-                                    Activity</h5>
-                                <table class="table table-sm table-hover table-striped">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>Abby</strong> joined ACME Project Team in
-                                            <strong>`Collaboration`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Kensington</strong> deleted MyBoard3 in
-                                            <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
+
                         <!--/row-->
+
                     </div>
-                    <div class="tab-pane" id="messages">
+
+                    <div class="tab-pane" id="documents">
                         <div class="alert alert-info alert-dismissable">
                             <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>.
                             Use this to show important messages to the user.
@@ -164,14 +151,29 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Bio</label>
+                                <label class="col-lg-3 col-form-label form-control-label">About</label>
                                 <div class="col-lg-9">
-                                    <input name="bio_summary" class="form-control" type="text"
-                                           th:value="${user.bioSummary}">
+                                    <textarea rows="5" name="bio_summary" class="form-control" type="text"
+                                           th:text="${user.bioSummary}">
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Mobile Phone</label>
+                                <label class="col-lg-3 col-form-label form-control-label">Desired work location(s)</label>
+                                <div class="col-lg-9">
+                                    <input name="work_location" class="form-control" type="text"
+                                              th:value="${user.workLocation}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                <div class="col-lg-9">
+                                    <input name="email" class="form-control" type="text"
+                                           th:value="${user.email}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                 <div class="col-lg-9">
                                     <input name="phone_number" class="form-control" type="text"
                                            th:value="${user.phoneNumber}">
@@ -179,7 +181,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Personal Website</label>
+                                <label class="col-lg-3 col-form-label form-control-label">Personal website</label>
                                 <div class="col-lg-9">
                                     <input name="user_website" class="form-control" type="url"
                                            th:value="${user.userWebsite}">
@@ -187,14 +189,14 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Github Username</label>
+                                <label class="col-lg-3 col-form-label form-control-label">Github username</label>
                                 <div class="col-lg-9">
                                     <input name="github_username" class="form-control" type="text"
                                            th:value="${user.githubUsername}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">LinkedIn Username</label>
+                                <label class="col-lg-3 col-form-label form-control-label">LinkedIn username</label>
                                 <div class="col-lg-9">
                                     <input name="linkedin_username" class="form-control" type="text"
                                            th:value="${user.linkedinUsername}">
@@ -205,15 +207,15 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                 <div class="col-lg-9">
-                                    <input type="reset" class="btn btn-secondary" value="Cancel">
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    <button type="submit" class="btn btn-block btn-primary">Save Changes</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 order-lg-1 text-center">
+
+            <div class="col-lg-4 order-lg-1 text-center mt-4">
                 <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
                 <h6 class="mt-2">Upload a different photo</h6>
                 <label class="custom-file">
@@ -224,10 +226,52 @@
         </div>
     </div>
 
+    <!-- GITHUB BLOCK -->
+
+    <div id="user-github-info" class="mr-auto ml-auto text-center">
+        <hr data-content="Github Activity" class="hr-text" />
+
+        <span th:if="${user.githubUsername == ''}">
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Please enter your Github username to display your commit history.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <p class="lead">No commit history available.</p>
+        </span>
+
+        <span th:unless="${user.githubUsername == ''}">
+
+
+            <!-- Loading animation SVG that plays while commit history image loads -->
+
+            <div id="loadingAnimation" th:replace="partials/partials :: loadingAnimation"></div>
+
+            <!-- Github commit history chart -->
+
+            <img id="githubHistoryImg" th:src=" 'https://grass-graph.moshimo.works/images/' + ${user.getGithubUsername()} + '.png' " alt="Github commit history chart">
+
+        </span>
+
+    </div>
 
 </div>
 
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+<script>
+    // show loading image
+    $('#loadingAnimation').show();
+
+    // main image loaded ?
+    $('#githubHistoryImg').on('load', function(){
+        // hide/remove the loading image
+        $('#loader_img').hide();
+    });
+</script>
+
 </body>
 </html>

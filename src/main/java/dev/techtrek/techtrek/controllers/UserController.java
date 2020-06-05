@@ -88,6 +88,9 @@ public class UserController {
             @RequestParam(name = "bio_summary") String bioSummary,
             @RequestParam(name = "phone_number") String phoneNumber,
 
+            @RequestParam(name = "email") String email,
+            @RequestParam(name = "work_location") String workLocation,
+
             @RequestParam(name = "user_website") String userWebsite,
             @RequestParam(name = "linkedin_username") String linkedinUsername,
 
@@ -103,6 +106,8 @@ public class UserController {
         currentUser.setGithubUsername(githubUsername);
         currentUser.setBioSummary(bioSummary);
         currentUser.setUserWebsite(userWebsite);
+        currentUser.setEmail(email);
+        currentUser.setWorkLocation(workLocation);
         currentUser.setLastName(lastName);
         currentUser.setPhoneNumber(phoneNumber);
         currentUser.setLinkedinUsername(linkedinUsername);
