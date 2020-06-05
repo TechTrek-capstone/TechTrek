@@ -5,6 +5,7 @@
 </head>
 
 <body>
+
 <nav th:replace="partials/partials :: navbar"></nav>
 
 <div class="container text-center">
@@ -26,7 +27,7 @@
         </tr>
 
         <!-- Value Rows -->
-        <tr class="resume-row" th:value="${resume.link}">
+        <tr class="resume-row">
             <td>
                 <a class="downloadLink" href="">View Resume</a>
                 <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">

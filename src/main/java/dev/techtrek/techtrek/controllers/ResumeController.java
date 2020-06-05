@@ -5,6 +5,7 @@ import dev.techtrek.techtrek.models.Cohort;
 import dev.techtrek.techtrek.models.Resume;
 import dev.techtrek.techtrek.models.User;
 import dev.techtrek.techtrek.repositories.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,10 @@ public class ResumeController {
 
     @GetMapping("/resume")
     public String showResume(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long id = user.getId();
+        model.addAttribute("resumes", resumeRepo.findAllById(id));
         model.addAttribute("user", new User());
-        model.addAttribute("resumes", resumeRepo.findAll());
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
         return "resume/index";

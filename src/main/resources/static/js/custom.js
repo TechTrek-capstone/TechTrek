@@ -3,7 +3,7 @@ $(document).ready(function () {
     let changeTest = function() {
         $(".resume-status").html("Pending Review").css;
         $(".placement-msg").html("You've successfully uploaded your resume! Please wait for Placement to review.");
-    }
+    };
 
     if ($(".resume-row").val() !== null) {
         changeTest();
@@ -75,12 +75,6 @@ $(document).ready(function () {
             // store resume url in variable, pass that variable as a value to the view
             fsURL = resultJSON.filesUploaded[0].url;
             $("#resumeURL").val(fsURL);
-
-            // print msg after successful upload here
-            $(".resume-status").html("Pending Review").css;
-
-            // print placement msg
-            $(".placement-msg").html("You've successfully uploaded your resume! Please wait for Placement to review.");
 
         $("#urlForm").submit();
         });
