@@ -9,6 +9,10 @@
 
 <container>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+
+
     <h1 class="mt-3 text-center">Create Job Listing</h1>
 
     <form th:action="@{/jobs/create}" th:method="POST" th:object="${jobListing}" class="w-50 ml-auto mr-auto" id="createJobForm">
@@ -34,7 +38,7 @@
 
             <div class="form-group col-md-6">
                 <label for="location">Location</label>
-                <input type="text" th:field="*{location}" class="form-control" id="location" placeholder="ex. Houston, TX" required/>
+                <input type="text" th:field="*{location}" class="form-control" id="address-input" placeholder="ex. Houston, TX" required/>
             </div>
         </div>
 
@@ -67,5 +71,25 @@
 </container>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+
+
+
+<script>
+    var placesAutocomplete = places({
+        appId: 'pl91Y2LN2WGM',
+        apiKey: 'e2d6a9188b9819c4d4c2c3ad2bbf150b',
+        container: document.querySelector('#address-input')
+    });
+    const reconfigurableOptions = {
+        language: 'en', // Receives results in German
+        countries: ['us'], // Search in the United States of America
+        type: 'city', // Search only for cities names
+        aroundLatLngViaIP: false // disable the extra search/boost around the source IP
+    };
+
+</script>
+
+
+
 </body>
 </html>
