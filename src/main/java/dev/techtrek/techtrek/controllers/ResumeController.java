@@ -38,7 +38,19 @@ public class ResumeController {
         return "resume/index";
     }
 
+    // create
+    @PostMapping("/resume")
+    public String createResume(@ModelAttribute Resume resume,
+                               @RequestParam(name = "resumeURL") String resumeURL) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        resume.setUser(user);
+        resume.setLink(resumeURL);
+        resumeRepo.save(resume);
+        return "redirect:/resume";
+    }
 
+
+    // edit
     @PostMapping("/resume/{id}")
     public String updateResumeDB(Model model,
                                  @PathVariable long id,
@@ -56,8 +68,9 @@ public class ResumeController {
         return "redirect:/resume";
     }
 
-    @PostMapping("/resume/{id}/delete")
-    public String deleteResume(@PathVariable long id) {
+    // delete
+    @PostMapping("/resume/delete")
+    public String deleteResume(@RequestParam(name = "deleteResumeId") long id) {
         resumeRepo.deleteById(id);
         return "redirect:/resume";
     }

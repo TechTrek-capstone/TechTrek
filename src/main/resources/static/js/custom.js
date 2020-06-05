@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    let changeTest = function() {
+    let changeTest = function () {
         $(".resume-status").html("Pending Review").css;
         $(".placement-msg").html("You've successfully uploaded your resume! Please wait for Placement to review.");
     };
@@ -60,23 +60,31 @@ $(document).ready(function () {
     });
 // END PROGRESS BAR
 
-
     $("#uploadResume").click(function () {
         let client = filestack.init(fileStackKey);
-        resumeId = $("#uploadResume").val();
+        // resumeId = $("#uploadResume").val();
 
         client
             .pick({
-            maxFiles: 1,
+                maxFiles: 1,
             })
             .then(function (result) {
-            let resultJSON = JSON.parse(JSON.stringify(result));
+                let resultJSON = JSON.parse(JSON.stringify(result));
 
-            // store resume url in variable, pass that variable as a value to the view
-            fsURL = resultJSON.filesUploaded[0].url;
-            $("#resumeURL").val(fsURL);
+                // store resume url in variable, pass that variable as a value to the view
+                fsURL = resultJSON.filesUploaded[0].url;
+                $("#resumeURL").val(fsURL);
 
-        $("#urlForm").submit();
-        });
+                $("#urlForm").submit();
+            });
     });
+});
+
+$('#deleteResumeModal').on('show.bs.modal', function (e) {
+    var button = $(e.relatedTarget); // Button that triggered the modal
+    var resumeId = button.data('id'); // Extract info from data-* attributes
+
+    // Update the modal's content
+    var modal = $(this);
+    modal.find('#deleteResumeId').val(resumeId);
 });
