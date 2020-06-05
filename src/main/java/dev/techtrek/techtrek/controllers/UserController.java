@@ -23,20 +23,17 @@ public class UserController {
     private Users users;
     private PasswordEncoder passwordEncoder;
     private CohortsRepo cohortsRepo;
-//    private UserWithRoles userWithRoles;
-    private Roles roles;
+
     private JobsRepo jobsRepo;
     private EventsRepo eventsRepo;
 
-    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, Roles roles, JobsRepo jobsRepo, EventsRepo eventsRepo) {
+    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.cohortsRepo = cohortsRepo;
-        this.roles = roles;
         this.jobsRepo = jobsRepo;
         this.eventsRepo = eventsRepo;
     }
-
 
 
     @GetMapping("/sign-up")
