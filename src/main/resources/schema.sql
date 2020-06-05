@@ -30,30 +30,27 @@ create table if not exists job_categories
     unique (name)
 );
 
-create table if not exists roles
-(
-    id bigint auto_increment primary key,
-    name varchar(255) not null,
-    unique (name)
-);
+
 
 create table if not exists users
 (
     id bigint auto_increment primary key,
-    bio_summary varchar(500) null,
+    enabled bit NOT NULL DEFAULT 0,
+    bio_summary varchar(500) not null default '',
     create_date datetime(6) null,
     email varchar(255) not null,
     username varchar(255) not null,
     employment_status int null,
-    first_name varchar(255) null,
-    github_username varchar(255) null,
-    last_name varchar(255) null,
-    linkedin_username varchar(255) null,
+    userfirstname varchar(255) not null default '',
+    github_username varchar(255)  not null default '',
+    last_name varchar(255)  not null default '',
+    linkedin_username varchar(255)  not null default '',
     modify_date datetime(6) null,
     user_password varchar(255) not null,
-    phone_number varchar(255) null,
+    phone_number varchar(255)  not null default '',
     cohort_id bigint null,
     role_id bigint null,
+    user_website varchar(255) not null default '',
     unique (email),
     foreign key (cohort_id) references cohorts (id),
     foreign key (role_id) references roles (id)
@@ -68,7 +65,7 @@ create table if not exists event_listings
     listing_date datetime(6) not null,
     location varchar(255) null,
     rsvp_url varchar(2000) null,
-    time datetime(6) null,
+    time varchar(255) null,
     title varchar(255) not null,
     user_id bigint null,
     foreign key (user_id) references users (id)
@@ -80,7 +77,7 @@ create table if not exists job_listings
     apply_url varchar(2000) not null,
     description text not null,
     is_archived bit not null,
-    is_remote bit null,
+    is_remote bit not null default false,
     listing_date datetime(6) not null,
     location varchar(255) not null,
     title varchar(255) not null,
@@ -94,5 +91,12 @@ create table if not exists user_roles
 (
     id bigint auto_increment primary key,
     user_id bigint null,
-    role varchar(255) null
-)
+    role_id int null
+);
+
+create table if not exists roles
+(
+    id bigint auto_increment primary key,
+    name varchar(255) not null,
+    unique (name)
+);

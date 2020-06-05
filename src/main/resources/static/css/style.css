@@ -80,7 +80,7 @@ hr {
     height: 70%;
 }
 
-.card:hover {
+.feature-card:hover {
     transform: scale(1.15);
     z-index: 100;
 }
