@@ -18,16 +18,15 @@
     </div>
 
     <!-- Resumes Table -->
-    <table class="table table-striped w-50 mr-auto ml-auto" th:each="resume : ${resumes}">
+    <table class="table table-striped w-50 mr-auto ml-auto">
 
         <!-- Header Rows -->
         <tr>
             <th scope="col">Resume</th>
             <th scope="col">Status</th>
         </tr>
-
         <!-- Value Rows -->
-        <tr class="resume-row">
+        <tr class="resume-row" th:each="resume : ${resumes}">
             <td>
                 <a class="downloadLink" href="">View Resume</a>
                 <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">

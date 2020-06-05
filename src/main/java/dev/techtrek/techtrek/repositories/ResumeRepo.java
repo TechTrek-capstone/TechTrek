@@ -8,5 +8,5 @@ import java.util.List;
 public interface ResumeRepo extends JpaRepository<Resume, Long> {
     Resume getById(long id);
 
-    List<Resume> findAllById(long id);
+    List<Resume> findAllByUser_Id(long id);
 }

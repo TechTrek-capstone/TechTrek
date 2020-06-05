@@ -31,7 +31,7 @@ public class ResumeController {
     public String showResume(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long id = user.getId();
-        model.addAttribute("resumes", resumeRepo.findAllById(id));
+        model.addAttribute("resumes", resumeRepo.findAllByUser_Id(id));
         model.addAttribute("user", new User());
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
