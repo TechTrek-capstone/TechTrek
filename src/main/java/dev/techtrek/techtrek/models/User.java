@@ -43,13 +43,16 @@ public class User {
     @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "linkedin_username")
     private String linkedinUsername = "";
 
+    @Column(columnDefinition = "varchar(255)", name = "work_location")
+    private String workLocation;
+
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "employment_status")
     private EmploymentStatus employmentStatus;
 
-    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "bio_summary", length = 500)
+    @Column(columnDefinition = "text", nullable = false, name = "bio_summary")
     private String bioSummary = "";
 
     @Column(name = "role_id")

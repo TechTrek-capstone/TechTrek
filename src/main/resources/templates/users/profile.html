@@ -7,34 +7,25 @@
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
 
-<container class="text-center">
-    <h1>User Profile</h1>
-    <p>This page will show the user's profile.</p>
-</container>
 
-<!-- TODO: Add github_username  -->
-<!--<div sec:authorize="isAuthenticated()" style="border:#b52628 2px solid;">-->
-<!--    This content is only shown to authenticated users.-->
-<!--    User ID: <span th:text="${user.id}"></span>-->
-<!--    Username: <span th:text="${#authentication.principal.username}"></span>-->
-<!--    Email: <span th:text="${#authentication.principal.email}"></span>-->
-<!--</div>-->
-<div>
-    <img th:src=" 'https://grass-graph.moshimo.works/images/' + ${user.getGithubUsername()} + '.png' " alt="">
-</div>
 
 <!-- Bootstrap Profile -->
 <div class="container-lg">
-
     <div class="container">
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
-                <ul class="nav nav-tabs">
+                <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
+                <h4 th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
+                    <span th:text="${user.getCohort().name}"></span> cohort <span class="mr-2 ml-2">|</span> <i class="fa fa-map-marker mr-2" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
+                    <br><small>Graduating <span th:text="${#dates.format(user.cohort.getGraduationDate(), 'MM-yyyy')}"></span></small>
+                </h4>
+
+                <ul class="nav nav-tabs" style="margin-top: 2rem;">
                     <li class="nav-item">
                         <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+                        <a href="" data-target="#documents" data-toggle="tab" class="nav-link">Documents</a>
                     </li>
                     <li class="nav-item">
                         <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
@@ -42,20 +33,67 @@
                 </ul>
                 <div class="tab-content py-4">
                     <div class="tab-pane active" id="profile">
-                        <h5 class="mb-3">User Profile for: <span th:text="${user.getUsername()}"></span></h5>
+                        <h5 class="mb-3">Username: <span class="badge badge-pill badge-primary" th:text="${user.getUsername()}"></span></h5>
                         <div class="row">
                             <div class="col-md-6">
                                 <h6>About</h6>
-                                <p>
-                                    Web Designer, UI/UX Engineer
+                                <p th:text="${user.bioSummary}">
+                                    User bio goes here
                                 </p>
-                                <h6>Hobbies</h6>
-                                <p>
-                                    Indie music, skiing and hiking. I love the great outdoors.
+
+                                <h6>Desired work location(s)</h6>
+                                <p th:text="${user.workLocation}">
+                                    Desired work location goes here
                                 </p>
                             </div>
+
+
+
                             <div class="col-md-6">
-                                <h6>Recent badges</h6>
+
+                                <!-- Contact info -->
+                                <div id="userInfoBlock">
+                                    <!-- Email -->
+                                    <span th:unless="${user.email == ''}">
+                                        <strong>Email: </strong><span th:text="${user.email}"></span>
+                                    </span>
+
+                                    <!-- Phone number -->
+                                    <br><span th:unless="${user.phoneNumber == ''}">
+                                        <strong>Phone: </strong><span th:text="${user.phoneNumber}"></span>
+                                    </span>
+                                </div>
+
+                                <div class="d-flex mt-2" style="font-size: 2rem">
+
+                                    <!-- Link to Github profile -->
+                                    <span th:unless="${user.githubUsername == ''}">
+                                        <a th:href="'https://github.com/' + ${user.githubUsername}" target="_blank">
+                                            <i class="fa fa-github mr-2"></i>
+                                        </a>
+                                    </span>
+
+                                    <!-- Link to LinkedIn profile -->
+                                    <span th:unless="${user.linkedinUsername == ''}">
+                                        <a th:href="'https://www.linkedin.com/in/' + ${user.linkedinUsername}" target="_blank">
+                                            <i class="fa fa-linkedin-square mr-2"></i>
+                                        </a>
+                                    </span>
+
+                                    <!-- Link to personal site -->
+                                    <span th:unless="${user.userWebsite == ''}">
+                                        <a th:href="${user.userWebsite}" target="_blank">
+                                            <i class="fa fa-globe mr-2"></i>
+                                        </a>
+                                    </span>
+
+
+                                </div>
+
+                                <hr class="hr-light" />
+
+                                <!-- Skills pill badges -->
+                                <h6>Skills</h6>
                                 <a href="#" class="badge badge-dark badge-pill">html5</a>
                                 <a href="#" class="badge badge-dark badge-pill">react</a>
                                 <a href="#" class="badge badge-dark badge-pill">codeply</a>
@@ -64,50 +102,20 @@
                                 <a href="#" class="badge badge-dark badge-pill">jquery</a>
                                 <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
                                 <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
-                                <hr>
+
+                                <hr class="hr-light">
+
                                 <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
                                 <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
                                 <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
                             </div>
-                            <div class="col-md-12">
-                                <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Recent
-                                    Activity</h5>
-                                <table class="table table-sm table-hover table-striped">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>Abby</strong> joined ACME Project Team in
-                                            <strong>`Collaboration`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Kensington</strong> deleted MyBoard3 in
-                                            <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
+
                         <!--/row-->
+
                     </div>
-                    <div class="tab-pane" id="messages">
+
+                    <div class="tab-pane" id="documents">
                         <div class="alert alert-info alert-dismissable">
                             <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>.
                             Use this to show important messages to the user.
@@ -164,14 +172,63 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Bio</label>
+                                <label class="col-lg-3 col-form-label form-control-label">Cohort</label>
                                 <div class="col-lg-9">
-                                    <input name="bio_summary" class="form-control" type="text"
-                                           th:value="${user.bioSummary}">
+                                    <!-- Dropdown for Cohort selection -->
+
+                                    <!-- If no cohort assigned already (without this the page will break) -->
+                                    <span th:if="${user.cohort} == null">
+                                        <select class="custom-select form-control" name="cohort" id="cohort">
+                                            <option selected disabled>Choose...</option>
+                                            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>
+                                        </select>
+                                    </span>
+
+                                    <!-- If user already has cohort, this dropdown will pre-select their cohort from list -->
+                                    <span th:unless="${user.cohort == null}">
+                                        <select class="custom-select form-control" name="cohort" id="cohort">
+                                            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:selected="${cohort.id == user.cohort.getId()}" th:text="${cohort.name}" th:value="${cohort.id}"></option>
+                                        </select>
+                                    </span>
+
+                                </div>
+                            </div>
+
+<!--                            TODO: Fix employment status -->
+
+<!--                            <div class="form-group row">-->
+<!--                                <label class="col-lg-3 col-form-label form-control-label">Hire Status</label>-->
+<!--                                <div class="col-lg-9">-->
+<!--                                    <select class="custom-select form-control" name="employment_status" id="employmentStatus">-->
+<!--                                        <option th:each="status : ${T(dev.techtrek.techtrek.models.EmploymentStatus).values()}" th:value="${status}" th:text="${status.displayValue()}"></option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">About</label>
+                                <div class="col-lg-9">
+                                    <textarea rows="5" name="bio_summary" class="form-control" type="text"
+                                           th:text="${user.bioSummary}">
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Mobile Phone</label>
+                                <label class="col-lg-3 col-form-label form-control-label">Desired work location(s)</label>
+                                <div class="col-lg-9">
+                                    <input id="workLocation" name="work_location" class="form-control" type="text"
+                                              th:value="${user.workLocation}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                <div class="col-lg-9">
+                                    <input name="email" class="form-control" type="text"
+                                           th:value="${user.email}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                 <div class="col-lg-9">
                                     <input name="phone_number" class="form-control" type="text"
                                            th:value="${user.phoneNumber}">
@@ -179,7 +236,21 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Personal Website</label>
+                                <label class="col-lg-3 col-form-label form-control-label">Github username</label>
+                                <div class="col-lg-9">
+                                    <input name="github_username" class="form-control" type="text"
+                                           th:value="${user.githubUsername}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">LinkedIn username</label>
+                                <div class="col-lg-9">
+                                    <input name="linkedin_username" class="form-control" type="text"
+                                           th:value="${user.linkedinUsername}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Personal website URL</label>
                                 <div class="col-lg-9">
                                     <input name="user_website" class="form-control" type="url"
                                            th:value="${user.userWebsite}">
@@ -187,17 +258,14 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Github Username</label>
-                                <div class="col-lg-9">
-                                    <input name="github_username" class="form-control" type="text"
-                                           th:value="${user.githubUsername}">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">LinkedIn Username</label>
-                                <div class="col-lg-9">
-                                    <input name="linkedin_username" class="form-control" type="text"
-                                           th:value="${user.linkedinUsername}">
+                                <label class="col-lg-3 col-form-label form-control-label">Skills</label>
+                                <div class="col-lg-9 overflow-auto" style="max-height: 200px;">
+<!--                                    <input name="skills" class="form-control" type="url">-->
+<!--                                    TODO: Need a auto generated checklist of skills right here -->
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
+                                    <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
+                                    <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
+                                    <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
                                 </div>
                             </div>
 
@@ -205,15 +273,15 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                 <div class="col-lg-9">
-                                    <input type="reset" class="btn btn-secondary" value="Cancel">
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    <button type="submit" class="btn btn-block btn-primary">Save Changes</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 order-lg-1 text-center">
+
+            <div class="col-lg-4 order-lg-1 text-center mt-4">
                 <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
                 <h6 class="mt-2">Upload a different photo</h6>
                 <label class="custom-file">
@@ -225,9 +293,56 @@
     </div>
 
 
+
+    <!-- GITHUB BLOCK -->
+
+    <div id="user-github-info" class="mr-auto ml-auto text-center">
+        <hr data-content="Github Activity" class="hr-text mb-5" />
+
+        <span th:if="${user.githubUsername == ''}">
+            <p class="lead">No commit history available.</p>
+        </span>
+
+        <span th:unless="${user.githubUsername == ''}">
+
+
+            <!-- Loading animation SVG that plays while commit history image loads -->
+<!--            <div id="loadingAnimation" th:replace="partials/partials :: loadingAnimation"></div>-->
+
+            <!-- Github commit history chart -->
+
+            <img id="githubHistoryImg" th:src=" 'https://grass-graph.moshimo.works/images/' + ${user.getGithubUsername()} + '.png' " alt="Github commit history chart">
+
+        </span>
+
+    </div>
+
 </div>
 
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+<!--<script>-->
+<!--    // show loading image-->
+<!--    $('#loadingAnimation').show();-->
+
+<!--    // main image loaded ?-->
+<!--    $('#githubHistoryImg').on('load', function(){-->
+<!--        // hide/remove the loading image-->
+<!--        $('#loader_img').hide();-->
+<!--    });-->
+
+<!--    var placesAutocomplete = places({-->
+<!--        appId: 'pl91Y2LN2WGM',-->
+<!--        apiKey: 'e2d6a9188b9819c4d4c2c3ad2bbf150b',-->
+<!--        container: document.querySelector('#workLocation')-->
+<!--    });-->
+<!--    const reconfigurableOptions = {-->
+<!--        language: 'en', // Receives results in German-->
+<!--        countries: ['us'], // Search in the United States of America-->
+<!--        type: 'city', // Search only for cities names-->
+<!--        aroundLatLngViaIP: false // disable the extra search/boost around the source IP-->
+<!--    };-->
+<!--</script>-->
+
 </body>
 </html>
