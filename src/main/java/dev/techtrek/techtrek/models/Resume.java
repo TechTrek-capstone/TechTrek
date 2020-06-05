@@ -13,7 +13,6 @@ public class Resume {
     private long id;
 
     // need to be able to update this column if wrong file was uploaded
-
     @Column (name = "link")
     private String link;
 

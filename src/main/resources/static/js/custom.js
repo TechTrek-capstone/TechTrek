@@ -1,4 +1,14 @@
 $(document).ready(function () {
+
+    let changeTest = function() {
+        $(".resume-status").html("Pending Review").css;
+        $(".placement-msg").html("You've successfully uploaded your resume! Please wait for Placement to review.");
+    }
+
+    if ($(".resume-row").val() !== null) {
+        changeTest();
+    }
+
     let resumeId = null;
     let fsURL;
 
@@ -72,12 +82,7 @@ $(document).ready(function () {
             // print placement msg
             $(".placement-msg").html("You've successfully uploaded your resume! Please wait for Placement to review.");
 
-        $("#urlForm").submit(changeTest());
+        $("#urlForm").submit();
         });
     });
-    
-    let changeTest = function() {
-        $(".resume-status").html("Pending Review").css;
-        $(".placement-msg").html("You've successfully uploaded your resume! Please wait for Placement to review.");
-    }
 });
