@@ -122,3 +122,17 @@ hr {
     margin: 10px;
     padding: 10px;
 }
+
+.success {
+    background-color: #b52628;
+    color: white;
+}
+
+.gameplan {
+    background-color: #ff5500;
+    color: white;
+    width: 100%;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+}

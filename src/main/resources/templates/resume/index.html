@@ -1,32 +1,90 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
-<head th:replace="partials/partials :: head">
-    <title>Resume Portal</title>
-
+<head th:replace="partials/partials :: head"/>
+<title>Resume Portal</title>
 </head>
 
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
 
 <div class="container text-center">
-    <h1>Resume Portal</h1>
-    <p>This page show the resume portal, with an option for students to upload their resume pdf and track the progress
-        of their resume. Placement users will be able to download the uploaded PDFs, make corrections, and
-        re-upload.
-    </p>
 
     <!-- STUDENT VIEW -->
-    <h1>STUDENT VIEW</h1>
+    <h1>Your Resumes</h1>
     <!-- Message from placement -->
     <div class="student-div">
-        <h3 class="success">
-            No resume uploaded yet.
-        </h3>
+        <p class="placement-msg">(placeholder - will be msg from placement after review) No resume uploaded.</p>
     </div>
-    <!-- Upload button / success msg / due date -->
-    <div class="student-div student-msg">
-        <button type="button" class="btn btn-primary" id="uploadResume">Upload Resume</button>
-    </div>
+
+    <!-- Resumes Table -->
+    <table class="table table-striped w-50 mr-auto ml-auto" th:each="resume : ${resumes}">
+
+        <!-- Header Rows -->
+        <tr>
+            <th scope="col">Resume</th>
+            <th scope="col">Status</th>
+        </tr>
+
+        <!-- Value Rows -->
+        <tr class="resume-row">
+            <td>
+                <a class="downloadLink" href="">View Resume</a>
+                <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
+
+                    <!-- Upload Resume -->
+                    <button type="button" class="btn btn-primary" id="uploadResume" th:value="${resume.id}">
+                        Upload Resume
+                    </button>
+                    <!-- Storing resume link in hidden input -->
+                    <form th:action="@{'resume/'+${resume.id}}" th:method="POST" id="urlForm">
+                        <input type="hidden" name="resumeURL" id="resumeURL">
+                    </form>
+
+                    <!-- Delete resume -->
+                    <button data-toggle="modal" th:data-target="'#' + modalForId + ${resume.id}"
+                            class="btn btn-link text-danger" style="font-size: 1.5rem">
+                        <i class="fa fa-trash"></i>
+                    </button>
+
+
+                    <!-- Delete Modal -->
+                    <div class="modal fade" th:id="modalForId + ${resume.id}" tabindex="-1" role="dialog"
+                         aria-labelledby="companyDeleteModalLabel"
+                         aria-hidden="true">
+
+                        <form th:action="@{'/resume/' + ${resume.id} + '/delete'}" th:method="POST"
+                              th:object="${resume}">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2 class="modal-title text-center text-danger"
+                                            id="companyDeleteModalLabel">Warning</h2>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="lead">
+                                            Delete this resume? This action is final.
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"
+                                                data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /end of modal -->
+                </span>
+            </td>
+            <td>
+                <p class="resume-status">Not uploaded.</p>
+            </td>
+        </tr>
+    </table>
+    <!-- END TABLE -->
+
+
     <!-- Resume tips/tricks. download for example resume -->
     <div class="student-div">
         <p>
@@ -49,10 +107,19 @@
     <h1>PLACEMENT VIEW</h1>
     <!-- Dropdown for cohorts -> dropdown for students -> button to download student resume -->
     <div class="student-div">
-        <select>
-
+        <select class="custom-select" id="cohort">
+            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}"
+                    th:value="${cohort.id}">
+            </option>
         </select>
-        <a class="downloadLink" href="">Download Resume</a>
+
+        <select class="custom-select" id="user">
+            <option th:each="user : ${users}" class="dropdown-item" th:text="${user.name}"
+                    th:value="${user.id}">
+            </option>
+        </select>
+
+        <a class="downloadLink" href="">View Resume</a>
     </div>
 </div>
 
