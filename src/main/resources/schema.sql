@@ -36,11 +36,12 @@ create table if not exists users
 (
     id bigint auto_increment primary key,
     enabled bit NOT NULL DEFAULT 0,
-    bio_summary varchar(500) not null default '',
+    bio_summary text not null default '',
     create_date datetime(6) null,
     email varchar(255) not null,
     username varchar(255) not null,
     employment_status int null,
+    work_location varchar(255) null,
     userfirstname varchar(255) not null default '',
     github_username varchar(255)  not null default '',
     last_name varchar(255)  not null default '',

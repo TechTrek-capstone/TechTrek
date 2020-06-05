@@ -3,68 +3,31 @@
 <head th:replace="partials/partials :: head">
     <title>Dashboard</title>
 </head>
+<head>
+    <link rel="stylesheet" href="/css/dash-style.css">
+
+</head>
 
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
 
-<div class="mr-auto ml-auto w-75" sec:authorize="isAuthenticated()">
+<!-- Ensure Data is not loaded when not authenticated -->
+<div sec:authorize="isAuthenticated()" class="page-wrapper ">
 
-    <div class="row">
-        <div class="col-md-9 p-5">
-
-            <!-- JOBS -->
-
-            <h2>Job Postings</h2>
-
-            <div th:replace="partials/jobpartials :: jobsListFrag"></div>
-
-            <div class="text-right"><a th:href="@{/jobs}">See more...</a></div>
-            <hr />
-
-            <!-- EVENTS -->
-            <h2>Events</h2>
-
-            <div th:replace="partials/partials :: eventsList"></div>
-
-            <div class="text-right"><a th:href="@{/events}">See more...</a></div>
-
-        </div>
-
-        <div class="col-md-3 pt-5 pl-1 pr-3 pb-3">
-            <h2>User's name</h2>
-
-            <div class="d-flex">
-                <!-- Profile pic -->
-                <img src="https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png">
-
-                <!-- Mini bio -->
-                <div class="d-flex flex-column pl-2">
-                    <h5 class="mb-0">Cohort</h5>
-                    <p>User's cohort</p>
-
-                    <h5 class="mb-0">Graduation</h5>
-                    <p>Date</p>
-
-                    <h5 class="mb-0">Status</h5>
-                    <p>Emp. status</p>
-                </div>
-            </div>
-
-            <hr />
-
-            <h3>Resume Versions</h3>
-            <p>Links to all resume's associated with user</p>
-
-
-            <hr />
-
-            <h3>Recent Applications</h3>
-            <p>Links to individual job listing pages the user has applied to</p>
-        </div>
+    <!--   Start Dashboard  -->
+    <div class="col-12">
+    <div th:replace="partials/jobpartials :: dashJobsListFrag"></div>
     </div>
+    <!--     End Dashboard -->
+
 
 </div>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+
+<script src="/js/dashboard/app-style-switcher.js"></script>
+<script src="/js/dashboard/custom.js"></script>
+
+
 </body>
 </html>

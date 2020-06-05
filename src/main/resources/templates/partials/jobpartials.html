@@ -17,22 +17,110 @@
                         <h5 th:text="${job.title}" class="card-title"></h5>
 
                         <!-- Company and Location -->
-                        <span class="text-black-50"><span th:text="${job.getCompany().getName()}">Company</span> | <span th:text="${job.location}">Location</span></span>
+                        <span class="text-black-50"><span th:text="${job.getCompany().getName()}">Company</span> | <span
+                                th:text="${job.location}">Location</span></span>
                     </li>
 
                     <li class="list-group-item">
                         <!-- Job description -->
                         <!-- Note: Limiting the jobs text (description) to 100 chars for readability in the card and to prevent growing the div. -->
-                        <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description text.</p>
+                        <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description
+                            text.</p>
 
 
                         <div class="text-right">
                             <!-- Posting date -->
-                            <span class="text-black-50 text-right" style="font-size: .75rem;">Posted: <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Listing date</span></span>
+                            <span class="text-black-50 text-right" style="font-size: .75rem;">Posted: <span
+                                    th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Listing date</span></span>
                         </div>
                     </li>
                 </ul>
             </div>
         </a>
     </div>
+</div>
+
+<!-- Job List frag for the dashboard -->
+<div  th:fragment="dashJobsListFrag">
+
+    <!-- ============================================================== -->
+    <!-- Table -->
+    <!-- ============================================================== -->
+    <div class="row" >
+        <!-- column -->
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- title -->
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h4 class="card-title">Job Listings</h4>
+                            <h5 class="card-subtitle">Overview of Jobs Posted matching your eligibility.</h5>
+                        </div>
+                        <div class="ml-auto">
+                            <div class="dl">
+                                <select class="custom-select">
+                                    <option value="0" selected>Newest</option>
+                                    <option value="1">Oldest</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- title -->
+                </div>
+                <div class="table-responsive">
+                    <table class="table v-middle">
+                        <tbody th:each="job : ${jobs}">
+                        <tr th:href="@{|/jobs/${job.id}|}">
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="m-r-10"><a class="btn btn-circle btn-info text-white">J</a></div>
+                                    <div class="">
+                                        <h4 class="m-b-0 font-16" th:text="${job.title}">(Job title)</h4>
+                                    </div>
+                                </div>
+                            </td>
+                            <td th:text="${job.getCompany().getName()}">(Company)</td>
+                            <td th:text="${job.location}">(Location)</td>
+                            <td>
+                                <label class="label label-danger">(Remote Yes|No)</label>
+                            </td>
+
+                            <td>
+                                <h5 class="m-b-0" th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">(Lisiting
+                                    Date)</h5>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Table -->
+    <!-- ============================================================== -->
+
+
+    <!--    <div th:each="job : ${jobs}" class="card mb-5" style="width: 18rem;">-->
+    <!--        <a th:href="@{|/jobs/${job.id}|}">-->
+
+
+    <!--            <h5 th:text="${job.title}" class="card-title"></h5>-->
+
+
+    <!--            <span th:text="${job.getCompany().getName()}">Company</span> | <span-->
+    <!--                th:text="${job.location}">Location</span>-->
+
+
+    <!--            <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description text.</p>-->
+
+
+    <!--            <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Listing date</span>-->
+
+    <!--        </a>-->
+    <!--    </div>-->
+
+
 </div>

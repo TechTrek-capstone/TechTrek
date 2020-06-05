@@ -23,9 +23,9 @@ public class UserController {
     private Users users;
     private PasswordEncoder passwordEncoder;
     private CohortsRepo cohortsRepo;
-
     private JobsRepo jobsRepo;
     private EventsRepo eventsRepo;
+//    private EmploymentStatus employmentStatus;
 
     public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo) {
         this.users = users;
@@ -33,6 +33,7 @@ public class UserController {
         this.cohortsRepo = cohortsRepo;
         this.jobsRepo = jobsRepo;
         this.eventsRepo = eventsRepo;
+//        this.employmentStatus = employmentStatus;
     }
 
 
@@ -73,6 +74,8 @@ public class UserController {
     // Profile view
     @GetMapping("/profile")
     public String showProfile(Model model) {
+        List<Cohort> cohorts = cohortsRepo.findAll();
+        model.addAttribute("cohorts", cohorts);
         UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
@@ -88,10 +91,16 @@ public class UserController {
             @RequestParam(name = "bio_summary") String bioSummary,
             @RequestParam(name = "phone_number") String phoneNumber,
 
+            @RequestParam(name = "email") String email,
+            @RequestParam(name = "work_location") String workLocation,
+
             @RequestParam(name = "user_website") String userWebsite,
             @RequestParam(name = "linkedin_username") String linkedinUsername,
 
-            @RequestParam(name = "github_username") String githubUsername
+            @RequestParam(name = "github_username") String githubUsername,
+            @RequestParam(name = "cohort") Cohort cohort
+
+//            @RequestParam(name = "employment_status") EmploymentStatus employmentStatus
     ) {
         // Sets user based off the spring security authentication. This is based on role.
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //1. Get the current user
@@ -103,9 +112,13 @@ public class UserController {
         currentUser.setGithubUsername(githubUsername);
         currentUser.setBioSummary(bioSummary);
         currentUser.setUserWebsite(userWebsite);
+        currentUser.setEmail(email);
+        currentUser.setWorkLocation(workLocation);
         currentUser.setLastName(lastName);
         currentUser.setPhoneNumber(phoneNumber);
         currentUser.setLinkedinUsername(linkedinUsername);
+        currentUser.setCohort(cohort);
+//        currentUser.setEmploymentStatus(employmentStatus);
 
         users.save(currentUser);
 
