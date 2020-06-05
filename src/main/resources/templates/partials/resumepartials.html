@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<body>
+
+<!-- Delete Modal -->
+<div th:fragment="deleteResumeModal" class="modal fade" id="deleteResumeModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteResumeModal"
+     aria-hidden="true">
+
+    <form th:action="@{resume/delete}" th:method="POST">
+
+    <!-- Get ID here from custom.js-->
+    <input type="hidden" name="deleteResumeId" id="deleteResumeId"/>
+
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title text-center text-danger"
+                        id="companyDeleteModalLabel">Warning</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">
+                        Delete this resume? This action is final.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal">Cancel
+                    </button>
+                    <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- /end of modal -->
+
+</body>
+</html>
