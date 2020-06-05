@@ -9,4 +9,6 @@ public interface ResumeRepo extends JpaRepository<Resume, Long> {
     Resume getById(long id);
 
     List<Resume> findAllByUser_Id(long id);
+
+    List<Resume> findAllByType(String type);
 }

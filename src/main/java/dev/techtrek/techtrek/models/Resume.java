@@ -16,6 +16,9 @@ public class Resume {
     @Column (name = "link")
     private String link;
 
+    @Column (name = "type")
+    private String type;
+
     // relationship to users table = many to one
     @ManyToOne
     @JoinColumn (name = "user_id")

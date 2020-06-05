@@ -15,10 +15,6 @@ import java.util.List;
 @Controller
 public class ResumeController {
 
-    // FIXME: Need a DB table called resumes and Java Bean for Resume with foreign key to the User id.
-
-    // FIXME: Need a ResumeRepo class to access data from the resumes table
-
     private ResumeRepo resumeRepo;
     private CohortsRepo cohortsRepo;
 
@@ -31,44 +27,29 @@ public class ResumeController {
     public String showResume(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long id = user.getId();
-        model.addAttribute("resumes", resumeRepo.findAllByUser_Id(id));
+
+        model.addAttribute("resumesTBlock", resumeRepo.findAllByType("t-block"));
+        model.addAttribute("resumesVertical", resumeRepo.findAllByType("vertical"));
         model.addAttribute("user", new User());
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
         return "resume/index";
     }
 
-    // create
+    // Store Resume
     @PostMapping("/resume")
     public String createResume(@ModelAttribute Resume resume,
-                               @RequestParam(name = "resumeURL") String resumeURL) {
+                               @RequestParam(name = "resumeURL") String resumeURL,
+                               @RequestParam(name = "resumeType") String type) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         resume.setUser(user);
+        resume.setType(type);
         resume.setLink(resumeURL);
         resumeRepo.save(resume);
         return "redirect:/resume";
     }
 
-
-    // edit
-    @PostMapping("/resume/{id}")
-    public String updateResumeDB(Model model,
-                                 @PathVariable long id,
-                                 @RequestParam(name = "resumeURL") String resumeURL) {
-
-
-        // identify resume to add url to
-        Resume resume = resumeRepo.getById(id);
-
-        // update column
-        resume.setLink(resumeURL);
-
-        // save resume
-        resumeRepo.save(resume);
-        return "redirect:/resume";
-    }
-
-    // delete
+    // Delete Resume
     @PostMapping("/resume/delete")
     public String deleteResume(@RequestParam(name = "deleteResumeId") long id) {
         resumeRepo.deleteById(id);

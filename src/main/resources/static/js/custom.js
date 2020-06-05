@@ -58,33 +58,53 @@ $(document).ready(function () {
             $.strength($("#progress-bar"), $(this).val());
         });
     });
-// END PROGRESS BAR
+    // END PROGRESS BAR
 
-    $("#uploadResume").click(function () {
+    // UPLOAD TBLOCK RESUME
+    $(".uploadTBlockResume").click(function () {
         let client = filestack.init(fileStackKey);
-        // resumeId = $("#uploadResume").val();
 
         client
             .pick({
-                maxFiles: 1,
+                maxFiles: 1
             })
             .then(function (result) {
                 let resultJSON = JSON.parse(JSON.stringify(result));
 
                 // store resume url in variable, pass that variable as a value to the view
                 fsURL = resultJSON.filesUploaded[0].url;
-                $("#resumeURL").val(fsURL);
+                $(".resumeURL").val(fsURL);
+                $("#resumeUploadTBlock").submit();
+            })
+    });
 
-                $("#urlForm").submit();
-            });
+    // UPLOAD VERTICAL RESUME
+    $(".uploadVerticalResume").click(function () {
+        let client = filestack.init(fileStackKey);
+
+        client
+            .pick({
+                maxFiles: 1
+            })
+            .then(function (result) {
+                let resultJSON = JSON.parse(JSON.stringify(result));
+
+                // store resume url in variable, pass that variable as a value to the view
+                fsURL = resultJSON.filesUploaded[0].url;
+                $(".resumeURL").val(fsURL);
+                $("#resumeUploadVertical").submit();
+            })
+    });
+
+    // DELETE RESUME
+    $('#deleteResumeModal').on('show.bs.modal', function (e) {
+        var button = $(e.relatedTarget); // Button that triggered the modal
+        var resumeId = button.data('id'); // Extract info from data-* attributes
+
+        // Update the modal's content
+        var modal = $(this);
+        modal.find('#deleteResumeId').val(resumeId);
     });
 });
 
-$('#deleteResumeModal').on('show.bs.modal', function (e) {
-    var button = $(e.relatedTarget); // Button that triggered the modal
-    var resumeId = button.data('id'); // Extract info from data-* attributes
 
-    // Update the modal's content
-    var modal = $(this);
-    modal.find('#deleteResumeId').val(resumeId);
-});

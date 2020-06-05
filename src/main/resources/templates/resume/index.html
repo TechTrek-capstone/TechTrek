@@ -12,7 +12,7 @@
 <div class="container text-center">
 
     <!-- STUDENT VIEW -->
-    <h1>Your Resumes</h1>
+    <h1>Resume Portal</h1>
     <!-- Message from placement -->
     <div class="student-div">
         <p class="placement-msg">(placeholder - will be msg from placement after review) No resume uploaded.</p>
@@ -21,37 +21,34 @@
     <!-- ######## TABLE - T-block Resume ######## -->
     <table class="table table-striped w-50 mr-auto ml-auto">
 
-        <!-- Form to submit uploaded resumes -->
-        <form th:action="@{/resume}" th:method="POST" id="urlForm">
-            <input type="hidden" name="resumeURL" id="resumeURL"/>
-        </form>
-
         <!-- ROW: Header -->
         <tr>
-            <th colspan="3">T-Block Resume</th>
+            <th colspan="3">
+                <!-- Upload Button -->
+                <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock">
+                    <button type="button" class="btn btn-primary uploadTBlockResume">Upload</button>
+                    <input type="hidden" name="resumeURL" class="resumeURL"/>
+                    <input type="hidden" name="resumeType" th:value="t-block"/>
+                </form>
+                T-Block Resume
+            </th>
         </tr>
 
         <!-- ROW: Sub-headers -->
         <tr>
-            <th scope="col">Version</th>
             <th scope="col">Resume</th>
             <th scope="col">Status</th>
         </tr>
 
-        <!-- ROW: Values Row -->
+        <!-- ROW: Resumes -->
+        <span th:each="resume : ${resumesTBlock}">
         <tr class="resume-row">
 
-            <!-- Resume Versions -->
+            <!-- DATA: Resume Versions -->
             <td>
-                <span th:each="resume : ${resumes}">
-                    <a th:href="${resume.link}">View</a>
-
-                    <!-- Edit Resume -->
-                    <button data-toggle="modal" data-target="#editResumeModal"
-                            class="btn btn-link text-danger" style="font-size: 1.5rem" th:data-id="${resume.id}">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <!-- Delete Resume -->
+                <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
+                <a th:href="${resume.link}">View</a>
+                    <!-- Delete Button -->
                     <button data-toggle="modal" data-target="#deleteResumeModal"
                             class="btn btn-link text-danger" style="font-size: 1.5rem" th:data-id="${resume.id}">
                         <i class="fa fa-trash"></i>
@@ -59,20 +56,59 @@
                 </span>
             </td>
 
-            <!-- Upload Resume -->
-            <td>
-                <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
-                    <!-- Upload Button -->
-                    <button type="button" class="btn btn-primary" id="uploadResume">
-                        Upload Resume
-                    </button>
-                </span>
-            </td>
-            <!-- Status -->
+            <!-- DATA: Status -->
             <td>
                 <p class="resume-status">Not uploaded.</p>
             </td>
         </tr>
+        </span>
+    </table>
+    <!-- END TABLE -->
+
+    <!-- ######## TABLE - Vertical Resume ######## -->
+    <table class="table table-striped w-50 mr-auto ml-auto">
+
+        <!-- ROW: Header -->
+        <tr>
+            <th colspan="3">
+                <!-- Upload Button -->
+                <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical">
+                    <button type="button" class="btn btn-primary uploadVerticalResume">Upload</button>
+                    <input type="hidden" name="resumeURL" class="resumeURL"/>
+                    <input type="hidden" name="resumeType" th:value="vertical"/>
+                </form>
+                Vertical Resume
+            </th>
+        </tr>
+
+        <!-- ROW: Sub-headers -->
+        <tr>
+            <th scope="col">Resume</th>
+            <th scope="col">Status</th>
+        </tr>
+
+        <!-- ROW: Resumes -->
+        <span th:each="resume : ${resumesVertical}">
+        <tr class="resume-row">
+
+            <!-- DATA: Resume Versions -->
+            <td>
+                <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
+                <a th:href="${resume.link}">View</a>
+                    <!-- Delete Button -->
+                    <button data-toggle="modal" data-target="#deleteResumeModal"
+                            class="btn btn-link text-danger" style="font-size: 1.5rem" th:data-id="${resume.id}">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </span>
+            </td>
+
+            <!-- DATA: Status -->
+            <td>
+                <p class="resume-status">Not uploaded.</p>
+            </td>
+        </tr>
+        </span>
     </table>
     <!-- END TABLE -->
 
