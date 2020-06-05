@@ -73,6 +73,8 @@ public class UserController {
     // Profile view
     @GetMapping("/profile")
     public String showProfile(Model model) {
+        List<Cohort> cohorts = cohortsRepo.findAll();
+        model.addAttribute("cohorts", cohorts);
         UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
@@ -94,7 +96,8 @@ public class UserController {
             @RequestParam(name = "user_website") String userWebsite,
             @RequestParam(name = "linkedin_username") String linkedinUsername,
 
-            @RequestParam(name = "github_username") String githubUsername
+            @RequestParam(name = "github_username") String githubUsername,
+            @RequestParam(name = "cohort") Cohort cohort
     ) {
         // Sets user based off the spring security authentication. This is based on role.
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //1. Get the current user
@@ -111,6 +114,7 @@ public class UserController {
         currentUser.setLastName(lastName);
         currentUser.setPhoneNumber(phoneNumber);
         currentUser.setLinkedinUsername(linkedinUsername);
+        currentUser.setCohort(cohort);
 
         users.save(currentUser);
 

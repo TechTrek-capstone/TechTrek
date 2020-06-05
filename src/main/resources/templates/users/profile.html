@@ -52,19 +52,25 @@
                                 <div class="d-flex" style="font-size: 2rem">
 
                                     <!-- Link to Github profile -->
-                                    <a th:href="'https://github.com/' + ${user.githubUsername}" target="_blank">
-                                        <i class="fa fa-github mr-2"></i>
-                                    </a>
+                                    <span th:unless="${user.githubUsername == ''}">
+                                        <a th:href="'https://github.com/' + ${user.githubUsername}" target="_blank">
+                                            <i class="fa fa-github mr-2"></i>
+                                        </a>
+                                    </span>
 
                                     <!-- Link to LinkedIn profile -->
-                                    <a th:href="'https://github.com/' + ${user.githubUsername}" target="_blank">
-                                        <i class="fa fa-linkedin-square mr-2"></i>
-                                    </a>
+                                    <span th:unless="${user.linkedinUsername == ''}">
+                                        <a th:href="'https://www.linkedin.com/in/' + ${user.linkedinUsername}" target="_blank">
+                                            <i class="fa fa-linkedin-square mr-2"></i>
+                                        </a>
+                                    </span>
 
                                     <!-- Link to personal site -->
-                                    <a th:href="${user.userWebsite}" target="_blank">
-                                        <i class="fa fa-globe mr-2"></i>
-                                    </a>
+                                    <span th:unless="${user.userWebsite == ''}">
+                                        <a th:href="${user.userWebsite}" target="_blank">
+                                            <i class="fa fa-globe mr-2"></i>
+                                        </a>
+                                    </span>
 
 
                                 </div>
@@ -151,6 +157,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Cohort</label>
+                                <div class="col-lg-9">
+                                    <!-- Dropdown for Cohort selection -->
+
+                                    <select class="custom-select form-control" name="cohort" id="cohort">
+                                        <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">About</label>
                                 <div class="col-lg-9">
                                     <textarea rows="5" name="bio_summary" class="form-control" type="text"
@@ -181,14 +198,6 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Personal website</label>
-                                <div class="col-lg-9">
-                                    <input name="user_website" class="form-control" type="url"
-                                           th:value="${user.userWebsite}">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Github username</label>
                                 <div class="col-lg-9">
                                     <input name="github_username" class="form-control" type="text"
@@ -200,6 +209,13 @@
                                 <div class="col-lg-9">
                                     <input name="linkedin_username" class="form-control" type="text"
                                            th:value="${user.linkedinUsername}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Personal website</label>
+                                <div class="col-lg-9">
+                                    <input name="user_website" class="form-control" type="url"
+                                           th:value="${user.userWebsite}">
                                 </div>
                             </div>
 
