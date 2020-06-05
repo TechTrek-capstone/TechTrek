@@ -9,7 +9,8 @@
     <!-- Filestack -->
     <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
     <!-- Summernote -->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <title>TechTrek</title>
@@ -64,23 +65,20 @@
                     <input type="text" class="form-control" placeholder="Search" aria-label="Search"
                            aria-describedby="button-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i>
+                        </button>
                     </div>
                 </div>
             </form>
 
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/profile}"><span style="font-size: 1.5rem"><i class="fa fa-user-circle"></i></span><span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/profile}"><span style="font-size: 1.5rem"><i
+                        class="fa fa-user-circle"></i></span><span class="sr-only">(current)</span></a>
             </li>
+
             <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
+                <a class="nav-link" th:href="@{/logout}"><button class="btn btn-link text-danger">Logout</button></a>
             </li>
-
-
-            <!--            <form sec:authorize="isAuthenticated()" class="" th:action="@{/logout}" th:method="post">-->
-            <!--                <button class="btn btn-link" type="button">Logout</button>-->
-            <!--            </form>-->
-
         </ul>
     </div>
 </nav>
@@ -103,24 +101,6 @@
                         <h2 class="modal-title text-center" id="registerModalLabel">Register</h2>
                     </div>
                     <div class="modal-body">
-
-                        <!-- Dropdown for Cohort -->
-                        <!--                        <div class="input-group mb-3">-->
-                        <!--                            <div class="input-group-prepend">-->
-                        <!--                                <label class="input-group-text" for="cohort">Cohort</label>-->
-                        <!--                            </div>-->
-                        <!--                            <select class="custom-select" id="cohort" th:field="*{cohort}">-->
-                        <!--                                <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>-->
-                        <!--                            </select>-->
-                        <!--                        </div>-->
-
-                        <!--                        &lt;!&ndash; First Name &ndash;&gt;-->
-                        <!--                        <h3>Enter First Name</h3>-->
-                        <!--                        <input type="text" th:field="*{firstName}" required/>-->
-
-                        <!--                        &lt;!&ndash; Last Name &ndash;&gt;-->
-                        <!--                        <h3>Enter Last Name</h3>-->
-                        <!--                        <input type="text" th:field="*{lastName}" required/>-->
 
                         <!-- Email -->
                         <h3>Email</h3>
@@ -158,20 +138,16 @@
     <div th:fragment="loginModal" class="modal fade" id="loginModal" tabindex="-1" role="dialog"
          aria-labelledby="loginModalLabel"
          aria-hidden="true">
-<!--         Login Form -->
-                <form th:action="@{/login}" th:method="post" th:object="${user}">
 
+        <!--         Login Form -->
 
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title text-center" id="loginModalLabel">Login</h2>
-                    </div>
-                    <form th:action="@{/login}" th:method="post">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title text-center" id="loginModalLabel">Login</h2>
+                </div>
+                <form th:action="@{/login}" th:method="post">
                     <div class="modal-body">
-                        <!--                        <h3 class="">Email</h3>-->
-                        <!--                        &lt;!&ndash; Username Here &ndash;&gt;-->
-                        <!--                        <input type="text" th:field="*{email}"/>-->
 
                         <!-- Username Here -->
                         <div class="form-group">
@@ -191,35 +167,46 @@
                         <button type="submit" class="btn btn-primary">Login</button>
                         <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
                     </div>
-                    </form>
-                </div>
+                </form>
             </div>
-
-    </div>
-</div>
-
-<!-- Event Listings Fragment -->
-<div th:fragment="eventsList">
-
-    <div th:each="event : ${eventsList}" class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 th:text="${event.title}" class="card-title">Card title</h5>
-            <p th:utext="${#strings.abbreviate(event.description, 100)}" class="card-text">Test.</p>
-        </div>
-
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><a th:href="|http://google.com/maps/place/${event.location}|" target="_blank">
-                <span th:text="${event.location}"></span></a></li>
-            <li class="list-group-item" th:text="${#dates.format(event.listingDate, 'dd-MM-yyyy HH:mm')}">Listing date
-            </li>
-        </ul>
-
-        <div class="card-body">
-            <a th:href="@{|${event.rsvpUrl}|}" class="card-link">RSVP</a>
         </div>
     </div>
 </div>
+
+
+    <!-- Event Listings Fragment -->
+
+    <div class="d-flex justify-content-around flex-wrap w-50-lg" th:fragment="eventsList">
+
+        <div th:each="event : ${eventsList}" class="card mb-5" style="width: 18rem;">
+            <a th:href="@{|/events/${event.id}|}">
+
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+
+                            <!-- Event image or placeholder -->
+                            <img src="..." class="card-img-top" alt="...">
+
+                            <!-- Event title -->
+                            <h5 th:text="${event.title}" class="card-title">Event title</h5>
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <!-- Date and Time -->
+                            <span class="text-black-50"><span th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Date of Event</span>
+                                <br /><span th:text="${event.time}">Time of Event</span></span>
+
+                            <!-- Event Location -->
+                            <br /><a th:href="|http://google.com/maps/place/${event.location}|" target="_blank"><span th:text="${event.location}"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+    </div>
 
 <!-- JS scripts -->
 <standard_scripts th:fragment="footer">
@@ -239,15 +226,48 @@
     <script>
         $('#jobDescription').summernote({
             height: 200,
-            placeholder: 'Enter description, job duties, required skills, preferred skills, etc...'
-        })
+            placeholder: 'Enter description, job duties, required skills, preferred skills, etc...',
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link']],
+                ['misc', ['undo', 'redo', 'help']]
+            ],
 
-        $(document).ready(function() {
-
-            if(window.location.href.indexOf('#login') != -1) {
-                $('#loginModal').modal('show');
+            popover: {
+                air: [
+                    ['color', ['color']],
+                    ['font', ['bold', 'underline', 'clear']]
+                ]
             }
+        });
 
+        $('#eventDescription').summernote({
+            height: 200,
+            placeholder: 'Enter description, job duties, required skills, preferred skills, etc...',
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link']],
+                ['misc', ['undo', 'redo', 'help']]
+            ],
+
+            popover: {
+                air: [
+                    ['color', ['color']],
+                    ['font', ['bold', 'underline', 'clear']]
+                ]
+            }
+        });
+
+        $(document).ready(function () {
+            if (window.location.href.indexOf('#register') != -1) {
+                $('#registerModal').modal('show');
+            }
         });
     </script>
 </standard_scripts>
