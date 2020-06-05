@@ -5,21 +5,21 @@ INSERT INTO techtrek_db.cohorts
  location)
 
 VALUES (1,
-        '2020-06-16 00:00:00',
+        '2020-06-16',
         'Fortuna',
-        'San Antonio'),
+        'San Antonio, TX'),
 
        (2,
-        '2020-07-15 00:00:00',
+        '2020-07-15',
         'Apex',
-        'Dallas'),
+        'Dallas, TX'),
 
        (3,
-        '2020-08-20 00:00:00',
+        '2020-08-20',
         'Gandymeade',
-        'San Antonio'),
+        'San Antonio, TX'),
 
        (4,
-        '2020-10-22 00:00:00',
+        '2020-10-22',
         'Hyperion',
-        'San Antonio');
+        'San Antonio, TX');

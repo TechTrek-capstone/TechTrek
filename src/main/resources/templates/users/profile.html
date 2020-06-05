@@ -14,9 +14,13 @@
     <div class="container">
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
-                <h1 class="display-4 mt-3" th:text="${user.getFullName()}"></h1>
+                <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
+                <h4 th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
+                    <span th:text="${user.getCohort().name}"></span> cohort <span class="mr-2 ml-2">|</span> <i class="fa fa-map-marker mr-2" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
+                    <br><small>Graduating <span th:text="${#dates.format(user.cohort.getGraduationDate(), 'MM-yyyy')}"></span></small>
+                </h4>
 
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs" style="margin-top: 2rem;">
                     <li class="nav-item">
                         <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                     </li>
@@ -37,7 +41,7 @@
                                     User bio goes here
                                 </p>
 
-                                <h6>Desired Work Location(s)</h6>
+                                <h6>Desired work location(s)</h6>
                                 <p th:text="${user.workLocation}">
                                     Desired work location goes here
                                 </p>
@@ -47,9 +51,20 @@
 
                             <div class="col-md-6">
 
-                                <!-- Media links -->
-                                <h6>Media Links</h6>
-                                <div class="d-flex" style="font-size: 2rem">
+                                <!-- Contact info -->
+                                <div id="userInfoBlock">
+                                    <!-- Email -->
+                                    <span th:unless="${user.email == ''}">
+                                        <strong>Email: </strong><span th:text="${user.email}"></span>
+                                    </span>
+
+                                    <!-- Phone number -->
+                                    <br><span th:unless="${user.phoneNumber == ''}">
+                                        <strong>Phone: </strong><span th:text="${user.phoneNumber}"></span>
+                                    </span>
+                                </div>
+
+                                <div class="d-flex mt-2" style="font-size: 2rem">
 
                                     <!-- Link to Github profile -->
                                     <span th:unless="${user.githubUsername == ''}">
@@ -161,19 +176,34 @@
                                 <div class="col-lg-9">
                                     <!-- Dropdown for Cohort selection -->
 
+                                    <!-- If no cohort assigned already (without this the page will break) -->
                                     <span th:if="${user.cohort} == null">
                                         <select class="custom-select form-control" name="cohort" id="cohort">
+                                            <option selected disabled>Choose...</option>
                                             <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>
                                         </select>
                                     </span>
 
+                                    <!-- If user already has cohort, this dropdown will pre-select their cohort from list -->
                                     <span th:unless="${user.cohort == null}">
                                         <select class="custom-select form-control" name="cohort" id="cohort">
                                             <option th:each="cohort : ${cohorts}" class="dropdown-item" th:selected="${cohort.id == user.cohort.getId()}" th:text="${cohort.name}" th:value="${cohort.id}"></option>
                                         </select>
                                     </span>
+
                                 </div>
                             </div>
+
+<!--                            TODO: Fix employment status -->
+
+<!--                            <div class="form-group row">-->
+<!--                                <label class="col-lg-3 col-form-label form-control-label">Hire Status</label>-->
+<!--                                <div class="col-lg-9">-->
+<!--                                    <select class="custom-select form-control" name="employment_status" id="employmentStatus">-->
+<!--                                        <option th:each="status : ${T(dev.techtrek.techtrek.models.EmploymentStatus).values()}" th:value="${status}" th:text="${status.displayValue()}"></option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">About</label>
@@ -186,7 +216,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Desired work location(s)</label>
                                 <div class="col-lg-9">
-                                    <input name="work_location" class="form-control" type="text"
+                                    <input id="workLocation" name="work_location" class="form-control" type="text"
                                               th:value="${user.workLocation}">
                                 </div>
                             </div>
@@ -220,10 +250,22 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Personal website</label>
+                                <label class="col-lg-3 col-form-label form-control-label">Personal website URL</label>
                                 <div class="col-lg-9">
                                     <input name="user_website" class="form-control" type="url"
                                            th:value="${user.userWebsite}">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Skills</label>
+                                <div class="col-lg-9 overflow-auto" style="max-height: 200px;">
+<!--                                    <input name="skills" class="form-control" type="url">-->
+<!--                                    TODO: Need a auto generated checklist of skills right here -->
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
+                                    <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
+                                    <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
+                                    <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
                                 </div>
                             </div>
 
@@ -250,20 +292,14 @@
         </div>
     </div>
 
+
+
     <!-- GITHUB BLOCK -->
 
     <div id="user-github-info" class="mr-auto ml-auto text-center">
-        <hr data-content="Github Activity" class="hr-text" />
+        <hr data-content="Github Activity" class="hr-text mb-5" />
 
         <span th:if="${user.githubUsername == ''}">
-
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                Please enter your Github username to display your commit history.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
             <p class="lead">No commit history available.</p>
         </span>
 
@@ -271,8 +307,7 @@
 
 
             <!-- Loading animation SVG that plays while commit history image loads -->
-
-            <div id="loadingAnimation" th:replace="partials/partials :: loadingAnimation"></div>
+<!--            <div id="loadingAnimation" th:replace="partials/partials :: loadingAnimation"></div>-->
 
             <!-- Github commit history chart -->
 
@@ -286,16 +321,28 @@
 
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
-<script>
-    // show loading image
-    $('#loadingAnimation').show();
+<!--<script>-->
+<!--    // show loading image-->
+<!--    $('#loadingAnimation').show();-->
 
-    // main image loaded ?
-    $('#githubHistoryImg').on('load', function(){
-        // hide/remove the loading image
-        $('#loader_img').hide();
-    });
-</script>
+<!--    // main image loaded ?-->
+<!--    $('#githubHistoryImg').on('load', function(){-->
+<!--        // hide/remove the loading image-->
+<!--        $('#loader_img').hide();-->
+<!--    });-->
+
+<!--    var placesAutocomplete = places({-->
+<!--        appId: 'pl91Y2LN2WGM',-->
+<!--        apiKey: 'e2d6a9188b9819c4d4c2c3ad2bbf150b',-->
+<!--        container: document.querySelector('#workLocation')-->
+<!--    });-->
+<!--    const reconfigurableOptions = {-->
+<!--        language: 'en', // Receives results in German-->
+<!--        countries: ['us'], // Search in the United States of America-->
+<!--        type: 'city', // Search only for cities names-->
+<!--        aroundLatLngViaIP: false // disable the extra search/boost around the source IP-->
+<!--    };-->
+<!--</script>-->
 
 </body>
 </html>
