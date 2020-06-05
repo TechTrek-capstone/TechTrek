@@ -161,9 +161,17 @@
                                 <div class="col-lg-9">
                                     <!-- Dropdown for Cohort selection -->
 
-                                    <select class="custom-select form-control" name="cohort" id="cohort">
-                                        <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>
-                                    </select>
+                                    <span th:if="${user.cohort} == null">
+                                        <select class="custom-select form-control" name="cohort" id="cohort">
+                                            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>
+                                        </select>
+                                    </span>
+
+                                    <span th:unless="${user.cohort == null}">
+                                        <select class="custom-select form-control" name="cohort" id="cohort">
+                                            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:selected="${cohort.id == user.cohort.getId()}" th:text="${cohort.name}" th:value="${cohort.id}"></option>
+                                        </select>
+                                    </span>
                                 </div>
                             </div>
 
