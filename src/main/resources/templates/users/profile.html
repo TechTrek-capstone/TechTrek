@@ -16,7 +16,7 @@
             <div class="col-lg-8 order-lg-2">
                 <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
                 <h4 th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
-                    <span th:text="${user.getCohort().name}"></span> cohort <span class="mr-2 ml-2">|</span> <i class="fa fa-map-marker mr-2" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
+                    <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fa fa-map-marker" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
                     <br><small>Graduating <span th:text="${#dates.format(user.cohort.getGraduationDate(), 'MM-yyyy')}"></span></small>
                 </h4>
 
@@ -38,11 +38,11 @@
                         <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null}" class="mb-3">
                             <span th:unless="${user.employmentStatus == null}">
                                         <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
-                                            <span class="badge badge-success">Available for hire <i class="fas fa-user-check"></i></span>
+                                            <span class="badge badge-success">Available for hire <i class="ml-1 fa fa-check-circle"></i></span>
                                         </h2>
 
                                         <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).HIRED}">
-                                            <span class="badge badge-info">Hired <i class="fas fa-user-lock"></i></span>
+                                            <span class="badge badge-info">Hired <i class="ml-1 fa fa-lock"></i></span>
                                         </h2>
                                     </span>
                         </div>
@@ -61,13 +61,12 @@
 
                                 <h6>Desired work location(s)</h6>
                                 <p>
-                                    <span th:if="${user.workLocation == null}">
+                                    <span th:if="${user.workLocation == ''}">
                                         <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
                                     </span>
-                                    <span th:unless="${user.workLocation == null}" th:text="${user.workLocation}"></span>
+                                    <span th:unless="${user.workLocation == ''}" th:text="${user.workLocation}"></span>
                                 </p>
                             </div>
-
 
 
                             <div class="col-md-6">
@@ -176,6 +175,8 @@
                             </tbody>
                         </table>
                     </div>
+
+
                     <div class="tab-pane" id="edit">
                         <form role="form" th:action="@{/profile}" th:method="post">
                             <div class="form-group row">
@@ -268,13 +269,15 @@
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Skills</label>
-                                <div class="col-lg-9 overflow-auto" style="max-height: 200px;">
-<!--                                    <input name="skills" class="form-control" type="url">-->
-<!--                                    TODO: Need a auto generated checklist of skills right here -->
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
-                                    <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
-                                    <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
-                                    <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at atque dolores ducimus error eum explicabo hic illum in inventore itaque iure libero magni maiores non nostrum reprehenderit, soluta tempora!
+                                <div class="col-lg-9">
+                                    <h6 class="text-secondary mb-4">Note: You should be able to speak "3 levels deep" on any skills selected.</h6>
+                                    <div class="row justify-content-around" name="skills">
+                                        <div th:each="skill : ${skills}" class="form-check form-check-inline col-md-3">
+                                            <input class="form-check-input" type="checkbox" th:id="'skillId' + ${skill.id}" th:value="${skill.id}">
+                                            <label class="form-check-label" th:for="'skillId' + ${skill.id}" th:text="${skill.name}"></label>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -330,28 +333,5 @@
 
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
-<!--<script>-->
-<!--    // show loading image-->
-<!--    $('#loadingAnimation').show();-->
-
-<!--    // main image loaded ?-->
-<!--    $('#githubHistoryImg').on('load', function(){-->
-<!--        // hide/remove the loading image-->
-<!--        $('#loader_img').hide();-->
-<!--    });-->
-
-<!--    var placesAutocomplete = places({-->
-<!--        appId: 'pl91Y2LN2WGM',-->
-<!--        apiKey: 'e2d6a9188b9819c4d4c2c3ad2bbf150b',-->
-<!--        container: document.querySelector('#workLocation')-->
-<!--    });-->
-<!--    const reconfigurableOptions = {-->
-<!--        language: 'en', // Receives results in German-->
-<!--        countries: ['us'], // Search in the United States of America-->
-<!--        type: 'city', // Search only for cities names-->
-<!--        aroundLatLngViaIP: false // disable the extra search/boost around the source IP-->
-<!--    };-->
-<!--</script>-->
-
 </body>
 </html>

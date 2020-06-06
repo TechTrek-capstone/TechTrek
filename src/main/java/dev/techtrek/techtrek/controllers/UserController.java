@@ -2,10 +2,7 @@ package dev.techtrek.techtrek.controllers;
 
 
 import dev.techtrek.techtrek.models.*;
-import dev.techtrek.techtrek.repositories.CohortsRepo;
-import dev.techtrek.techtrek.repositories.EventsRepo;
-import dev.techtrek.techtrek.repositories.JobsRepo;
-import dev.techtrek.techtrek.repositories.Users;
+import dev.techtrek.techtrek.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,15 +22,16 @@ public class UserController {
     private CohortsRepo cohortsRepo;
     private JobsRepo jobsRepo;
     private EventsRepo eventsRepo;
-    private EmploymentStatus employmentStatus;
+    private SkillsRepo skillsRepo;
 
-    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo) {
+
+    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo, SkillsRepo skillsRepo) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.cohortsRepo = cohortsRepo;
         this.jobsRepo = jobsRepo;
         this.eventsRepo = eventsRepo;
-//        this.employmentStatus = employmentStatus;
+        this.skillsRepo = skillsRepo;
     }
 
 
@@ -76,9 +74,14 @@ public class UserController {
     public String showProfile(Model model) {
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
+
+        List<Skill> skills = skillsRepo.findAll();
+        model.addAttribute("skills", skills);
+
         UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
+
         return "users/profile";
     }
 
