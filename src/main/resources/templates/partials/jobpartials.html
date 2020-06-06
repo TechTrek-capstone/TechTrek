@@ -41,12 +41,12 @@
 </div>
 
 <!-- Job List frag for the dashboard -->
-<div  th:fragment="dashJobsListFrag">
+<div th:fragment="dashJobsListFrag">
 
     <!-- ============================================================== -->
     <!-- Table -->
     <!-- ============================================================== -->
-    <div class="row" >
+    <div class="row">
         <!-- column -->
         <div class="col-12">
             <div class="card">
@@ -70,33 +70,43 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table v-middle">
+                        <thead>
+                        <tr class="bg-light">
+                            <th class="border-top-0">Job Title</th>
+                            <th class="border-top-0">Company</th>
+                            <th class="border-top-0">Location</th>
+                            <th class="border-top-0">Remote</th>
+                            <th class="border-top-0">Listing Date</th>
+                        </tr>
+                        </thead>
                         <tbody th:each="job : ${jobs}">
-                        <tr th:href="@{|/jobs/${job.id}|}">
+                        <tr>
                             <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="m-r-10"><a class="btn btn-circle btn-info text-white">J</a></div>
-                                    <div class="">
-                                        <h4 class="m-b-0 font-16" th:text="${job.title}">(Job title)</h4>
-                                    </div>
-                                </div>
+                                <a th:href="@{|/jobs/${job.id}|}"><h5 th:text="${job.title}">(Job title)</h5></a>
                             </td>
                             <td th:text="${job.getCompany().getName()}">(Company)</td>
                             <td th:text="${job.location}">(Location)</td>
                             <td>
-                                <label class="label label-danger">(Remote Yes|No)</label>
+                                <label class="label label-info" th:text="${job.isRemote}? Yes : No ">(Remote)</label>
                             </td>
-
-                            <td>
-                                <h5 class="m-b-0" th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">(Lisiting
-                                    Date)</h5>
-                            </td>
+                            <td th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">(Lisiting Date)</td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+        <!--        listing sort -->
+
+        <script>
+
+
+        </script>
+
+        <!--        end listing sort-->
+
+
     </div>
     <!-- ============================================================== -->
     <!-- Table -->
