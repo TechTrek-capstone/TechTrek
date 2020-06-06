@@ -25,7 +25,7 @@ public class UserController {
     private CohortsRepo cohortsRepo;
     private JobsRepo jobsRepo;
     private EventsRepo eventsRepo;
-//    private EmploymentStatus employmentStatus;
+    private EmploymentStatus employmentStatus;
 
     public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo) {
         this.users = users;
@@ -98,9 +98,8 @@ public class UserController {
             @RequestParam(name = "linkedin_username") String linkedinUsername,
 
             @RequestParam(name = "github_username") String githubUsername,
-            @RequestParam(name = "cohort") Cohort cohort
-
-//            @RequestParam(name = "employment_status") EmploymentStatus employmentStatus
+            @RequestParam(name = "cohort") Cohort cohort,
+            @RequestParam(name = "employment_status") EmploymentStatus employmentStatus
     ) {
         // Sets user based off the spring security authentication. This is based on role.
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //1. Get the current user
@@ -118,7 +117,7 @@ public class UserController {
         currentUser.setPhoneNumber(phoneNumber);
         currentUser.setLinkedinUsername(linkedinUsername);
         currentUser.setCohort(cohort);
-//        currentUser.setEmploymentStatus(employmentStatus);
+        currentUser.setEmploymentStatus(employmentStatus);
 
         users.save(currentUser);
 

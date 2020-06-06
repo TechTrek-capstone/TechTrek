@@ -106,5 +106,3 @@ $(document).ready(function () {
         modal.find('#deleteResumeId').val(resumeId);
     });
 });
-
-

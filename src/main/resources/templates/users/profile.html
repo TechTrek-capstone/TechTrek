@@ -33,17 +33,38 @@
                 </ul>
                 <div class="tab-content py-4">
                     <div class="tab-pane active" id="profile">
-                        <h5 class="mb-3">Username: <span class="badge badge-pill badge-primary" th:text="${user.getUsername()}"></span></h5>
+
+                        <!-- Employment status block -->
+                        <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null}" class="mb-3">
+                            <span th:unless="${user.employmentStatus == null}">
+                                        <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
+                                            <span class="badge badge-success">Available for hire <i class="fas fa-user-check"></i></span>
+                                        </h2>
+
+                                        <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).HIRED}">
+                                            <span class="badge badge-info">Hired <i class="fas fa-user-lock"></i></span>
+                                        </h2>
+                                    </span>
+                        </div>
+
+<!--                        <h5 class="mb-3">Username: <span class="badge badge-pill badge-primary" th:text="${user.getUsername()}"></span></h5>-->
+
                         <div class="row">
                             <div class="col-md-6">
                                 <h6>About</h6>
-                                <p th:text="${user.bioSummary}">
-                                    User bio goes here
+                                <p>
+                                    <span th:if="${user.bioSummary == ''}">
+                                        No description for <span th:text="${user.userfirstname}"></span> yet.
+                                    </span>
+                                    <span th:unless="${user.bioSummary == ''}" th:text="${user.bioSummary}"></span>
                                 </p>
 
                                 <h6>Desired work location(s)</h6>
-                                <p th:text="${user.workLocation}">
-                                    Desired work location goes here
+                                <p>
+                                    <span th:if="${user.workLocation == null}">
+                                        <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
+                                    </span>
+                                    <span th:unless="${user.workLocation == null}" th:text="${user.workLocation}"></span>
                                 </p>
                             </div>
 
@@ -174,16 +195,6 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Cohort</label>
                                 <div class="col-lg-9">
-                                    <!-- Dropdown for Cohort selection -->
-
-                                    <!-- If no cohort assigned already (without this the page will break) -->
-                                    <span th:if="${user.cohort} == null">
-                                        <select class="custom-select form-control" name="cohort" id="cohort">
-                                            <option selected disabled>Choose...</option>
-                                            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>
-                                        </select>
-                                    </span>
-
                                     <!-- If user already has cohort, this dropdown will pre-select their cohort from list -->
                                     <span th:unless="${user.cohort == null}">
                                         <select class="custom-select form-control" name="cohort" id="cohort">
@@ -194,16 +205,14 @@
                                 </div>
                             </div>
 
-<!--                            TODO: Fix employment status -->
-
-<!--                            <div class="form-group row">-->
-<!--                                <label class="col-lg-3 col-form-label form-control-label">Hire Status</label>-->
-<!--                                <div class="col-lg-9">-->
-<!--                                    <select class="custom-select form-control" name="employment_status" id="employmentStatus">-->
-<!--                                        <option th:each="status : ${T(dev.techtrek.techtrek.models.EmploymentStatus).values()}" th:value="${status}" th:text="${status.displayValue()}"></option>-->
-<!--                                    </select>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Hire Status</label>
+                                <div class="col-lg-9">
+                                    <select class="custom-select form-control" name="employment_status" id="employmentStatus">
+                                        <option th:each="status : ${T(dev.techtrek.techtrek.models.EmploymentStatus).values()}" th:value="${status}" th:selected="${user.getEmploymentStatus()}" th:text="${status.getDisplayValue()}"></option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">About</label>
