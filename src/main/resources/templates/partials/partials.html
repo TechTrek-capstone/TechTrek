@@ -157,32 +157,34 @@
         <!--         Login Form -->
 
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title text-center" id="loginModalLabel">Login</h2>
+            <div class="modal-content mr-auto ml-auto" style="width: auto; border: none; background: none;">
+                <div class="text-center mr-auto ml-auto pt-4 pr-5 pl-5 pb-4 shadow" style="border: 1px solid lightgray; border-radius: 2rem; width: 25rem; background: white">
+                    <h1 class="text-primary">Sign In</h1>
+                    <p class="lead">Please log in to access your TechTrek profile</p>
+
+                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                        Invalid username and/or password.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                        You have successfully logged out.
+                    </div>
+
+                    <hr class="mb-4 mt-4" style="border:1px solid #016ff9"/>
+                    <form th:action="@{/login}" method="post" autocomplete="off">
+
+                        <div class="form-group">
+                            <input class="form-control-lg" style="border-radius: 3rem; border: 1px solid lightgray" id="username" name="username" type="text" placeholder="Username"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control-lg" style="border-radius: 3rem; border: 1px solid lightgray" id="password" name="password" type="password" placeholder="Password"/>
+                        </div>
+
+                        <button type="submit" class="mt-3 btn btn-lg btn-primary">Sign in</button>
+                    </form>
                 </div>
-                <form th:action="@{/login}" th:method="post">
-                    <div class="modal-body">
-
-                        <!-- Username Here -->
-                        <div class="form-group">
-                            <label for="username" class="col-form-label">Username:</label>
-                            <input class="form-control" id="username" name="username" type="text"/>
-                        </div>
-
-                        <!-- Password Here -->
-                        <div class="form-group">
-                            <label for="password" class="col-form-label">Password:</label>
-                            <input class="form-control" id="password" name="password" type="password"/>
-                        </div>
 
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
