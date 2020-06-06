@@ -12,12 +12,34 @@
 <nav th:replace="partials/partials :: navbar"></nav>
 
 <!-- Ensure Data is not loaded when not authenticated -->
-<div sec:authorize="isAuthenticated()" class="page-wrapper ">
+<div sec:authorize="isAuthenticated()" >
 
     <!--   Start Dashboard  -->
-    <div class="col-12">
-    <div th:replace="partials/jobpartials :: dashJobsListFrag"></div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" th:replace="partials/jobpartials :: dashJobsListFrag">
+            </div>
+            <div class="col-md-6" th:replace="partials/jobpartials :: dashJobsListFrag">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" th:replace="partials/jobpartials :: dashJobsListFrag">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" th:replace="partials/jobpartials :: dashJobsListFrag">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" th:replace="partials/jobpartials :: dashJobsListFrag">
+            </div>
+            <div class="col-md-6" th:replace="partials/jobpartials :: dashJobsListFrag">
+            </div>
+        </div>
     </div>
+
     <!--     End Dashboard -->
 
 

@@ -46,91 +46,73 @@
     <!-- ============================================================== -->
     <!-- Table -->
     <!-- ============================================================== -->
-    <div class="row">
-        <!-- column -->
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <!-- title -->
-                    <div class="d-md-flex align-items-center">
-                        <div>
-                            <h4 class="card-title">Job Listings</h4>
-                            <h5 class="card-subtitle">Overview of Jobs Posted matching your eligibility.</h5>
-                        </div>
-                        <div class="ml-auto">
-                            <div class="dl">
-                                <select class="custom-select">
-                                    <option value="0" selected>Newest</option>
-                                    <option value="1">Oldest</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- title -->
+    <div class="card">
+        <!-- title -->
+        <div class="card-body">
+            <div class="d-md-flex align-items-center">
+                <div>
+                    <h4 class="card-title">Job Listings</h4>
+                    <h5 class="card-subtitle">Overview of Jobs Posted matching your eligibility.</h5>
                 </div>
-                <div class="table-responsive">
-                    <table class="table v-middle">
-                        <thead>
-                        <tr class="bg-light">
-                            <th class="border-top-0">Job Title</th>
-                            <th class="border-top-0">Company</th>
-                            <th class="border-top-0">Location</th>
-                            <th class="border-top-0">Remote</th>
-                            <th class="border-top-0">Listing Date</th>
-                        </tr>
-                        </thead>
-                        <tbody th:each="job : ${jobs}">
-                        <tr>
-                            <td>
-                                <a th:href="@{|/jobs/${job.id}|}"><h5 th:text="${job.title}">(Job title)</h5></a>
-                            </td>
-                            <td th:text="${job.getCompany().getName()}">(Company)</td>
-                            <td th:text="${job.location}">(Location)</td>
-                            <td>
-                                <label class="label label-info" th:text="${job.isRemote}? Yes : No ">(Remote)</label>
-                            </td>
-                            <td th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">(Lisiting Date)</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="ml-auto">
+                    <div class="dl">
+                        <select class="custom-select">
+                            <option value="0" selected>Newest</option>
+                            <option value="1">Oldest</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- title -->
 
-        <!--        listing sort -->
-
-        <script>
-
-
-        </script>
-
-        <!--        end listing sort-->
-
-
+        <table class="table">
+            <thead class="thead-light">
+            <tr class="bg-light">
+                <th class="border-top-0">Job Title</th>
+                <th class="border-top-0">Company</th>
+                <th class="border-top-0">Location</th>
+                <th class="border-top-0">Listing Date</th>
+            </tr>
+            </thead>
+            <tbody th:each="job : ${jobs}">
+            <tr>
+                <td>
+                    <a th:href="@{|/jobs/${job.id}|}"><h5 th:text="${#strings.abbreviate(job.title, 25)}">(Job
+                        title)</h5></a>
+                </td>
+                <td th:text="${job.getCompany().getName()}">(Company)</td>
+                <td th:text="${#strings.abbreviate(job.location, 25)}">(Location)</td>
+                <td th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">(Lisiting Date)</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <!-- ============================================================== -->
-    <!-- Table -->
-    <!-- ============================================================== -->
+
+</div>
+<!-- ============================================================== -->
+<!-- Table -->
+<!-- ============================================================== -->
 
 
-    <!--    <div th:each="job : ${jobs}" class="card mb-5" style="width: 18rem;">-->
-    <!--        <a th:href="@{|/jobs/${job.id}|}">-->
+<!--    <div th:each="job : ${jobs}" class="card mb-5" style="width: 18rem;">-->
+<!--        <a th:href="@{|/jobs/${job.id}|}">-->
 
 
-    <!--            <h5 th:text="${job.title}" class="card-title"></h5>-->
+<!--            <h5 th:text="${job.title}" class="card-title"></h5>-->
 
 
-    <!--            <span th:text="${job.getCompany().getName()}">Company</span> | <span-->
-    <!--                th:text="${job.location}">Location</span>-->
+<!--            <span th:text="${job.getCompany().getName()}">Company</span> | <span-->
+<!--                th:text="${job.location}">Location</span>-->
 
 
-    <!--            <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description text.</p>-->
+<!--            <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description text.</p>-->
 
 
-    <!--            <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Listing date</span>-->
+<!--            <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Listing date</span>-->
 
-    <!--        </a>-->
-    <!--    </div>-->
+<!--        </a>-->
+<!--    </div>-->
 
 
 </div>
