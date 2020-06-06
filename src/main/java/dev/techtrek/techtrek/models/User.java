@@ -49,7 +49,7 @@ public class User {
     private String username;
 
     @Column(name = "employment_status")
-    private EmploymentStatus employmentStatus;
+    private EmploymentStatus employmentStatus = EmploymentStatus.AVAILABLE;
 
     @Column(columnDefinition = "text", nullable = false, name = "bio_summary")
     private String bioSummary = "";

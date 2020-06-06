@@ -102,6 +102,21 @@
                     </div>
                     <div class="modal-body">
 
+                        <!-- First name -->
+                        <h3>First name</h3>
+                        <input type="text" name="userfirstname" th:field="*{userfirstname}" required/>
+
+                        <!-- Last name -->
+                        <h3>Last name</h3>
+                        <input type="text" name="last_name" th:field="*{lastName}" required/>
+
+                        <!-- Cohort -->
+                        <h3>Cohort</h3>
+                        <select class="custom-select form-control" name="cohort" id="cohort" required>
+                            <option selected disabled>Choose...</option>
+                            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>
+                        </select>
+
                         <!-- Email -->
                         <h3>Email</h3>
                         <input type="email" name="email" th:field="*{email}" required/>

@@ -40,7 +40,7 @@ create table if not exists users
     create_date datetime(6) null,
     email varchar(255) not null,
     username varchar(255) not null,
-    employment_status int null,
+    employment_status int not null default 1,
     work_location varchar(255) null,
     userfirstname varchar(255) not null default '',
     github_username varchar(255)  not null default '',
