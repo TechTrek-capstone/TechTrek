@@ -42,47 +42,38 @@
 
 <!-- Job List frag for the dashboard -->
 <div th:fragment="dashJobsListFrag">
-
-    <!-- ============================================================== -->
-    <!-- Table -->
-    <!-- ============================================================== -->
     <div class="card">
         <!-- title -->
         <div class="card-body">
             <div class="d-md-flex align-items-center">
                 <div>
-                    <h4 class="card-title">Job Listings</h4>
-                    <h5 class="card-subtitle">Overview of Jobs Posted matching your eligibility.</h5>
+                    <h5 class="card-title">Latest Job Listings</h5>
                 </div>
                 <div class="ml-auto">
                     <div class="dl">
-                        <select class="custom-select">
-                            <option value="0" selected>Newest</option>
-                            <option value="1">Oldest</option>
-                        </select>
+                        <a th:href="@{/jobs}">
+                            <button class="btn btn-primary">View All</button>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- title -->
-
-        <table class="table">
+        <table id="jobslisting" class="table table-sm table-hover">
             <thead class="thead-light">
             <tr class="bg-light">
                 <th class="border-top-0">Job Title</th>
-                <th class="border-top-0">Company</th>
-                <th class="border-top-0">Location</th>
+<!--                <th class="border-top-0">Company</th>-->
+<!--                <th class="border-top-0">Location</th>-->
                 <th class="border-top-0">Listing Date</th>
             </tr>
             </thead>
-            <tbody th:each="job : ${jobs}">
+            <tbody th:each="job,iterStat : ${jobs}" th:if="${iterStat.index}<5">
+
             <tr>
-                <td>
-                    <a th:href="@{|/jobs/${job.id}|}"><h5 th:text="${#strings.abbreviate(job.title, 25)}">(Job
-                        title)</h5></a>
-                </td>
-                <td th:text="${job.getCompany().getName()}">(Company)</td>
-                <td th:text="${#strings.abbreviate(job.location, 25)}">(Location)</td>
+                <td><a th:href="@{|/jobs/${job.id}|}" th:text="${#strings.abbreviate(job.title, 50)}"></a></td>
+
+<!--                <td th:text="${job.getCompany().getName()}">(Company)</td>-->
+<!--                <td th:text="${#strings.abbreviate(job.location, 25)}">(Location)</td>-->
                 <td th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">(Lisiting Date)</td>
             </tr>
             </tbody>
@@ -90,9 +81,6 @@
     </div>
 
 </div>
-<!-- ============================================================== -->
-<!-- Table -->
-<!-- ============================================================== -->
 
 
 <!--    <div th:each="job : ${jobs}" class="card mb-5" style="width: 18rem;">-->

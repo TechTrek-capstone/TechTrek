@@ -166,3 +166,6 @@ hr.hr-light {
     height: 1px;
     background: #d9dee2;
 }
+table {
+    margin-bottom: 0;
+}

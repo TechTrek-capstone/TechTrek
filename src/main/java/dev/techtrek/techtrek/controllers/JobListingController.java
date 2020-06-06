@@ -5,10 +5,14 @@ import dev.techtrek.techtrek.models.JobListing;
 import dev.techtrek.techtrek.repositories.CompaniesRepo;
 import dev.techtrek.techtrek.repositories.JobsRepo;
 import dev.techtrek.techtrek.repositories.Users;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -35,6 +39,7 @@ public class JobListingController {
         model.addAttribute("jobs", jobList);
         return "jobs/index";
     }
+
 
 
     // (All users) Individual job listing view (by id)
@@ -134,4 +139,6 @@ public class JobListingController {
         jobsRepo.deleteById(id);
         return "redirect:/jobs";
     }
+
+
 }
