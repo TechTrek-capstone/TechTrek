@@ -2,10 +2,7 @@ package dev.techtrek.techtrek.controllers;
 
 
 import dev.techtrek.techtrek.models.*;
-import dev.techtrek.techtrek.repositories.CohortsRepo;
-import dev.techtrek.techtrek.repositories.EventsRepo;
-import dev.techtrek.techtrek.repositories.JobsRepo;
-import dev.techtrek.techtrek.repositories.Users;
+import dev.techtrek.techtrek.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,15 +22,16 @@ public class UserController {
     private CohortsRepo cohortsRepo;
     private JobsRepo jobsRepo;
     private EventsRepo eventsRepo;
-    private EmploymentStatus employmentStatus;
+    private SkillsRepo skillsRepo;
 
-    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo) {
+
+    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo, SkillsRepo skillsRepo) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.cohortsRepo = cohortsRepo;
         this.jobsRepo = jobsRepo;
         this.eventsRepo = eventsRepo;
-//        this.employmentStatus = employmentStatus;
+        this.skillsRepo = skillsRepo;
     }
 
 
@@ -76,9 +74,14 @@ public class UserController {
     public String showProfile(Model model) {
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
+
+        List<Skill> skills = skillsRepo.findAll();
+        model.addAttribute("skills", skills);
+
         UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
+
         return "users/profile";
     }
 
@@ -99,7 +102,8 @@ public class UserController {
 
             @RequestParam(name = "github_username") String githubUsername,
             @RequestParam(name = "cohort") Cohort cohort,
-            @RequestParam(name = "employment_status") EmploymentStatus employmentStatus
+            @RequestParam(name = "employment_status") EmploymentStatus employmentStatus,
+            @RequestParam(name = "profile_pic") String profilePic
     ) {
         // Sets user based off the spring security authentication. This is based on role.
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //1. Get the current user
@@ -118,6 +122,7 @@ public class UserController {
         currentUser.setLinkedinUsername(linkedinUsername);
         currentUser.setCohort(cohort);
         currentUser.setEmploymentStatus(employmentStatus);
+        currentUser.setProfilePic(profilePic);
 
         users.save(currentUser);
 

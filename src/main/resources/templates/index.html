@@ -3,6 +3,13 @@
 
 <head th:replace="partials/partials :: head">
     <title>TechTrek - Begin your journey</title>
+    <style>
+        .modal-content{
+            position: relative;
+            display: table; /* This is important */
+            width: 100px;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,6 +55,8 @@
                     </div>
                 </div>
                 <!-- End Not Authenticated View -->
+
+
                 <!-- Authenticated View -->
                 <div sec:authorize="isAuthenticated()" class="landing-buttons container mt-4">
                     <div class="row">
@@ -56,18 +65,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm">
-                            <a class="text-white" th:href="@{/logout}">
-                                <button type="button"  name="Logout" class="btn btn-primary w-100">Logout
-                            </button></a>
-                        </div>
+
                         <div class="col-sm">
                             <a class="text-white" th:href="@{/home}">
                                 <button type="button"  name="Dashboard" class="btn btn-primary w-100">
                                 Dashboard
                             </button></a>
-
                         </div>
+
+                        <div class="col-sm">
+                            <a class="text-white" th:href="@{/logout}">
+                                <button type="button"  name="Logout" class="btn btn-danger w-100">Logout
+                                </button></a>
+                        </div>
+
                     </div>
                 </div>
                 <!-- End Authenticated View -->
