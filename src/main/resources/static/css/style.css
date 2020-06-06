@@ -99,19 +99,19 @@ hr {
 #progress-bar {
     width: 0%;
     height: 100%;
-    transition: width 500ms linear;
+    transition: width 200ms linear;
 }
 
 .progress-bar-danger {
-    background: #d00;
+    background: #dd5641;
 }
 
 .progress-bar-warning {
-    background: #f50;
+    background: #ffa720;
 }
 
 .progress-bar-success {
-    background: #080;
+    background: #5ee990;
 }
 
 /* END PROGRESS BAR */
