@@ -102,7 +102,8 @@ public class UserController {
 
             @RequestParam(name = "github_username") String githubUsername,
             @RequestParam(name = "cohort") Cohort cohort,
-            @RequestParam(name = "employment_status") EmploymentStatus employmentStatus
+            @RequestParam(name = "employment_status") EmploymentStatus employmentStatus,
+            @RequestParam(name = "profile_pic") String profilePic
     ) {
         // Sets user based off the spring security authentication. This is based on role.
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //1. Get the current user
@@ -121,6 +122,7 @@ public class UserController {
         currentUser.setLinkedinUsername(linkedinUsername);
         currentUser.setCohort(cohort);
         currentUser.setEmploymentStatus(employmentStatus);
+        currentUser.setProfilePic(profilePic);
 
         users.save(currentUser);
 

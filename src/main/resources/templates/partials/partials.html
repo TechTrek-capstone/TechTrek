@@ -172,68 +172,6 @@
     </div>
 
 
-
-<!--    <div th:fragment="registerModal" class="modal fade" id="registerModal" tabindex="-1" role="dialog"-->
-<!--         aria-labelledby="registerModalLabel"-->
-<!--         aria-hidden="true">-->
-<!--        &lt;!&ndash; Register Form &ndash;&gt;-->
-<!--        <form th:action="@{/register}" th:method="post" th:object="${user}"-->
-<!--              oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match." : "")'>-->
-
-<!--            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">-->
-<!--                <div class="modal-content">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h2 class="modal-title text-center" id="registerModalLabel">Register</h2>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-
-<!--                        &lt;!&ndash; First name &ndash;&gt;-->
-<!--                        <h3>First name</h3>-->
-<!--                        <input type="text" name="userfirstname" th:field="*{userfirstname}" required/>-->
-
-<!--                        &lt;!&ndash; Last name &ndash;&gt;-->
-<!--                        <h3>Last name</h3>-->
-<!--                        <input type="text" name="last_name" th:field="*{lastName}" required/>-->
-
-<!--                        &lt;!&ndash; Cohort &ndash;&gt;-->
-<!--                        <h3>Cohort</h3>-->
-<!--                        <select class="custom-select form-control" name="cohort" id="cohort" required>-->
-<!--                            <option selected disabled>Choose...</option>-->
-<!--                            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}" th:value="${cohort.id}"></option>-->
-<!--                        </select>-->
-
-<!--                        &lt;!&ndash; Email &ndash;&gt;-->
-<!--                        <h3>Email</h3>-->
-<!--                        <input type="email" name="email" th:field="*{email}" required/>-->
-
-<!--                        &lt;!&ndash; Username &ndash;&gt;-->
-<!--                        <h3>Username</h3>-->
-<!--                        <input type="text" name="username" th:field="*{username}" value="*{email}">-->
-
-<!--                        &lt;!&ndash; Create Password &ndash;&gt;-->
-<!--                        <h3 class="">Create Password</h3>-->
-<!--                        <input class="" id="pwd" type="password" th:field="*{password}" name="password" required/>-->
-<!--                        <div id="progress">-->
-<!--                            <div id="progress-bar"></div>-->
-<!--                        </div>-->
-
-<!--                        &lt;!&ndash; Confirm Password &ndash;&gt;-->
-<!--                        <h3>Confirm Password</h3>-->
-<!--                        <input type="password" name="confirmPassword" required/>-->
-
-
-<!--                    </div>-->
-
-<!--                    <div class="modal-footer">-->
-<!--                        <button type="submit" class="btn btn-primary" name="create">Register</button>-->
-<!--                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </form>-->
-<!--    </div>-->
-
-
     <!-- Login Modal -->
 
     <div th:fragment="loginModal" class="modal fade" id="loginModal" tabindex="-1" role="dialog"
