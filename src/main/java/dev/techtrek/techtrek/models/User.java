@@ -7,7 +7,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @EqualsAndHashCode
@@ -60,6 +59,9 @@ public class User {
 
     @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "user_website")
     private String userWebsite = "";
+
+    @Column(name = "profile_pic")
+    private String profilePic;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

@@ -52,6 +52,7 @@ create table if not exists users
     cohort_id bigint null,
     role_id bigint null,
     user_website varchar(255) not null default '',
+    profile_pic varchar(255),
     unique (email),
     foreign key (cohort_id) references cohorts (id),
     foreign key (role_id) references roles (id)
