@@ -77,7 +77,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private Role role;
+    private UserRole userRole;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -99,6 +99,7 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+
     }
 
     public User(){}
@@ -106,5 +107,9 @@ public class User {
 
     public void setEnabled(boolean b) {
         this.isEnabled = b;
+    }
+
+
+    public void setRoleId(int i) {
     }
 }

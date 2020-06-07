@@ -1,7 +1,5 @@
 package dev.techtrek.techtrek.repositories;
 
-import dev.techtrek.techtrek.models.Role;
-import dev.techtrek.techtrek.models.User;
 import dev.techtrek.techtrek.models.UserRole;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class UserAccountController {
 
@@ -37,15 +39,6 @@ public class UserAccountController {
         this.passwordEncoder = passwordEncoder;
     }
 
-
-//    @RequestMapping(value="/register", method = RequestMethod.GET)
-//    public ModelAndView displayRegistration(ModelAndView modelAndView, User user)
-//    {
-//        modelAndView.addObject("user", user);
-//        modelAndView.setViewName("register");
-//        return modelAndView;
-//    }
-
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public ModelAndView registerUser(ModelAndView modelAndView, User user)
     {
@@ -60,6 +53,8 @@ public class UserAccountController {
         {
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
+            user.setUserWebsite("http://codeup.com");
+            user.setRoleId(3);
             users.save(user);
 
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
