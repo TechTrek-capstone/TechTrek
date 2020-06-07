@@ -107,5 +107,87 @@ create table if not exists job_listings
     foreign key (company_id) references companies (id)
 );
 
+INSERT INTO techtrek_db.cohorts
+(id,
+ graduation_date,
+ name,
+ location)
 
+VALUES (1,
+        '2020-06-16',
+        'Fortuna',
+        'San Antonio, TX'),
+
+       (2,
+        '2020-07-15',
+        'Apex',
+        'Dallas, TX'),
+
+       (3,
+        '2020-08-20',
+        'Gandymeade',
+        'San Antonio, TX'),
+
+       (4,
+        '2020-10-22',
+        'Hyperion',
+        'San Antonio, TX');
+
+INSERT INTO techtrek_db.roles (id, name) VALUES (1, 'USER_ADMIN');
+INSERT INTO techtrek_db.roles (id, name) VALUES (2, 'USER_PLACE');
+INSERT INTO techtrek_db.roles (id, name) VALUES (3, 'USER_STUDENT');
+
+INSERT INTO techtrek_db.skills (id, name)
+
+VALUES (1, 'HTML5'),
+       (2, 'CSS'),
+       (3, 'Web design'),
+       (4, 'Bootstrap'),
+       (5, 'JavaScript'),
+       (6, 'jQuery'),
+       (7, 'Java SE'),
+       (8, 'Java EE'),
+       (9, 'MySQL'),
+       (10, 'Spring Boot'),
+       (11, 'Thymeleaf'),
+       (12, 'OOP'),
+       (13, 'Git'),
+       (14, 'Paired programming'),
+       (15, 'TDD'),
+       (16, 'React'),
+       (17, 'Codeply'),
+       (18, 'npm'),
+       (19, 'Node.js'),
+       (20, 'Jasmine'),
+       (21, 'Python'),
+       (22, 'C'),
+       (23, 'C#'),
+       (24, 'C++'),
+       (25, 'Docker'),
+       (26, 'Kubernetes'),
+       (27, '.NET Core'),
+       (28, 'Data structures'),
+       (29, 'Agile workflow'),
+       (30, 'Maven'),
+       (31, 'Ant'),
+       (32, 'Gradle'),
+       (33, 'Tomcat'),
+       (34, 'AWS'),
+       (35, 'RESTful APIs'),
+       (36, 'Angular'),
+       (37, 'PostgreSQL'),
+       (38, 'Cassandra'),
+       (39, 'MongoDB'),
+       (40, 'NoSQL'),
+       (41, 'GCP'),
+       (42, 'Swift'),
+       (43, 'Scala'),
+       (44, 'Go'),
+       (45, 'Elm'),
+       (46, 'Ruby'),
+       (47, 'Rust'),
+       (48, 'PHP'),
+       (49, 'MATLAB'),
+       (50, 'Groovy'),
+       (51, 'Material-UI');
 
