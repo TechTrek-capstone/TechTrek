@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode
@@ -42,8 +43,8 @@ public class User {
     @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "linkedin_username")
     private String linkedinUsername = "";
 
-    @Column(columnDefinition = "varchar(255)", name = "work_location")
-    private String workLocation;
+    @Column(columnDefinition = "varchar(255) default ''", name = "work_location")
+    private String workLocation = "";
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -77,13 +78,19 @@ public class User {
     @JoinColumn(name = "cohort_id")
     private Cohort cohort;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "users_skills",
+        joinColumns={@JoinColumn(name="user_id")},
+        inverseJoinColumns={@JoinColumn(name="skill_id")}
+    )
+    private List<Skill> skills;
+
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 //    private List<JobListing> jobListingList;
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 //    private List<EventListing> eventListingList;
-
-
 
 
     public String getFullName() {

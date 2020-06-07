@@ -7,14 +7,32 @@
 
 
 <!--    Registration Success! -->
-<div class="alert alert-success" role="alert">
-    <h4 class="alert-heading">Well done!</h4>
-    <p th:text="'A verification email has been sent to: ' + ${emailId}" ></p>
-    <hr>
-    <p class="mb-0">Check you email! If you already have confirmed your email, just go ahead and login.</p>
+
+<div class="modal" tabindex="-1" role="dialog" id="registrationSuccessModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-success">Registration successful!</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="lead">
+                    <h4 class="mb-3">A verification email has been sent to: <span class="badge badge-pill badge-success" th:text="${emailId}"></span></h4>
+                    If you already have confirmed your email, you are now able to log in.
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 
-
+<!--<div class="alert alert-success" role="alert">-->
+<!--    <h4 class="alert-heading">Well done!</h4>-->
+<!--    <p th:text="'A verification email has been sent to: ' + ${emailId}" ></p>-->
+<!--    <hr>-->
+<!--    <p class="mb-0">Check your email! <br />If you already have confirmed your email, you are now able to log in.</p>-->
+<!--</div>-->
 
 <div class="text-center mr-auto ml-auto pt-4 pr-5 pl-5 pb-4 shadow"
      style="border: 1px solid lightgray; border-radius: 2rem; width: 25rem; position: relative; top: 50%; transform: translateY(50%);">
@@ -48,5 +66,10 @@
 </div>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+<script>
+    $(document).ready(function(){
+        $("#registrationSuccessModal").modal('show');
+    });
+</script>
 </body>
 </html>

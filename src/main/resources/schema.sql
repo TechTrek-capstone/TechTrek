@@ -41,7 +41,7 @@ create table if not exists users
     email varchar(255) not null,
     username varchar(255) not null,
     employment_status int not null default 1,
-    work_location varchar(255) null,
+    work_location varchar(255) not null default '',
     userfirstname varchar(255) not null default '',
     github_username varchar(255)  not null default '',
     last_name varchar(255)  not null default '',
@@ -56,6 +56,19 @@ create table if not exists users
     unique (email),
     foreign key (cohort_id) references cohorts (id),
     foreign key (role_id) references roles (id)
+);
+
+CREATE TABLE IF NOT EXISTS skills (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS users_skills (
+    user_id BIGINT NOT NULL,
+    skill_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (skill_id) REFERENCES skills(id)
 );
 
 create table if not exists event_listings

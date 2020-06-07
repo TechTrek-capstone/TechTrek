@@ -6,12 +6,25 @@
 <body>
 
 
-<!--    Registration Success! -->
-<div class="alert alert-success" role="alert">
-    <h4 class="alert-heading">Well done!</h4>
-    <p>Congratulations! Your account has been activated and email is verified!</p>
-    <hr>
-    <p class="mb-0">Login below</p>
+<!-- Account verified modal-->
+
+<div class="modal" tabindex="-1" role="dialog" id="accountVerifiedModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-success">Account verified!</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="lead">
+                    Congratulations!
+                    <br />Your account has been activated and email is verified!
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -48,5 +61,10 @@
 </div>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+<script>
+    $(document).ready(function(){
+        $("#accountVerifiedModal").modal('show');
+    });
+</script>
 </body>
 </html>
