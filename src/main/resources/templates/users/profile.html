@@ -373,8 +373,7 @@
                 <!-- If the profile pic is not null display the profile image url -->
 
                 <div class="mr-auto ml-auto" th:unless="${user.profilePic == null}" style="border-radius: 50%; overflow: hidden; width:200px; height: 200px;">
-                    <img th:src="${user.profilePic}" style="width: 200px; height: 200px; vertical-align: middle;
-object-fit: cover;"/>
+                    <img th:src="${user.profilePic}" style="width: 200px; height: 200px; vertical-align: middle; object-fit: cover;"/>
                 </div>
             </div>
         </div>

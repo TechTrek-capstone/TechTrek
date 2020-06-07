@@ -21,11 +21,15 @@
             </div>
             <div class="sidebar-header">
                 <a th:href="@{/profile}">
-                <div class="user-pic">
+                <div class="user-pic" th:if="${user.profilePic == null}">
                     <img class="img-responsive img-rounded"
                          src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
                          alt="User picture">
-                </div></a>
+                </div>
+                    <div class="user-pic" th:unless="${user.profilePic == null}">
+                        <img class="img-responsive img-rounded" th:src="${user.profilePic}" alt="User picture">
+                    </div>
+                </a>
                 <div class="user-info">
           <span class="user-name"><span th:text="${user.userfirstname}"></span>
             <strong th:text="${user.lastName}"></strong>
