@@ -20,7 +20,8 @@ create table if not exists cohorts
 create table if not exists companies
 (
     id bigint auto_increment primary key,
-    name varchar(255) not null
+    name varchar(255) not null,
+    logo_img varchar(255)
 );
 
 create table if not exists job_categories
