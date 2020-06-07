@@ -2,25 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
 <head th:replace="partials/partials :: head">
     <title>Jobs</title>
+    <style>
+        .logo::after{
+            content: '';
+            display: inline-block;
+            border: 10px solod
+            border-radius: 50%;
+            background-color: yellow;
+        }
+    </style>
 </head>
 
 <body>
 <nav th:replace="partials/partials :: navbar"></nav>
+
+<div class="jumbotron jumbotron-fluid bg-secondary text-white">
+    <div class="container">
+        <!-- Company logo (if available) -->
+        <div class="mr-auto ml-auto logo shadow mb-3" th:unless="${job.getCompany().getLogoImg() == 'null'} OR ${job.getCompany().getLogoImg() == ''}" style="border-radius: 50%; overflow: hidden; width:200px; height: 200px;">
+            <img th:unless="${job.getCompany().getLogoImg() == 'null'} OR ${job.getCompany().getLogoImg() == ''}" th:src="${job.getCompany().getLogoImg()}" style="width:200px; height: 200px; vertical-align: middle; object-fit: cover;">
+        </div>
+
+        <!--   Title   -->
+        <h1 class="display-4 text-center" th:text="${job.title}">Fluid jumbotron</h1>
+
+        <!--   Company   -->
+        <br><h5 class="text-black-50 text-center"><span th:text="${job.getCompany().getName()}"></span> |
+
+        <!--   Location   -->
+        <span th:text="${job.location}"></span></h5>
+    </div>
+</div>
 
 <div class="container mt-3 mb-3" id="individual-job-listing">
     <ul class="list-group list-group-flush">
 
     <!-- JOB TITLE, COMPANY, LOCATION, AND LISTING DATE -->
         <li class="list-group-item">
-
-            <!--   Title   -->
-            <h2 class="text-center mb-1" th:text="${job.title}"></h2>
-
-                <!--   Company   -->
-                <br><h5 class="text-black-50 text-center"><span th:text="${job.getCompany().getName()}"></span> |
-
-                <!--   Location   -->
-                <span th:text="${job.location}"></span></h5>
 
                 <!--   Listing date   -->
                 <br><b>Posted: <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}"></span></b>
