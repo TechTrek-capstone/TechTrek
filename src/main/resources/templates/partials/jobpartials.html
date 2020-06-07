@@ -6,37 +6,43 @@
 
 <div class="d-flex justify-content-around flex-wrap w-50-lg" th:fragment="jobsListFrag">
 
-    <div th:each="job : ${jobs}" class="card mb-5" style="width: 18rem;">
-        <a th:href="@{|/jobs/${job.id}|}">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
+    <div th:each="job : ${jobs}" class="card mb-5 p-4 container" style="width: 18rem;">
+        <div class="row">
+            <!-- Job title -->
+            <h5 th:text="${job.title}" class="card-title text-center"></h5>
 
-                        <!-- Job title -->
-                        <h5 th:text="${job.title}" class="card-title"></h5>
+            <div class="col-4">
+                <img th:if="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}" th:src="@{/img/logo-placeholder.jpg}" alt="Placeholder logo" style="width: 75px; height:75px; vertical-align: middle; object-fit: cover;">
 
-                        <!-- Company and Location -->
-                        <span class="text-black-50"><span th:text="${job.getCompany().getName()}">Company</span> | <span
-                                th:text="${job.location}">Location</span></span>
-                    </li>
-
-                    <li class="list-group-item">
-                        <!-- Job description -->
-                        <!-- Note: Limiting the jobs text (description) to 100 chars for readability in the card and to prevent growing the div. -->
-                        <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description
-                            text.</p>
-
-
-                        <div class="text-right">
-                            <!-- Posting date -->
-                            <span class="text-black-50 text-right" style="font-size: .75rem;">Posted: <span
-                                    th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Listing date</span></span>
-                        </div>
-                    </li>
-                </ul>
+                <img th:unless="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}" th:src="${job.getCompany().getLogoImg()}" alt="Company logo" style="width: 75px; height:75px; vertical-align: middle; object-fit: cover;">
             </div>
-        </a>
+
+            <div class="col-8">
+                <!-- Company and Location -->
+                <span class="text-black-50"><span th:text="${job.getCompany().getName()}">Company</span> | <span
+                        th:text="${job.location}">Location</span></span>
+            </div>
+        </div>
+
+        <hr class="hr-light w-75 mr-auto ml-auto mt-0 mb-0" />
+
+<!--        <div class="card-body">-->
+
+            <!-- Job description -->
+            <!-- Note: Limiting the jobs text (description) to 100 chars for readability in the card and to prevent growing the div. -->
+            <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description
+                text.</p>
+
+            <a th:href="@{|/jobs/${job.id}|}">
+                <button class="btn btn-block btn-primary mb-1">View listing</button>
+            </a>
+
+            <div class="text-right">
+                <!-- Posting date -->
+                <span class="text-black-50 text-right" style="font-size: .75rem;">Posted: <span
+                        th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Listing date</span></span>
+            </div>
+<!--        </div>-->
     </div>
 </div>
 

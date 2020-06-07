@@ -15,7 +15,7 @@
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
                 <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
-                <h4 th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
+                <h4 class="lead" th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
                     <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fas fa-map-marker-alt" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
                     <br><small>Graduating <span th:text="${#dates.format(user.cohort.getGraduationDate(), 'MM-yyyy')}"></span></small>
                 </h4>
@@ -51,7 +51,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <h6>About</h6>
+                                <h5>About</h5>
                                 <p>
                                     <span th:if="${user.bioSummary == ''}">
                                         No description for <span th:text="${user.userfirstname}"></span> yet.
@@ -59,7 +59,7 @@
                                     <span th:unless="${user.bioSummary == ''}" th:text="${user.bioSummary}"></span>
                                 </p>
 
-                                <h6>Desired work location(s)</h6>
+                                <h5>Desired work location(s)</h5>
                                 <p>
                                     <span th:if="${user.workLocation == ''}">
                                         <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
@@ -113,7 +113,7 @@
                                 <hr class="hr-light" />
 
                                 <!-- Skills pill badges -->
-                                <h6>Skills</h6>
+                                <h5>Skills</h5>
                                 <a href="#" class="badge badge-dark badge-pill">html5</a>
                                 <a href="#" class="badge badge-dark badge-pill">react</a>
                                 <a href="#" class="badge badge-dark badge-pill">codeply</a>
@@ -131,10 +131,7 @@
                     </div>
 
                     <div class="tab-pane" id="documents">
-                        <div class="alert alert-info alert-dismissable">
-                            <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>.
-                            Use this to show important messages to the user.
-                        </div>
+                        <h4 style="font-weight: normal">Resumes</h4>
                         <table class="table table-hover table-striped">
                             <tbody>
                             <tr>
@@ -179,6 +176,8 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Profile picture</label>
                                 <div class="col-lg-9">
                                     <button type="button" id="uploadProfilePic" class="btn btn-primary rounded-pill">Choose file</button>
+
+                                    <i id="uploadSuccessful" class="far fa-check-circle text-success ml-2 " style="display: none; font-size: 1.25rem"></i>
 
                                     <input type="hidden" name="profile_pic" id="profilePic" th:value="${user.profilePic}">
                                 </div>
@@ -368,7 +367,7 @@
                 <!-- If the profile pic is not null display the profile image url -->
 
                 <div class="mr-auto ml-auto" th:unless="${user.profilePic == null} OR ${user.profilePic == ''}" style="border-radius: 50%; overflow: hidden; width:200px; height: 200px;">
-                    <img th:src="${user.profilePic}" style="width: 200px; height: 200px; vertical-align: middle; object-fit: cover;"/>
+                    <img id="profilePicImg" th:src="${user.profilePic}" style="width: 200px; height: 200px; vertical-align: middle; object-fit: cover;"/>
                 </div>
             </div>
         </div>
@@ -419,6 +418,10 @@
                 $("#profilePic").val(fsURL);
                 // $("#resumeUploadTBlock").submit();
             })
+            .then(function () {
+                $("#uploadSuccessful").show();
+                $("#profilePicImg").attr("src", fsURL);
+            });
     });
 </script>
 
