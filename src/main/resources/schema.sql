@@ -31,7 +31,7 @@ create table if not exists job_categories
     unique (name)
 );
 
-create table if not exists roles
+create table if not exists user_roles
 (
     id bigint auto_increment primary key,
     name varchar(255) not null,
@@ -55,13 +55,14 @@ create table if not exists users
     modify_date datetime(6) null,
     user_password varchar(255) not null,
     phone_number varchar(255)  not null default '',
+    user_perm varchar(255)  not null default 'student',
     cohort_id bigint null,
-    role_id bigint not null default 3,
+    role_id bigint not null,
     user_website varchar(255) not null default '',
     profile_pic varchar(255),
     unique (email),
     foreign key (cohort_id) references cohorts (id),
-    foreign key (role_id) references roles (id)
+    foreign key (role_id) references user_roles (id)
 );
 
 CREATE TABLE IF NOT EXISTS skills (

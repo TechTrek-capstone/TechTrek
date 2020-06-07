@@ -15,7 +15,10 @@
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
                 <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
-                <h4 class="lead" th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
+              
+                <h5 class="display-4 mt-3 mb-0" th:text="${#strings.capitalize(user.getUserPerm())}"></h5>
+              
+                <h4 th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
                     <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fas fa-map-marker-alt" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
                     <br><small>Graduating <span th:text="${#dates.format(user.cohort.getGraduationDate(), 'MM-yyyy')}"></span></small>
                 </h4>
@@ -188,6 +191,7 @@
                                 <div class="col-lg-9">
                                     <input name="userfirstname" class="form-control" type="text"
                                            th:value="${user.userfirstname}">
+
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -270,6 +274,7 @@
                                            th:value="${user.userWebsite}">
                                 </div>
                             </div>
+                            <input type="hidden" name="user_perm" th:value="${user.userPerm}">
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Skills</label>

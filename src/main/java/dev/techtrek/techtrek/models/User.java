@@ -61,6 +61,9 @@ public class User {
     @Column(name = "profile_pic")
     private String profilePic;
 
+    @Column(columnDefinition = "varchar(255) default 'student'", nullable = false, name = "user_perm")
+    private String userPerm;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")
@@ -77,7 +80,9 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private Role role;
+    private UserRole userRole;
+
+
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -99,6 +104,7 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+
     }
 
     public User(){}
@@ -107,4 +113,7 @@ public class User {
     public void setEnabled(boolean b) {
         this.isEnabled = b;
     }
+
+
+
 }
