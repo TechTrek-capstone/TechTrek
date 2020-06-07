@@ -15,7 +15,7 @@
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
                 <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
-                <h1 class="display-4 mt-3 mb-0" th:text="${user.getUserRole().name}"></h1>
+                <h5 class="display-4 mt-3 mb-0" th:text="${#strings.capitalize(user.getUserPerm())}"></h5>
 
 
 
@@ -198,6 +198,7 @@
                                 <div class="col-lg-9">
                                     <input name="userfirstname" class="form-control" type="text"
                                            th:value="${user.userfirstname}">
+
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -280,6 +281,7 @@
                                            th:value="${user.userWebsite}">
                                 </div>
                             </div>
+                            <input type="hidden" name="user_perm" th:value="${user.userPerm}">
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Skills</label>
