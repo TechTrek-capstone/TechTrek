@@ -16,7 +16,7 @@
             <div class="col-lg-8 order-lg-2">
                 <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
                 <h4 th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
-                    <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fa fa-map-marker" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
+                    <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fas fa-map-marker-alt" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
                     <br><small>Graduating <span th:text="${#dates.format(user.cohort.getGraduationDate(), 'MM-yyyy')}"></span></small>
                 </h4>
 
@@ -38,11 +38,11 @@
                         <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null}" class="mb-3">
                             <span th:unless="${user.employmentStatus == null}">
                                         <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
-                                            <span class="badge badge-success">Available for hire <i class="ml-1 fa fa-check-circle"></i></span>
+                                            <span class="badge badge-success">Available for hire <i class="ml-1 fas fa-check-circle"></i></span>
                                         </h2>
 
                                         <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).HIRED}">
-                                            <span class="badge badge-info">Hired <i class="ml-1 fa fa-lock"></i></span>
+                                            <span class="badge badge-info">Hired <i class="ml-1 fas fa-lock"></i></span>
                                         </h2>
                                     </span>
                         </div>
@@ -89,21 +89,21 @@
                                     <!-- Link to Github profile -->
                                     <span th:unless="${user.githubUsername == ''}">
                                         <a th:href="'https://github.com/' + ${user.githubUsername}" target="_blank">
-                                            <i class="fa fa-github mr-2"></i>
+                                            <i class="fab fa-github mr-2"></i>
                                         </a>
                                     </span>
 
                                     <!-- Link to LinkedIn profile -->
                                     <span th:unless="${user.linkedinUsername == ''}">
                                         <a th:href="'https://www.linkedin.com/in/' + ${user.linkedinUsername}" target="_blank">
-                                            <i class="fa fa-linkedin-square mr-2"></i>
+                                            <i class="fab fa-linkedin mr-2"></i>
                                         </a>
                                     </span>
 
                                     <!-- Link to personal site -->
                                     <span th:unless="${user.userWebsite == ''}">
                                         <a th:href="${user.userWebsite}" target="_blank">
-                                            <i class="fa fa-globe mr-2"></i>
+                                            <i class="fas fa-globe mr-2"></i>
                                         </a>
                                     </span>
 
@@ -125,9 +125,9 @@
 
                                 <hr class="hr-light">
 
-                                <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
-                                <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
-                                <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                                <span class="badge badge-primary"><i class="fas fa-user"></i> 900 Followers</span>
+                                <span class="badge badge-success"><i class="fas fa-cog"></i> 43 Forks</span>
+                                <span class="badge badge-danger"><i class="fas fa-eye"></i> 245 Views</span>
                             </div>
                         </div>
 

@@ -61,12 +61,15 @@ public class UserController {
     // Dashboard view
     @GetMapping("/home")
     public String showDashboard(Model model) {
-        model.addAttribute("user", new User());
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.getOne(userWithRoles.getId());
+        model.addAttribute("user", user);
         List<JobListing> jobList = jobsRepo.findAll();
         model.addAttribute("jobs", jobList);
         List<EventListing> eventList = eventsRepo.findAll();
         model.addAttribute("eventsList", eventList);
         return "users/index";
+
     }
 
     // Profile view
