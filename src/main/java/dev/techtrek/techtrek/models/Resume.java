@@ -19,6 +19,9 @@ public class Resume {
     @Column (name = "type")
     private String type;
 
+    @Column (name = "placement_notes", length = 5000)
+    private String placementNotes;
+
     // relationship to users table = many to one
     @ManyToOne
     @JoinColumn (name = "user_id")
