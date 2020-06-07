@@ -17,13 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AuthenticationController {
-//    private Users usersRepo;
-//    private PasswordEncoder passwordEncoder;
-//
-//    public AuthenticationController(Users usersRepo, PasswordEncoder passwordEncoder) {
-//        this.usersRepo = usersRepo;
-//        this.passwordEncoder = passwordEncoder;
-//    }
+
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -36,13 +30,6 @@ public class AuthenticationController {
         return "redirect:/home";
     }
 
-//    @PostMapping("/register")
-//    public String saveUser(@ModelAttribute User user, Model model) {
-//        String hash = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(hash);
-//        usersRepo.save(user);
-//        return "redirect:/profile";
-//    }
 
     @GetMapping("/logout")
     public String fetchSignoutSite(HttpServletRequest request, HttpServletResponse response) {

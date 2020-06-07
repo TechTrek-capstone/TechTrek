@@ -3,13 +3,13 @@ package dev.techtrek.techtrek.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "roles")
 
-public class Roles {
-
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -18,7 +18,7 @@ public class Roles {
     private String name;
 
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    private List<User> users;
+
 }
-
-
-

@@ -52,11 +52,8 @@ public class User {
     @Column(name = "employment_status")
     private EmploymentStatus employmentStatus = EmploymentStatus.AVAILABLE;
 
-    @Column(columnDefinition = "text", nullable = false, name = "bio_summary")
+    @Column(columnDefinition = "varchar(1000) default ''", nullable = false, name = "bio_summary")
     private String bioSummary = "";
-
-    @Column(name = "role_id")
-    private Long roleId;
 
     @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "user_website")
     private String userWebsite = "";
@@ -78,6 +75,10 @@ public class User {
     @JoinColumn(name = "cohort_id")
     private Cohort cohort;
 
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "users_skills",
@@ -88,10 +89,6 @@ public class User {
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 //    private List<JobListing> jobListingList;
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-//    private List<EventListing> eventListingList;
-
 
     public String getFullName() {
         return userfirstname + " " + lastName;

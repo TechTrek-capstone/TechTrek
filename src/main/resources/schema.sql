@@ -30,13 +30,18 @@ create table if not exists job_categories
     unique (name)
 );
 
-
+create table if not exists roles
+(
+    id bigint auto_increment primary key,
+    name varchar(255) not null,
+    unique (name)
+);
 
 create table if not exists users
 (
     id bigint auto_increment primary key,
     enabled bit NOT NULL DEFAULT 0,
-    bio_summary text not null default '',
+    bio_summary varchar(1000) not null default '',
     create_date datetime(6) null,
     email varchar(255) not null,
     username varchar(255) not null,
@@ -50,7 +55,7 @@ create table if not exists users
     user_password varchar(255) not null,
     phone_number varchar(255)  not null default '',
     cohort_id bigint null,
-    role_id bigint null,
+    role_id bigint not null default 3,
     user_website varchar(255) not null default '',
     profile_pic varchar(255),
     unique (email),
@@ -102,16 +107,5 @@ create table if not exists job_listings
     foreign key (company_id) references companies (id)
 );
 
-create table if not exists user_roles
-(
-    id bigint auto_increment primary key,
-    user_id bigint null,
-    role_id int null
-);
 
-create table if not exists roles
-(
-    id bigint auto_increment primary key,
-    name varchar(255) not null,
-    unique (name)
-);
+

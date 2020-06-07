@@ -1,25 +1,45 @@
 package dev.techtrek.techtrek.models;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+
 
 import javax.persistence.*;
 
-@Data
-@EqualsAndHashCode
 @Entity
 @Table(name = "user_roles")
-public class UserRole {
+public class UserRole extends User {
+
+    public UserRole(User user) { super(user); }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "user_id")
-    private long userId;
+    public UserRole(long id, String user_student) {
+    }
 
-    @Column(name = "role_id")
-    private long roleId;
+    public static UserRole student(User user) {
+        return new UserRole(user.getId(), "USER_STUDENT");
+    }
+    public static UserRole placementTeam(User user) {
+        return new UserRole(user.getId(), "USER_PLACE");
+    }
+    public static UserRole administrator(User user) {
+        return new UserRole(user.getId(), "USER_ADMIN");
+    }
 
-    // Default contructor...
+    public UserRole() { }
 
+    public UserRole(long id) {
+        this.id = id;
+    }
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(long id) {
+        this.id = id;
+    }
 }
