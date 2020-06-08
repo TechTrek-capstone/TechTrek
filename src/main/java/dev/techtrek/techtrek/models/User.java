@@ -1,5 +1,7 @@
 package dev.techtrek.techtrek.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,6 +28,7 @@ public class User {
     private String email;
 
     @Column(name = "user_password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "userfirstname")
@@ -76,6 +79,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "cohort_id")
+    @JsonManagedReference
     private Cohort cohort;
 
     @ManyToOne

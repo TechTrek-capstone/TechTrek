@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +48,13 @@ public class ResumeController {
     @PostMapping("/resume")
     public String createResume(@ModelAttribute Resume resume,
                                @RequestParam(name = "resumeURL") String resumeURL,
-                               @RequestParam(name = "resumeType") String type) {
+                               @RequestParam(name = "resumeType") String type,
+                               @RequestParam(name = "resumeTitle") String resumeTitle) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         resume.setUser(user);
         resume.setType(type);
         resume.setLink(resumeURL);
+        resume.setTitle(resumeTitle);
         resumeRepo.save(resume);
         return "redirect:/resume";
     }
@@ -62,10 +66,18 @@ public class ResumeController {
         return "redirect:/resume";
     }
 
-    // Placement Resume Select
+    // Mapping for cohort dropdown - ajax request gets data here
     @GetMapping("/resume/{cohortId}")
-    public List<User> correctStudent(@PathVariable long cohortId) {
+    @ResponseBody
+    public List<User> cohortStudents(@PathVariable long cohortId) {
         Cohort cohort = cohortsRepo.findCohortById(cohortId);
         return users.findAllByCohort(cohort);
+    }
+
+    // Mapping for student dropdown - ajax request gets data here
+    @GetMapping("/resume/student/{studentId}")
+    @ResponseBody
+    public List<Resume> studentResumes(@PathVariable long studentId) {
+        return resumeRepo.findAllByUser_Id(studentId);
     }
 }

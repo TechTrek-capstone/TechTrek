@@ -11,6 +11,7 @@ $(document).ready(function () {
 
     let resumeId = null;
     let fsURL;
+    let fsTitle;
 
 // PROGRESS BAR TEST
     $.strength = function (element, password) {
@@ -70,10 +71,12 @@ $(document).ready(function () {
             })
             .then(function (result) {
                 let resultJSON = JSON.parse(JSON.stringify(result));
-
+                console.log(result);
                 // store resume url in variable, pass that variable as a value to the view
                 fsURL = resultJSON.filesUploaded[0].url;
+                fsTitle = resultJSON.filesUploaded[0].filename;
                 $(".resumeURL").val(fsURL);
+                $(".resumeTitle").val(fsTitle);
                 $("#resumeUploadTBlock").submit();
             })
     });
@@ -91,7 +94,10 @@ $(document).ready(function () {
 
                 // store resume url in variable, pass that variable as a value to the view
                 fsURL = resultJSON.filesUploaded[0].url;
+                fsTitle = resultJSON.filesUploaded[0].filename;
                 $(".resumeURL").val(fsURL);
+                $(".resumeTitle").val(fsTitle);
+
                 $("#resumeUploadVertical").submit();
             })
     });
@@ -106,23 +112,23 @@ $(document).ready(function () {
         modal.find('#deleteResumeId').val(resumeId);
     });
 
-    // DROPDOWN COHORT SELECT
+    // DROPDOWN - populate student dropdown based off of cohort dropdown
     $("#cohort-dropdown").change(function(){
         let cohortId = $(this).val();
 
         $.ajax({
             type: 'GET',
-            url: "/resume/" + cohortId,
-            success: function(data){
-                let student=$("#student-dropdown"), option="";
-                student.empty();
+            url: '/resume/' + cohortId,
+            success: [function(data){
+                let student=$("#student-dropdown"), option="Select Student";
+                // student.empty();
 
                 for(let i = 0; i<data.length; i++){
-                    option = option + "<option value='" + data[i].id + "'>" +data[i].userfirstname + "</option>";
+                    option = option + "<option value='" + data[i].id + "'>" +data[i].userfirstname + ' ' + data[i].lastName + "</option>";
 
                 }
                 student.append(option);
-            },
+            }],
             error:function(){
                 alert("error");
             }
@@ -130,6 +136,46 @@ $(document).ready(function () {
         });
     });
 
+    // DROPDOWN - populate resume links based off of student dropdown
+    $("#student-dropdown").change(function(){
+        let studentId = $(this).val();
+
+        $.ajax({
+            type: 'GET',
+            url: '/resume/student/'+studentId,
+            success: [function(data){
+                console.log(data);
+                let counter = 0;
+                let resumeTBlock = $(".student-resume-tblock");
+                let resumeVertical = $(".student-resume-vertical");
+                let tBlockData;
+                let verticalData;
+                let noResume = "<td>No Resume Uploaded</td>";
+
+                for(let i = 0; i<data.length; i++){
+                    tBlockData = "<td value='" + data[i].id + "'><a href='"+data[i].link+"' target=_blank'>" +"Version"+' '+counter+"</a></td> + <td>Upload Revision</td>";
+                    verticalData = "<td value='" + data[i].id + "'><a href='"+data[i].link+"' target=_blank'>" +"Version"+' '+counter+"</a></td> + <td>Upload Revision</td>";
+                    counter++;
+                }
+
+                if (resumeTBlock !== null) {
+                    resumeTBlock.append(tBlockData);
+                } else {
+                    resumeTBlock.append(noResume);
+                }
+
+                if (resumeVertical !== null) {
+                    resumeVertical.append(verticalData);
+                } else {
+                    resumeVertical.append(noResume);
+                }
+            }],
+            error:function(){
+                alert("error");
+            }
+
+        });
+    });
 
 });
 
