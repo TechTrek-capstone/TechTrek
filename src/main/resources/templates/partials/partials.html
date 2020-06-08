@@ -80,11 +80,6 @@
                                     <a href="#"> Main
                                     </a>
                                 </li>
-                                <li>
-                                    <!-- Update to amdin onyl when roles are up -->
-                                    <a href="#"> Users
-                                        <span class="badge badge-pill badge-success">Admin</span></a>
-                                </li>
                             </ul>
                         </div>
                     </li>
@@ -99,14 +94,6 @@
                                     <a th:href="@{/jobs}">Browse
                                     </a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/jobs/create}">Create
-                                        <span class="badge badge-pill badge-success">Admin</span></a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/companies}">Companies
-                                        <span class="badge badge-pill badge-success">Admin</span></a>
-                                </li>
                             </ul>
                         </div>
                     </li>
@@ -120,10 +107,6 @@
                                 <li>
                                     <a th:href="@{/events}">Browse
                                     </a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/events/create}">Create
-                                        <span class="badge badge-pill badge-success">Admin</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -140,13 +123,7 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-calendar"></i>
-                            <span>Calendar</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-folder"></i>
-                            <span>Examples</span>
+                            <span>Development</span>
                         </a>
                     </li>
                 </ul>
@@ -230,7 +207,7 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="#"> Main
+                                    <a th:href="@{/home}"> Main
                                     </a>
                                 </li>
                                 <li>
@@ -299,7 +276,7 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-folder"></i>
-                            <span>Examples</span>
+                            <span>Development</span>
                         </a>
                     </li>
                 </ul>
