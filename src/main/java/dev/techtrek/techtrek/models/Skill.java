@@ -1,5 +1,6 @@
 package dev.techtrek.techtrek.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,5 +18,6 @@ public class Skill {
     private String name;
 
     @ManyToMany(mappedBy = "skills")
+    @JsonBackReference
     private List<User> users;
 }
