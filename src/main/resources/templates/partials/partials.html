@@ -43,9 +43,8 @@
 
                         <span class="user-role">Student</span>
 
-                        <span class="user-status">
-                            <i class="fa fa-circle"></i>
-                            <span>Online</span>
+                        <span class="user-role mt-1">
+                            <span th:unless="${user.getCohort() == ''} OR ${user.getCohort() == null}"><strong>Cohort: </strong><span th:text="${user.getCohort().name}">Cohort name</span></span>
                       </span>
                     </div>
                 </a>
@@ -66,9 +65,6 @@
             <!-- sidebar-search  -->
             <div class="sidebar-menu">
                 <ul>
-                    <li class="header-menu">
-                        <span>General</span>
-                    </li>
                     <li>
                         <a th:href="@{/home}">
                             <i class="fa fa-tachometer-alt"></i>
@@ -152,9 +148,6 @@
             <!-- sidebar-search  -->
             <div class="sidebar-menu">
                 <ul>
-                    <li class="header-menu">
-                        <span>General</span>
-                    </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
                             <i class="fa fa-tachometer-alt"></i>
