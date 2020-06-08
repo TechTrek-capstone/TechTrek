@@ -17,10 +17,12 @@ public class ResumeController {
 
     private ResumeRepo resumeRepo;
     private CohortsRepo cohortsRepo;
+    private Users users;
 
-    public ResumeController(ResumeRepo resumeRepo, CohortsRepo cohortsRepo) {
+    public ResumeController(ResumeRepo resumeRepo, CohortsRepo cohortsRepo, Users users) {
         this.resumeRepo = resumeRepo;
         this.cohortsRepo = cohortsRepo;
+        this.users  = users;
     }
 
     @GetMapping("/resume")
@@ -33,6 +35,10 @@ public class ResumeController {
         model.addAttribute("user", new User());
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
+        model.addAttribute("user", user);
+
+
+
         return "resume/index";
     }
 

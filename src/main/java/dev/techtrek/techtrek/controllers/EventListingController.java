@@ -2,6 +2,7 @@ package dev.techtrek.techtrek.controllers;
 
 import dev.techtrek.techtrek.models.EventListing;
 import dev.techtrek.techtrek.models.User;
+import dev.techtrek.techtrek.models.UserWithRoles;
 import dev.techtrek.techtrek.repositories.EventsRepo;
 import dev.techtrek.techtrek.repositories.Users;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,11 +22,11 @@ public class EventListingController {
     // Dependency injection
 
     private EventsRepo eventsRepo;
-    private Users usersRepo;
+    private Users users;
 
-    public EventListingController(EventsRepo eventsRepo, Users usersRepo){
+    public EventListingController(EventsRepo eventsRepo, Users users){
         this.eventsRepo = eventsRepo;
-        this.usersRepo = usersRepo;
+        this.users = users;
     }
 
 
@@ -35,6 +36,9 @@ public class EventListingController {
     public String showAllEventListings(Model model){
         List<EventListing> eventList = eventsRepo.findAll();
         model.addAttribute("eventsList", eventList);
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.getOne(userWithRoles.getId());
+        model.addAttribute("user", user);
         return "events/index";
     }
 
@@ -44,6 +48,9 @@ public class EventListingController {
     @GetMapping("/events/{id}")
     public String showEventListingById(@PathVariable long id, Model model){
         model.addAttribute("event", eventsRepo.getEventListingById(id));
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.getOne(userWithRoles.getId());
+        model.addAttribute("user", user);
         return "events/show";
     }
 
@@ -54,6 +61,9 @@ public class EventListingController {
     @GetMapping(path = "/events/create")
     public String viewCreateEventListingForm(Model model) {
         model.addAttribute("event", new EventListing());
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.getOne(userWithRoles.getId());
+        model.addAttribute("user", user);
         return "events/create";
     }
 
@@ -92,6 +102,9 @@ public class EventListingController {
     @GetMapping("/events/{id}/edit")
     public String viewEditEventListingForm(@PathVariable long id, Model model) {
         model.addAttribute("event", eventsRepo.getOne(id));
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.getOne(userWithRoles.getId());
+        model.addAttribute("user", user);
         return "events/edit";
     }
 
