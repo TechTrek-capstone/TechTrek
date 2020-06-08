@@ -25,70 +25,119 @@
     <main class="page-content">
 
 
-        <div class="jumbotron jumbotron-fluid bg-secondary text-white">
-            <div class="container">
-                <!-- Company logo (if available) -->
-                <div class="mr-auto ml-auto logo shadow mb-3"
-                     th:unless="${job.getCompany().getLogoImg() == 'null'} OR ${job.getCompany().getLogoImg() == ''}"
-                     style="border-radius: 50%; overflow: hidden; width:200px; height: 200px;">
-                    <img th:unless="${job.getCompany().getLogoImg() == 'null'} OR ${job.getCompany().getLogoImg() == ''}"
-                         th:src="${job.getCompany().getLogoImg()}"
-                         style="width:200px; height: 200px; vertical-align: middle; object-fit: cover;">
+        <div class="media">
+            <img class="align-self-start mr-3" style="max-width:10rem;"
+                 th:if="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}"
+                 th:src="@{/img/logo-placeholder.jpg}" alt="Placeholder logo">
+            <img class="align-self-start mr-3" style="max-width:10rem;"
+                 th:unless="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}"
+                 th:src="${job.getCompany().getLogoImg()}" alt="Company logo">
+            <div class="media-body">
+                <h5 class="mt-0" th:text="${job.title}">Top-aligned media</h5>
+                <span>
+                    <span th:text="${job.getCompany().getName()}"></span> -
+                    <span class="text-muted" th:text="${job.location}"></span>
+                </span>
+                <p> Listed: <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}"></span></p>
+
+                <p th:utext="${job.description}">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu
+                    leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+            </div>
+            <!--            <a th:href="@{${job.applyUrl}}" target="_blank">-->
+            <!--                <button type="button" class="btn btn-primary btn-lg btn-block">Apply</button>-->
+            <!--            </a>-->
+            <!--            <a th:href="@{|/jobs/${job.id}/edit|}" th:if="${user.userPerm == 'admin'}">-->
+            <!--                <button type="button" class="btn btn-primary btn-lg">Edit</button>-->
+            <!--            </a>-->
+
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a th:href="@{${job.applyUrl}}" target="_blank">
+                        <button type="button" class="btn btn-primary">APPLY</button>
+                    </a>
+
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group" th:if="${user.userPerm == 'admin'}">
+                    <a th:href="@{|/jobs/${job.id}/edit|}">
+                        <button type="button" class="btn btn-secondary">EDIT</button>
+                    </a>
+                    <button data-toggle="modal" data-target="#modalForJobDelete" type="button" class="btn btn-danger">
+                        DELETE
+                    </button>
                 </div>
 
-                <!--   Title   -->
-                <h1 class="display-4 text-center" th:text="${job.title}">Fluid jumbotron</h1>
-
-                <!--   Company   -->
-                <br><h5 class="text-black-50 text-center"><span th:text="${job.getCompany().getName()}"></span> |
-
-                <!--   Location   -->
-                <span th:text="${job.location}"></span></h5>
             </div>
+
+
         </div>
+        <!--        <button th:if="${user.userPerm == 'admin'}" data-toggle="modal" data-target="#modalForJobDelete"-->
+        <!--                class="dropdown-item btn btn-lg btn-danger">Delete-->
+        <!--        </button>-->
 
-        <div class="container mt-3 mb-3" id="individual-job-listing">
-            <ul class="list-group list-group-flush">
+        <!--        <div class="jumbotron jumbotron-fluid bg-secondary text-white">-->
+        <!--            <div class="container">-->
+        <!--                &lt;!&ndash; Company logo (if available) &ndash;&gt;-->
+        <!--                <div class="mr-auto ml-auto logo shadow mb-3"-->
+        <!--                     th:unless="${job.getCompany().getLogoImg() == 'null'} OR ${job.getCompany().getLogoImg() == ''}"-->
+        <!--                     style="border-radius: 50%; overflow: hidden; width:200px; height: 200px;">-->
+        <!--                    <img th:unless="${job.getCompany().getLogoImg() == 'null'} OR ${job.getCompany().getLogoImg() == ''}"-->
+        <!--                         th:src="${job.getCompany().getLogoImg()}"-->
+        <!--                         style="width:200px; height: 200px; vertical-align: middle; object-fit: cover;">-->
+        <!--                </div>-->
 
-                <!-- JOB TITLE, COMPANY, LOCATION, AND LISTING DATE -->
-                <li class="list-group-item">
+        <!--                &lt;!&ndash;   Title   &ndash;&gt;-->
+        <!--                <h1 class="display-4 text-center" th:text="${job.title}">Fluid jumbotron</h1>-->
 
-                    <!--   Listing date   -->
-                    <br><b>Posted: <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}"></span></b>
-                </li>
+        <!--                &lt;!&ndash;   Company   &ndash;&gt;-->
+        <!--                <br><h5 class="text-black-50 text-center"><span th:text="${job.getCompany().getName()}"></span> |-->
 
-                <!-- JOB DESCRIPTION -->
-                <li class="list-group-item">
-                    <h4>Description</h4>
-                    <div class="pl-5" th:utext="${job.description}"></div>
-                </li>
+        <!--                &lt;!&ndash;   Location   &ndash;&gt;-->
+        <!--                <span th:text="${job.location}"></span></h5>-->
+        <!--            </div>-->
+        <!--        </div>-->
 
-                <!-- ADDITIONAL INFO -->
-                <li class="list-group-item">
-                    <h4>Additional Information</h4>
+        <!--        <div class="container mt-3 mb-3" id="individual-job-listing">-->
+        <!--            <ul class="list-group list-group-flush">-->
 
-                    <b>Remote available?</b>
-                    <br/><span class="pl-5" th:text="${job.isRemote}? Yes : No ">N/A</span>
-                </li>
+        <!--                &lt;!&ndash; JOB TITLE, COMPANY, LOCATION, AND LISTING DATE &ndash;&gt;-->
+        <!--                <li class="list-group-item">-->
 
-                <!-- APPLY URL LINK -->
-                <li class="list-group-item">
-                    <a th:href="@{${job.applyUrl}}" target="_blank">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Apply</button>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <!--                    &lt;!&ndash;   Listing date   &ndash;&gt;-->
+        <!--                    <br><b>Posted: <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}"></span></b>-->
+        <!--                </li>-->
 
-        <div class="text-center mb-3" th:if="${user.userPerm == 'admin'}">
-            <h2>Placement Team Controls</h2>
+        <!--                &lt;!&ndash; JOB DESCRIPTION &ndash;&gt;-->
+        <!--                <li class="list-group-item">-->
+        <!--                    <h4>Description</h4>-->
+        <!--                    <div class="pl-5" th:utext="${job.description}"></div>-->
+        <!--                </li>-->
 
-            <a th:href="@{|/jobs/${job.id}/edit|}">
-                <button type="button" class="btn btn-primary btn-lg">Edit</button>
-            </a>
+        <!--                &lt;!&ndash; ADDITIONAL INFO &ndash;&gt;-->
+        <!--                <li class="list-group-item">-->
+        <!--                    <h4>Additional Information</h4>-->
 
-            <button data-toggle="modal" data-target="#modalForJobDelete" class="btn btn-lg btn-danger">Delete</button>
-        </div>
+        <!--                    <b>Remote available?</b>-->
+        <!--                    <br/><span class="pl-5" th:text="${job.isRemote}? Yes : No ">N/A</span>-->
+        <!--                </li>-->
+
+        <!--                &lt;!&ndash; APPLY URL LINK &ndash;&gt;-->
+        <!--                <li class="list-group-item">-->
+        <!--                    <a th:href="@{${job.applyUrl}}" target="_blank">-->
+        <!--                        <button type="button" class="btn btn-primary btn-lg btn-block">Apply</button>-->
+        <!--                    </a>-->
+        <!--                </li>-->
+        <!--            </ul>-->
+        <!--        </div>-->
+
+        <!--                <div class="text-center mb-3" th:if="${user.userPerm == 'admin'}">-->
+        <!--                    <h2>Placement Team Controls</h2>-->
+
+        <!--                    <a th:href="@{|/jobs/${job.id}/edit|}" th:if="${user.userPerm == 'admin'}">-->
+        <!--                        <button type="button" class="btn btn-primary btn-lg">Edit</button>-->
+        <!--                    </a>-->
+
+        <!--                    <button th:if="${user.userPerm == 'admin'}" data-toggle="modal" data-target="#modalForJobDelete" class="btn btn-lg btn-danger">Delete</button>-->
+        <!--                </div>-->
 
         <!-- Job delete confirmation modal -->
 
