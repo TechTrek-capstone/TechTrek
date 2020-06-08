@@ -64,7 +64,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <!-- Employment status block -->
-                                <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null}" class="mb-3">
+                                <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null} OR ${user.userPerm == 'admin'}" class="mb-3">
                             <span th:unless="${user.employmentStatus == null}">
                                 <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
                                     <span class="badge badge-success">Available for hire <i class="ml-1 fas fa-check-circle"></i></span>
@@ -215,9 +215,9 @@
                                             <option th:each="cohort : ${cohorts}" class="dropdown-item" th:selected="${cohort.id == user.cohort.getId()}" th:text="${cohort.name}" th:value="${cohort.id}"></option>
                                         </select>
                                     </span>
-
                                 </div>
                             </div>
+<!--                            <input type="hidden" th:if="${user.userPerm == 'admin'}" name="cohort" th:value="1">-->
 
                             <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Hire Status</label>
@@ -227,6 +227,7 @@
                                     </select>
                                 </div>
                             </div>
+<!--                            <input type="hidden" th:if="${user.userPerm == 'admin'}" name="employment_status" th:value="2">-->
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">About</label>
@@ -236,6 +237,7 @@
                                     </textarea>
                                 </div>
                             </div>
+
                             <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Desired work location(s)</label>
                                 <div class="col-lg-9">
@@ -243,6 +245,8 @@
                                               th:value="${user.workLocation}">
                                 </div>
                             </div>
+<!--                            <input type="hidden" th:if="${user.userPerm == 'admin'}" name="work_location" th:value="">-->
+
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                 <div class="col-lg-9">
@@ -250,6 +254,7 @@
                                            th:value="${user.email}">
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                 <div class="col-lg-9">
@@ -265,6 +270,8 @@
                                            th:value="${user.githubUsername}">
                                 </div>
                             </div>
+<!--                            <input type="hidden" th:if="${user.userPerm == 'admin'}" name="github_username" th:value="">-->
+
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">LinkedIn username</label>
                                 <div class="col-lg-9">
@@ -272,6 +279,7 @@
                                            th:value="${user.linkedinUsername}">
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Personal website URL</label>
                                 <div class="col-lg-9">
@@ -279,7 +287,6 @@
                                            th:value="${user.userWebsite}">
                                 </div>
                             </div>
-                            <input type="hidden" name="user_perm" th:value="${user.userPerm}">
 
                             <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Skills</label>
@@ -293,7 +300,6 @@
                                     </div>
                                 </div>
                             </div>
-
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label"></label>
