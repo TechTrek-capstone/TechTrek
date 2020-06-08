@@ -110,7 +110,8 @@ public class UserController {
             @RequestParam(name = "cohort") Cohort cohort,
             @RequestParam(name = "employment_status") EmploymentStatus employmentStatus,
             @RequestParam(name = "profile_pic") String profilePic,
-            @RequestParam(name = "user_perm") String userPerm
+            @RequestParam(name = "user_perm") String userPerm,
+            @RequestParam(name = "skills") List<Skill> skills
     ) {
         // Sets user based off the spring security authentication. This is based on role.
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //1. Get the current user
@@ -131,6 +132,7 @@ public class UserController {
         currentUser.setEmploymentStatus(employmentStatus);
         currentUser.setProfilePic(profilePic);
         currentUser.setUserPerm(userPerm);
+        currentUser.setSkills(skills);
 
         users.save(currentUser);
 
