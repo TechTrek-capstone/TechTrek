@@ -101,8 +101,6 @@
 </nav>
 <!-- /Student Nav/Sidebar -->
 
-
-
 <!-- Admin Nav/Sidebar -->
 <nav th:fragment="adminNav" th:if="${user.userPerm == 'admin'}">
     <nav id="sidebar" class="sidebar-wrapper">
@@ -294,7 +292,13 @@
 </nav>
 <!-- /OLD nav bar-->
 
+<div th:fragment="adminDash" th:if="${user.userPerm == 'admin'}">
 
+
+
+
+
+</div>
 
 <!-- All Modals -->
 <div th:fragment="allModals">
