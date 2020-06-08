@@ -38,8 +38,10 @@ public class JobListingController {
 
     @GetMapping("/jobs")
     public String showAllJobListings(Model model){
-        List<JobListing> jobList = jobsRepo.findAll();
+        List<JobListing> jobList = jobsRepo.findAllByOrderByIdDesc();
+
         model.addAttribute("jobs", jobList);
+
         UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
