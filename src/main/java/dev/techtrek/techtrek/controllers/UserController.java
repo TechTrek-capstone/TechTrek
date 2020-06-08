@@ -24,9 +24,10 @@ public class UserController {
     private EventsRepo eventsRepo;
     private SkillsRepo skillsRepo;
     private Roles roles;
+    private ResumeRepo resumeRepo;
 
 
-    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo, SkillsRepo skillsRepo, Roles roles) {
+    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo, SkillsRepo skillsRepo, Roles roles, ResumeRepo resumeRepo) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.cohortsRepo = cohortsRepo;
@@ -34,7 +35,7 @@ public class UserController {
         this.eventsRepo = eventsRepo;
         this.skillsRepo = skillsRepo;
         this.roles = roles;
-
+        this.resumeRepo = resumeRepo;
     }
 
 
@@ -89,6 +90,9 @@ public class UserController {
         UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
+
+        List<Resume> resumes = resumeRepo.findAllByUser_Id(user.getId());
+        model.addAttribute("resumes", resumes);
 
         return "users/profile";
     }

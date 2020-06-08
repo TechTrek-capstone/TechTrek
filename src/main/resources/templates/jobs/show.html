@@ -2,15 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
 <head th:replace="partials/partials :: head">
     <title>Jobs</title>
-    <style>
-        .logo::after {
-            content:'';
-            display:inline-block;
-            border:10px solod
-            border-radius:50%;
-            background-color:yellow;
-        }
-    </style>
 </head>
 
 <body>
@@ -56,6 +47,7 @@
                         <button type="button" class="btn btn-primary">APPLY</button>
                     </a>
 
+
                 </div>
                 <div class="btn-group mr-2" role="group" aria-label="Second group" th:if="${user.userPerm == 'admin'}">
                     <a th:href="@{|/jobs/${job.id}/edit|}">
@@ -67,7 +59,6 @@
                 </div>
 
             </div>
-
 
         </div>
         <!--        <button th:if="${user.userPerm == 'admin'}" data-toggle="modal" data-target="#modalForJobDelete"-->
