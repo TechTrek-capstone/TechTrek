@@ -5,7 +5,7 @@
 </head>
 
 <body>
-  
+
 <div class="page-wrapper chiller-theme toggled">
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
@@ -15,38 +15,39 @@
     <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
     <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
     <main class="page-content">
-      <div th:replace="partials/resumepartials :: deleteResumeModal"></div>
+        <div th:replace="partials/resumepartials :: deleteResumeModal"></div>
 
-    <h1>Resume Portal</h1>
+        <h1>Resume Portal</h1>
 
-    <h2 class="text-left">Resume</h2>
-    <div class="d-flex">
-        <!-- ######## TABLE - T-block Resume ######## -->
-        <table class="table table-striped w-50 mr-5">
+        <h2 class="text-left">Resume</h2>
+        <div class="d-flex">
+            <!-- ######## TABLE - T-block Resume ######## -->
+            <table class="table table-striped w-50 mr-5">
 
-            <tr>
-                <th colspan="2">
-                    T-Block
-                    <!-- Upload Resume Form -->
-                    <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline">
-                        <button type="button" class="btn btn-primary uploadTBlockResume">Upload</button>
-                        <input type="hidden" name="resumeURL" class="resumeURL"/>
-                        <input type="hidden" name="resumeTitle" class="resumeTitle"/>
-                        <input type="hidden" name="resumeType" value="t-block"/>
-                    </form>
-                </th>
-            </tr>
+                <tr>
+                    <th colspan="2">
+                        T-Block
+                        <!-- Upload Resume Form -->
+                        <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline">
+                            <button type="button" class="btn btn-primary uploadTBlockResume">Upload</button>
+                            <input type="hidden" name="resumeURL" class="resumeURL"/>
+                            <input type="hidden" name="resumeTitle" class="resumeTitle"/>
+                            <input type="hidden" name="resumeType" value="t-block"/>
+                        </form>
+                    </th>
+                </tr>
 
-            <tr>
-                <th scope="col">Resume</th>
-                <th scope="col">Status</th>
-            </tr>
+                <tr>
+                    <th scope="col">Resume</th>
+                    <th scope="col">Status</th>
+                </tr>
 
-            <span th:each="resume : ${resumesTBlock}">
+                <span th:each="resume : ${resumesTBlock}">
             <tr class="resume-row">
                 <td>
                     <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
-                    <a th:href="${resume.link}" style="font-size: 1.5rem"><i class="fas fa-binoculars"></i></a>
+                    <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem"><i
+                            class="fas fa-binoculars"></i></a>
                         <!-- Delete Button -->
                         <button data-toggle="modal" data-target="#deleteResumeModal"
                                 class="btn btn-link text-danger" style="font-size: 1.5rem" th:data-id="${resume.id}">
@@ -60,37 +61,38 @@
                 </td>
             </tr>
         </span>
-        </table>
-        <!-- ######## END TB TABLE ######## -->
+            </table>
+            <!-- ######## END TB TABLE ######## -->
 
-        <!-- ######## TABLE - Vertical Resume ######## -->
-        <table class="table table-striped w-50 ml-5">
+            <!-- ######## TABLE - Vertical Resume ######## -->
+            <table class="table table-striped w-50 ml-5">
 
-            <tr>
-                <th colspan="2">
-                    Vertical
-                    <!-- Upload Button -->
-                    <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline">
-                        <button type="button" class="btn btn-primary uploadVerticalResume">Upload</button>
-                        <input type="hidden" name="resumeURL" class="resumeURL"/>
-                        <input type="hidden" name="resumeTitle" class="resumeTitle"/>
-                        <input type="hidden" name="resumeType" value="vertical"/>
-                    </form>
-                </th>
-            </tr>
+                <tr>
+                    <th colspan="2">
+                        Vertical
+                        <!-- Upload Button -->
+                        <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline">
+                            <button type="button" class="btn btn-primary uploadVerticalResume">Upload</button>
+                            <input type="hidden" name="resumeURL" class="resumeURL"/>
+                            <input type="hidden" name="resumeTitle" class="resumeTitle"/>
+                            <input type="hidden" name="resumeType" value="vertical"/>
+                        </form>
+                    </th>
+                </tr>
 
-            <tr>
-                <th scope="col">Resume</th>
-                <th scope="col">Status</th>
-            </tr>
+                <tr>
+                    <th scope="col">Resume</th>
+                    <th scope="col">Status</th>
+                </tr>
 
-            <span th:each="resume : ${resumesVertical}">
+                <span th:each="resume : ${resumesVertical}">
             <tr class="resume-row">
 
                 <!-- DATA: Resume Versions -->
                 <td>
                     <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
-                    <a th:href="${resume.link}" style="font-size: 1.5rem"><i class="fas fa-binoculars"></i></a>
+                    <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem"><i
+                            class="fas fa-binoculars"></i></a>
                         <!-- Delete Button -->
                         <button data-toggle="modal" data-target="#deleteResumeModal"
                                 class="btn btn-link text-danger" style="font-size: 1.5rem" th:data-id="${resume.id}">
@@ -105,199 +107,217 @@
                 </td>
             </tr>
         </span>
-        </table>
-        <!-- ######## END VERTICAL TABLE ######## -->
-    </div>
-
-    <h2 class="text-left">Notes</h2>
-    <!-- Message from placement -->
-    <p>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                aria-expanded="false" aria-controls="collapseExample">
-            View Resume Notes
-        </button>
-    </p>
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body placement-resume-notes">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
-            keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+            </table>
+            <!-- ######## END VERTICAL TABLE ######## -->
         </div>
-    </div>
 
-    <!-- Resume tips/tricks. download for example resume -->
-    <h2 class="text-left">Resume Builder Tips</h2>
-    <div class="student-div">
+        <h2 class="text-left">Notes</h2>
+        <!-- Message from placement -->
         <p>
-            During your time at Codeup, you will build at least 2 different types of resumes, a “T-Block” and a
-            “Vertical". Today, we are going to go over the T-Block resume. The purpose of the T-Block resume is to have
-            a 1 page, easy to consume resume. Your resume will be made up of 5-6 different sections listed below in
-            order of importance:
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                View Resume Notes
+            </button>
         </p>
-        <ul>
-            <li>Professional Summary</li>
-            <li>Technical Skills</li>
-            <li>Development Projects</li>
-            <li>Professional Experience</li>
-            <li>Military Experience (if warranted)</li>
-            <li>Education</li>
-        </ul>
-    </div>
-
-    <h3 class="text-left">Professional Summary</h3>
-
-    <p>A hiring manager will spend 5-7 seconds on a resume before they move on. This is where you get their attention.
-        Each summary should be made up of 2-3 sentences where you will:</p>
-
-    <ul>
-        <li>Bring out your good qualities</li>
-        <li>Mention why you decided to become a Software Developer</li>
-        <li>Why does this matter to a company</li>
-        <li>*If you get stuck trying to write your summary: ask loved ones what it is they love and respect about you.
-            Take the characteristics they point out and infuse it into your summary. 
-            Here are a few examples:
-        </li>
-    </ul>
-
-    <p>I love the way technology requires us to learn, relearn, unlearn, and create the most optimal solutions for
-        everyday
-        business needs. Ideas poised for generating real value in our communities are conceptualized every day, and I’m
-        passionate about making these visions a reality using my skills as a software developer.</p>
-
-    <p>Highly creative maker with a love for designing and building things for others to use. Excellent interpersonal
-        skills and a strong background in working collaboratively to solve complicated problems and tackle extensive
-        projects. Seeking to become a developer at a firm that values diversity, growing its team members, and giving
-        back
-        to the community.</p>
-
-    <p>As a software developer, I thrive most in the ever-changing technology enhancements by constantly performing
-        research and learning something new. I am versatile and a quick learner willing to embrace new challenges and
-        eager
-        to learn more and grow as a software engineer. I will strive to be a supportive and enthusiastic team player
-        dedicated to streamlining processes and efficiently resolving project issues.</p>
-
-    <p>I am an innately inquisitive and purpose-driven developer with a fascination for creating useful products. As a
-        former chef, I have cultivated strong problem-solving skills, and I know what it takes to thrive in a team
-        environment with customer satisfaction as a primary goal. I look forward to imparting these skills along with my
-        thirst to learn into being an effective programmer. It is my desire to join a team that fosters personal and
-        professional growth.</p>
-
-    <p>I love the dynamic tools software development gives me to tackle ideas and problems I pursue and encounter.
-        Programming is an exciting and engaging way to contribute to the digital machinery that is the cornerstone of
-        our
-        modern world. It’s a constantly evolving field that always challenges me to learn and in return gives me great
-        flexibility to leverage my skills to solve problems and innovate.</p>
-
-    <h3 class="text-left">Contact Information</h3>
-    <p>(not a section heading > succinctly across the top of the resume)</p>
-
-    <p>Include the following contact information:</p>
-    <ul>
-        <li>Phone number (in this format > XXX-XXX-XXXX)</li>
-        <li>Email address</li>
-        <li>LinkedIn Profile URL</li>
-        <li>GitHub URL</li>
-        <li>Personal website (once approved)</li>
-    </ul>
-
-    <h3 class="text-left">Technical Skills</h3>
-    <p>This is where you list the Technical skills that you developed during your time here at Codeup. It’s very
-        important
-        that you only list Technical Skills that you can answer 3 levels deep in difficulty. Please list the following
-        skills:</p>
-    <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        JavaScript
-        BootStrap
-        VCS with Git
-        Paired Programming
-        Thymeleaf
-        Test-Driven Development
-        Java SE
-        MySQL
-        Spring Boot Framework
-        jQuery
-        Object-Oriented Programming
-        Java EE (Servlets, JSP)
-    </ul>
-
-    <p>If you’ve developed any additional skills but you’re not comfortable with an answer 3 levels deep in difficulty,
-        you
-        may add a section called “Exposure to” and list those skills there.</p>
-
-    <h3 class="text-left">Development Projects</h3>
-    <p>It’s important to not only have technical knowledge but also technical projects. During your time at Codeup, you
-        will build 4-5 projects that you will be listed here. IF you have the additional time to create your own
-        projects,
-        you are encouraged to add them instead of some of the earlier projects. The format of the descriptions should
-        be:</p>
-
-    <ul>
-        <li>Give a summary of what the project was about.</li>
-        <li>What your role was and what languages were used to create the project.</li>
-        <li>List the projects in order, starting with the most recent.</li>
-    </ul>
-    Professional Experience
-    While you may or may not have any technical background, we still want to feature your professional background and
-    those skills that you had that transferred over to making you a better Software Developer. Give a Summary of your
-    responsibilities, ideally those relevant to the job you're looking for. See example of resumes for proper format.
-
-    <h3 class="text-left">Military Experience (if applicable)</h3>
-    <p>List your Military background as far as what Branch, years served and duties. Please include any active or past
-        clearance.</p>
-
-    <h3 class="text-left">Education</h3>
-    <p>For Codeup, add the following:</p>
-
-    <p>A fully-immersive, project-based, and intensive 20-week full-stack Java career accelerator that provides students
-        with 670+ hours of expert instruction in software development.</p>
-
-    <p>This is a great place to list any further education that you have, not including a high school diploma. This
-        doesn’t
-        have to be restricted to technical degrees.</p>
-
-    <!-- PLACEMENT VIEW -->
-    <h1>PLACEMENT VIEW</h1>
-    <div class="student-div">
-
-        <!-- Dropdown for cohorts -->
-        <select class="custom-select" id="cohort-dropdown">
-            <option>Select Cohort</option>
-            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}"
-                    th:value="${cohort.id}">
-            </option>
-        </select>
-
-        <!-- Dropdown for students -->
-        <select class="custom-select" id="student-dropdown">
-            <option>Select Student</option>
-        </select>
-
-        <!-- Tables for both resume types -->
-        <div class="d-flex">
-            <table class="table table-striped w-50 mr-5">
-                <tr>
-                    <th colspan="2">T-Block Resume</th>
-                </tr>
-                <tr>
-                    <th>Version</th>
-                    <th>Upload Revision</th>
-                </tr>
-                <tr class="student-resume-tblock"></tr>
-            </table>
-            <table class="table table-striped w-50 mr-5">
-                <tr>
-                    <th colspan="2">Vertical Resume</th>
-                </tr>
-                <tr>
-                    <th>Version</th>
-                    <th>Upload Revision</th>
-                </tr>
-                <tr class="student-resume-vertical"></tr>
-            </table>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body placement-resume-notes">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                anim
+                keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+            </div>
         </div>
+
+        <!-- Resume tips/tricks. download for example resume -->
+        <h2 class="text-left">Resume Builder Tips</h2>
+        <div class="student-div">
+            <p>
+                During your time at Codeup, you will build at least 2 different types of resumes, a “T-Block” and a
+                “Vertical". Today, we are going to go over the T-Block resume. The purpose of the T-Block resume is to
+                have
+                a 1 page, easy to consume resume. Your resume will be made up of 5-6 different sections listed below in
+                order of importance:
+            </p>
+            <ul>
+                <li>Professional Summary</li>
+                <li>Technical Skills</li>
+                <li>Development Projects</li>
+                <li>Professional Experience</li>
+                <li>Military Experience (if warranted)</li>
+                <li>Education</li>
+            </ul>
+        </div>
+
+        <h3 class="text-left">Professional Summary</h3>
+
+        <p>A hiring manager will spend 5-7 seconds on a resume before they move on. This is where you get their
+            attention.
+            Each summary should be made up of 2-3 sentences where you will:</p>
+
+        <ul>
+            <li>Bring out your good qualities</li>
+            <li>Mention why you decided to become a Software Developer</li>
+            <li>Why does this matter to a company</li>
+            <li>*If you get stuck trying to write your summary: ask loved ones what it is they love and respect about
+                you.
+                Take the characteristics they point out and infuse it into your summary. 
+                Here are a few examples:
+            </li>
+        </ul>
+
+        <p>I love the way technology requires us to learn, relearn, unlearn, and create the most optimal solutions for
+            everyday
+            business needs. Ideas poised for generating real value in our communities are conceptualized every day, and
+            I’m
+            passionate about making these visions a reality using my skills as a software developer.</p>
+
+        <p>Highly creative maker with a love for designing and building things for others to use. Excellent
+            interpersonal
+            skills and a strong background in working collaboratively to solve complicated problems and tackle extensive
+            projects. Seeking to become a developer at a firm that values diversity, growing its team members, and
+            giving
+            back
+            to the community.</p>
+
+        <p>As a software developer, I thrive most in the ever-changing technology enhancements by constantly performing
+            research and learning something new. I am versatile and a quick learner willing to embrace new challenges
+            and
+            eager
+            to learn more and grow as a software engineer. I will strive to be a supportive and enthusiastic team player
+            dedicated to streamlining processes and efficiently resolving project issues.</p>
+
+        <p>I am an innately inquisitive and purpose-driven developer with a fascination for creating useful products. As
+            a
+            former chef, I have cultivated strong problem-solving skills, and I know what it takes to thrive in a team
+            environment with customer satisfaction as a primary goal. I look forward to imparting these skills along
+            with my
+            thirst to learn into being an effective programmer. It is my desire to join a team that fosters personal and
+            professional growth.</p>
+
+        <p>I love the dynamic tools software development gives me to tackle ideas and problems I pursue and encounter.
+            Programming is an exciting and engaging way to contribute to the digital machinery that is the cornerstone
+            of
+            our
+            modern world. It’s a constantly evolving field that always challenges me to learn and in return gives me
+            great
+            flexibility to leverage my skills to solve problems and innovate.</p>
+
+        <h3 class="text-left">Contact Information</h3>
+        <p>(not a section heading > succinctly across the top of the resume)</p>
+
+        <p>Include the following contact information:</p>
+        <ul>
+            <li>Phone number (in this format > XXX-XXX-XXXX)</li>
+            <li>Email address</li>
+            <li>LinkedIn Profile URL</li>
+            <li>GitHub URL</li>
+            <li>Personal website (once approved)</li>
+        </ul>
+
+        <h3 class="text-left">Technical Skills</h3>
+        <p>This is where you list the Technical skills that you developed during your time here at Codeup. It’s very
+            important
+            that you only list Technical Skills that you can answer 3 levels deep in difficulty. Please list the
+            following
+            skills:</p>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            JavaScript
+            BootStrap
+            VCS with Git
+            Paired Programming
+            Thymeleaf
+            Test-Driven Development
+            Java SE
+            MySQL
+            Spring Boot Framework
+            jQuery
+            Object-Oriented Programming
+            Java EE (Servlets, JSP)
+        </ul>
+
+        <p>If you’ve developed any additional skills but you’re not comfortable with an answer 3 levels deep in
+            difficulty,
+            you
+            may add a section called “Exposure to” and list those skills there.</p>
+
+        <h3 class="text-left">Development Projects</h3>
+        <p>It’s important to not only have technical knowledge but also technical projects. During your time at Codeup,
+            you
+            will build 4-5 projects that you will be listed here. IF you have the additional time to create your own
+            projects,
+            you are encouraged to add them instead of some of the earlier projects. The format of the descriptions
+            should
+            be:</p>
+
+        <ul>
+            <li>Give a summary of what the project was about.</li>
+            <li>What your role was and what languages were used to create the project.</li>
+            <li>List the projects in order, starting with the most recent.</li>
+        </ul>
+        Professional Experience
+        While you may or may not have any technical background, we still want to feature your professional background
+        and
+        those skills that you had that transferred over to making you a better Software Developer. Give a Summary of
+        your
+        responsibilities, ideally those relevant to the job you're looking for. See example of resumes for proper
+        format.
+
+        <h3 class="text-left">Military Experience (if applicable)</h3>
+        <p>List your Military background as far as what Branch, years served and duties. Please include any active or
+            past
+            clearance.</p>
+
+        <h3 class="text-left">Education</h3>
+        <p>For Codeup, add the following:</p>
+
+        <p>A fully-immersive, project-based, and intensive 20-week full-stack Java career accelerator that provides
+            students
+            with 670+ hours of expert instruction in software development.</p>
+
+        <p>This is a great place to list any further education that you have, not including a high school diploma. This
+            doesn’t
+            have to be restricted to technical degrees.</p>
+
+        <!-- PLACEMENT VIEW -->
+        <h1>PLACEMENT VIEW</h1>
+        <div class="student-div">
+
+            <!-- Dropdown for cohorts -->
+            <select class="custom-select" id="cohort-dropdown">
+                <option>Select Cohort</option>
+                <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}"
+                        th:value="${cohort.id}">
+                </option>
+            </select>
+
+            <!-- Dropdown for students -->
+            <select class="custom-select" id="student-dropdown">
+                <option>Select Student</option>
+            </select>
+
+            <!-- Tables for both resume types -->
+            <div class="d-flex">
+                <table class="table table-striped w-100 mr-5 student-resumes">
+                    <tr>
+                        <th colspan="4">Resume</th>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Upload Revision</th>
+                        <th>Upload Notes</th>
+                    </tr>
+                </table>
+
+
+                <form th:action="@{resume/revision}" method="post" id="placementUploadTblock">
+                    <input type="hidden" name="tblockResumeRevisionUpload" id="tblockResumeRevisionUpload">
+                    <input type="hidden" name="tblockResumeRevisionId" id="tblockResumeRevisionId">
+                </form>
+            </div>
     </main>
 </div>
-    <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>
