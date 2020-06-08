@@ -137,15 +137,16 @@
                     </div>
 
                     <div class="tab-pane" id="documents">
-                        <div class="alert alert-info alert-dismissable">
-                            <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>.
-                            Use this to show important messages to the user.
-                        </div>
+                       <h4>Resumes</h4>
                         <table class="table table-hover table-striped">
                             <tbody>
-                                <tr>
+                                <tr th:if="${resumes.isEmpty()}">
+                                    <td>No resumes to display for this user.</td>
+                                </tr>
+
+                                <tr th:unless="${resumes.isEmpty()}" th:each="resume : ${resumes}">
                                     <td>
-                                        hi
+                                        <span th:text="${resume.type}"></span>
                                     </td>
                                 </tr>
                             </tbody>
