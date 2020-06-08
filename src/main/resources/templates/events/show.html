@@ -5,9 +5,16 @@
 </head>
 
 <body>
-<nav th:replace="partials/partials :: navbar"></nav>
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
 
-<div class="container mt-3 mb-3" id="individual-job-listing">
+    <!-- sidebar-wrapper  -->
+    <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
+    <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
+
+    <div class="container mt-3 mb-3" id="individual-job-listing">
     <ul class="list-group list-group-flush">
 
         <!-- IMAGE HEADER FOR EVENT -->
@@ -42,7 +49,7 @@
     </ul>
 </div>
 
-<div class="text-center mb-3">
+<div class="text-center mb-3" th:if="${user.userPerm == 'admin'}">
     <h2>Placement Team Controls</h2>
 
     <a th:href="@{|/events/${event.id}/edit|}"><button type="button" class="btn btn-primary btn-lg">Edit</button></a>
@@ -54,7 +61,7 @@
 
 <div class="modal fade" id="modalForEventDelete" tabindex="-1" role="dialog"
      aria-labelledby="eventDeleteModalLabel"
-     aria-hidden="true">
+     aria-hidden="true" th:if="${user.userPerm == 'admin'}">
 
     <form th:action="@{'/events/' + ${event.id} + '/delete'}" th:method="POST" th:object="${event}">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -75,7 +82,7 @@
         </div>
     </form>
 </div>
-
+</div>
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>
