@@ -32,7 +32,9 @@
                 <div class="col-lg-9">
                     <button type="button" id="uploadLogoImg" class="btn btn-primary rounded-pill">Choose file</button>
 
-                    <i id="uploadSuccessful" class="far fa-check-circle text-success ml-2 " style="display: none; font-size: 1.25rem"></i>
+                    <span id="uploadSuccessful" class="ml-1 text-success" style="display: none; font-size: 1.25rem;">
+                        <i class="far fa-check-circle"></i>
+                    </span>
 
                     <input type="hidden" name="logo_img" id="logoImg" th:value="${company.logoImg}">
                 </div>
