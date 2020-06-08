@@ -41,9 +41,6 @@ public class ResumeController {
 //        model.addAttribute("user", new User());
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
-
-
-
         return "resume/index";
     }
 
