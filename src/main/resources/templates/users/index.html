@@ -14,8 +14,10 @@
     <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
     <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
     <main class="page-content">
-        <p>Content</p>
-        <div th:replace="partials/partials :: adminDash"></div>
+
+        <div th:replace="partials/partials :: adminDash" th:if="${user.userPerm == 'admin'}"></div>
+        <div th:replace="partials/partials :: studentDash" th:if="${user.userPerm == 'student'}"></div>
+
     </main>
 </div>
 

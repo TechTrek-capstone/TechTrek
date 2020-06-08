@@ -7,10 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -73,9 +70,20 @@ public class UserController {
         model.addAttribute("eventsList", eventList);
         List<User> userList = users.findAll();
         model.addAttribute("userList", userList);
+
         return "users/index";
 
     }
+
+//    @GetMapping("/users/{id}/edit")
+//    public String viewEditUserListingForm(@PathVariable long id, Model model){
+//        // get user that is doing the editing
+//        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = users.getOne(userWithRoles.getId());
+//        model.addAttribute("user", user);
+//
+//        // pull record that needs to be edited
+//    }
 
     // Profile view
     @GetMapping("/profile")
