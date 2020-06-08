@@ -12,7 +12,7 @@
     <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
     <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
     <main class="page-content">
-        <div th:replace="partials/jobpartials :: dashJobsListFrag"></div>
+        <div th:replace="partials/jobpartials :: jobsListFrag"></div>
     </main>
 </div>
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
