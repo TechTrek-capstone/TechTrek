@@ -21,14 +21,14 @@
 
         <div class="form-row">
             <div class="form-group col-md-12">
-                <label for="logo">Upload logo</label>
-        <!-- TODO: INCLUDE FILESTACK COMPANY LOGO EDIT HERE AS PART OF FORM -->
-<!--        <div class="form-group row">-->
-<!--            <label for="title" class="col-sm-1 col-form-label text-right font-weight-bold">Name</label>-->
-<!--            <div class="col-sm-11">-->
-<!--                <input type="text" class="form-control text-left" id="name" name="name" th:value="${company.name}"/>-->
-<!--            </div>-->
-<!--        </div>-->
+                <label class="col-lg-3 col-form-label form-control-label">Change company logo</label>
+                <div class="col-lg-9">
+                    <button type="button" id="uploadLogoImg" class="btn btn-primary rounded-pill">Choose file</button>
+
+                    <i id="uploadSuccessful" class="far fa-check-circle text-success ml-2 " style="display: none; font-size: 1.25rem"></i>
+
+                    <input type="hidden" name="logo_img" id="logoImg" th:value="${company.logoImg}">
+                </div>
             </div>
         </div>
 
@@ -38,5 +38,30 @@
 </container>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+<script>
+
+    let client = filestack.init("A4cXA0jCTTJGCdD6ep1Btz");
+
+    // Script to upload profile pic
+    $("#uploadLogoImg").click(function () {
+
+        client
+            .pick({
+                accept: 'image/*',
+                maxFiles: 1
+            })
+            .then(function (result) {
+                let resultJSON = JSON.parse(JSON.stringify(result));
+
+                // store resume url in variable, pass that variable as a value to the view
+                let fsURL = resultJSON.filesUploaded[0].url;
+                $("#logoImg").val(fsURL);
+                // $("#resumeUploadTBlock").submit();
+            })
+            .then(function () {
+                $("#uploadSuccessful").show();
+            });
+    });
+</script>
 </body>
 </html>

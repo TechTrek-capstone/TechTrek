@@ -23,15 +23,18 @@ public class UserController {
     private JobsRepo jobsRepo;
     private EventsRepo eventsRepo;
     private SkillsRepo skillsRepo;
+    private Roles roles;
 
 
-    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo, SkillsRepo skillsRepo) {
+    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo, SkillsRepo skillsRepo, Roles roles) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.cohortsRepo = cohortsRepo;
         this.jobsRepo = jobsRepo;
         this.eventsRepo = eventsRepo;
         this.skillsRepo = skillsRepo;
+        this.roles = roles;
+
     }
 
 
@@ -106,7 +109,9 @@ public class UserController {
             @RequestParam(name = "github_username") String githubUsername,
             @RequestParam(name = "cohort") Cohort cohort,
             @RequestParam(name = "employment_status") EmploymentStatus employmentStatus,
-            @RequestParam(name = "profile_pic") String profilePic
+            @RequestParam(name = "profile_pic") String profilePic,
+            @RequestParam(name = "user_perm") String userPerm,
+            @RequestParam(name = "skills") List<Skill> skills
     ) {
         // Sets user based off the spring security authentication. This is based on role.
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //1. Get the current user
@@ -126,6 +131,8 @@ public class UserController {
         currentUser.setCohort(cohort);
         currentUser.setEmploymentStatus(employmentStatus);
         currentUser.setProfilePic(profilePic);
+        currentUser.setUserPerm(userPerm);
+        currentUser.setSkills(skills);
 
         users.save(currentUser);
 

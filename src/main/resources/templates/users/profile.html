@@ -5,24 +5,33 @@
 </head>
 
 <body>
-<nav th:replace="partials/partials :: navbar"></nav>
+
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+
+    <!-- sidebar-wrapper  -->
+    <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
+    <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
+
+    <!-- Bootstrap Profile -->
+    <main class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 order-lg-2">
+                    <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
+                    <h3 class="mb-3"><span class="badge badge-pill badge-primary" th:text="${#strings.capitalize(user.getUserPerm())}">User role</span></h3>
 
 
-
-<!-- Bootstrap Profile -->
-<div class="container-lg">
-    <div class="container">
-        <div class="row my-2">
-            <div class="col-lg-8 order-lg-2">
-                <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
-                <h1 class="display-4 mt-3 mb-0" th:text="${user.getUserRole().name}"></h1>
-
-
-
-                <h4 th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
-                    <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fas fa-map-marker-alt" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
-                    <br><small>Graduating <span th:text="${#dates.format(user.cohort.getGraduationDate(), 'MM-yyyy')}"></span></small>
-                </h4>
+                    <h4 th:unless="${user.cohort == null}"
+                        style="margin-top: -.25rem; color: lightgray; font-weight: normal">
+                        <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fas fa-map-marker-alt"
+                                                                                    aria-hidden="true"></i><span
+                            th:text="${user.getCohort().location}"></span>
+                        <br><small>Graduating <span
+                            th:text="${#dates.format(user.cohort.getGraduationDate(), 'MM-yyyy')}"></span></small>
+                    </h4>
 
                 <ul class="nav nav-tabs" style="margin-top: 2rem;">
                     <li class="nav-item">
@@ -38,23 +47,22 @@
                 <div class="tab-content py-4">
                     <div class="tab-pane active" id="profile">
 
-                        <!-- Employment status block -->
-                        <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null}" class="mb-3">
-                            <span th:unless="${user.employmentStatus == null}">
-                                        <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
-                                            <span class="badge badge-success">Available for hire <i class="ml-1 fas fa-check-circle"></i></span>
-                                        </h2>
-
-                                        <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).HIRED}">
-                                            <span class="badge badge-info">Hired <i class="ml-1 fas fa-lock"></i></span>
-                                        </h2>
-                                    </span>
-                        </div>
-
-<!--                        <h5 class="mb-3">Username: <span class="badge badge-pill badge-primary" th:text="${user.getUsername()}"></span></h5>-->
-
                         <div class="row">
                             <div class="col-md-6">
+                                <!-- Employment status block -->
+                                <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null}" class="mb-3">
+                            <span th:unless="${user.employmentStatus == null}">
+                                <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
+                                    <span class="badge badge-success">Available for hire <i class="ml-1 fas fa-check-circle"></i></span>
+                                </h2>
+
+                                <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).HIRED}">
+                                    <span class="badge badge-info">Hired <i class="ml-1 fas fa-lock"></i></span>
+                                </h2>
+                            </span>
+                                </div>
+
+
                                 <h6>About</h6>
                                 <p>
                                     <span th:if="${user.bioSummary == ''}">
@@ -118,20 +126,10 @@
 
                                 <!-- Skills pill badges -->
                                 <h6>Skills</h6>
-                                <a href="#" class="badge badge-dark badge-pill">html5</a>
-                                <a href="#" class="badge badge-dark badge-pill">react</a>
-                                <a href="#" class="badge badge-dark badge-pill">codeply</a>
-                                <a href="#" class="badge badge-dark badge-pill">angularjs</a>
-                                <a href="#" class="badge badge-dark badge-pill">css3</a>
-                                <a href="#" class="badge badge-dark badge-pill">jquery</a>
-                                <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
-                                <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
 
-                                <hr class="hr-light">
+                                <span th:if="${user.getSkills().isEmpty()}">No skills selected yet.</span>
 
-                                <span class="badge badge-primary"><i class="fas fa-user"></i> 900 Followers</span>
-                                <span class="badge badge-success"><i class="fas fa-cog"></i> 43 Forks</span>
-                                <span class="badge badge-danger"><i class="fas fa-eye"></i> 245 Views</span>
+                                <span th:unless="${user.getSkills().isEmpty()}" th:each="skill : ${user.getSkills()}" class="badge badge-dark badge-pill mr-1" th:text="${skill.getName()}">Skill name</span>
                             </div>
                         </div>
 
@@ -146,36 +144,11 @@
                         </div>
                         <table class="table table-hover table-striped">
                             <tbody>
-                            <tr>
-                                <td>
-                                    <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to
-                                    the latest summary report from the..
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="float-right font-weight-bold">Yesterday</span> There has been a request
-                                    on your account since that was..
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices
-                                    quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt
-                                    ullamcorper eros eget luctus.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for
-                                    tibulum tincidunt ullamcorper eros.
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        hi
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -198,6 +171,7 @@
                                 <div class="col-lg-9">
                                     <input name="userfirstname" class="form-control" type="text"
                                            th:value="${user.userfirstname}">
+
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -280,18 +254,18 @@
                                            th:value="${user.userWebsite}">
                                 </div>
                             </div>
+                            <input type="hidden" name="user_perm" th:value="${user.userPerm}">
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Skills</label>
                                 <div class="col-lg-9">
                                     <h6 class="text-secondary mb-4">Note: You should be able to speak "3 levels deep" on any skills selected.</h6>
-                                    <div class="row justify-content-around" name="skills">
+                                    <div class="row justify-content-around">
                                         <div th:each="skill : ${skills}" class="form-check form-check-inline col-md-3">
-                                            <input class="form-check-input" type="checkbox" th:id="'skillId' + ${skill.id}" th:value="${skill.id}">
+                                            <input name="skills" class="form-check-input" type="checkbox" th:id="'skillId' + ${skill.id}" th:value="${skill.id}" th:checked="${user.skills.contains(skill)}">
                                             <label class="form-check-label" th:for="'skillId' + ${skill.id}" th:text="${skill.name}"></label>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
 

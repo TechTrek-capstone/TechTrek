@@ -2,12 +2,15 @@ package dev.techtrek.techtrek.controllers;
 
 import dev.techtrek.techtrek.models.Company;
 import dev.techtrek.techtrek.models.JobListing;
+import dev.techtrek.techtrek.models.User;
+import dev.techtrek.techtrek.models.UserWithRoles;
 import dev.techtrek.techtrek.repositories.CompaniesRepo;
 import dev.techtrek.techtrek.repositories.JobsRepo;
 import dev.techtrek.techtrek.repositories.Users;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +24,12 @@ public class JobListingController {
     // Dependency injection
 
     private JobsRepo jobsRepo;
-    private Users usersRepo;
+    private Users users;
     private CompaniesRepo companiesRepo;
 
-    public JobListingController(JobsRepo jobsRepo, Users usersRepo, CompaniesRepo companiesRepo){
+    public JobListingController(JobsRepo jobsRepo, Users users, CompaniesRepo companiesRepo){
         this.jobsRepo = jobsRepo;
-        this.usersRepo = usersRepo;
+        this.users = users;
         this.companiesRepo = companiesRepo;
     }
 
@@ -37,6 +40,9 @@ public class JobListingController {
     public String showAllJobListings(Model model){
         List<JobListing> jobList = jobsRepo.findAll();
         model.addAttribute("jobs", jobList);
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.getOne(userWithRoles.getId());
+        model.addAttribute("user", user);
         return "jobs/index";
     }
 
@@ -47,6 +53,9 @@ public class JobListingController {
     @GetMapping("/jobs/{id}")
     public String showJobListingById(@PathVariable long id, Model model){
         model.addAttribute("job", jobsRepo.getJobListingById(id));
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.getOne(userWithRoles.getId());
+        model.addAttribute("user", user);
         return "jobs/show";
     }
 
@@ -59,6 +68,9 @@ public class JobListingController {
         List<Company> companies = companiesRepo.findAll();
         model.addAttribute("jobListing", new JobListing());
         model.addAttribute("companies", companies);
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.getOne(userWithRoles.getId());
+        model.addAttribute("user", user);
         return "jobs/create";
     }
 
@@ -88,6 +100,11 @@ public class JobListingController {
 
         // Add job by ID to model
         model.addAttribute("job", jobsRepo.getOne(id));
+
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.getOne(userWithRoles.getId());
+        model.addAttribute("user", user);
+
         return "jobs/edit";
     }
 

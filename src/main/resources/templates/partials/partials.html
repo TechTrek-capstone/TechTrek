@@ -12,26 +12,300 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
-    <title>TechTrek</title>
-</head>
-
-
-<head th:fragment="dashboard-head">
-    <meta charset="UTF-8"/>
-    <!-- include stylesheets, etc here -->
-    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
-    <!-- Filestack -->
-    <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
-    <!-- Summernote -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
     <link th:href="@{/css/dashboard.css}" rel="stylesheet" type="text/css"/>
-
     <title>TechTrek</title>
 </head>
 
 <body>
-<!-- Navbar -->
+
+<!-- Student Nav/Sidebar -->
+<nav th:fragment="studentNav">
+    <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+            <div class="sidebar-brand">
+                <a href="#">TechTrek</a>
+                <div id="close-sidebar">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="sidebar-header">
+                <a th:href="@{/profile}">
+                    <div class="user-pic" th:if="${user.profilePic == null}">
+                        <img class="img-responsive img-rounded"
+                             src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                             alt="User picture">
+                    </div>
+                    <div class="user-pic" th:unless="${user.profilePic == null}">
+                        <img class="img-responsive img-rounded" th:src="${user.profilePic}" alt="User picture">
+                    </div>
+                </a>
+                <div class="user-info">
+          <span class="user-name"><span th:text="${user.userfirstname}"></span>
+            <strong th:text="${user.lastName}"></strong>
+          </span>
+                    <span class="user-role">Student</span>
+                    <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Online</span>
+          </span>
+                </div>
+            </div>
+            <!-- sidebar-header  -->
+            <div class="sidebar-search">
+                <div>
+                    <div class="input-group">
+                        <input type="text" class="form-control search-menu" placeholder="Search...">
+                        <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- sidebar-search  -->
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="header-menu">
+                        <span>General</span>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a href="#"> Main
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Job Listings</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/jobs}">Browse
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Events</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/events}">Browse
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a th:href="@{/resume}">
+                            <i class="fas fa-file"></i>
+                            <span>Resume</span>
+                        </a>
+                    </li>
+                    <li class="header-menu">
+                        <span>Extra</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-calendar"></i>
+                            <span>Development</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- sidebar-menu  -->
+        </div>
+        <!-- sidebar-content  -->
+        <div class="sidebar-footer">
+            <a href="#">
+                <i class="fa fa-bell"></i>
+                <!--                <span class="badge badge-pill badge-warning notification">3</span>-->
+            </a>
+            <a href="#">
+                <i class="fa fa-envelope"></i>
+                <!--                <span class="badge badge-pill badge-success notification">7</span>-->
+            </a>
+            <a href="#">
+                <i class="fa fa-cog"></i>
+                <!--                <span class="badge-sonar"></span>-->
+            </a>
+            <a th:href="@{/logout}">
+                <i class="fas fa-power-off" style="color:#b52628;"></i>
+            </a>
+        </div>
+    </nav>
+</nav>
+<!-- Student Nav/Sidebar -->
+
+<!-- Admin Nav/Sidebar -->
+<nav th:fragment="adminNav">
+    <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+            <div class="sidebar-brand">
+                <a th:href="@{/home}">TechTrek</a>
+                <div id="close-sidebar">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="sidebar-header">
+                <a th:href="@{/profile}">
+                    <div class="user-pic" th:if="${user.profilePic == null}">
+                        <img class="img-responsive img-rounded"
+                             src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                             alt="User picture">
+                    </div>
+                    <div class="user-pic" th:unless="${user.profilePic == null}">
+                        <img class="img-responsive img-rounded" th:src="${user.profilePic}" alt="User picture">
+                    </div>
+                </a>
+                <div class="user-info">
+                    <span class="user-name"><span th:text="${user.userfirstname}"></span><strong
+                            th:text="${user.lastName}"></strong></span>
+                    <span class="user-role">Administrator</span>
+                    <span class="user-status"><i class="fa fa-circle"></i><span>Online</span></span>
+                </div>
+            </div>
+            <!-- sidebar-header  -->
+            <div class="sidebar-search">
+                <div>
+                    <div class="input-group">
+                        <input type="text" class="form-control search-menu" placeholder="Search...">
+                        <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- sidebar-search  -->
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="header-menu">
+                        <span>General</span>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/home}"> Main
+                                    </a>
+                                </li>
+                                <li>
+                                    <!-- Update to amdin onyl when roles are up -->
+                                    <a href="#"> Users
+                                        <span class="badge badge-pill badge-success">Admin</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Job Listings</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/jobs}">Browse
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/jobs/create}">Create
+                                        <span class="badge badge-pill badge-success">Admin</span></a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/companies}">Companies
+                                        <span class="badge badge-pill badge-success">Admin</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Events</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/events}">Browse
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/events/create}">Create
+                                        <span class="badge badge-pill badge-success">Admin</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a th:href="@{/resume}">
+                            <i class="fas fa-file"></i>
+                            <span>Resume</span>
+                        </a>
+                    </li>
+                    <li class="header-menu">
+                        <span>Extra</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-calendar"></i>
+                            <span>Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-folder"></i>
+                            <span>Development</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- sidebar-menu  -->
+        </div>
+        <!-- sidebar-content  -->
+        <div class="sidebar-footer">
+            <a href="#">
+                <i class="fa fa-bell"></i>
+                <!--                <span class="badge badge-pill badge-warning notification">3</span>-->
+            </a>
+            <a href="#">
+                <i class="fa fa-envelope"></i>
+                <!--                <span class="badge badge-pill badge-success notification">7</span>-->
+            </a>
+            <a href="#">
+                <i class="fa fa-cog"></i>
+                <!--                <span class="badge-sonar"></span>-->
+            </a>
+            <a th:href="@{/logout}">
+                <i class="fas fa-power-off" style="color:#b52628;"></i>
+            </a>
+        </div>
+    </nav>
+</nav>
+<!-- Admin Nav/Sidebar -->
+
+<!-- OLD Navbar -->
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" th:href="@{/home}">TechTrek</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -99,12 +373,10 @@
     </div>
 </nav>
 
-
 <!-- All Modals -->
 <div th:fragment="allModals">
 
     <!-- Register Modal -->
-
     <div th:fragment="registerModal" class="modal fade" id="registerModal" tabindex="-1" role="dialog"
          aria-labelledby="registerModalLabel"
          aria-hidden="true">
@@ -224,6 +496,7 @@
                                     </select>
                                 </div>
 
+
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <input class="form-control" th:field="*{password}"
@@ -255,9 +528,7 @@
         </div>
     </div>
 
-
     <!-- Login Modal -->
-
     <div th:fragment="loginModal" class="modal fade" id="loginModal" tabindex="-1" role="dialog"
          aria-labelledby="loginModalLabel"
          aria-hidden="true">
@@ -471,9 +742,7 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
     </div>
 </div>
 
-
 <!-- Event Listings Fragment -->
-
 <div class="d-flex justify-content-around flex-wrap w-50-lg" th:fragment="eventsList">
 
     <div th:each="event : ${eventsList}" class="card mb-5" style="width: 18rem;">
@@ -508,9 +777,7 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
     </div>
 </div>
 
-
 <!-- Loading SVG -->
-
 <div class="d-flex justify-content-around flex-wrap w-50-lg" th:fragment="loadingAnimation">
     <?xml version="1.0" encoding="utf-8"?>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -556,7 +823,6 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
         </circle>
         <!-- [ldio] generated by https://loading.io/ --></svg>
 </div>
-
 
 <!-- JS scripts -->
 <standard_scripts th:fragment="footer">

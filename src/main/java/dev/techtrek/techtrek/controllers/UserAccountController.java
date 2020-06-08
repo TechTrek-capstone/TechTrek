@@ -54,7 +54,7 @@ public class UserAccountController {
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
             user.setUserWebsite("http://codeup.com");
-            user.setRoleId(3);
+            user.setUserPerm("student");
             users.save(user);
 
             ConfirmationToken confirmationToken = new ConfirmationToken(user);

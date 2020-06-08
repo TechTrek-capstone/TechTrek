@@ -5,41 +5,79 @@
 </head>
 
 <body>
-<nav th:replace="partials/partials :: navbar"></nav>
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+    <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
+    <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
 
-<container>
-    <h1 class="mt-3 text-center">Add Company</h1>
+    <main class="page-wrapper">
+        <h1 class="mt-3 text-center">Add Company</h1>
 
-    <form th:action="@{/companies/create}" th:method="POST" th:object="${company}" class="w-50 ml-auto mr-auto" id="createCompanyForm">
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <label for="name">Company name</label>
-                <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="ex. USAA, Accenture, Google, etc." required>
-            </div>
-
-            <div class="form-group col-md-12">
-                <label for="logo">Upload logo image</label>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="logo">
-                    <label class="custom-file-label" for="logo">Choose file</label>
+        <form th:action="@{/companies/create}" th:method="POST" th:object="${company}" class="w-50 ml-auto mr-auto"
+              id="createCompanyForm">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="name">Company name</label>
+                    <input type="text" th:field="*{name}" class="form-control" id="name"
+                           placeholder="ex. USAA, Accenture, Google, etc." required>
                 </div>
-                <!--                <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="ex. USAA, Accenture, Google, etc." required>-->
+
+
+                <div class="form-group col-md-12">
+                    <label for="uploadLogoImg">Upload logo image</label>
+                    <div class="col-lg-9">
+                        <button type="button" id="uploadLogoImg" class="btn btn-primary rounded-pill">Choose file
+                        </button>
+
+                        <div id="uploadSuccessful" class="alert alert-success mt-3 ml-3" style="display: none">
+                            <i class="far fa-check-circle"></i> Upload successful!
+                        </div>
+
+                        <input type="hidden" name="logo_img" id="logoImg" th:field="*{logoImg}">
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <button type="submit" class="btn btn-block btn-primary">Submit</button>
+            <button type="submit" class="btn btn-block btn-primary">Submit</button>
 
-    </form>
+        </form>
 
-</container>
-
+    </main>
+</div>
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+
 <script>
-    // Add the following code if you want the name of the file appear on select
-    $(".custom-file-input").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+
+    let client = filestack.init("A4cXA0jCTTJGCdD6ep1Btz");
+
+    // Script to upload profile pic
+    $("#uploadLogoImg").click(function () {
+
+        client
+            .pick({
+                accept: 'image/*',
+                maxFiles: 1
+            })
+            .then(function (result) {
+                let resultJSON = JSON.parse(JSON.stringify(result));
+
+                // store resume url in variable, pass that variable as a value to the view
+                let fsURL = resultJSON.filesUploaded[0].url;
+                $("#logoImg").val(fsURL);
+                // $("#resumeUploadTBlock").submit();
+            })
+            .then(function () {
+                $("#uploadSuccessful").show();
+            });
     });
+
+    // // Add the following code if you want the name of the file appear on select
+    // $(".custom-file-input").on("change", function() {
+    //     var fileName = $(this).val().split("\\").pop();
+    //     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    // });
 </script>
 </body>
 </html>

@@ -16,6 +16,9 @@ public class Company {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "logo_img")
+    private String logoImg;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private List<JobListing> jobListingList;
 }
