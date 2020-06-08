@@ -197,7 +197,7 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Hire Status</label>
                                 <div class="col-lg-9">
                                     <select class="custom-select form-control" name="employment_status" id="employmentStatus">
-                                        <option th:each="status : ${T(dev.techtrek.techtrek.models.EmploymentStatus).values()}" th:value="${status}" th:selected="${user.getEmploymentStatus()}" th:text="${status.getDisplayValue()}"></option>
+                                        <option th:each="status : ${T(dev.techtrek.techtrek.models.EmploymentStatus).values()}" th:value="${status}" th:selected="${user.getEmploymentStatus() == status}" th:text="${status.getDisplayValue()}"></option>
                                     </select>
                                 </div>
                             </div>
