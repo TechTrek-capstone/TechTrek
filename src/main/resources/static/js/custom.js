@@ -164,7 +164,6 @@ $(document).ready(function () {
 
         });
     });
-
 });
 
 // PLACEMENT - upload resume revision
@@ -185,4 +184,3 @@ $(document).on('click', '.uploadResumeRevision', (function () {
             $("#uploadResumeRevision").submit();
         })
 }));
-

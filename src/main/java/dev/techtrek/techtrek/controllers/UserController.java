@@ -7,10 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,9 +21,10 @@ public class UserController {
     private EventsRepo eventsRepo;
     private SkillsRepo skillsRepo;
     private Roles roles;
+    private ResumeRepo resumeRepo;
 
 
-    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo, SkillsRepo skillsRepo, Roles roles) {
+    public UserController(Users users, PasswordEncoder passwordEncoder, CohortsRepo cohortsRepo, JobsRepo jobsRepo, EventsRepo eventsRepo, SkillsRepo skillsRepo, Roles roles, ResumeRepo resumeRepo) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.cohortsRepo = cohortsRepo;
@@ -34,7 +32,7 @@ public class UserController {
         this.eventsRepo = eventsRepo;
         this.skillsRepo = skillsRepo;
         this.roles = roles;
-
+        this.resumeRepo = resumeRepo;
     }
 
 
@@ -71,9 +69,22 @@ public class UserController {
         model.addAttribute("jobs", jobList);
         List<EventListing> eventList = eventsRepo.findAll();
         model.addAttribute("eventsList", eventList);
+        List<User> userList = users.findAll();
+        model.addAttribute("userList", userList);
+
         return "users/index";
 
     }
+
+//    @GetMapping("/users/{id}/edit")
+//    public String viewEditUserListingForm(@PathVariable long id, Model model){
+//        // get user that is doing the editing
+//        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = users.getOne(userWithRoles.getId());
+//        model.addAttribute("user", user);
+//
+//        // pull record that needs to be edited
+//    }
 
     // Profile view
     @GetMapping("/profile")
@@ -87,6 +98,9 @@ public class UserController {
         UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
+
+        List<Resume> resumes = resumeRepo.findAllByUser_Id(user.getId());
+        model.addAttribute("resumes", resumes);
 
         return "users/profile";
     }

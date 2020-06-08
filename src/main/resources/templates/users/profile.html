@@ -19,12 +19,27 @@
     <main class="page-content">
         <div class="container">
             <div class="row">
+                <div class="col-lg-4 order-lg-1 text-center mt-4">
+
+                    <!-- if profile pic is null display the default user svg pic-->
+
+                    <div class="mr-auto ml-auto" th:if="${user.profilePic == null} OR ${user.profilePic == ''}" style="width: 200px; height: 200px;">
+                        <div th:replace="partials/svgpartials :: defaultProfilePic"></div>
+                    </div>
+
+                    <!-- If the profile pic is not null display the profile image url -->
+
+                    <div class="mr-auto ml-auto" th:unless="${user.profilePic == null} OR ${user.profilePic == ''}" style="border-radius: 50%; overflow: hidden; width:200px; height: 200px;">
+                        <img th:src="${user.profilePic}" style="width: 200px; height: 200px; vertical-align: middle; object-fit: cover;"/>
+                    </div>
+                </div>
+
                 <div class="col-lg-8 order-lg-2">
                     <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
                     <h3 class="mb-3"><span class="badge badge-pill badge-primary" th:text="${#strings.capitalize(user.getUserPerm())}">User role</span></h3>
 
 
-                    <h4 th:unless="${user.cohort == null}"
+                    <h4 th:unless="${user.cohort == null} OR ${user.userPerm == 'admin'}"
                         style="margin-top: -.25rem; color: lightgray; font-weight: normal">
                         <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fas fa-map-marker-alt" aria-hidden="true"></i><span
                             th:text="${user.getCohort().location}"></span>
@@ -36,7 +51,7 @@
                     <li class="nav-item">
                         <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                     </li>
-                    <li class="nav-item">
+                    <li th:unless="${user.userPerm == 'admin'}" class="nav-item">
                         <a href="" data-target="#documents" data-toggle="tab" class="nav-link">Documents</a>
                     </li>
                     <li class="nav-item">
@@ -49,7 +64,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <!-- Employment status block -->
-                                <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null}" class="mb-3">
+                                <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null} OR ${user.userPerm == 'admin'}" class="mb-3">
                             <span th:unless="${user.employmentStatus == null}">
                                 <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
                                     <span class="badge badge-success">Available for hire <i class="ml-1 fas fa-check-circle"></i></span>
@@ -70,13 +85,15 @@
                                     <span th:unless="${user.bioSummary == ''}" th:text="${user.bioSummary}"></span>
                                 </p>
 
-                                <h5>Desired work location(s)</h5>
-                                <p>
-                                    <span th:if="${user.workLocation == ''}">
-                                        <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
-                                    </span>
-                                    <span th:unless="${user.workLocation == ''}" th:text="${user.workLocation}"></span>
-                                </p>
+                                <div th:unless="${user.userPerm == 'admin'}">
+                                    <h5>Desired work location(s)</h5>
+                                    <p>
+                                        <span th:if="${user.workLocation == ''}">
+                                            <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
+                                        </span>
+                                        <span th:unless="${user.workLocation == ''}" th:text="${user.workLocation}"></span>
+                                    </p>
+                                </div>
                             </div>
 
 
@@ -98,7 +115,7 @@
                                 <div class="d-flex mt-2" style="font-size: 2rem">
 
                                     <!-- Link to Github profile -->
-                                    <span th:unless="${user.githubUsername == ''}">
+                                    <span th:unless="${user.githubUsername == ''} OR ${user.userPerm == 'admin'}">
                                         <a th:href="'https://github.com/' + ${user.githubUsername}" target="_blank">
                                             <i class="fab fa-github mr-2"></i>
                                         </a>
@@ -121,14 +138,15 @@
 
                                 </div>
 
-                                <hr class="hr-light" />
+                                <div th:unless="${user.userPerm == 'admin'}">
+                                    <hr class="hr-light" />
+                                    <!-- Skills pill badges -->
+                                    <h5>Skills</h5>
 
-                                <!-- Skills pill badges -->
-                                <h5>Skills</h5>
+                                    <span th:if="${user.getSkills().isEmpty()}">No skills selected yet.</span>
 
-                                <span th:if="${user.getSkills().isEmpty()}">No skills selected yet.</span>
-
-                                <span th:unless="${user.getSkills().isEmpty()}" th:each="skill : ${user.getSkills()}" class="badge badge-dark badge-pill mr-1" th:text="${skill.getName()}">Skill name</span>
+                                    <span th:unless="${user.getSkills().isEmpty()}" th:each="skill : ${user.getSkills()}" class="badge badge-dark badge-pill mr-1" th:text="${skill.getName()}">Skill name</span>
+                                </div>
                             </div>
                         </div>
 
@@ -136,16 +154,20 @@
 
                     </div>
 
-                    <div class="tab-pane" id="documents">
-                        <div class="alert alert-info alert-dismissable">
-                            <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>.
-                            Use this to show important messages to the user.
-                        </div>
+                    <div th:unless="${user.userPerm == 'admin'}" class="tab-pane" id="documents">
+                       <h4>Resumes</h4>
                         <table class="table table-hover table-striped">
                             <tbody>
-                                <tr>
+                                <tr th:if="${resumes.isEmpty()}">
+                                    <td>No resumes to display for this user.</td>
+                                </tr>
+
+                                <tr th:unless="${resumes.isEmpty()}" th:each="resume : ${resumes}">
                                     <td>
-                                        hi
+                                        <a th:href="${resume.link}" target="_blank">
+                                            <span th:text="${resume.title} + ' '"></span>
+                                        </a>
+                                        <small class="text-muted" th:text="'(' + ${resume.type + ')'}"></small>
                                     </td>
                                 </tr>
                             </tbody>
@@ -184,7 +206,7 @@
                                            th:value="${user.lastName}">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Cohort</label>
                                 <div class="col-lg-9">
                                     <!-- If user already has cohort, this dropdown will pre-select their cohort from list -->
@@ -193,11 +215,11 @@
                                             <option th:each="cohort : ${cohorts}" class="dropdown-item" th:selected="${cohort.id == user.cohort.getId()}" th:text="${cohort.name}" th:value="${cohort.id}"></option>
                                         </select>
                                     </span>
-
                                 </div>
                             </div>
+<!--                            <input type="hidden" th:if="${user.userPerm == 'admin'}" name="cohort" th:value="1">-->
 
-                            <div class="form-group row">
+                            <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Hire Status</label>
                                 <div class="col-lg-9">
                                     <select class="custom-select form-control" name="employment_status" id="employmentStatus">
@@ -205,6 +227,7 @@
                                     </select>
                                 </div>
                             </div>
+<!--                            <input type="hidden" th:if="${user.userPerm == 'admin'}" name="employment_status" th:value="2">-->
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">About</label>
@@ -214,13 +237,16 @@
                                     </textarea>
                                 </div>
                             </div>
-                            <div class="form-group row">
+
+                            <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Desired work location(s)</label>
                                 <div class="col-lg-9">
                                     <input id="workLocation" name="work_location" class="form-control" type="text"
                                               th:value="${user.workLocation}">
                                 </div>
                             </div>
+<!--                            <input type="hidden" th:if="${user.userPerm == 'admin'}" name="work_location" th:value="">-->
+
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                 <div class="col-lg-9">
@@ -228,6 +254,7 @@
                                            th:value="${user.email}">
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                 <div class="col-lg-9">
@@ -236,13 +263,16 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Github username</label>
                                 <div class="col-lg-9">
                                     <input name="github_username" class="form-control" type="text"
                                            th:value="${user.githubUsername}">
                                 </div>
                             </div>
+
+                            <input type="hidden" name="user_perm" th:value="${user.userPerm}">
+
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">LinkedIn username</label>
                                 <div class="col-lg-9">
@@ -250,6 +280,7 @@
                                            th:value="${user.linkedinUsername}">
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Personal website URL</label>
                                 <div class="col-lg-9">
@@ -257,9 +288,8 @@
                                            th:value="${user.userWebsite}">
                                 </div>
                             </div>
-                            <input type="hidden" name="user_perm" th:value="${user.userPerm}">
 
-                            <div class="form-group row">
+                            <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Skills</label>
                                 <div class="col-lg-9">
                                     <h6 class="text-secondary mb-4">Note: You should be able to speak "3 levels deep" on any skills selected.</h6>
@@ -272,7 +302,6 @@
                                 </div>
                             </div>
 
-
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                 <div class="col-lg-9">
@@ -283,21 +312,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-4 order-lg-1 text-center mt-4">
-
-                <!-- if profile pic is null display the default user svg pic-->
-
-                <div class="mr-auto ml-auto" th:if="${user.profilePic == null} OR ${user.profilePic == ''}" style="width: 200px; height: 200px;">
-                    <div th:replace="partials/svgpartials :: defaultProfilePic"></div>
-                </div>
-
-                <!-- If the profile pic is not null display the profile image url -->
-
-                <div class="mr-auto ml-auto" th:unless="${user.profilePic == null} OR ${user.profilePic == ''}" style="border-radius: 50%; overflow: hidden; width:200px; height: 200px;">
-                    <img th:src="${user.profilePic}" style="width: 200px; height: 200px; vertical-align: middle; object-fit: cover;"/>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -305,7 +319,7 @@
 
     <!-- GITHUB BLOCK -->
 
-    <div id="user-github-info" class="mr-auto ml-auto text-center">
+    <div th:unless="${user.userPerm == 'admin'}" id="user-github-info" class="mr-auto ml-auto text-center">
         <hr data-content="Github Activity" class="hr-text mb-5" />
 
         <span th:if="${user.githubUsername == ''}">
@@ -321,7 +335,7 @@
         </span>
 
     </div>
-
+    </main>
 </div>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
