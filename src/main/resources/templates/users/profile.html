@@ -13,7 +13,7 @@
 
     <!-- sidebar-wrapper  -->
     <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
-<!--    <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>-->
+    <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
 
     <!-- Bootstrap Profile -->
     <main class="page-content">
