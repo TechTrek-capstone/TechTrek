@@ -85,10 +85,9 @@ public class ResumeController {
     }
 
     @PostMapping("resume/revision")
-    public String uploadTBlockRevision(@ModelAttribute Resume resume,
-                               @RequestParam(name = "tblockResumeRevisionUpload") String resumeURL,
-                               @RequestParam(name = "tblockResumeRevisionId") long id) {
-
+    public String uploadTBlockRevision(@RequestParam(name = "resumeRevisionUpload") String resumeURL,
+                                       @RequestParam(name = "resumeRevisionId") long id) {
+        Resume resume = resumeRepo.findById(id);
         resume.setRevision(resumeURL);
         resumeRepo.save(resume);
 

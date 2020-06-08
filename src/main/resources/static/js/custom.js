@@ -112,25 +112,6 @@ $(document).ready(function () {
         modal.find('#deleteResumeId').val(resumeId);
     });
 
-    // PLACEMENT - upload resume revision
-    $(".placementUploadTBlock").click(function () {
-        let id = $(this).val();
-        let client = filestack.init(fileStackKey);
-
-        client
-            .pick({
-                maxFiles: 1
-            })
-            .then(function (result) {
-                let resultJSON = JSON.parse(JSON.stringify(result));
-
-                fsURL = resultJSON.filesUploaded[0].url;
-                $("#tblockResumeRevisionUpload").val(fsURL);
-                $("#tblockResumeRevisionId").val(id);
-                $("#placementUploadTblock").submit();
-            })
-    });
-
     // DROPDOWN - populate student dropdown based off of cohort dropdown
     $("#cohort-dropdown").change(function () {
         let cohortId = $(this).val();
@@ -169,21 +150,13 @@ $(document).ready(function () {
                 let noResume = "<tr colspan='3'><td>No Resume Uploaded</td></tr>";
 
                 for (let i = 0; i < data.length; i++) {
-                        resumeData = resumeData
-                            + "<tr><td value='" + data[i].id + "'><a href='" + data[i].link + "' target=_blank'>"
-                            + data[i].title
-                            + "</a></td>"
-                            + "<td>'"+data[i].type+"'</td>"
-                            + "<td><button type='button' class='btn btn-primary placementUploadTBlock' value='" + data[i].id + "'>Upload Revision</button></td><td>Upload Message</td></tr>";
-                    }
-
-
-                if (studentResumes !== null) {
-                    studentResumes.append(resumeData);
-                } else {
-                    studentResumes.append(noResume);
+                    resumeData = resumeData
+                        + "<tr><td><a href='" + data[i].link + "' target=_blank'>" + data[i].title + "</a></td>"
+                        + "<td>'" + data[i].type + "'</td>"
+                        + "<td><button type='button' class='btn btn-primary uploadResumeRevision' value='" + data[i].id + "'>Upload Revision</button></td>"
+                        + "<td><button type='button' class='btn btn-primary uploadResumeNotes' value='" + data[i].id + "'>Upload Notes</button></td></tr>";
                 }
-
+                studentResumes.append(resumeData);
             }],
             error: function () {
                 alert("error");
@@ -193,4 +166,23 @@ $(document).ready(function () {
     });
 
 });
+
+// PLACEMENT - upload resume revision
+$(document).on('click', '.uploadResumeRevision', (function () {
+    let id = $(this).val();
+    let client = filestack.init(fileStackKey);
+
+    client
+        .pick({
+            maxFiles: 1
+        })
+        .then(function (result) {
+            let resultJSON = JSON.parse(JSON.stringify(result));
+
+            fsURL = resultJSON.filesUploaded[0].url;
+            $("#resumeRevisionUpload").val(fsURL);
+            $("#resumeRevisionId").val(id);
+            $("#uploadResumeRevision").submit();
+        })
+}));
 
