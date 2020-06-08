@@ -4,6 +4,7 @@ import dev.techtrek.techtrek.models.EventListing;
 import dev.techtrek.techtrek.models.User;
 import dev.techtrek.techtrek.repositories.EventsRepo;
 import dev.techtrek.techtrek.repositories.Users;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -100,11 +101,13 @@ public class EventListingController {
             @PathVariable long id,
             @RequestParam(name = "title") String title,
             @RequestParam(name = "location") String location,
-            @RequestParam(name = "date") Date date,
+
+            @RequestParam(name = "date")
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+
             @RequestParam(name = "time") String time,
             @RequestParam(name = "description") String description,
-            @RequestParam(name = "rsvp_url") String rsvpUrl,
-            @RequestParam(name = "is_archived") Boolean isArchived
+            @RequestParam(name = "rsvp_url") String rsvpUrl
     ) {
 
         // Get the event listing from DB
@@ -127,8 +130,6 @@ public class EventListingController {
 
         // Set the RSVP url to URL in input field
         eventListing.setRsvpUrl(rsvpUrl);
-
-        // FIXME: Why does isArchived not work???? :(
 
         // Update the event listing in the DB
         eventsRepo.save(eventListing);
