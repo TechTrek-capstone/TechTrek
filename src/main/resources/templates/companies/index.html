@@ -30,7 +30,7 @@
             <td>
                 <img th:if="${company.logoImg == null} OR ${company.logoImg == ''}" th:src="@{img/logo-placeholder.jpg}" style="width: 75px; height: 75px; vertical-align: middle; object-fit: cover;">
 
-                <img th:unless="${company.logoImg == null} OR ${company.logoImg == ''}" th:src="${company.logoImg}" style="width: 75px; height: 75px; vertical-align: middle; object-fit: cover;">
+                <img th:unless="${company.logoImg == null} OR ${company.logoImg == ''}" th:src="${company.logoImg}" style="width: 75px;">
             </td>
 
             <td th:text="${company.name}">Company name</td>

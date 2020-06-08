@@ -12,8 +12,8 @@
     <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
     <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
 
-    <main class="page-wrapper">
-        <h1 class="mt-3 text-center">Add Company</h1>
+    <main class="page-content page-wrapper">
+    <h1 class="mt-3 text-center">Add Company</h1>
 
         <form th:action="@{/companies/create}" th:method="POST" th:object="${company}" class="w-50 ml-auto mr-auto"
               id="createCompanyForm">
