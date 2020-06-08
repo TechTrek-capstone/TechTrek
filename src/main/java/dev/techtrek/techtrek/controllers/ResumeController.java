@@ -34,7 +34,7 @@ public class ResumeController {
 
         model.addAttribute("resumesTBlock", resumeRepo.findAllByType("t-block"));
         model.addAttribute("resumesVertical", resumeRepo.findAllByType("vertical"));
-        model.addAttribute("user", new User());
+//        model.addAttribute("user", new User());
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
 
