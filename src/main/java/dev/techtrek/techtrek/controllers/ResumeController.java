@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,7 +24,7 @@ public class ResumeController {
     public ResumeController(ResumeRepo resumeRepo, CohortsRepo cohortsRepo, Users users) {
         this.resumeRepo = resumeRepo;
         this.cohortsRepo = cohortsRepo;
-        this.users  = users;
+        this.users = users;
     }
 
     @GetMapping("/resume")
@@ -36,8 +38,6 @@ public class ResumeController {
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
         model.addAttribute("user", user);
-
-
 
         return "resume/index";
     }
@@ -61,16 +61,11 @@ public class ResumeController {
         resumeRepo.deleteById(id);
         return "redirect:/resume";
     }
+
+    // Placement Resume Select
+    @GetMapping("/resume/{cohortId}")
+    public List<User> correctStudent(@PathVariable long cohortId) {
+        Cohort cohort = cohortsRepo.findCohortById(cohortId);
+        return users.findAllByCohort(cohort);
+    }
 }
-// @RequestMapping("/check")
-// @ResponseBody
-// public String check(@RequestParam Integer id, HttpServletRequest request, HttpServletResponse response, Model model) {
-//     boolean a = getSomeResult();
-//     if (a == true) {
-//         model.addAttribute("alreadySaved", true);
-//         return view;
-//     } else {
-//         model.addAttribute("alreadySaved", false);
-//         return view;
-//     }
-// }

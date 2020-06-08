@@ -105,5 +105,31 @@ $(document).ready(function () {
         var modal = $(this);
         modal.find('#deleteResumeId').val(resumeId);
     });
+
+    // DROPDOWN COHORT SELECT
+    $("#cohort-dropdown").change(function(){
+        let cohortId = $(this).val();
+
+        $.ajax({
+            type: 'GET',
+            url: "/resume/" + cohortId,
+            success: function(data){
+                let student=$("#student-dropdown"), option="";
+                student.empty();
+
+                for(let i = 0; i<data.length; i++){
+                    option = option + "<option value='" + data[i].id + "'>" +data[i].userfirstname + "</option>";
+
+                }
+                student.append(option);
+            },
+            error:function(){
+                alert("error");
+            }
+
+        });
+    });
+
+
 });
 

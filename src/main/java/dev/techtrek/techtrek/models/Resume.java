@@ -21,10 +21,10 @@ public class Resume {
     @Column (name = "placement_notes", length = 5000)
     private String placementNotes;
 
-    // relationship to users table = many to one
+    @Column (name = "revision")
+    private String revision;
+
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
-
-    //after placement reviews, add columns where V2, V3, etc. of resume are added dynamically
 }

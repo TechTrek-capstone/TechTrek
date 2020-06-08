@@ -13,18 +13,19 @@
 
     <h1>Resume Portal</h1>
 
+    <h2 class="text-left">Resume</h2>
     <div class="d-flex">
         <!-- ######## TABLE - T-block Resume ######## -->
         <table class="table table-striped w-50 mr-5">
 
             <tr>
                 <th colspan="2">
-                    T-Block Resume
+                    T-Block
                     <!-- Upload Resume Form -->
                     <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline">
                         <button type="button" class="btn btn-primary uploadTBlockResume">Upload</button>
                         <input type="hidden" name="resumeURL" class="resumeURL"/>
-                        <input type="hidden" name="resumeType" th:value="t-block"/>
+                        <input type="hidden" name="resumeType" value="t-block"/>
                     </form>
                 </th>
             </tr>
@@ -60,12 +61,12 @@
 
             <tr>
                 <th colspan="2">
-                    Vertical Resume
+                    Vertical
                     <!-- Upload Button -->
                     <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline">
                         <button type="button" class="btn btn-primary uploadVerticalResume">Upload</button>
                         <input type="hidden" name="resumeURL" class="resumeURL"/>
-                        <input type="hidden" name="resumeType" th:value="vertical"/>
+                        <input type="hidden" name="resumeType" value="vertical"/>
                     </form>
                 </th>
             </tr>
@@ -99,6 +100,8 @@
         </table>
         <!-- ######## END VERTICAL TABLE ######## -->
     </div>
+
+    <h2 class="text-left">Notes</h2>
     <!-- Message from placement -->
     <p class="student-div">
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -112,6 +115,7 @@
     </div>
 
     <!-- Resume tips/tricks. download for example resume -->
+    <h2 class="ml-auto">Resume Builder Tips</h2>
     <div class="student-div">
         <p>
             During your time at Codeup, you will build at least 2 different types of resumes, a “T-Block” and a
@@ -133,19 +137,19 @@
     <h1>PLACEMENT VIEW</h1>
     <!-- Dropdown for cohorts -> dropdown for students -> button to download student resume -->
     <div class="student-div">
-        <select class="custom-select" id="cohort">
+        <select class="custom-select" id="cohort-dropdown">
+            <option>Select Cohort</option>
             <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}"
                     th:value="${cohort.id}">
             </option>
         </select>
-
-        <select class="custom-select" id="user">
-            <option th:each="user : ${users}" class="dropdown-item" th:text="${user.name}"
-                    th:value="${user.id}">
-            </option>
+        <select class="custom-select" id="student-dropdown">
+            <option>Select Student</option>
         </select>
 
-        <a class="downloadLink" href="">View Resume</a>
+<!--        <select class="custom-select" id="user-resume">-->
+<!--            <option th:each-->
+<!--        </select>-->
     </div>
 </div>
 
