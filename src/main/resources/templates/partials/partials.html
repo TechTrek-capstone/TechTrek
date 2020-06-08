@@ -19,7 +19,7 @@
 <body>
 
 <!-- Student Nav/Sidebar -->
-<nav th:fragment="studentNav">
+<nav th:fragment="studentNav" th:if="${user.userPerm == 'student'}">
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
@@ -104,7 +104,7 @@
 
 
 <!-- Admin Nav/Sidebar -->
-<nav th:fragment="adminNav">
+<nav th:fragment="adminNav" th:if="${user.userPerm == 'admin'}">
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
