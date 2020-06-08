@@ -53,7 +53,6 @@ public class UserAccountController {
         {
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
-            user.setUserWebsite("http://codeup.com");
             user.setUserPerm("student");
             users.save(user);
 
