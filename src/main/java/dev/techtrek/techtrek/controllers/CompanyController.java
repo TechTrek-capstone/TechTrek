@@ -38,7 +38,7 @@ public class CompanyController {
 
     // Create the company
     @PostMapping(path = "/companies/create")
-    public String createJobListing(@ModelAttribute Company company) {
+    public String createCompany(@ModelAttribute Company company) {
 
         // Save the company to DB and redirect to companies index page (table of all companies)
         companiesRepo.save(company);
@@ -57,7 +57,11 @@ public class CompanyController {
 
     // Submit the edited post information and update the DB
     @PostMapping("/companies/{id}/edit")
-    public String postEdit(@PathVariable long id, @RequestParam(name = "name") String name) {
+    public String companyEdit(
+            @PathVariable long id,
+            @RequestParam(name = "name") String name,
+            @RequestParam(name = "logo_img") String logoImg
+            ) {
 
         // Get the company from DB
         Company company = companiesRepo.getCompanyById(id);
@@ -65,9 +69,8 @@ public class CompanyController {
         // Set the name to the value in the name
         company.setName(name);
 
-
-        // TODO: Set the image to the value in the image field
-//        company.setImg(img); // Add img to RequestParam
+        // Set the image to the value in the image field
+        company.setLogoImg(logoImg);
 
         // Update the company in the DB
         companiesRepo.save(company);
@@ -79,7 +82,7 @@ public class CompanyController {
 
     // (Placement only) Delete a company
     @PostMapping("/companies/{id}/delete")
-    public String postDelete(@PathVariable long id) {
+    public String companyDelete(@PathVariable long id) {
         // Grab the post by the ID
         companiesRepo.deleteById(id);
 
