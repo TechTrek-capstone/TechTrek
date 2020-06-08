@@ -15,116 +15,84 @@
     <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
     <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
     <main class="page-content">
-        <div th:replace="partials/resumepartials :: deleteResumeModal"></div>
+        <div th:replace="partials/resumepartials :: resumeModals"></div>
 
         <h1>Resume Portal</h1>
 
         <h2 class="text-left">Resume</h2>
         <div class="d-flex">
-            <!-- ######## TABLE - T-block Resume ######## -->
-            <table class="table table-striped w-50 mr-5">
+
+            <!-- ######## RESUME TABLE ######## -->
+            <table class="table table-striped w-100">
 
                 <tr>
-                    <th colspan="2">
+                    <th colspan="3">
+                        <span class="text-left">
                         T-Block
-                        <!-- Upload Resume Form -->
+                            <!-- Upload Resume Form -->
                         <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline">
                             <button type="button" class="btn btn-primary uploadTBlockResume">Upload</button>
                             <input type="hidden" name="resumeURL" class="resumeURL"/>
                             <input type="hidden" name="resumeTitle" class="resumeTitle"/>
                             <input type="hidden" name="resumeType" value="t-block"/>
                         </form>
+                        </span>
+                        <span class="text-right">
+                            Vertical
+                            <!-- Upload Button -->
+                            <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline">
+                                <button type="button" class="btn btn-primary uploadVerticalResume">Upload</button>
+                                <input type="hidden" name="resumeURL" class="resumeURL"/>
+                                <input type="hidden" name="resumeTitle" class="resumeTitle"/>
+                                <input type="hidden" name="resumeType" value="vertical"/>
+                            </form>
+                        </span>
                     </th>
                 </tr>
 
                 <tr>
-                    <th scope="col">Resume</th>
+                    <th scope="col">File</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Revision</th>
                 </tr>
 
-                <span th:each="resume : ${resumesTBlock}">
-            <tr class="resume-row">
-                <td>
-                    <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
-                    <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem"><i
-                            class="fas fa-binoculars"></i></a>
-                        <!-- Delete Button -->
-                        <button data-toggle="modal" data-target="#deleteResumeModal"
-                                class="btn btn-link text-danger" style="font-size: 1.5rem" th:data-id="${resume.id}">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </span>
-                </td>
+                <span th:each="resume : ${resumes}">
+                    <tr class="resume-row">
 
-                <td>
-                    <p class="resume-status"></p>
-                </td>
-            </tr>
-        </span>
+                        <td>
+                            <span style="justify-content: space-evenly">
+                                <span th:text="${resume.title}"></span>
+                            <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem"><i
+                                    class="fas fa-binoculars"></i></a>
+                                <!-- Delete Button -->
+                                <button data-toggle="modal" data-target="#deleteResumeModal"
+                                        class="btn btn-link text-danger" style="font-size: 1.5rem"
+                                        th:data-id="${resume.id}">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </span>
+                        </td>
+
+                        <td>
+                            <p class="resume-status"></p>
+                        </td>
+
+                        <td>
+                            <a th:href="${resume.revision}" target="_blank" style="font-size: 1.5rem"><i
+                                    class="fas fa-binoculars"></i></a>
+                            <button type="button" class="btn btn-primary resumeNotes" data-toggle="collapse"
+                                    data-target="#notesCollapse" th:value="${resume.placementNotes}">Notes</button>
+                        </td>
+                    </tr>
+                </span>
             </table>
-            <!-- ######## END TB TABLE ######## -->
-
-            <!-- ######## TABLE - Vertical Resume ######## -->
-            <table class="table table-striped w-50 ml-5">
-
-                <tr>
-                    <th colspan="2">
-                        Vertical
-                        <!-- Upload Button -->
-                        <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline">
-                            <button type="button" class="btn btn-primary uploadVerticalResume">Upload</button>
-                            <input type="hidden" name="resumeURL" class="resumeURL"/>
-                            <input type="hidden" name="resumeTitle" class="resumeTitle"/>
-                            <input type="hidden" name="resumeType" value="vertical"/>
-                        </form>
-                    </th>
-                </tr>
-
-                <tr>
-                    <th scope="col">Resume</th>
-                    <th scope="col">Status</th>
-                </tr>
-
-                <span th:each="resume : ${resumesVertical}">
-            <tr class="resume-row">
-
-                <!-- DATA: Resume Versions -->
-                <td>
-                    <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
-                    <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem"><i
-                            class="fas fa-binoculars"></i></a>
-                        <!-- Delete Button -->
-                        <button data-toggle="modal" data-target="#deleteResumeModal"
-                                class="btn btn-link text-danger" style="font-size: 1.5rem" th:data-id="${resume.id}">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </span>
-                </td>
-
-                <!-- DATA: Status -->
-                <td>
-                    <p class="resume-status">Not uploaded.</p>
-                </td>
-            </tr>
-        </span>
-            </table>
-            <!-- ######## END VERTICAL TABLE ######## -->
         </div>
 
         <h2 class="text-left">Notes</h2>
         <!-- Message from placement -->
-        <p>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                    aria-expanded="false" aria-controls="collapseExample">
-                View Resume Notes
-            </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body placement-resume-notes">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
-                anim
-                keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-            </div>
+        <div class="collapse" id="notesCollapse">
+            <div class="card card-body placement-resume-notes"></div>
         </div>
 
         <!-- Resume tips/tricks. download for example resume -->
@@ -285,7 +253,7 @@
 
             <!-- Dropdown for cohorts -->
             <select class="custom-select" id="cohort-dropdown">
-                <option>Select Cohort</option>
+                <option disabled selected>Select Cohort</option>
                 <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}"
                         th:value="${cohort.id}">
                 </option>
@@ -293,7 +261,7 @@
 
             <!-- Dropdown for students -->
             <select class="custom-select" id="student-dropdown">
-                <option>Select Student</option>
+                <option disabled selected>Select Student</option>
             </select>
 
             <!-- Tables for both resume types -->
@@ -303,17 +271,23 @@
                         <th colspan="4">Resume</th>
                     </tr>
                     <tr>
-                        <th>Name</th>
+                        <th>Filename</th>
                         <th>Type</th>
                         <th>Upload Revision</th>
                         <th>Upload Notes</th>
                     </tr>
                 </table>
 
-
+                <!-- Form to submit resume revision -->
                 <form th:action="@{resume/revision}" method="post" id="uploadResumeRevision">
                     <input type="hidden" name="resumeRevisionUpload" id="resumeRevisionUpload">
-                    <input type="hidden" name="resumeRevisionId" id="resumeRevisionId">
+                    <input type="hidden" name="resumeId" id="resumeId">
+                </form>
+
+                <!-- Form to submit resume notes -->
+                <form th:action="@{resume/notes}" method="post" id="uploadResumeNotes">
+                    <input type="hidden" name="resumeNotesUpload" id="resumeNotesUpload">
+                    <input type="hidden" name="resumeNotesId" id="resumeNotesId">
                 </form>
             </div>
     </main>

@@ -120,12 +120,11 @@ $(document).ready(function () {
             type: 'GET',
             url: '/resume/' + cohortId,
             success: [function (data) {
-                let student = $("#student-dropdown"), option = "Select Student";
-                // student.empty();
+                let student = $("#student-dropdown"), option = "<option disabled selected>Select Student</option>";
+                student.empty();
 
                 for (let i = 0; i < data.length; i++) {
-                    option = option + "<option value='" + data[i].id + "'>" + data[i].userfirstname + ' ' + data[i].lastName + "</option>";
-
+                    option += "<option value='" + data[i].id + "'>" + data[i].userfirstname + ' ' + data[i].lastName + "</option>";
                 }
                 student.append(option);
             }],
@@ -149,12 +148,14 @@ $(document).ready(function () {
                 let resumeData;
                 let noResume = "<tr colspan='3'><td>No Resume Uploaded</td></tr>";
 
+                studentResumes.empty();
+
                 for (let i = 0; i < data.length; i++) {
                     resumeData = resumeData
                         + "<tr><td><a href='" + data[i].link + "' target=_blank'>" + data[i].title + "</a></td>"
                         + "<td>'" + data[i].type + "'</td>"
                         + "<td><button type='button' class='btn btn-primary uploadResumeRevision' value='" + data[i].id + "'>Upload Revision</button></td>"
-                        + "<td><button type='button' class='btn btn-primary uploadResumeNotes' value='" + data[i].id + "'>Upload Notes</button></td></tr>";
+                        + "<td><button type='button' class='btn btn-primary uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='" + data[i].id + "'>Upload Notes</button></td></tr>";
                 }
                 studentResumes.append(resumeData);
             }],
@@ -180,7 +181,21 @@ $(document).on('click', '.uploadResumeRevision', (function () {
 
             fsURL = resultJSON.filesUploaded[0].url;
             $("#resumeRevisionUpload").val(fsURL);
-            $("#resumeRevisionId").val(id);
+            $("#resumeId").val(id);
             $("#uploadResumeRevision").submit();
         })
 }));
+
+// PLACEMENT - upload resume revision
+$(document).on('click', '.uploadResumeNotes', (function () {
+    $("#resumeNotesId").val($(this).val());
+}));
+
+$(document).on('click', '.sendNotes', (function () {
+    $("#resumeNotesUpload").val($("#resumeNotes").val());
+    $("#uploadResumeNotes").submit();
+}));
+
+$(document).on('click', '.resumeNotes', function() {
+    $(".placement-resume-notes").html($(this).val());
+});

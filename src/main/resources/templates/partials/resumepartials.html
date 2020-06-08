@@ -3,37 +3,57 @@
 <body>
 
 <!-- Delete Modal -->
-<div th:fragment="deleteResumeModal" class="modal fade" id="deleteResumeModal" tabindex="-1" role="dialog"
-     aria-labelledby="deleteResumeModal"
-     aria-hidden="true">
+<div th:fragment="resumeModals">
+    <div th:fragment="deleteResumeModal" class="modal fade" id="deleteResumeModal" tabindex="-1" role="dialog"
+         aria-labelledby="deleteResumeModal"
+         aria-hidden="true">
 
-    <form th:action="@{resume/delete}" th:method="POST">
+        <form th:action="@{resume/delete}" th:method="POST">
 
-    <!-- Get ID here from custom.js-->
-    <input type="hidden" name="deleteResumeId" id="deleteResumeId"/>
+            <!-- Get ID here from custom.js-->
+            <input type="hidden" name="deleteResumeId" id="deleteResumeId"/>
 
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title text-center text-danger"
+                            id="companyDeleteModalLabel">Warning</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lead">
+                            Delete this resume? This action is final.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary"
+                                data-dismiss="modal">Cancel
+                        </button>
+                        <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- /end of modal -->
+
+    <!-- Message Modal -->
+    <div th:fragment="notesModal" class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title text-center text-danger"
-                        id="companyDeleteModalLabel">Warning</h2>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Enter Notes</h5>
                 </div>
                 <div class="modal-body">
-                    <p class="lead">
-                        Delete this resume? This action is final.
-                    </p>
+                    <textarea id="resumeNotes"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary"
-                            data-dismiss="modal">Cancel
-                    </button>
-                    <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary sendNotes">Send Notes</button>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
-<!-- /end of modal -->
 
 </body>
 </html>

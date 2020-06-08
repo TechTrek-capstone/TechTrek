@@ -36,9 +36,8 @@ public class ResumeController {
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
 
-        model.addAttribute("resumesTBlock", resumeRepo.findAllByType("t-block"));
-        model.addAttribute("resumesVertical", resumeRepo.findAllByType("vertical"));
-//        model.addAttribute("user", new User());
+        List<Resume> resumes = resumeRepo.findAllByUser_Id(user.getId());
+        model.addAttribute("resumes", resumes);
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
         return "resume/index";
@@ -82,10 +81,20 @@ public class ResumeController {
     }
 
     @PostMapping("resume/revision")
-    public String uploadTBlockRevision(@RequestParam(name = "resumeRevisionUpload") String resumeURL,
-                                       @RequestParam(name = "resumeRevisionId") long id) {
+    public String uploadResumeRevision(@RequestParam(name = "resumeRevisionUpload") String resumeURL,
+                                       @RequestParam(name = "resumeId") long id) {
         Resume resume = resumeRepo.findById(id);
         resume.setRevision(resumeURL);
+        resumeRepo.save(resume);
+
+        return "redirect:/resume";
+    }
+
+    @PostMapping("resume/notes")
+    public String uploadResumeNotes(@RequestParam(name = "resumeNotesUpload") String resumeNotes,
+                                       @RequestParam(name = "resumeNotesId") long id) {
+        Resume resume = resumeRepo.findById(id);
+        resume.setPlacementNotes(resumeNotes);
         resumeRepo.save(resume);
 
         return "redirect:/resume";
