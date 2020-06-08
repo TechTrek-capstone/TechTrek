@@ -1,5 +1,6 @@
 package dev.techtrek.techtrek.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,5 +26,6 @@ public class Cohort {
     private String location;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cohort")
+    @JsonBackReference
     private List<User> studentList;
 }
