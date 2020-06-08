@@ -31,9 +31,9 @@
                         <button type="button" id="uploadLogoImg" class="btn btn-primary rounded-pill">Choose file
                         </button>
 
-                        <div id="uploadSuccessful" class="alert alert-success mt-3 ml-3" style="display: none">
-                            <i class="far fa-check-circle"></i> Upload successful!
-                        </div>
+                        <span id="uploadSuccessful" class="ml-1 text-success" style="display: none; font-size: 1.25rem;">
+                            <i class="far fa-check-circle"></i>
+                        </span>
 
                         <input type="hidden" name="logo_img" id="logoImg" th:field="*{logoImg}">
                     </div>
@@ -73,11 +73,6 @@
             });
     });
 
-    // // Add the following code if you want the name of the file appear on select
-    // $(".custom-file-input").on("change", function() {
-    //     var fileName = $(this).val().split("\\").pop();
-    //     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    // });
 </script>
 </body>
 </html>

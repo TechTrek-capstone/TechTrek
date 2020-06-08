@@ -62,7 +62,7 @@
                                 </div>
 
 
-                                <h6>About</h6>
+                                <h5>About</h5>
                                 <p>
                                     <span th:if="${user.bioSummary == ''}">
                                         No description for <span th:text="${user.userfirstname}"></span> yet.
@@ -70,7 +70,7 @@
                                     <span th:unless="${user.bioSummary == ''}" th:text="${user.bioSummary}"></span>
                                 </p>
 
-                                <h6>Desired work location(s)</h6>
+                                <h5>Desired work location(s)</h5>
                                 <p>
                                     <span th:if="${user.workLocation == ''}">
                                         <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
@@ -124,7 +124,7 @@
                                 <hr class="hr-light" />
 
                                 <!-- Skills pill badges -->
-                                <h6>Skills</h6>
+                                <h5>Skills</h5>
 
                                 <span th:if="${user.getSkills().isEmpty()}">No skills selected yet.</span>
 
@@ -160,6 +160,10 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Profile picture</label>
                                 <div class="col-lg-9">
                                     <button type="button" id="uploadProfilePic" class="btn btn-primary rounded-pill">Choose file</button>
+
+                                    <span id="uploadSuccessful" class="ml-1 text-success" style="display: none; font-size: 1.25rem;">
+                                        <i class="far fa-check-circle"></i>
+                                    </span>
 
                                     <input type="hidden" name="profile_pic" id="profilePic" th:value="${user.profilePic}">
                                 </div>
@@ -197,7 +201,7 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Hire Status</label>
                                 <div class="col-lg-9">
                                     <select class="custom-select form-control" name="employment_status" id="employmentStatus">
-                                        <option th:each="status : ${T(dev.techtrek.techtrek.models.EmploymentStatus).values()}" th:value="${status}" th:selected="${user.getEmploymentStatus()}" th:text="${status.getDisplayValue()}"></option>
+                                        <option th:each="status : ${T(dev.techtrek.techtrek.models.EmploymentStatus).values()}" th:value="${status}" th:selected="${user.getEmploymentStatus() == status}" th:text="${status.getDisplayValue()}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -342,6 +346,9 @@
                 $("#profilePic").val(fsURL);
                 // $("#resumeUploadTBlock").submit();
             })
+            .then(function () {
+                $("#uploadSuccessful").show();
+            });
     });
 </script>
 
