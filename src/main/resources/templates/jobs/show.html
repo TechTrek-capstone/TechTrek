@@ -80,8 +80,8 @@
             </ul>
         </div>
 
-        <div class="text-center mb-3" th:if="${user.userPerm == 'admin'}">
-            <h2>Placement Team Controls</h2>
+        <div class="text-center mb-3 bg-light rounded" th:if="${user.userPerm == 'admin'}">
+            <h2>Admin Controls</h2>
 
             <a th:href="@{|/jobs/${job.id}/edit|}">
                 <button type="button" class="btn btn-primary btn-lg">Edit</button>

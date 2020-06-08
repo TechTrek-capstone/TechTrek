@@ -39,7 +39,7 @@
                     <h3 class="mb-3"><span class="badge badge-pill badge-primary" th:text="${#strings.capitalize(user.getUserPerm())}">User role</span></h3>
 
 
-                    <h4 th:unless="${user.cohort == null}"
+                    <h4 th:unless="${user.cohort == null} OR ${user.userPerm == 'admin'}"
                         style="margin-top: -.25rem; color: lightgray; font-weight: normal">
                         <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fas fa-map-marker-alt" aria-hidden="true"></i><span
                             th:text="${user.getCohort().location}"></span>
@@ -51,7 +51,7 @@
                     <li class="nav-item">
                         <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                     </li>
-                    <li class="nav-item">
+                    <li th:unless="${user.userPerm == 'admin'}" class="nav-item">
                         <a href="" data-target="#documents" data-toggle="tab" class="nav-link">Documents</a>
                     </li>
                     <li class="nav-item">
@@ -85,13 +85,15 @@
                                     <span th:unless="${user.bioSummary == ''}" th:text="${user.bioSummary}"></span>
                                 </p>
 
-                                <h5>Desired work location(s)</h5>
-                                <p>
-                                    <span th:if="${user.workLocation == ''}">
-                                        <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
-                                    </span>
-                                    <span th:unless="${user.workLocation == ''}" th:text="${user.workLocation}"></span>
-                                </p>
+                                <div th:unless="${user.userPerm == 'admin'}">
+                                    <h5>Desired work location(s)</h5>
+                                    <p>
+                                        <span th:if="${user.workLocation == ''}">
+                                            <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
+                                        </span>
+                                        <span th:unless="${user.workLocation == ''}" th:text="${user.workLocation}"></span>
+                                    </p>
+                                </div>
                             </div>
 
 
@@ -113,7 +115,7 @@
                                 <div class="d-flex mt-2" style="font-size: 2rem">
 
                                     <!-- Link to Github profile -->
-                                    <span th:unless="${user.githubUsername == ''}">
+                                    <span th:unless="${user.githubUsername == ''} OR ${user.userPerm == 'admin'}">
                                         <a th:href="'https://github.com/' + ${user.githubUsername}" target="_blank">
                                             <i class="fab fa-github mr-2"></i>
                                         </a>
@@ -136,14 +138,15 @@
 
                                 </div>
 
-                                <hr class="hr-light" />
+                                <div th:unless="${user.userPerm == 'admin'}">
+                                    <hr class="hr-light" />
+                                    <!-- Skills pill badges -->
+                                    <h5>Skills</h5>
 
-                                <!-- Skills pill badges -->
-                                <h5>Skills</h5>
+                                    <span th:if="${user.getSkills().isEmpty()}">No skills selected yet.</span>
 
-                                <span th:if="${user.getSkills().isEmpty()}">No skills selected yet.</span>
-
-                                <span th:unless="${user.getSkills().isEmpty()}" th:each="skill : ${user.getSkills()}" class="badge badge-dark badge-pill mr-1" th:text="${skill.getName()}">Skill name</span>
+                                    <span th:unless="${user.getSkills().isEmpty()}" th:each="skill : ${user.getSkills()}" class="badge badge-dark badge-pill mr-1" th:text="${skill.getName()}">Skill name</span>
+                                </div>
                             </div>
                         </div>
 
@@ -151,7 +154,7 @@
 
                     </div>
 
-                    <div class="tab-pane" id="documents">
+                    <div th:unless="${user.userPerm == 'admin'}" class="tab-pane" id="documents">
                        <h4>Resumes</h4>
                         <table class="table table-hover table-striped">
                             <tbody>
@@ -203,7 +206,7 @@
                                            th:value="${user.lastName}">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Cohort</label>
                                 <div class="col-lg-9">
                                     <!-- If user already has cohort, this dropdown will pre-select their cohort from list -->
@@ -216,7 +219,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Hire Status</label>
                                 <div class="col-lg-9">
                                     <select class="custom-select form-control" name="employment_status" id="employmentStatus">
@@ -233,7 +236,7 @@
                                     </textarea>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Desired work location(s)</label>
                                 <div class="col-lg-9">
                                     <input id="workLocation" name="work_location" class="form-control" type="text"
@@ -255,7 +258,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Github username</label>
                                 <div class="col-lg-9">
                                     <input name="github_username" class="form-control" type="text"
@@ -278,7 +281,7 @@
                             </div>
                             <input type="hidden" name="user_perm" th:value="${user.userPerm}">
 
-                            <div class="form-group row">
+                            <div th:unless="${user.userPerm == 'admin'}" class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Skills</label>
                                 <div class="col-lg-9">
                                     <h6 class="text-secondary mb-4">Note: You should be able to speak "3 levels deep" on any skills selected.</h6>
@@ -309,7 +312,7 @@
 
     <!-- GITHUB BLOCK -->
 
-    <div id="user-github-info" class="mr-auto ml-auto text-center">
+    <div th:unless="${user.userPerm == 'admin'}" id="user-github-info" class="mr-auto ml-auto text-center">
         <hr data-content="Github Activity" class="hr-text mb-5" />
 
         <span th:if="${user.githubUsername == ''}">
@@ -325,7 +328,7 @@
         </span>
 
     </div>
-
+    </main>
 </div>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
