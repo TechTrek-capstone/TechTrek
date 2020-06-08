@@ -46,7 +46,7 @@
             <tr class="resume-row">
                 <td>
                     <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
-                    <a th:href="${resume.link}" style="font-size: 1.5rem"><i class="fas fa-binoculars"></i></a>
+                    <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem"><i class="fas fa-binoculars"></i></a>
                         <!-- Delete Button -->
                         <button data-toggle="modal" data-target="#deleteResumeModal"
                                 class="btn btn-link text-danger" style="font-size: 1.5rem" th:data-id="${resume.id}">
@@ -90,7 +90,7 @@
                 <!-- DATA: Resume Versions -->
                 <td>
                     <span class="w-25 mr-auto ml-auto" style="display: flex; justify-content: space-evenly">
-                    <a th:href="${resume.link}" style="font-size: 1.5rem"><i class="fas fa-binoculars"></i></a>
+                    <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem"><i class="fas fa-binoculars"></i></a>
                         <!-- Delete Button -->
                         <button data-toggle="modal" data-target="#deleteResumeModal"
                                 class="btn btn-link text-danger" style="font-size: 1.5rem" th:data-id="${resume.id}">
@@ -275,25 +275,27 @@
 
         <!-- Tables for both resume types -->
         <div class="d-flex">
-            <table class="table table-striped w-50 mr-5">
+            <table class="table table-striped w-50 mr-5 student-resume-tblock">
                 <tr>
-                    <th colspan="2">T-Block Resume</th>
+                    <th colspan="3">T-Block Resume</th>
                 </tr>
                 <tr>
-                    <th>Version</th>
+                    <th>Name</th>
                     <th>Upload Revision</th>
+                    <th>Upload Notes</th>
                 </tr>
-                <tr class="student-resume-tblock"></tr>
+<!--                <tr class="student-resume-tblock"></tr>-->
             </table>
-            <table class="table table-striped w-50 mr-5">
+            <table class="table table-striped w-50 mr-5 student-resume-vertical">
                 <tr>
-                    <th colspan="2">Vertical Resume</th>
+                    <th colspan="3">Vertical Resume</th>
                 </tr>
                 <tr>
-                    <th>Version</th>
+                    <th>Name</th>
                     <th>Upload Revision</th>
+                    <th>Upload Notes</th>
                 </tr>
-                <tr class="student-resume-vertical"></tr>
+<!--                <tr class="student-resume-vertical"></tr>-->
             </table>
         </div>
     </main>

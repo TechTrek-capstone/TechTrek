@@ -145,17 +145,24 @@ $(document).ready(function () {
             url: '/resume/student/'+studentId,
             success: [function(data){
                 console.log(data);
-                let counter = 0;
                 let resumeTBlock = $(".student-resume-tblock");
                 let resumeVertical = $(".student-resume-vertical");
                 let tBlockData;
                 let verticalData;
-                let noResume = "<td>No Resume Uploaded</td>";
+                let noResume = "<tr colspan='3'><td>No Resume Uploaded</td></tr>";
 
                 for(let i = 0; i<data.length; i++){
-                    tBlockData = "<td value='" + data[i].id + "'><a href='"+data[i].link+"' target=_blank'>" +"Version"+' '+counter+"</a></td> + <td>Upload Revision</td>";
-                    verticalData = "<td value='" + data[i].id + "'><a href='"+data[i].link+"' target=_blank'>" +"Version"+' '+counter+"</a></td> + <td>Upload Revision</td>";
-                    counter++;
+                    if (data[i].type === "t-block") {
+                        tBlockData = tBlockData
+                            + "<tr><td value='" + data[i].id + "'><a href='" + data[i].link + "' target=_blank'>"
+                            + data[i].title
+                            + "</a></td> + <td>Upload Revision</td></tr>";
+                    } else {
+                        verticalData = verticalData
+                            + "<tr><td value='" + data[i].id + "'><a href='" + data[i].link + "' target=_blank'>"
+                            + data[i].title
+                            + "</a></td> + <td>Upload Revision</td></tr>";
+                    }
                 }
 
                 if (resumeTBlock !== null) {
