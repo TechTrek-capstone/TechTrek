@@ -146,7 +146,10 @@
 
                                 <tr th:unless="${resumes.isEmpty()}" th:each="resume : ${resumes}">
                                     <td>
-                                        <span th:text="${resume.type}"></span>
+                                        <a th:href="${resume.link}" target="_blank">
+                                            <span th:text="${resume.title} + ' '"></span>
+                                        </a>
+                                        <small class="text-muted" th:text="'(' + ${resume.type + ')'}"></small>
                                     </td>
                                 </tr>
                             </tbody>
