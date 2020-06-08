@@ -26,13 +26,6 @@
 
         <hr class="hr-light w-75 mr-auto ml-auto mt-0 mb-0" />
 
-<!--        <div class="card-body">-->
-
-            <!-- Job description -->
-            <!-- Note: Limiting the jobs text (description) to 100 chars for readability in the card and to prevent growing the div. -->
-            <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description
-                text.</p>
-
             <a th:href="@{|/jobs/${job.id}|}">
                 <button class="btn btn-block btn-primary mb-1">View listing</button>
             </a>

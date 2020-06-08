@@ -97,7 +97,7 @@ create table if not exists job_listings
 (
     id bigint auto_increment primary key,
     apply_url varchar(2000) not null,
-    description text not null,
+    description mediumtext not null,
     is_archived bit not null,
     is_remote bit not null default false,
     listing_date datetime(6) not null,

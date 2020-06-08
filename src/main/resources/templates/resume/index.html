@@ -5,43 +5,49 @@
 </head>
 
 <body>
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
 
-<nav th:replace="partials/partials :: navbar"></nav>
-<div th:replace="partials/resumepartials :: deleteResumeModal"></div>
+    <!-- sidebar-wrapper  -->
+    <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
+    <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
+    <main class="page-content">
 
-<div class="container text-center">
+        <div class="container text-center">
+            <div th:replace="partials/resumepartials :: deleteResumeModal"></div>
+            <!-- STUDENT VIEW -->
+            <h1>Resume Portal</h1>
+            <!-- Message from placement -->
+            <div class="student-div">
+                <p class="placement-msg">(placeholder - will be msg from placement after review) No resume uploaded.</p>
+            </div>
 
-    <!-- STUDENT VIEW -->
-    <h1>Resume Portal</h1>
-    <!-- Message from placement -->
-    <div class="student-div">
-        <p class="placement-msg">(placeholder - will be msg from placement after review) No resume uploaded.</p>
-    </div>
+            <!-- ######## TABLE - T-block Resume ######## -->
+            <table class="table table-striped w-50 mr-auto ml-auto">
 
-    <!-- ######## TABLE - T-block Resume ######## -->
-    <table class="table table-striped w-50 mr-auto ml-auto">
+                <!-- ROW: Header -->
+                <tr>
+                    <th colspan="3">
+                        <!-- Upload Button -->
+                        <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock">
+                            <button type="button" class="btn btn-primary uploadTBlockResume">Upload</button>
+                            <input type="hidden" name="resumeURL" class="resumeURL"/>
+                            <input type="hidden" name="resumeType" th:value="t-block"/>
+                        </form>
+                        T-Block Resume
+                    </th>
+                </tr>
 
-        <!-- ROW: Header -->
-        <tr>
-            <th colspan="3">
-                <!-- Upload Button -->
-                <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock">
-                    <button type="button" class="btn btn-primary uploadTBlockResume">Upload</button>
-                    <input type="hidden" name="resumeURL" class="resumeURL"/>
-                    <input type="hidden" name="resumeType" th:value="t-block"/>
-                </form>
-                T-Block Resume
-            </th>
-        </tr>
+                <!-- ROW: Sub-headers -->
+                <tr>
+                    <th scope="col">Resume</th>
+                    <th scope="col">Status</th>
+                </tr>
 
-        <!-- ROW: Sub-headers -->
-        <tr>
-            <th scope="col">Resume</th>
-            <th scope="col">Status</th>
-        </tr>
-
-        <!-- ROW: Resumes -->
-        <span th:each="resume : ${resumesTBlock}">
+                <!-- ROW: Resumes -->
+                <span th:each="resume : ${resumesTBlock}">
         <tr class="resume-row">
 
             <!-- DATA: Resume Versions -->
@@ -62,33 +68,33 @@
             </td>
         </tr>
         </span>
-    </table>
-    <!-- END TABLE -->
+            </table>
+            <!-- END TABLE -->
 
-    <!-- ######## TABLE - Vertical Resume ######## -->
-    <table class="table table-striped w-50 mr-auto ml-auto">
+            <!-- ######## TABLE - Vertical Resume ######## -->
+            <table class="table table-striped w-50 mr-auto ml-auto">
 
-        <!-- ROW: Header -->
-        <tr>
-            <th colspan="3">
-                <!-- Upload Button -->
-                <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical">
-                    <button type="button" class="btn btn-primary uploadVerticalResume">Upload</button>
-                    <input type="hidden" name="resumeURL" class="resumeURL"/>
-                    <input type="hidden" name="resumeType" th:value="vertical"/>
-                </form>
-                Vertical Resume
-            </th>
-        </tr>
+                <!-- ROW: Header -->
+                <tr>
+                    <th colspan="3">
+                        <!-- Upload Button -->
+                        <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical">
+                            <button type="button" class="btn btn-primary uploadVerticalResume">Upload</button>
+                            <input type="hidden" name="resumeURL" class="resumeURL"/>
+                            <input type="hidden" name="resumeType" th:value="vertical"/>
+                        </form>
+                        Vertical Resume
+                    </th>
+                </tr>
 
-        <!-- ROW: Sub-headers -->
-        <tr>
-            <th scope="col">Resume</th>
-            <th scope="col">Status</th>
-        </tr>
+                <!-- ROW: Sub-headers -->
+                <tr>
+                    <th scope="col">Resume</th>
+                    <th scope="col">Status</th>
+                </tr>
 
-        <!-- ROW: Resumes -->
-        <span th:each="resume : ${resumesVertical}">
+                <!-- ROW: Resumes -->
+                <span th:each="resume : ${resumesVertical}">
         <tr class="resume-row">
 
             <!-- DATA: Resume Versions -->
@@ -109,47 +115,50 @@
             </td>
         </tr>
         </span>
-    </table>
-    <!-- END TABLE -->
+            </table>
+            <!-- END TABLE -->
 
-    <!-- Resume tips/tricks. download for example resume -->
-    <div class="student-div">
-        <p>
-            During your time at Codeup, you will build at least 2 different types of resumes, a “T-Block” and a
-            “Vertical". Today, we are going to go over the T-Block resume. The purpose of the T-Block resume is to have
-            a 1 page, easy to consume resume. Your resume will be made up of 5-6 different sections listed below in
-            order of importance:
-        </p>
-        <ul>
-            <li>Professional Summary</li>
-            <li>Technical Skills</li>
-            <li>Development Projects</li>
-            <li>Professional Experience</li>
-            <li>Military Experience (if warranted)</li>
-            <li>Education</li>
-        </ul>
-    </div>
+            <!-- Resume tips/tricks. download for example resume -->
+            <div class="student-div">
+                <p>
+                    During your time at Codeup, you will build at least 2 different types of resumes, a “T-Block” and a
+                    “Vertical". Today, we are going to go over the T-Block resume. The purpose of the T-Block resume is
+                    to have
+                    a 1 page, easy to consume resume. Your resume will be made up of 5-6 different sections listed below
+                    in
+                    order of importance:
+                </p>
+                <ul>
+                    <li>Professional Summary</li>
+                    <li>Technical Skills</li>
+                    <li>Development Projects</li>
+                    <li>Professional Experience</li>
+                    <li>Military Experience (if warranted)</li>
+                    <li>Education</li>
+                </ul>
+            </div>
 
-    <!-- PLACEMENT VIEW -->
-    <h1>PLACEMENT VIEW</h1>
-    <!-- Dropdown for cohorts -> dropdown for students -> button to download student resume -->
-    <div class="student-div">
-        <select class="custom-select" id="cohort">
-            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}"
-                    th:value="${cohort.id}">
-            </option>
-        </select>
+            <!-- PLACEMENT VIEW -->
+            <h1>PLACEMENT VIEW</h1>
+            <!-- Dropdown for cohorts -> dropdown for students -> button to download student resume -->
+            <div class="student-div">
+                <select class="custom-select" id="cohort">
+                    <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}"
+                            th:value="${cohort.id}">
+                    </option>
+                </select>
 
-        <select class="custom-select" id="user">
-            <option th:each="user : ${users}" class="dropdown-item" th:text="${user.name}"
-                    th:value="${user.id}">
-            </option>
-        </select>
+                <select class="custom-select" id="user">
+                    <option th:each="user : ${users}" class="dropdown-item" th:text="${user.name}"
+                            th:value="${user.id}">
+                    </option>
+                </select>
 
-        <a class="downloadLink" href="">View Resume</a>
-    </div>
+                <a class="downloadLink" href="">View Resume</a>
+            </div>
+        </div>
+    </main>
 </div>
-
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>
 </html>

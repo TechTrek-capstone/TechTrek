@@ -5,9 +5,16 @@
 </head>
 
 <body>
-<nav th:replace="partials/partials :: navbar"></nav>
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
 
-<container>
+    <!-- sidebar-wrapper  -->
+    <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
+    <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
+
+    <main class="page-content">
 
 
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
@@ -68,11 +75,11 @@
         <button type="submit" class="btn btn-block btn-primary">Submit</button>
     </form>
 
-</container>
+</main>
 
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 
-
+</div>
 
 <script>
     var placesAutocomplete = places({

@@ -26,7 +26,7 @@ public class JobListing {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description", nullable = false, columnDefinition = "MEDIUMTEXT")
     private String description;
 
     @Column(name = "apply_url", nullable = false, length = 2000, unique = true)
