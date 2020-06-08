@@ -5,23 +5,33 @@
 </head>
 
 <body>
-<nav th:replace="partials/partials :: navbar"></nav>
+
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+
+    <!-- sidebar-wrapper  -->
+    <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
+    <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
+
+    <!-- Bootstrap Profile -->
+    <main class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 order-lg-2">
+                    <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
+                    <h3 class="mb-3"><span class="badge badge-pill badge-primary" th:text="${#strings.capitalize(user.getUserPerm())}">User role</span></h3>
 
 
-
-<!-- Bootstrap Profile -->
-<div class="container-lg">
-    <div class="container">
-        <div class="row my-2">
-            <div class="col-lg-8 order-lg-2">
-                <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
-              
-                <h3 class="mb-3"><span class="badge badge-pill badge-primary" th:text="${#strings.capitalize(user.getUserPerm())}">User role</span></h3>
-              
-                <h4 th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
-                    <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fas fa-map-marker-alt" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
-                    <br><small>Graduating <span th:text="${#dates.format(user.cohort.getGraduationDate(), 'MM-yyyy')}"></span></small>
-                </h4>
+                    <h4 th:unless="${user.cohort == null}"
+                        style="margin-top: -.25rem; color: lightgray; font-weight: normal">
+                        <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fas fa-map-marker-alt"
+                                                                                    aria-hidden="true"></i><span
+                            th:text="${user.getCohort().location}"></span>
+                        <br><small>Graduating <span
+                            th:text="${#dates.format(user.cohort.getGraduationDate(), 'MM-yyyy')}"></span></small>
+                    </h4>
 
                 <ul class="nav nav-tabs" style="margin-top: 2rem;">
                     <li class="nav-item">
@@ -52,7 +62,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <h5>About</h5>
+                                <h6>About</h6>
                                 <p>
                                     <span th:if="${user.bioSummary == ''}">
                                         No description for <span th:text="${user.userfirstname}"></span> yet.
@@ -60,7 +70,7 @@
                                     <span th:unless="${user.bioSummary == ''}" th:text="${user.bioSummary}"></span>
                                 </p>
 
-                                <h5>Desired work location(s)</h5>
+                                <h6>Desired work location(s)</h6>
                                 <p>
                                     <span th:if="${user.workLocation == ''}">
                                         <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
@@ -114,7 +124,7 @@
                                 <hr class="hr-light" />
 
                                 <!-- Skills pill badges -->
-                                <h5>Skills</h5>
+                                <h6>Skills</h6>
                                 <a href="#" class="badge badge-dark badge-pill">html5</a>
                                 <a href="#" class="badge badge-dark badge-pill">react</a>
                                 <a href="#" class="badge badge-dark badge-pill">codeply</a>
@@ -124,6 +134,11 @@
                                 <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
                                 <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
 
+                                <hr class="hr-light">
+
+                                <span class="badge badge-primary"><i class="fas fa-user"></i> 900 Followers</span>
+                                <span class="badge badge-success"><i class="fas fa-cog"></i> 43 Forks</span>
+                                <span class="badge badge-danger"><i class="fas fa-eye"></i> 245 Views</span>
                             </div>
                         </div>
 
@@ -132,7 +147,10 @@
                     </div>
 
                     <div class="tab-pane" id="documents">
-                        <h4 style="font-weight: normal">Resumes</h4>
+                        <div class="alert alert-info alert-dismissable">
+                            <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>.
+                            Use this to show important messages to the user.
+                        </div>
                         <table class="table table-hover table-striped">
                             <tbody>
                             <tr>
@@ -177,8 +195,6 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Profile picture</label>
                                 <div class="col-lg-9">
                                     <button type="button" id="uploadProfilePic" class="btn btn-primary rounded-pill">Choose file</button>
-
-                                    <i id="uploadSuccessful" class="far fa-check-circle text-success ml-2 " style="display: none; font-size: 1.25rem"></i>
 
                                     <input type="hidden" name="profile_pic" id="profilePic" th:value="${user.profilePic}">
                                 </div>
@@ -304,7 +320,7 @@
 
                 <!-- if profile pic is null display the default user svg pic-->
 
-                <div class="mr-auto ml-auto" th:if="${user.profilePic == null} OR ${user.profilePic == ''}" style="width: 200px; height: 200px;">
+                <div class="mr-auto ml-auto" th:if="${user.profilePic == null}" style="width: 150px; height: 150px;">
                                 <?xml version="1.0" encoding="iso-8859-1"?>
                                 <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -369,8 +385,8 @@
 
                 <!-- If the profile pic is not null display the profile image url -->
 
-                <div class="mr-auto ml-auto" th:unless="${user.profilePic == null} OR ${user.profilePic == ''}" style="border-radius: 50%; overflow: hidden; width:200px; height: 200px;">
-                    <img id="profilePicImg" th:src="${user.profilePic}" style="width: 200px; height: 200px; vertical-align: middle; object-fit: cover;"/>
+                <div class="mr-auto ml-auto" th:unless="${user.profilePic == null}" style="border-radius: 50%; overflow: hidden; width:200px; height: 200px;">
+                    <img th:src="${user.profilePic}" style="width: 200px; height: 200px; vertical-align: middle; object-fit: cover;"/>
                 </div>
             </div>
         </div>
@@ -421,10 +437,6 @@
                 $("#profilePic").val(fsURL);
                 // $("#resumeUploadTBlock").submit();
             })
-            .then(function () {
-                $("#uploadSuccessful").show();
-                $("#profilePicImg").attr("src", fsURL);
-            });
     });
 </script>
 
