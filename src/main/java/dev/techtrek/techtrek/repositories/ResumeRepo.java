@@ -10,4 +10,6 @@ public interface ResumeRepo extends JpaRepository<Resume, Long> {
     List<Resume> findAllByUser_Id(long id);
 
     List<Resume> findAllByType(String type);
+
+    Resume findById(long id);
 }

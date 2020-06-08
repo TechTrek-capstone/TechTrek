@@ -112,24 +112,43 @@ $(document).ready(function () {
         modal.find('#deleteResumeId').val(resumeId);
     });
 
+    // PLACEMENT - upload resume revision
+    $(".placementUploadTBlock").click(function () {
+        let id = $(this).val();
+        let client = filestack.init(fileStackKey);
+
+        client
+            .pick({
+                maxFiles: 1
+            })
+            .then(function (result) {
+                let resultJSON = JSON.parse(JSON.stringify(result));
+
+                fsURL = resultJSON.filesUploaded[0].url;
+                $("#tblockResumeRevisionUpload").val(fsURL);
+                $("#tblockResumeRevisionId").val(id);
+                $("#placementUploadTblock").submit();
+            })
+    });
+
     // DROPDOWN - populate student dropdown based off of cohort dropdown
-    $("#cohort-dropdown").change(function(){
+    $("#cohort-dropdown").change(function () {
         let cohortId = $(this).val();
 
         $.ajax({
             type: 'GET',
             url: '/resume/' + cohortId,
-            success: [function(data){
-                let student=$("#student-dropdown"), option="Select Student";
+            success: [function (data) {
+                let student = $("#student-dropdown"), option = "Select Student";
                 // student.empty();
 
-                for(let i = 0; i<data.length; i++){
-                    option = option + "<option value='" + data[i].id + "'>" +data[i].userfirstname + ' ' + data[i].lastName + "</option>";
+                for (let i = 0; i < data.length; i++) {
+                    option = option + "<option value='" + data[i].id + "'>" + data[i].userfirstname + ' ' + data[i].lastName + "</option>";
 
                 }
                 student.append(option);
             }],
-            error:function(){
+            error: function () {
                 alert("error");
             }
 
@@ -137,40 +156,36 @@ $(document).ready(function () {
     });
 
     // DROPDOWN - populate resume links based off of student dropdown
-    $("#student-dropdown").change(function(){
+    $("#student-dropdown").change(function () {
         let studentId = $(this).val();
 
         $.ajax({
             type: 'GET',
-            url: '/resume/student/'+studentId,
-            success: [function(data){
+            url: '/resume/student/' + studentId,
+            success: [function (data) {
                 console.log(data);
-                let counter = 0;
-                let resumeTBlock = $(".student-resume-tblock");
-                let resumeVertical = $(".student-resume-vertical");
-                let tBlockData;
-                let verticalData;
-                let noResume = "<td>No Resume Uploaded</td>";
+                let studentResumes = $(".student-resumes");
+                let resumeData;
+                let noResume = "<tr colspan='3'><td>No Resume Uploaded</td></tr>";
 
-                for(let i = 0; i<data.length; i++){
-                    tBlockData = "<td value='" + data[i].id + "'><a href='"+data[i].link+"' target=_blank'>" +"Version"+' '+counter+"</a></td> + <td>Upload Revision</td>";
-                    verticalData = "<td value='" + data[i].id + "'><a href='"+data[i].link+"' target=_blank'>" +"Version"+' '+counter+"</a></td> + <td>Upload Revision</td>";
-                    counter++;
-                }
+                for (let i = 0; i < data.length; i++) {
+                        resumeData = resumeData
+                            + "<tr><td value='" + data[i].id + "'><a href='" + data[i].link + "' target=_blank'>"
+                            + data[i].title
+                            + "</a></td>"
+                            + "<td>'"+data[i].type+"'</td>"
+                            + "<td><button type='button' class='btn btn-primary placementUploadTBlock' value='" + data[i].id + "'>Upload Revision</button></td><td>Upload Message</td></tr>";
+                    }
 
-                if (resumeTBlock !== null) {
-                    resumeTBlock.append(tBlockData);
+
+                if (studentResumes !== null) {
+                    studentResumes.append(resumeData);
                 } else {
-                    resumeTBlock.append(noResume);
+                    studentResumes.append(noResume);
                 }
 
-                if (resumeVertical !== null) {
-                    resumeVertical.append(verticalData);
-                } else {
-                    resumeVertical.append(noResume);
-                }
             }],
-            error:function(){
+            error: function () {
                 alert("error");
             }
 
