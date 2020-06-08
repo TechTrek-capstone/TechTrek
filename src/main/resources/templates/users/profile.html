@@ -47,8 +47,10 @@
                 <div class="tab-content py-4">
                     <div class="tab-pane active" id="profile">
 
-                        <!-- Employment status block -->
-                        <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null}" class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Employment status block -->
+                                <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null}" class="mb-3">
                             <span th:unless="${user.employmentStatus == null}">
                                 <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
                                     <span class="badge badge-success">Available for hire <i class="ml-1 fas fa-check-circle"></i></span>
@@ -58,10 +60,9 @@
                                     <span class="badge badge-info">Hired <i class="ml-1 fas fa-lock"></i></span>
                                 </h2>
                             </span>
-                        </div>
+                                </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
+
                                 <h6>About</h6>
                                 <p>
                                     <span th:if="${user.bioSummary == ''}">
@@ -125,20 +126,10 @@
 
                                 <!-- Skills pill badges -->
                                 <h6>Skills</h6>
-                                <a href="#" class="badge badge-dark badge-pill">html5</a>
-                                <a href="#" class="badge badge-dark badge-pill">react</a>
-                                <a href="#" class="badge badge-dark badge-pill">codeply</a>
-                                <a href="#" class="badge badge-dark badge-pill">angularjs</a>
-                                <a href="#" class="badge badge-dark badge-pill">css3</a>
-                                <a href="#" class="badge badge-dark badge-pill">jquery</a>
-                                <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
-                                <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
 
-                                <hr class="hr-light">
+                                <span th:if="${user.getSkills().isEmpty()}">No skills selected yet.</span>
 
-                                <span class="badge badge-primary"><i class="fas fa-user"></i> 900 Followers</span>
-                                <span class="badge badge-success"><i class="fas fa-cog"></i> 43 Forks</span>
-                                <span class="badge badge-danger"><i class="fas fa-eye"></i> 245 Views</span>
+                                <span th:unless="${user.getSkills().isEmpty()}" th:each="skill : ${user.getSkills()}" class="badge badge-dark badge-pill mr-1" th:text="${skill.getName()}">Skill name</span>
                             </div>
                         </div>
 
@@ -294,13 +285,12 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Skills</label>
                                 <div class="col-lg-9">
                                     <h6 class="text-secondary mb-4">Note: You should be able to speak "3 levels deep" on any skills selected.</h6>
-                                    <div class="row justify-content-around" name="skills">
+                                    <div class="row justify-content-around">
                                         <div th:each="skill : ${skills}" class="form-check form-check-inline col-md-3">
-                                            <input class="form-check-input" type="checkbox" th:id="'skillId' + ${skill.id}" th:value="${skill.id}">
+                                            <input name="skills" class="form-check-input" type="checkbox" th:id="'skillId' + ${skill.id}" th:value="${skill.id}" th:checked="${user.skills.contains(skill)}">
                                             <label class="form-check-label" th:for="'skillId' + ${skill.id}" th:text="${skill.name}"></label>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
 
