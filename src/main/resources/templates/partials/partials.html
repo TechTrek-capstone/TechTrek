@@ -23,7 +23,7 @@
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
-                <a href="#">TechTrek</a>
+                <a th:href="@{/home}">TechTrek</a>
                 <div id="close-sidebar">
                     <i class="fas fa-times"></i>
                 </div>
@@ -69,47 +69,23 @@
                     <li class="header-menu">
                         <span>General</span>
                     </li>
-                    <li class="sidebar-dropdown">
+                    <li>
                         <a th:href="@{/home}">
                             <i class="fa fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li>
-                                    <a href="#"> Main
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
-                    <li class="sidebar-dropdown">
-                        <a href="#">
+                    <li>
+                        <a th:href="@{/jobs}">
                             <i class="fas fa-briefcase"></i>
                             <span>Job Listings</span>
                         </a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li>
-                                    <a th:href="@{/jobs}">Browse
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
-                    <li class="sidebar-dropdown">
-                        <a href="#">
+                    <li>
+                        <a th:href="@{/events}">
                             <i class="fas fa-calendar-check"></i>
                             <span>Events</span>
                         </a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li>
-                                    <a th:href="@{/events}">Browse
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li>
                         <a th:href="@{/resume}">
@@ -121,9 +97,17 @@
             </div>
             <!-- sidebar-menu  -->
         </div>
+        <!-- sidebar footer -->
+        <div class="sidebar-footer">
+            <a th:href="@{/logout}">
+                <i class="fas fa-power-off" style="color:#b52628;"></i>
+            </a>
+        </div>
     </nav>
 </nav>
-<!-- Student Nav/Sidebar -->
+<!-- /Student Nav/Sidebar -->
+
+
 
 <!-- Admin Nav/Sidebar -->
 <nav th:fragment="adminNav">
@@ -145,13 +129,12 @@
                     <div class="user-pic" th:unless="${user.profilePic == null}">
                         <img class="img-responsive img-rounded" th:src="${user.profilePic}" alt="User picture">
                     </div>
+                    <div class="user-info">
+                        <span class="user-name"><span th:text="${user.userfirstname} + ' '"></span><strong
+                                th:text="${user.lastName}"></strong></span>
+                        <span class="user-role">Administrator</span>
+                    </div>
                 </a>
-                <div class="user-info">
-                    <span class="user-name"><span th:text="${user.userfirstname}"></span><strong
-                            th:text="${user.lastName}"></strong></span>
-                    <span class="user-role">Administrator</span>
-                    <span class="user-status"><i class="fa fa-circle"></i><span>Online</span></span>
-                </div>
             </div>
             <!-- sidebar-header  -->
             <div class="sidebar-search">
@@ -249,7 +232,9 @@
         </div>
     </nav>
 </nav>
-<!-- Admin Nav/Sidebar -->
+<!-- /Admin Nav/Sidebar -->
+
+
 
 <!-- OLD Navbar -->
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
@@ -318,6 +303,9 @@
         </ul>
     </div>
 </nav>
+<!-- /OLD nav bar-->
+
+
 
 <!-- All Modals -->
 <div th:fragment="allModals">

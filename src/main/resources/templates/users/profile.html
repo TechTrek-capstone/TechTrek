@@ -62,7 +62,7 @@
                                 </div>
 
 
-                                <h6>About</h6>
+                                <h5>About</h5>
                                 <p>
                                     <span th:if="${user.bioSummary == ''}">
                                         No description for <span th:text="${user.userfirstname}"></span> yet.
@@ -70,7 +70,7 @@
                                     <span th:unless="${user.bioSummary == ''}" th:text="${user.bioSummary}"></span>
                                 </p>
 
-                                <h6>Desired work location(s)</h6>
+                                <h5>Desired work location(s)</h5>
                                 <p>
                                     <span th:if="${user.workLocation == ''}">
                                         <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
@@ -124,7 +124,7 @@
                                 <hr class="hr-light" />
 
                                 <!-- Skills pill badges -->
-                                <h6>Skills</h6>
+                                <h5>Skills</h5>
 
                                 <span th:if="${user.getSkills().isEmpty()}">No skills selected yet.</span>
 
