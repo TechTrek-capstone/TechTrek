@@ -120,7 +120,9 @@ public class EventListingController {
 
             @RequestParam(name = "time") String time,
             @RequestParam(name = "description") String description,
-            @RequestParam(name = "rsvp_url") String rsvpUrl
+            @RequestParam(name = "rsvp_url") String rsvpUrl,
+
+            @RequestParam(name = "event_img") String eventImg
     ) {
 
         // Get the event listing from DB
@@ -143,6 +145,9 @@ public class EventListingController {
 
         // Set the RSVP url to URL in input field
         eventListing.setRsvpUrl(rsvpUrl);
+
+        // Set the event image to FileStack URL
+        eventListing.setEventImg(eventImg);
 
         // Update the event listing in the DB
         eventsRepo.save(eventListing);
