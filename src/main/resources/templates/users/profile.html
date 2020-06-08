@@ -270,7 +270,8 @@
                                            th:value="${user.githubUsername}">
                                 </div>
                             </div>
-<!--                            <input type="hidden" th:if="${user.userPerm == 'admin'}" name="github_username" th:value="">-->
+
+                            <input type="hidden" name="user_perm" th:value="${user.userPerm}">
 
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">LinkedIn username</label>
