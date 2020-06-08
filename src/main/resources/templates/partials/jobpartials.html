@@ -5,29 +5,27 @@
 <!--Basic job listing fragment used to show all jobs in cards.-->
 
 
-<div th:fragment="jobsListFrag">
-    <div class="row row-cols-1 row-cols-md-2" th:each="job : ${jobs}">
-        <div class="col mb-4">
-            <div class="card">
-                <img class="card-img-top p-2" style="max-width:5rem;"
-                     th:if="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}"
-                     th:src="@{/img/logo-placeholder.jpg}" alt="Placeholder logo">
-                <img class="card-img-top p-2" style="max-width:5rem;"
-                     th:unless="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}"
-                     th:src="${job.getCompany().getLogoImg()}" alt="Company logo">                <div class="card-body">
-                    <h5 class="card-title" th:text="${job.title}">Card title</h5>
-                    <p class="card-text"><a th:href="@{|/jobs/${job.id}|}" class="stretched-link">Read more...</a></p>
+<div th:fragment="jobsListFrag" class="row row-cols-1 row-cols-md-2" >
+    <div class="col mb-4" th:each="job : ${jobs}">
+        <div class="card" >
+            <img class="card-img-top rounded mx-auto d-block" style="max-width:10rem;"
+                 th:if="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}"
+                 th:src="@{/img/logo-placeholder.jpg}" alt="Placeholder logo">
+            <img class="card-img-top rounded mx-auto d-block" style="max-width:10rem;"
+                 th:unless="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}"
+                 th:src="${job.getCompany().getLogoImg()}" alt="Company logo">
+            <div class="card-body">
+                <p class="card-text" th:text="${job.getCompany().name}"></p>
+                <h5 class="card-title" th:text="${job.title}">Card title</h5>
+                <p class="card-text"><a th:href="@{|/jobs/${job.id}|}" class="stretched-link">Read more...</a></p>
                 <small th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">@mdo</small>
-                </div>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted" th:text="${job.location}">Last updated 3 mins ago</small>
             </div>
         </div>
     </div>
-<!--    -->
-
-
 </div>
-
-
 
 
 <!-- Job List frag for the dashboard -->
@@ -35,7 +33,7 @@
     <div class="card">
         <!-- title -->
         <div class="card-body">
-<!--                            <img th:if="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}" th:src="@{/img/logo-placeholder.jpg}" alt="Placeholder logo" style="width: 75px; height:75px; vertical-align: middle; object-fit: cover;" src="">-->
+            <!--                            <img th:if="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}" th:src="@{/img/logo-placeholder.jpg}" alt="Placeholder logo" style="width: 75px; height:75px; vertical-align: middle; object-fit: cover;" src="">-->
 
 
             <div class="d-md-flex align-items-center">
@@ -61,7 +59,8 @@
             </tr>
             </thead>
             <tbody th:each="job,iterStat : ${jobs}" th:if="${iterStat.index}<5">
-            <tr>                            <img  th:src="${job.getCompany().getLogoImg()}" alt="Company logo" style="width: 75px; height:75px; vertical-align: middle; object-fit: cover;" src="">
+            <tr><img th:src="${job.getCompany().getLogoImg()}" alt="Company logo"
+                     style="width: 75px; height:75px; vertical-align: middle; object-fit: cover;" src="">
             </tr>
             <tr>
                 <td><a th:href="@{|/jobs/${job.id}|}" th:text="${#strings.abbreviate(job.title, 50)}"></a></td>

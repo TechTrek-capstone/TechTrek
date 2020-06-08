@@ -72,6 +72,8 @@ public class UserController {
         model.addAttribute("jobs", jobList);
         List<EventListing> eventList = eventsRepo.findAll();
         model.addAttribute("eventsList", eventList);
+        List<User> userList = users.findAll();
+        model.addAttribute("userList", userList);
         return "users/index";
 
     }

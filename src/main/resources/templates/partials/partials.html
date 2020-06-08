@@ -298,6 +298,37 @@
 
 
 
+
+<!--    USER TABLE -->
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Join Date</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Cohort</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userList}">
+            <th scope="row" th:text="${user.id}"></th>
+            <td th:text="${user.getFullName()}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
+            <td th:text="${user.phoneNumber}"></td>
+            <td th:text="${user.getCohort().name}"></td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+
+
 </div>
 
 <!-- All Modals -->
