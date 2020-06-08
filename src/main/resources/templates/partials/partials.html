@@ -38,17 +38,17 @@
                     <div class="user-pic" th:unless="${user.profilePic == null}">
                         <img class="img-responsive img-rounded" th:src="${user.profilePic}" alt="User picture">
                     </div>
+                    <div class="user-info">
+                        <span class="user-name"><span th:text="${user.userfirstname} + ' '"></span><strong th:text="${user.lastName}"></strong></span>
+
+                        <span class="user-role">Student</span>
+
+                        <span class="user-status">
+                            <i class="fa fa-circle"></i>
+                            <span>Online</span>
+                      </span>
+                    </div>
                 </a>
-                <div class="user-info">
-          <span class="user-name"><span th:text="${user.userfirstname}"></span>
-            <strong th:text="${user.lastName}"></strong>
-          </span>
-                    <span class="user-role">Student</span>
-                    <span class="user-status">
-            <i class="fa fa-circle"></i>
-            <span>Online</span>
-          </span>
-                </div>
             </div>
             <!-- sidebar-header  -->
             <div class="sidebar-search">
@@ -70,7 +70,7 @@
                         <span>General</span>
                     </li>
                     <li class="sidebar-dropdown">
-                        <a href="#">
+                        <a th:href="@{/home}">
                             <i class="fa fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
@@ -85,7 +85,7 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-shopping-cart"></i>
+                            <i class="fas fa-briefcase"></i>
                             <span>Job Listings</span>
                         </a>
                         <div class="sidebar-submenu">
@@ -99,7 +99,7 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-shopping-cart"></i>
+                            <i class="fas fa-calendar-check"></i>
                             <span>Events</span>
                         </a>
                         <div class="sidebar-submenu">
@@ -117,36 +117,9 @@
                             <span>Resume</span>
                         </a>
                     </li>
-                    <li class="header-menu">
-                        <span>Extra</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-calendar"></i>
-                            <span>Development</span>
-                        </a>
-                    </li>
                 </ul>
             </div>
             <!-- sidebar-menu  -->
-        </div>
-        <!-- sidebar-content  -->
-        <div class="sidebar-footer">
-            <a href="#">
-                <i class="fa fa-bell"></i>
-                <!--                <span class="badge badge-pill badge-warning notification">3</span>-->
-            </a>
-            <a href="#">
-                <i class="fa fa-envelope"></i>
-                <!--                <span class="badge badge-pill badge-success notification">7</span>-->
-            </a>
-            <a href="#">
-                <i class="fa fa-cog"></i>
-                <!--                <span class="badge-sonar"></span>-->
-            </a>
-            <a th:href="@{/logout}">
-                <i class="fas fa-power-off" style="color:#b52628;"></i>
-            </a>
         </div>
     </nav>
 </nav>
@@ -220,7 +193,7 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-shopping-cart"></i>
+                            <i class="fas fa-briefcase"></i>
                             <span>Job Listings</span>
                         </a>
                         <div class="sidebar-submenu">
@@ -242,7 +215,7 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-shopping-cart"></i>
+                            <i class="fas fa-calendar-check"></i>
                             <span>Events</span>
                         </a>
                         <div class="sidebar-submenu">
@@ -264,39 +237,12 @@
                             <span>Resume</span>
                         </a>
                     </li>
-                    <li class="header-menu">
-                        <span>Extra</span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-calendar"></i>
-                            <span>Calendar</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-folder"></i>
-                            <span>Development</span>
-                        </a>
-                    </li>
                 </ul>
             </div>
             <!-- sidebar-menu  -->
         </div>
         <!-- sidebar-content  -->
         <div class="sidebar-footer">
-            <a href="#">
-                <i class="fa fa-bell"></i>
-                <!--                <span class="badge badge-pill badge-warning notification">3</span>-->
-            </a>
-            <a href="#">
-                <i class="fa fa-envelope"></i>
-                <!--                <span class="badge badge-pill badge-success notification">7</span>-->
-            </a>
-            <a href="#">
-                <i class="fa fa-cog"></i>
-                <!--                <span class="badge-sonar"></span>-->
-            </a>
             <a th:href="@{/logout}">
                 <i class="fas fa-power-off" style="color:#b52628;"></i>
             </a>

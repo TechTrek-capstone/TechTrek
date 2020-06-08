@@ -161,6 +161,10 @@
                                 <div class="col-lg-9">
                                     <button type="button" id="uploadProfilePic" class="btn btn-primary rounded-pill">Choose file</button>
 
+                                    <span id="uploadSuccessful" class="ml-1 text-success" style="display: none; font-size: 1.25rem;">
+                                        <i class="far fa-check-circle"></i>
+                                    </span>
+
                                     <input type="hidden" name="profile_pic" id="profilePic" th:value="${user.profilePic}">
                                 </div>
                             </div>
@@ -342,6 +346,9 @@
                 $("#profilePic").val(fsURL);
                 // $("#resumeUploadTBlock").submit();
             })
+            .then(function () {
+                $("#uploadSuccessful").show();
+            });
     });
 </script>
 
