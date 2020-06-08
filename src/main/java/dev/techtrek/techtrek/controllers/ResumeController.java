@@ -83,4 +83,15 @@ public class ResumeController {
     public List<Resume> studentResumes(@PathVariable long studentId) {
         return resumeRepo.findAllByUser_Id(studentId);
     }
+
+    @PostMapping("resume/revision")
+    public String uploadTBlockRevision(@ModelAttribute Resume resume,
+                               @RequestParam(name = "tblockResumeRevisionUpload") String resumeURL,
+                               @RequestParam(name = "tblockResumeRevisionId") long id) {
+
+        resume.setRevision(resumeURL);
+        resumeRepo.save(resume);
+
+        return "redirect:/resume";
+    }
 }
