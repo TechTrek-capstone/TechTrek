@@ -16,7 +16,7 @@
             <div class="col-lg-8 order-lg-2">
                 <h1 class="display-4 mt-3 mb-0" th:text="${user.getFullName()}"></h1>
               
-                <h5 class="display-4 mt-3 mb-0" th:text="${#strings.capitalize(user.getUserPerm())}"></h5>
+                <h3 class="mb-3"><span class="badge badge-pill badge-primary" th:text="${#strings.capitalize(user.getUserPerm())}">User role</span></h3>
               
                 <h4 th:unless="${user.cohort == null}" style="margin-top: -.25rem; color: lightgray; font-weight: normal">
                     <span th:text="${user.getCohort().name}"></span> cohort, <i class="mr-2 fas fa-map-marker-alt" aria-hidden="true"></i><span th:text="${user.getCohort().location}"></span>
@@ -40,17 +40,15 @@
                         <!-- Employment status block -->
                         <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null}" class="mb-3">
                             <span th:unless="${user.employmentStatus == null}">
-                                        <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
-                                            <span class="badge badge-success">Available for hire <i class="ml-1 fas fa-check-circle"></i></span>
-                                        </h2>
+                                <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
+                                    <span class="badge badge-success">Available for hire <i class="ml-1 fas fa-check-circle"></i></span>
+                                </h2>
 
-                                        <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).HIRED}">
-                                            <span class="badge badge-info">Hired <i class="ml-1 fas fa-lock"></i></span>
-                                        </h2>
-                                    </span>
+                                <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).HIRED}">
+                                    <span class="badge badge-info">Hired <i class="ml-1 fas fa-lock"></i></span>
+                                </h2>
+                            </span>
                         </div>
-
-<!--                        <h5 class="mb-3">Username: <span class="badge badge-pill badge-primary" th:text="${user.getUsername()}"></span></h5>-->
 
                         <div class="row">
                             <div class="col-md-6">
@@ -218,7 +216,7 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Hire Status</label>
                                 <div class="col-lg-9">
                                     <select class="custom-select form-control" name="employment_status" id="employmentStatus">
-                                        <option th:each="status : ${T(dev.techtrek.techtrek.models.EmploymentStatus).values()}" th:value="${status}" th:selected="${user.getEmploymentStatus()}" th:text="${status.getDisplayValue()}"></option>
+                                        <option th:each="status : ${T(dev.techtrek.techtrek.models.EmploymentStatus).values()}" th:value="${status}" th:selected="${user.getEmploymentStatus() == status}" th:text="${status.getDisplayValue()}"></option>
                                     </select>
                                 </div>
                             </div>
