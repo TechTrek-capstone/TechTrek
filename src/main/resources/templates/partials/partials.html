@@ -195,75 +195,6 @@
 <!-- /Admin Nav/Sidebar -->
 
 
-<!-- OLD Navbar -->
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{/home}">TechTrek</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Jobs
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" th:href="@{/jobs}">Browse</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" th:href="@{/jobs/create}">Create listing</a>
-                    <a class="dropdown-item" th:href="@{/companies}">Companies</a>
-                    <a class="dropdown-item" th:href="@{/companies/create}">Add a company</a>
-                </div>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Events
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" th:href="@{/events}">Browse</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" th:href="@{/events/create}">Add event</a>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/resume}">Resume</a>
-            </li>
-        </ul>
-
-        <ul class="navbar-nav ml-auto">
-
-            <form class="form-inline my-2 my-lg-0 mr-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" aria-label="Search"
-                           aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/profile}"><span style="font-size: 1.5rem"><i
-                        class="fa fa-user-circle"></i></span><span class="sr-only">(current)</span></a>
-            </li>
-
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link" th:href="@{/logout}">
-                    <button class="btn btn-link text-danger">Logout</button>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<!-- /OLD nav bar-->
-
 <!--DASHBOARDS-->
 
 <!--Admin Dash-->
@@ -319,10 +250,23 @@
 
 <!--Student Dash-->
 <div th:fragment="studentDash" th:if="${user.userPerm == 'student'}">
-    <div class="card border ">
-        <h1>Student Dashboard</h1>
-        <p>Links, resources, and messages from placement team will be displayed here.</p>
-    </div>
+    <h4>Resumes</h4>
+    <table class="table table-hover table-striped">
+<!--        <tbody>-->
+<!--        <tr th:if="${resumes.isEmpty() || resumes.isNull()} ">-->
+<!--            <td>No resumes to display for this user.</td>-->
+<!--        </tr>-->
+
+<!--        <tr th:unless="${resumes.isEmpty()}" th:each="resume : ${resumes}">-->
+<!--            <td>-->
+<!--                <a th:href="${resume.link}" target="_blank">-->
+<!--                    <span th:text="${resume.title} + ' '"></span>-->
+<!--                </a>-->
+<!--                <small class="text-muted" th:text="'(' + ${resume.type + ')'}"></small>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+    </table>
 </div>
 
 
