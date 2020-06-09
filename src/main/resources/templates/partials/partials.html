@@ -89,7 +89,7 @@
             <!-- sidebar-menu  -->
         </div>
         <!-- sidebar footer -->
-        <div class="sidebar-footer">
+        <div class="sidebar-footer p-3" style="font-size: 1.25rem">
             <a th:href="@{/logout}">
                 <i class="fas fa-power-off" style="color:#b52628;"></i>
             </a>
@@ -185,7 +185,7 @@
             <!-- sidebar-menu  -->
         </div>
         <!-- sidebar-content  -->
-        <div class="sidebar-footer">
+        <div class="sidebar-footer p-3" style="font-size: 1.25rem">
             <a th:href="@{/logout}">
                 <i class="fas fa-power-off" style="color:#b52628;"></i>
             </a>
@@ -199,7 +199,55 @@
 
 <!--Admin Dash-->
 <div th:fragment="adminDash" th:if="${user.userPerm == 'admin'}">
-    <div id="toolbar">
+        <div id="toolbar">
+            <h2 class="card-title">User Data</h2>
+        </div>
+        <table id="userListTable" class="table table-hover w-100"
+               data-toolbar="#toolbar"
+               data-toggle="table"
+               data-sort-class="table-active"
+               data-sortable="true"
+               data-height="460"
+               data-show-columns="true"
+               data-search="true"
+               data-id-field="id"
+               data-cookie="true"
+               data-cookie-id-table="saveId"
+              >
+            <thead>
+            <tr>
+                <th> - </th>
+                <th data-field="id" data-sortable="true">ID</th>
+                <th data-field="fullname" data-sortable="true" scope="col">Name</th>
+                <th data-field="username" data-sortable="true" scope="col">Username</th>
+                <th data-field="email" data-sortable="true" scope="col">Email</th>
+                <th data-field="createDate" data-sortable="true" scope="col">Join Date</th>
+                <th data-field="phoneNumber" data-sortable="true" scope="col">Phone</th>
+                <th data-field="cohort" data-sortable="true" scope="col">Cohort</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userList}">
+                <td><p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i
+                        class="fas fa-user-cog color-01"></i></p></td>
+                <td th:text="${user.id}" th:id="${user.id}"></td>
+                <td th:text="${user.getFullName()}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
+                <td th:text="${user.phoneNumber}"></td>
+                <td><span th:unless="${user.getCohort() == ''} OR ${user.getCohort() == null}"><span
+                        th:text="${user.getCohort().name}">Cohort name</span></span></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    <div class="row" th:replace="partials/jobpartials :: dashJobList" ></div>
+
+  
+  
+<!--     <div id="toolbar">
         <h2 class="card-title">User Data</h2>
     </div>
     <table id="userListTable" class="table table-hover w-100"
@@ -240,8 +288,7 @@
                     th:text="${user.getCohort().name}">Cohort name</span></span></td>
         </tr>
         </tbody>
-    </table>
-
+    </table> -->
 
 </div>
 
@@ -738,6 +785,41 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
     </div>
 </div>
 
+
+<div th:fragment="eventsListDash" class="row row-cols-sm-1 row-cols-md-2 row-cols-xl-3">
+    <!-- For first 3 events, make a new card that links to individual view-->
+    <div class="col mb-4" th:each="event,iterStat : ${eventsList}" th:if="${iterStat.index}<3">
+        <div class="card h-100 event-card shadow">
+            <a class="text-decoration-none text-reset" th:href="@{|/events/${event.id}|}">
+
+                <!--  CARD IMAGE-->
+                <!-- Placeholder image if no image uploaded -->
+                <img class="card-img-top" style="max-height: 23vh; vertical-align: center; object-fit: cover"
+                     th:if="${event.eventImg == null} OR ${event.eventImg == ''}"
+                     th:src="@{/img/event-placeholder.jpg}" alt="Placeholder event photo">
+
+                <!--   OR    -->
+                <!-- Use FileStack URL if image was uploaded-->
+                <img class="card-img-top" style="max-height: 23vh; vertical-align: center; object-fit: cover"
+                     th:unless="${event.eventImg == null} OR ${event.eventImg == ''}"
+                     th:src="${event.eventImg}" alt="Event photo">
+
+                <!-- CARD BODY -->
+                <div class="card-body">
+
+                    <!--  Event date -->
+                    <h4><span class="badge badge-info rounded-pill" th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Event date</span></h4>
+                    <h6 class="card-subtitle mb-4"><i class="far fa-clock text-black-50"></i> <span th:text="${event.time}" class="text-black-50">Event time</span></h6>
+
+                    <h3 class="card-title" style="text-transform: uppercase" th:text="${event.title}">Event title</h3>
+
+                </div>
+
+                <div class="card-footer bg-transparent"><i class="fas fa-map-marker-alt mr-2"></i><span class="card-text" th:text="${event.location}"></span></div>
+            </a>
+        </div>
+    </div>
+</div>
 
 <!-- Loading SVG -->
 <div class="d-flex justify-content-around flex-wrap w-50-lg" th:fragment="loadingAnimation">
