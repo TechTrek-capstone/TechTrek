@@ -257,26 +257,28 @@
 
         <!-- PLACEMENT VIEW -->
         <h1>PLACEMENT VIEW</h1>
-        <div class="d-flex">
-            <!-- Dropdown for cohorts -->
-            <select class="custom-select w-50" id="cohort-dropdown">
-                <option disabled selected>Select Cohort</option>
-                <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}"
-                        th:value="${cohort.id}">
-                </option>
-            </select>
 
-            <!-- Dropdown for students -->
-            <select class="custom-select w-50" id="student-dropdown">
-                <option disabled selected>Select Student</option>
-            </select>
-        </div>
+        <h1>Resume Tracker</h1>
         <!-- Tables for resumes -->
         <div class="d-flex">
             <table class="table table-striped w-100 mr-5">
                 <thead>
                 <tr>
-                    <th colspan="4">Resume</th>
+                    <th>
+                        <!-- Dropdown for cohorts -->
+                        <select class="custom-select" id="cohort-dropdown">
+                            <option disabled selected>Select Cohort</option>
+                            <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}"
+                                    th:value="${cohort.id}">
+                            </option>
+                        </select>
+                    </th>
+                    <th>
+                        <!-- Dropdown for students -->
+                        <select class="custom-select" id="student-dropdown">
+                            <option disabled selected>Select Student</option>
+                        </select>
+                    </th>
                 </tr>
                 <tr>
                     <th>Filename</th>
