@@ -21,6 +21,8 @@
                 <ul class="list-group list-group-flush">
 
                     <!-- IMAGE HEADER FOR EVENT -->
+                    <img th:if="${event.eventImg == null} OR ${event.eventImg == ''}" th:src="@{/img/event-placeholder.jpg}" style="max-height: 300px; vertical-align: center; object-fit: cover"/>
+
                     <img th:unless="${event.eventImg == null} OR ${event.eventImg == ''}" th:src="${event.eventImg}" style="max-height: 300px; vertical-align: center; object-fit: cover"/>
 
                     <!-- EVENT TITLE, DATE, TIME, AND LOCATION -->

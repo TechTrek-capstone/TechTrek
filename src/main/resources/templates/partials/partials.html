@@ -791,43 +791,45 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
     </div>
 </div>
 
-<!-- Event Listings Fragment -->
-<div class="d-flex justify-content-around flex-wrap w-50-lg" th:fragment="eventsList">
 
-    <div th:each="event : ${eventsList}" class="card mb-5" style="width: 18rem;">
-        <a th:href="@{|/events/${event.id}|}">
+<!-- EVENTS LIST CARD DECK FRAGMENT -->
 
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
+<div th:fragment="eventsList" class="row row-cols-sm-1 row-cols-md-2 row-cols-xl-3">
 
-                        <!-- Event image or placeholder -->
-                        <img th:if="${event.eventImg == null} OR ${event.eventImg == ''}" src="/img/event-placeholder.png" class="card-img-top border-light"
-                             alt="Event Placeholder Image">
+    <!-- For each event make a new card that links to individual view-->
+    <div class="col mb-4" th:each="event : ${eventsList}">
+        <div class="card h-100 event-card shadow">
+            <a class="text-decoration-none text-reset" th:href="@{|/events/${event.id}|}">
 
-                        <img th:unless="${event.eventImg == null} OR ${event.eventImg == ''}" th:src="${event.eventImg}" class="card-img-top border-light"
-                             alt="Event Placeholder Image">
+                <!--  CARD IMAGE-->
+                <!-- Placeholder image if no image uploaded -->
+                <img class="card-img-top" style="max-height: 23vh; vertical-align: center; object-fit: cover"
+                     th:if="${event.eventImg == null} OR ${event.eventImg == ''}"
+                     th:src="@{/img/event-placeholder.jpg}" alt="Placeholder event photo">
 
-                        <!-- Event title -->
-                        <h5 th:text="${event.title}" class="card-title">Event title</h5>
+                <!--   OR    -->
+                <!-- Use FileStack URL if image was uploaded-->
+                <img class="card-img-top" style="max-height: 23vh; vertical-align: center; object-fit: cover"
+                     th:unless="${event.eventImg == null} OR ${event.eventImg == ''}"
+                     th:src="${event.eventImg}" alt="Event photo">
 
-                    </li>
+                <!-- CARD BODY -->
+                <div class="card-body">
 
-                    <li class="list-group-item">
+                    <!--  Event date -->
+                    <h4><span class="badge badge-info rounded-pill" th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Event date</span></h4>
+                    <h6 class="card-subtitle mb-4"><i class="far fa-clock text-black-50"></i> <span th:text="${event.time}" class="text-black-50">Event time</span></h6>
 
-                        <!-- Date and Time -->
-                        <span class="text-black-50"><span th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Date of Event</span>
-                                <br/><span th:text="${event.time}">Time of Event</span></span>
+                    <h3 class="card-title" style="text-transform: uppercase" th:text="${event.title}">Event title</h3>
 
-                        <!-- Event Location -->
-                        <br/><a th:href="|http://google.com/maps/place/${event.location}|" target="_blank"><span
-                            th:text="${event.location}"></span></a>
-                    </li>
-                </ul>
-            </div>
-        </a>
+                </div>
+
+                <div class="card-footer bg-transparent"><i class="fas fa-map-marker-alt mr-2"></i><span class="card-text" th:text="${event.location}"></span></div>
+            </a>
+        </div>
     </div>
 </div>
+
 
 <!-- Loading SVG -->
 <div class="d-flex justify-content-around flex-wrap w-50-lg" th:fragment="loadingAnimation">
