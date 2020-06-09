@@ -6,11 +6,14 @@
     <meta charset="UTF-8"/>
     <!-- include stylesheets, etc here -->
     <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
+    <!--    Bootstrap-Tables CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
     <!-- Filestack -->
     <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
     <!-- Summernote -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+    <!--    TechTrek CSS-->
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/dashboard.css}" rel="stylesheet" type="text/css"/>
     <link rel="icon" type="image/png" th:href="@{/img/favicon-16x16.png}" sizes="16x16">
@@ -274,40 +277,77 @@
 </nav>
 <!-- /OLD nav bar-->
 
+<!--DASHBOARDS-->
 <div th:fragment="adminDash" th:if="${user.userPerm == 'admin'}">
 
 
     <!--    USER TABLE -->
-    <table class="table table-hover">
+
+
+    <table class="table table-hover"
+           data-toggle="table"
+           data-sort-class="table-active"
+           data-sortable="true"
+           data-height="460"
+           data-show-refresh="true"
+           data-show-toggle="true"
+           data-show-columns="true"
+           data-search="true"
+           data-show-fullscreen="true"
+           data-toolbar=".btn-primary"
+           data-id-field="id"
+           data-select-item-name="id"
+
+    >
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Join Date</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Cohort</th>
+            <th></th>
+            <th data-field="id" data-sortable="true">ID</th>
+            <th data-sortable="true" scope="col">Name</th>
+            <th data-sortable="true" scope="col">Username</th>
+            <th data-sortable="true" scope="col">Email</th>
+            <th data-sortable="true" scope="col">Join Date</th>
+            <th data-sortable="true" scope="col">Phone</th>
+            <th data-sortable="true" scope="col">Cohort</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user : ${userList}">
-            <th scope="row" th:text="${user.id}"></th>
+            <td>
+
+
+                <p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i
+                        class="fas fa-user-cog color-01"></i></p>
+
+
+            </td>
+            <td th:text="${user.id}" th:id="${user.id}"></td>
             <td th:text="${user.getFullName()}"></td>
             <td th:text="${user.username}"></td>
             <td th:text="${user.email}"></td>
             <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
             <td th:text="${user.phoneNumber}"></td>
             <td th:text="${user.getCohort().name}"></td>
-
         </tr>
-
         </tbody>
     </table>
 
 
-</div>
+    <script>
 
+        var $table = $('#table')
+        var $ok = $('#ok')
+
+        $(function () {
+            $ok.click(function () {
+                $table.bootstrapTable('refresh')
+            })
+        })
+
+
+    </script>
+
+</div>
 <div th:fragment="studentDash" th:if="${user.userPerm == 'student'}">
     <div class="card border ">
         <h1>Student Dashboard</h1>
@@ -315,7 +355,74 @@
     </div>
 </div>
 
+<!--TEST DASHBOARD-->
+<div th:fragment="testDash" th:if="${user.userPerm == 'admin'}">
+
+
+</div>
+
+
 <!-- All Modals -->
+
+<!--User Popup-->
+<div th:fragment="userModalContents" id="studentModal" class="modal fade bd-example-modal-lg" tabindex="-1"
+     role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel" th:text="${student.getFullName()}">Name Missing</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:method="POST" th:action="@{'/users/' + ${student.getId()}}" class="w-50 ml-auto mr-auto"
+                      id="editUserForm">
+
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input name="enabled" type="checkbox" class="custom-control-input" id="enabled"
+                                   th:checked="${student.isEnabled}" th:value="true">
+                            <label class="custom-control-label" for="enabled"><b>Account Enabled</b></label>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="userPerm">Options</label>
+                        </div>
+                        <select class="custom-select" id="userPerm" name="user_perm" th:selected="${student.userPerm}">
+                            <option value="admin">Administrator</option>
+                            <option value="student">Student</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="cohort">Cohort</label>
+                        </div>
+                        <span th:unless="${student.cohort == null}">
+                        <select class="custom-select form-control" name="cohort" id="cohort">
+                            <option th:each="cohort : ${cohorts}" class="dropdown-item"
+                                    th:selected="${cohort.id == student.cohort.getId()}" th:text="${cohort.name}"
+                                    th:value="${cohort.id}"></option>
+                        </select>
+                        </span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
 <div th:fragment="allModals">
 
     <!-- Register Modal -->
@@ -777,6 +884,9 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+    <!--    Bootstrap Tables JS -->
+    <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+    <!--    Custom JS-->
     <script th:src="@{/js/keys.js}"></script>
     <script th:src="@{/js/custom.js}"></script>
     <script th:src="@{/js/dashboard.js}"></script>
@@ -827,6 +937,16 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
                 $('#registerModal').modal('show');
             }
         });
+
+        function openStudentModal(id) {
+            $.ajax({
+                url: "/users/" + id,
+                success: function (data) {
+                    $("#studentModalHolder").html(data);
+                    $("#studentModal").modal("show");
+                }
+            });
+        }
     </script>
 </standard_scripts>
 

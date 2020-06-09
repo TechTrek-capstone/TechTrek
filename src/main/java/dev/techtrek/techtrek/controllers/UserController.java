@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -152,6 +153,30 @@ public class UserController {
 
         // Just going to return the same page to view the updates.
         return "redirect:/profile";
+    }
+
+    @GetMapping("/users/{id}")
+    public String showUserById(@PathVariable long id, Model model) {
+        model.addAttribute("student", users.getUserById(id));
+        List<Cohort> cohorts = cohortsRepo.findAll();
+        model.addAttribute("cohorts", cohorts);
+        return "partials/partials :: userModalContents";
+    }
+
+    @PostMapping("/users/{id}")
+    public String editUserData(
+           @PathVariable long id,
+            @RequestParam(name = "cohort") Cohort cohort,
+            @RequestParam(name = "user_perm") String userPerm,
+            @RequestParam(name = "enabled") Boolean isEnabled
+    ) {
+        User student = users.getUserById(id);
+        student.setCohort(cohort);
+        student.setUserPerm(userPerm);
+        student.setIsEnabled(isEnabled);
+
+        users.save(student);
+        return "redirect:/home";
     }
 
 }
