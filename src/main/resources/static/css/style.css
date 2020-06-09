@@ -179,3 +179,12 @@ table {
     transform: scale(1.05);
     transition: .2s;
 }
+
+.uploadTBlockResume:hover, .uploadVerticalResume:hover {
+    transform: scale(1.05);
+    transition: .2s;
+}
+
+.uploadVerticalResume:hover {
+    font-size: 1.3rem;
+}
