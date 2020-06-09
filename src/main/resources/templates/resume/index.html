@@ -18,94 +18,98 @@
         <div th:replace="partials/resumepartials :: resumeModals"></div>
 
 
-        <h1>Resume Portal</h1>
-        <div th:if="${user.userPerm == 'student'}">
-            <h2 class="text-left">Resume</h2>
-            <div class="d-flex">
+        <h1 class="display-3 text-center mb-3">Resume Portal</h1>
+        <hr class="hr-light w-50 mr-auto mt-0">
 
+        <div th:if="${user.userPerm == 'student'}">
+
+            <div class="d-flex justify-content-center mb-4">
+                <!-- Upload TBlock Form -->
+                <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline mr-3">
+                    <button type="button" class="badge badge-pill badge-primary uploadTBlockResume" style="font-size: 1.3rem">
+                        <i class="fas fa-arrow-circle-up"></i>
+                        T-Block
+                    </button>
+                    <input type="hidden" name="resumeURL" class="resumeURL"/>
+                    <input type="hidden" name="resumeTitle" class="resumeTitle"/>
+                    <input type="hidden" name="resumeType" value="t-block"/>
+                </form>
+                <h2>Upload</h2>
+                <!-- Upload Vertical Form -->
+                <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline ml-3">
+                    <button type="button" class="badge badge-pill badge-primary uploadVerticalResume" style="font-size: 1.3rem">
+                        Vertical
+                        <i class="fas fa-arrow-circle-up"></i>
+                    </button>
+                    <input type="hidden" name="resumeURL" class="resumeURL"/>
+                    <input type="hidden" name="resumeTitle" class="resumeTitle"/>
+                    <input type="hidden" name="resumeType" value="vertical"/>
+                </form>
+            </div>
+
+            <div class="d-flex">
                 <!-- ######## RESUME TABLE ######## -->
                 <table class="table table-striped w-100">
-
-                    <tr>
-                        <th colspan="5">
-                        <span class="text-left">
-                            T-Block
-                            <!-- Upload Resume Form -->
-                            <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline">
-                                <button type="button" class="btn btn-primary uploadTBlockResume">Upload</button>
-                                <input type="hidden" name="resumeURL" class="resumeURL"/>
-                                <input type="hidden" name="resumeTitle" class="resumeTitle"/>
-                                <input type="hidden" name="resumeType" value="t-block"/>
-                            </form>
-                        </span>
-                            <span class="text-right">
-                            Vertical
-                                <!-- Upload Button -->
-                            <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline">
-                                <button type="button" class="btn btn-primary uploadVerticalResume">Upload</button>
-                                <input type="hidden" name="resumeURL" class="resumeURL"/>
-                                <input type="hidden" name="resumeTitle" class="resumeTitle"/>
-                                <input type="hidden" name="resumeType" value="vertical"/>
-                            </form>
-                        </span>
-                        </th>
-                    </tr>
-
                     <tr>
                         <th scope="col">File</th>
                         <th scope="col">Type</th>
                         <th scope="col">Action</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Revision</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col">Status</th>
                     </tr>
 
                     <span th:each="resume : ${resumes}">
-                    <tr class="resume-row">
+                        <tr class="resume-row">
 
-                        <td>
-<!--                            <span style="justify-content: space-evenly">-->
+                            <td>
                                 <span th:text="${resume.title}"></span>
-                        </td>
+                            </td>
 
-                        <td>
-                            <div th:text="${resume.type}"></div>
-                        </td>
+                            <td>
+                                <div th:text="${resume.type}"></div>
+                            </td>
 
-                        <td>
-                            <!-- View Uploaded Resume -->
-                            <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem">
-                                <i class="fas fa-binoculars"></i>
-                            </a>
-                            <!-- Delete Uploaded Resume -->
-                            <button data-toggle="modal" data-target="#deleteResumeModal"
-                                    class="btn btn-link text-danger trashcan" style="font-size: 1.5rem"
-                                    th:data-id="${resume.id}" th:unless="${resume.status == 'Reviewed!'}">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td>
+                            <td>
 
-                        <td>
-                            <div th:text="${resume.status}" class="status"></div>
-                        </td>
+                                <!-- View Uploaded Resume -->
+                                <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem">
+                                    <i class="fas fa-binoculars"></i>
+                                </a>
 
-                        <td>
-                            <a th:href="${resume.revision}" target="_blank" style="font-size: 1.5rem"><i
-                                    class="fas fa-binoculars"></i></a>
-                            <button type="button" class="btn btn-primary resumeNotes" data-toggle="collapse"
-                                    data-target="#notesCollapse" th:value="${resume.placementNotes}">Notes
-                            </button>
-                        </td>
-                    </tr>
-                </span>
+                                <!-- Delete Uploaded Resume -->
+                                <button data-toggle="modal" data-target="#deleteResumeModal"
+                                        class="btn btn-link text-danger trashcan" style="font-size: 1.5rem"
+                                        th:data-id="${resume.id}" th:unless="${resume.status == 'Reviewed!'}">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+
+                            <!-- View Resume Revision -->
+                            <td>
+                                <a th:href="${resume.revision}" target="_blank" style="font-size: 1.5rem"><i
+                                        class="fas fa-binoculars"></i></a>
+                            </td>
+
+                            <!-- Placement Notes -->
+                            <td>
+                                <button type="button" class="btn btn-primary resumeNotes" data-toggle="modal"
+                                        data-target="#studentNotesModal" th:value="${resume.placementNotes}" style="font-size: 1.5rem">
+                                    <i class="fas fa-binoculars"></i>
+                                </button>
+                            </td>
+
+                            <!-- Resume Status -->
+                            <td style="font-size: 1.5rem">
+                                <div th:text="${resume.status}" class="status badge badge-pill badge-success"
+                                     th:if="${resume.status == 'Reviewed!'}"></div>
+                                <div th:text="${resume.status}" class="status badge badge-pill badge-warning"
+                                     th:unless="${resume.status == 'Reviewed!'}"></div>
+                            </td>
+                        </tr>
+                    </span>
                 </table>
             </div>
-
-            <h2 class="text-left">Notes</h2>
-            <!-- Message from placement -->
-            <div class="collapse" id="notesCollapse">
-                <div class="card card-body placement-resume-notes"></div>
-            </div>
-
 
             <!-- Resume tips/tricks. download for example resume -->
             <h2 class="text-left">Resume Builder Tips</h2>
@@ -397,8 +401,6 @@
 
         </div>
         <div th:unless="${user.userPerm == 'student'}">
-            <!-- PLACEMENT VIEW -->
-            <h1>PLACEMENT VIEW</h1>
 
             <h1>Resume Tracker</h1>
             <!-- Tables for resumes -->
