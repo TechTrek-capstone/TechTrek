@@ -10,11 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -80,23 +75,23 @@ public class ResumeController {
         return resumeRepo.findAllByUser_Id(studentId);
     }
 
+    // placement form submission for resume revision - not an endpoint
     @PostMapping("resume/revision")
     public String uploadResumeRevision(@RequestParam(name = "resumeRevisionUpload") String resumeURL,
                                        @RequestParam(name = "resumeId") long id) {
         Resume resume = resumeRepo.findById(id);
         resume.setRevision(resumeURL);
         resumeRepo.save(resume);
-
         return "redirect:/resume";
     }
 
+    // placement form submission for resume notes - not an endpoint
     @PostMapping("resume/notes")
     public String uploadResumeNotes(@RequestParam(name = "resumeNotesUpload") String resumeNotes,
-                                       @RequestParam(name = "resumeNotesId") long id) {
+                                    @RequestParam(name = "resumeNotesId") long id) {
         Resume resume = resumeRepo.findById(id);
         resume.setPlacementNotes(resumeNotes);
         resumeRepo.save(resume);
-
         return "redirect:/resume";
     }
 }

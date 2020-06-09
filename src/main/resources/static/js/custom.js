@@ -1,19 +1,10 @@
 $(document).ready(function () {
 
-    let changeTest = function () {
-        $(".resume-status").html("Pending Review").css;
-        $(".placement-msg").html("You've successfully uploaded your resume! Please wait for Placement to review.");
-    };
-
-    if ($(".resume-row").val() !== null) {
-        changeTest();
-    }
-
     let resumeId = null;
     let fsURL;
     let fsTitle;
 
-// PROGRESS BAR TEST
+    // Progress bar for password strength on registration
     $.strength = function (element, password) {
         var desc = [{
             'width': '0px'
@@ -54,14 +45,14 @@ $(document).ready(function () {
         element.removeClass(descClass[score - 1]).addClass(descClass[score]).css(desc[score]);
     };
 
+    // progress bar updates on every keyup here
     $(function () {
         $("#pwd").keyup(function () {
             $.strength($("#progress-bar"), $(this).val());
         });
     });
-    // END PROGRESS BAR
 
-    // UPLOAD TBLOCK RESUME
+    // Tblock resume upload on btn click
     $(".uploadTBlockResume").click(function () {
         let client = filestack.init(fileStackKey);
 
@@ -71,7 +62,6 @@ $(document).ready(function () {
             })
             .then(function (result) {
                 let resultJSON = JSON.parse(JSON.stringify(result));
-                console.log(result);
                 // store resume url in variable, pass that variable as a value to the view
                 fsURL = resultJSON.filesUploaded[0].url;
                 fsTitle = resultJSON.filesUploaded[0].filename;
@@ -81,7 +71,7 @@ $(document).ready(function () {
             })
     });
 
-    // UPLOAD VERTICAL RESUME
+    // Vertical resume upload on btn click
     $(".uploadVerticalResume").click(function () {
         let client = filestack.init(fileStackKey);
 
@@ -102,7 +92,7 @@ $(document).ready(function () {
             })
     });
 
-    // DELETE RESUME
+    // Delete Resume Modal
     $('#deleteResumeModal').on('show.bs.modal', function (e) {
         var button = $(e.relatedTarget); // Button that triggered the modal
         var resumeId = button.data('id'); // Extract info from data-* attributes
@@ -121,11 +111,14 @@ $(document).ready(function () {
             url: '/resume/' + cohortId,
             success: [function (data) {
                 let student = $("#student-dropdown"), option = "<option disabled selected>Select Student</option>";
-                student.empty();
+                let studentResumes = $(".student-resumes");
 
                 for (let i = 0; i < data.length; i++) {
                     option += "<option value='" + data[i].id + "'>" + data[i].userfirstname + ' ' + data[i].lastName + "</option>";
                 }
+
+                studentResumes.empty();
+                student.empty();
                 student.append(option);
             }],
             error: function () {
@@ -146,17 +139,17 @@ $(document).ready(function () {
                 console.log(data);
                 let studentResumes = $(".student-resumes");
                 let resumeData;
-                let noResume = "<tr colspan='3'><td>No Resume Uploaded</td></tr>";
 
-                studentResumes.empty();
 
                 for (let i = 0; i < data.length; i++) {
-                    resumeData = resumeData
-                        + "<tr><td><a href='" + data[i].link + "' target=_blank'>" + data[i].title + "</a></td>"
-                        + "<td>'" + data[i].type + "'</td>"
+                    resumeData +=
+                        "<tr><td><a href='" + data[i].link + "' target=_blank>" + data[i].title + "</a></td>"
+                        + "<td>" + data[i].type + "</td>"
                         + "<td><button type='button' class='btn btn-primary uploadResumeRevision' value='" + data[i].id + "'>Upload Revision</button></td>"
                         + "<td><button type='button' class='btn btn-primary uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='" + data[i].id + "'>Upload Notes</button></td></tr>";
                 }
+
+                studentResumes.empty();
                 studentResumes.append(resumeData);
             }],
             error: function () {
@@ -191,11 +184,14 @@ $(document).on('click', '.uploadResumeNotes', (function () {
     $("#resumeNotesId").val($(this).val());
 }));
 
+// PLACEMENT - pull up modal, assign values to .sendNotes
+$(document).on('click', '.resumeNotes', function () {
+    $(".placement-resume-notes").html($(this).val());
+});
+
+// PLACEMENT - upload resume notes
 $(document).on('click', '.sendNotes', (function () {
     $("#resumeNotesUpload").val($("#resumeNotes").val());
     $("#uploadResumeNotes").submit();
 }));
 
-$(document).on('click', '.resumeNotes', function() {
-    $(".placement-resume-notes").html($(this).val());
-});

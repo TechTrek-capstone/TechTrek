@@ -26,16 +26,16 @@
             <table class="table table-striped w-100">
 
                 <tr>
-                    <th colspan="3">
+                    <th colspan="5">
                         <span class="text-left">
-                        T-Block
+                            T-Block
                             <!-- Upload Resume Form -->
-                        <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline">
-                            <button type="button" class="btn btn-primary uploadTBlockResume">Upload</button>
-                            <input type="hidden" name="resumeURL" class="resumeURL"/>
-                            <input type="hidden" name="resumeTitle" class="resumeTitle"/>
-                            <input type="hidden" name="resumeType" value="t-block"/>
-                        </form>
+                            <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline">
+                                <button type="button" class="btn btn-primary uploadTBlockResume">Upload</button>
+                                <input type="hidden" name="resumeURL" class="resumeURL"/>
+                                <input type="hidden" name="resumeTitle" class="resumeTitle"/>
+                                <input type="hidden" name="resumeType" value="t-block"/>
+                            </form>
                         </span>
                         <span class="text-right">
                             Vertical
@@ -53,6 +53,7 @@
                 <tr>
                     <th scope="col">File</th>
                     <th scope="col">Type</th>
+                    <th scope="col">Action</th>
                     <th scope="col">Status</th>
                     <th scope="col">Revision</th>
                 </tr>
@@ -61,17 +62,25 @@
                     <tr class="resume-row">
 
                         <td>
-                            <span style="justify-content: space-evenly">
+<!--                            <span style="justify-content: space-evenly">-->
                                 <span th:text="${resume.title}"></span>
-                            <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem"><i
-                                    class="fas fa-binoculars"></i></a>
-                                <!-- Delete Button -->
-                                <button data-toggle="modal" data-target="#deleteResumeModal"
-                                        class="btn btn-link text-danger" style="font-size: 1.5rem"
-                                        th:data-id="${resume.id}">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </span>
+                        </td>
+
+                        <td>
+                            <div th:text="${resume.type}"></div>
+                        </td>
+
+                        <td>
+                            <!-- View Uploaded Resume -->
+                            <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem">
+                                <i class="fas fa-binoculars"></i>
+                            </a>
+                            <!-- Delete Uploaded Resume -->
+                            <button data-toggle="modal" data-target="#deleteResumeModal"
+                                    class="btn btn-link text-danger" style="font-size: 1.5rem"
+                                    th:data-id="${resume.id}">
+                                <i class="fa fa-trash"></i>
+                            </button>
                         </td>
 
                         <td>
@@ -82,7 +91,8 @@
                             <a th:href="${resume.revision}" target="_blank" style="font-size: 1.5rem"><i
                                     class="fas fa-binoculars"></i></a>
                             <button type="button" class="btn btn-primary resumeNotes" data-toggle="collapse"
-                                    data-target="#notesCollapse" th:value="${resume.placementNotes}">Notes</button>
+                                    data-target="#notesCollapse" th:value="${resume.placementNotes}">Notes
+                            </button>
                         </td>
                     </tr>
                 </span>
@@ -97,23 +107,21 @@
 
         <!-- Resume tips/tricks. download for example resume -->
         <h2 class="text-left">Resume Builder Tips</h2>
-        <div class="student-div">
-            <p>
-                During your time at Codeup, you will build at least 2 different types of resumes, a “T-Block” and a
-                “Vertical". Today, we are going to go over the T-Block resume. The purpose of the T-Block resume is to
-                have
-                a 1 page, easy to consume resume. Your resume will be made up of 5-6 different sections listed below in
-                order of importance:
-            </p>
-            <ul>
-                <li>Professional Summary</li>
-                <li>Technical Skills</li>
-                <li>Development Projects</li>
-                <li>Professional Experience</li>
-                <li>Military Experience (if warranted)</li>
-                <li>Education</li>
-            </ul>
-        </div>
+        <p>
+            During your time at Codeup, you will build at least 2 different types of resumes, a “T-Block” and a
+            “Vertical". Today, we are going to go over the T-Block resume. The purpose of the T-Block resume is to
+            have
+            a 1 page, easy to consume resume. Your resume will be made up of 5-6 different sections listed below in
+            order of importance:
+        </p>
+        <ul>
+            <li>Professional Summary</li>
+            <li>Technical Skills</li>
+            <li>Development Projects</li>
+            <li>Professional Experience</li>
+            <li>Military Experience (if warranted)</li>
+            <li>Education</li>
+        </ul>
 
         <h3 class="text-left">Professional Summary</h3>
 
@@ -249,10 +257,9 @@
 
         <!-- PLACEMENT VIEW -->
         <h1>PLACEMENT VIEW</h1>
-        <div class="student-div">
-
+        <div class="d-flex">
             <!-- Dropdown for cohorts -->
-            <select class="custom-select" id="cohort-dropdown">
+            <select class="custom-select w-50" id="cohort-dropdown">
                 <option disabled selected>Select Cohort</option>
                 <option th:each="cohort : ${cohorts}" class="dropdown-item" th:text="${cohort.name}"
                         th:value="${cohort.id}">
@@ -260,36 +267,39 @@
             </select>
 
             <!-- Dropdown for students -->
-            <select class="custom-select" id="student-dropdown">
+            <select class="custom-select w-50" id="student-dropdown">
                 <option disabled selected>Select Student</option>
             </select>
+        </div>
+        <!-- Tables for resumes -->
+        <div class="d-flex">
+            <table class="table table-striped w-100 mr-5">
+                <thead>
+                <tr>
+                    <th colspan="4">Resume</th>
+                </tr>
+                <tr>
+                    <th>Filename</th>
+                    <th>Type</th>
+                    <th>Upload Revision</th>
+                    <th>Upload Notes</th>
+                </tr>
+                </thead>
+                <tbody class="student-resumes"></tbody>
+            </table>
 
-            <!-- Tables for both resume types -->
-            <div class="d-flex">
-                <table class="table table-striped w-100 mr-5 student-resumes">
-                    <tr>
-                        <th colspan="4">Resume</th>
-                    </tr>
-                    <tr>
-                        <th>Filename</th>
-                        <th>Type</th>
-                        <th>Upload Revision</th>
-                        <th>Upload Notes</th>
-                    </tr>
-                </table>
+            <!-- Form to submit resume revision -->
+            <form th:action="@{resume/revision}" method="post" id="uploadResumeRevision">
+                <input type="hidden" name="resumeRevisionUpload" id="resumeRevisionUpload">
+                <input type="hidden" name="resumeId" id="resumeId">
+            </form>
 
-                <!-- Form to submit resume revision -->
-                <form th:action="@{resume/revision}" method="post" id="uploadResumeRevision">
-                    <input type="hidden" name="resumeRevisionUpload" id="resumeRevisionUpload">
-                    <input type="hidden" name="resumeId" id="resumeId">
-                </form>
-
-                <!-- Form to submit resume notes -->
-                <form th:action="@{resume/notes}" method="post" id="uploadResumeNotes">
-                    <input type="hidden" name="resumeNotesUpload" id="resumeNotesUpload">
-                    <input type="hidden" name="resumeNotesId" id="resumeNotesId">
-                </form>
-            </div>
+            <!-- Form to submit resume notes -->
+            <form th:action="@{resume/notes}" method="post" id="uploadResumeNotes">
+                <input type="hidden" name="resumeNotesUpload" id="resumeNotesUpload">
+                <input type="hidden" name="resumeNotesId" id="resumeNotesId">
+            </form>
+        </div>
     </main>
 </div>
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
