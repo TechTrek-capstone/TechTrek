@@ -6,6 +6,9 @@ import dev.techtrek.techtrek.models.Resume;
 import dev.techtrek.techtrek.models.User;
 import dev.techtrek.techtrek.models.UserWithRoles;
 import dev.techtrek.techtrek.repositories.*;
+import dev.techtrek.techtrek.services.EmailSenderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,9 @@ public class ResumeController {
         this.cohortsRepo = cohortsRepo;
         this.users = users;
     }
+
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     @GetMapping("/resume")
     public String showResume(Model model) {
@@ -85,6 +91,18 @@ public class ResumeController {
         resume.setRevision(resumeURL);
         resume.setStatus("Reviewed!");
         resumeRepo.save(resume);
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        User student = resume.getUser();
+
+        mailMessage.setTo(student.getEmail());
+        mailMessage.setSubject("Your resume has been reviewed!");
+        mailMessage.setFrom("no_reply@techtrek.dev");
+        mailMessage.setText("Your resume has been reviewed. You can see it here: "  + "https://techtrek.dev/resume");
+
+        emailSenderService.sendEmail(mailMessage);
+
+
         return "redirect:/resume";
     }
 

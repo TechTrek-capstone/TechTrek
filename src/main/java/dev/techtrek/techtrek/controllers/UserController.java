@@ -72,6 +72,8 @@ public class UserController {
         model.addAttribute("eventsList", eventList);
         List<User> userList = users.findAll();
         model.addAttribute("userList", userList);
+        List<Resume> resumes = resumeRepo.findAll();
+        model.addAttribute("resumes", resumes);
 
         return "users/index";
 
@@ -160,6 +162,7 @@ public class UserController {
         model.addAttribute("student", users.getUserById(id));
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
+
         return "partials/partials :: userModalContents";
     }
 
