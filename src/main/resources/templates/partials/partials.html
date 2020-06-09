@@ -278,87 +278,129 @@
 <!-- /OLD nav bar-->
 
 <!--DASHBOARDS-->
+
+<!--Admin Dash-->
 <div th:fragment="adminDash" th:if="${user.userPerm == 'admin'}">
+    <div class="row">
+        <!--    USER TABLE -->
+        <table id="userListTable"
+                class="table table-hover"
+               data-toggle="table"
+               data-sort-class="table-active"
+               data-sortable="true"
+               data-height="460"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true"
+               data-search="true"
+               data-show-fullscreen="true"
+               data-toolbar=".btn-primary"
+               data-id-field="id"
+               data-select-item-name="id">
+            <thead>
+            <tr>
+                <th></th>
+                <th data-field="id" data-sortable="true">ID</th>
+                <th data-sortable="true" scope="col">Name</th>
+                <th data-sortable="true" scope="col">Username</th>
+                <th data-sortable="true" scope="col">Email</th>
+                <th data-sortable="true" scope="col">Join Date</th>
+                <th data-sortable="true" scope="col">Phone</th>
+                <th data-sortable="true" scope="col">Cohort</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userList}">
+                <td><p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i
+                        class="fas fa-user-cog color-01"></i></p></td>
+                <td th:text="${user.id}" th:id="${user.id}"></td>
+                <td th:text="${user.getFullName()}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
+                <td th:text="${user.phoneNumber}"></td>
+                <td th:text="${user.getCohort().name}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <script>
 
+            var $table = $('#userListTable')
+            var $ok = $('#ok')
 
-    <!--    USER TABLE -->
-
-
-    <table class="table table-hover"
-           data-toggle="table"
-           data-sort-class="table-active"
-           data-sortable="true"
-           data-height="460"
-           data-show-refresh="true"
-           data-show-toggle="true"
-           data-show-columns="true"
-           data-search="true"
-           data-show-fullscreen="true"
-           data-toolbar=".btn-primary"
-           data-id-field="id"
-           data-select-item-name="id"
-
-    >
-        <thead>
-        <tr>
-            <th></th>
-            <th data-field="id" data-sortable="true">ID</th>
-            <th data-sortable="true" scope="col">Name</th>
-            <th data-sortable="true" scope="col">Username</th>
-            <th data-sortable="true" scope="col">Email</th>
-            <th data-sortable="true" scope="col">Join Date</th>
-            <th data-sortable="true" scope="col">Phone</th>
-            <th data-sortable="true" scope="col">Cohort</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${userList}">
-            <td>
-
-
-                <p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i
-                        class="fas fa-user-cog color-01"></i></p>
-
-
-            </td>
-            <td th:text="${user.id}" th:id="${user.id}"></td>
-            <td th:text="${user.getFullName()}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
-            <td th:text="${user.phoneNumber}"></td>
-            <td th:text="${user.getCohort().name}"></td>
-        </tr>
-        </tbody>
-    </table>
-
-
-    <script>
-
-        var $table = $('#table')
-        var $ok = $('#ok')
-
-        $(function () {
-            $ok.click(function () {
-                $table.bootstrapTable('refresh')
+            $(function () {
+                $ok.click(function () {
+                    $table.bootstrapTable('refresh')
+                })
             })
-        })
+        </script>
+    </div>
 
+    <div class="row">
 
-    </script>
+        <table id="jobsListTable"
+                class="table table-hover"
+               data-toggle="table"
+               data-sort-class="table-active"
+               data-sortable="true"
+               data-height="460"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true"
+               data-search="true"
+               data-show-fullscreen="true"
+               data-toolbar=".btn-primary"
+               data-id-field="id"
+               data-select-item-name="id">
+            <thead>
+            <tr>
+                <th></th>
+                <th data-field="id" data-sortable="true">ID</th>
+                <th data-sortable="true" scope="col">Name</th>
+                <th data-sortable="true" scope="col">Username</th>
+                <th data-sortable="true" scope="col">Email</th>
+                <th data-sortable="true" scope="col">Join Date</th>
+                <th data-sortable="true" scope="col">Phone</th>
+                <th data-sortable="true" scope="col">Cohort</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userList}">
+                <td><p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i
+                        class="fas fa-user-cog color-01"></i></p></td>
+                <td th:text="${user.id}" th:id="${user.id}"></td>
+                <td th:text="${user.getFullName()}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
+                <td th:text="${user.phoneNumber}"></td>
+                <td th:text="${user.getCohort().name}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <script>
+
+            var $table = $('#jobsListTable')
+            var $ok = $('#ok')
+
+            $(function () {
+                $ok.click(function () {
+                    $table.bootstrapTable('refresh')
+                })
+            })
+        </script>
+
+    </div>
+
 
 </div>
+
+<!--Student Dash-->
 <div th:fragment="studentDash" th:if="${user.userPerm == 'student'}">
     <div class="card border ">
         <h1>Student Dashboard</h1>
         <p>Links, resources, and messages from placement team will be displayed here.</p>
     </div>
-</div>
-
-<!--TEST DASHBOARD-->
-<div th:fragment="testDash" th:if="${user.userPerm == 'admin'}">
-
-
 </div>
 
 
