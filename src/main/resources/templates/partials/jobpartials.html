@@ -40,8 +40,9 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${job.title}">Job title</h5>
-                        <h5 class="card-text"><span class="badge badge-pill badge-success"><i class="far fa-building mr-1"></i><span th:text="${job.getCompany().getName()}">Company name</span></span></h5>
+                        <h4 class="card-title lead" th:text="${job.title}">Job title</h4>
+                        <h4 class="card-text lead"><span class="badge badge-primary lead"><i class="far fa-building mr-1"></i><span th:text="${job.getCompany().getName()}">Company name</span></h4>
+                        <span th:if="${job.isRemote == true}" class="badge badge-pill badge-success ml-1">Remote <i class="fas fa-check-circle"></i></span>
                         <p class="card-text"><i class="fas fa-map-marker-alt mr-1"></i><span th:text="${job.location}">Job location</span></p>
                         <p class="card-text"><small class="text-muted" th:text="'Posted ' + ${#dates.format(job.listingDate, 'MM-dd-yyyy')}"></small></p>
                     </div>
@@ -51,7 +52,48 @@
     </div>
 </div>
 
- 
+
+<div th:fragment="jobsListDash" class="row row-cols-sm-1 row-cols-md-2 row-cols-xl-3">
+    <!-- For first 3 jobs, make a new card that links to individual view-->
+    <div class="col mb-4" th:each="job,iterStat : ${jobs}" th:if="${iterStat.index}<3">
+        <div class="card h-100 event-card shadow">
+            <a class="text-decoration-none text-reset" th:href="@{|/jobs/${job.id}|}">
+
+                <!--  CARD IMAGE-->
+                <!-- Placeholder company logo if no image uploaded -->
+                <img class="card-img-top" style="max-height: 23vh; vertical-align: center; object-fit: cover"
+                     th:if="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}"
+                     th:src="@{/img/logo-placeholder.jpg}" alt="Placeholder company logo">
+
+                <!--   OR    -->
+                <!-- Use FileStack URL if company logo was uploaded-->
+                <img class="card-img-top" style="max-height: 23vh;"
+                     th:unless="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}"
+                     th:src="${job.getCompany().getLogoImg()}" alt="Company logo">
+
+                <!--    CARD BODY   -->
+                <div class="card-body">
+
+                    <!--  Company title and listing date -->
+                    <h6 class="text-black-50" style="font-weight: normal"><span th:text="${job.getCompany().getName()}"></span> | <span th:text="'Posted: ' + ${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Posting date</span></h6>
+                    <span></span>
+
+                    <!--  Remote availability -->
+                    <span th:if="${job.isRemote == true}" class="badge badge-pill badge-success ml-1">Remote <i class="fas fa-check-circle"></i></span>
+
+                    <!--  Job title -->
+                    <h3 class="card-title" style="text-transform: uppercase" th:text="${job.title}">Job title</h3>
+
+                </div>
+
+                <!--  Job location -->
+                <div class="card-footer bg-transparent"><i class="fas fa-map-marker-alt mr-2"></i><span class="card-text" th:text="${job.location}"></span></div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
   
 <!-- Job List frag for the dashboard -->
 <div th:fragment="dashJobsListFrag">
@@ -74,6 +116,7 @@
                 </div>
             </div>
         </div>
+
         <table id="jobslisting" class="table table-sm table-hover">
             <thead class="thead-light">
             <tr class="bg-light">
