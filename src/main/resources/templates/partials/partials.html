@@ -802,7 +802,10 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
                     <li class="list-group-item">
 
                         <!-- Event image or placeholder -->
-                        <img src="/img/event-placeholder.png" class="card-img-top border-light"
+                        <img th:if="${event.eventImg == null} OR ${event.eventImg == ''}" src="/img/event-placeholder.png" class="card-img-top border-light"
+                             alt="Event Placeholder Image">
+
+                        <img th:unless="${event.eventImg == null} OR ${event.eventImg == ''}" th:src="${event.eventImg}" class="card-img-top border-light"
                              alt="Event Placeholder Image">
 
                         <!-- Event title -->

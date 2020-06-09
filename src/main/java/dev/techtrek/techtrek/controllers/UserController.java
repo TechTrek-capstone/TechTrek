@@ -112,21 +112,21 @@ public class UserController {
             @RequestParam(name = "userfirstname") String userFirstName,
             @RequestParam(name = "last_name") String lastName,
 
-            @RequestParam(name = "bio_summary") String bioSummary,
-            @RequestParam(name = "phone_number") String phoneNumber,
+            @RequestParam(name = "bio_summary", required = false) String bioSummary,
+            @RequestParam(name = "phone_number", required = false) String phoneNumber,
 
             @RequestParam(name = "email") String email,
-            @RequestParam(name = "work_location") String workLocation,
+            @RequestParam(name = "work_location", required = false) String workLocation,
 
-            @RequestParam(name = "user_website") String userWebsite,
-            @RequestParam(name = "linkedin_username") String linkedinUsername,
+            @RequestParam(name = "user_website", required = false) String userWebsite,
+            @RequestParam(name = "linkedin_username", required = false) String linkedinUsername,
 
-            @RequestParam(name = "github_username") String githubUsername,
-            @RequestParam(name = "cohort") Cohort cohort,
-            @RequestParam(name = "employment_status") EmploymentStatus employmentStatus,
-            @RequestParam(name = "profile_pic") String profilePic,
+            @RequestParam(name = "github_username", required = false) String githubUsername,
+            @RequestParam(name = "cohort", required = false) Cohort cohort,
+            @RequestParam(name = "employment_status", required = false) EmploymentStatus employmentStatus,
+            @RequestParam(name = "profile_pic", required = false) String profilePic,
             @RequestParam(name = "user_perm") String userPerm,
-            @RequestParam(name = "skills") List<Skill> skills
+            @RequestParam(name = "skills", required = false) List<Skill> skills
     ) {
         // Sets user based off the spring security authentication. This is based on role.
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //1. Get the current user

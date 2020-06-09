@@ -65,7 +65,7 @@
                             <div class="col-md-6">
                                 <!-- Employment status block -->
                                 <div id="userEmploymentStatusBlock" th:unless="${user.employmentStatus == null} OR ${user.userPerm == 'admin'}" class="mb-3">
-                            <span th:unless="${user.employmentStatus == null}">
+                            <span th:unless="${user.employmentStatus == null} OR ${user.employmentStatus == admin}">
                                 <h2 th:if="${user.employmentStatus == T(dev.techtrek.techtrek.models.EmploymentStatus).AVAILABLE}">
                                     <span class="badge badge-success">Available for hire <i class="ml-1 fas fa-check-circle"></i></span>
                                 </h2>
@@ -79,19 +79,19 @@
 
                                 <h5>About</h5>
                                 <p>
-                                    <span th:if="${user.bioSummary == ''}">
+                                    <span th:if="${user.bioSummary == ''} OR ${user.bioSummary == null}">
                                         No description for <span th:text="${user.userfirstname}"></span> yet.
                                     </span>
-                                    <span th:unless="${user.bioSummary == ''}" th:text="${user.bioSummary}"></span>
+                                    <span th:unless="${user.bioSummary == ''} or ${user.bioSummary == null}" th:text="${user.bioSummary}"></span>
                                 </p>
 
                                 <div th:unless="${user.userPerm == 'admin'}">
                                     <h5>Desired work location(s)</h5>
                                     <p>
-                                        <span th:if="${user.workLocation == ''}">
+                                        <span th:if="${user.workLocation == ''} OR ${user.workLocation == null}">
                                             <span th:text="${user.userfirstname}"></span> has not specified their desired work location(s) yet.
                                         </span>
-                                        <span th:unless="${user.workLocation == ''}" th:text="${user.workLocation}"></span>
+                                        <span th:unless="${user.workLocation == ''} OR ${user.workLocation == null}" th:text="${user.workLocation}"></span>
                                     </p>
                                 </div>
                             </div>
@@ -102,12 +102,12 @@
                                 <!-- Contact info -->
                                 <div id="userInfoBlock">
                                     <!-- Email -->
-                                    <span th:unless="${user.email == ''}">
+                                    <span th:unless="${user.email == ''} OR ${user.email == null}">
                                         <strong>Email: </strong><span th:text="${user.email}"></span>
                                     </span>
 
                                     <!-- Phone number -->
-                                    <br><span th:unless="${user.phoneNumber == ''}">
+                                    <br><span th:unless="${user.phoneNumber == ''} OR ${user.phoneNumber == null}">
                                         <strong>Phone: </strong><span th:text="${user.phoneNumber}"></span>
                                     </span>
                                 </div>
@@ -115,21 +115,21 @@
                                 <div class="d-flex mt-2" style="font-size: 2rem">
 
                                     <!-- Link to Github profile -->
-                                    <span th:unless="${user.githubUsername == ''} OR ${user.userPerm == 'admin'}">
+                                    <span th:unless="${user.githubUsername == ''} OR ${user.userPerm == 'admin'} OR ${user.githubUsername == null}">
                                         <a th:href="'https://github.com/' + ${user.githubUsername}" target="_blank">
                                             <i class="fab fa-github mr-2"></i>
                                         </a>
                                     </span>
 
                                     <!-- Link to LinkedIn profile -->
-                                    <span th:unless="${user.linkedinUsername == ''}">
+                                    <span th:unless="${user.linkedinUsername == ''} OR ${user.linkedinUsername == null}">
                                         <a th:href="'https://www.linkedin.com/in/' + ${user.linkedinUsername}" target="_blank">
                                             <i class="fab fa-linkedin mr-2"></i>
                                         </a>
                                     </span>
 
                                     <!-- Link to personal site -->
-                                    <span th:unless="${user.userWebsite == ''}">
+                                    <span th:unless="${user.userWebsite == ''} OR ${user.userWebsite == null}">
                                         <a th:href="${user.userWebsite}" target="_blank">
                                             <i class="fas fa-globe mr-2"></i>
                                         </a>
@@ -232,7 +232,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">About</label>
                                 <div class="col-lg-9">
-                                    <textarea rows="5" name="bio_summary" class="form-control" type="text"
+                                    <textarea rows="5" name="bio_summary" class="form-control" type="text" maxlength = "1000"
                                            th:text="${user.bioSummary}">
                                     </textarea>
                                 </div>
@@ -322,11 +322,11 @@
     <div th:unless="${user.userPerm == 'admin'}" id="user-github-info" class="mr-auto ml-auto text-center">
         <hr data-content="Github Activity" class="hr-text mb-5" />
 
-        <span th:if="${user.githubUsername == ''}">
+        <span th:if="${user.githubUsername == ''} OR ${user.githubUsername == null}">
             <p class="lead">No commit history available.</p>
         </span>
 
-        <span th:unless="${user.githubUsername == ''}">
+        <span th:unless="${user.githubUsername == ''} OR ${user.githubUsername == null}">
 
             <!-- Github commit history chart -->
 
