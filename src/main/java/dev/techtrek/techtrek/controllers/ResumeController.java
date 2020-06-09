@@ -37,6 +37,8 @@ public class ResumeController {
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
 
+        Resume resume = new Resume();
+        model.addAttribute("resume", resume);
         List<Resume> resumes = resumeRepo.findAllByUser_Id(user.getId());
         model.addAttribute("resumes", resumes);
         List<Cohort> cohorts = cohortsRepo.findAll();

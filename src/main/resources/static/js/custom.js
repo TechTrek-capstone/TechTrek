@@ -146,8 +146,23 @@ $(document).ready(function () {
                     resumeData +=
                         "<tr><td class='w-50'><a href='" + data[i].link + "' target=_blank>" + data[i].title + "</a></td>"
                         + "<td>" + data[i].type + "</td>"
-                        + "<td><button type='button' class='btn btn-primary uploadResumeRevision' value='" + data[i].id + "'>Upload</button></td>"
-                        + "<td><button type='button' class='btn btn-primary uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='" + data[i].id + "'>Upload</button></td></tr>";
+                        + "<td><button type='button' class='btn btn-primary uploadResumeRevision' value='"+ data[i].id + "'>Upload</button>";
+
+                    // if placement has already submitted a revision, checkmark populates here
+                    if (data[i].status === "Reviewed!") {
+                        resumeData += "<i class='fa fa-check-circle ml-2' style='font-size: 1.5rem; color: green'></i></td>";
+                    } else {
+                        resumeData += "</td>";
+                    }
+
+                    // same as above, but just checking for notes
+                    resumeData += "<td><button type='button' class='btn btn-primary uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='" + data[i].id + "'>Upload</button>";
+
+                    if (data[i].placementNotes !== null) {
+                        resumeData += "<i class='fa fa-check-circle ml-2' style='font-size: 1.5rem; color: green'></i></td></tr>";
+                    } else {
+                        resumeData += "</td></tr>";
+                    }
                 }
 
                 studentResumes.empty();
