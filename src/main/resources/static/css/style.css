@@ -169,3 +169,13 @@ hr.hr-light {
 table {
     margin-bottom: 0;
 }
+
+.event-card:hover {
+    transform: scale(1.08);
+    transition: .2s;
+}
+
+.job-card:hover {
+    transform: scale(1.05);
+    transition: .2s;
+}

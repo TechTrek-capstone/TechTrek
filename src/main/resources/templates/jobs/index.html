@@ -12,6 +12,9 @@
     <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
     <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
     <main class="page-content">
+        <h1 class="display-3 text-center mb-3">Job Listings</h1>
+        <hr class="hr-light w-50 mr-auto mt-0">
+
         <div th:replace="partials/jobpartials :: jobsListFrag"></div>
     </main>
 </div>
