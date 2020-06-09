@@ -10,11 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,14 +31,10 @@ public class ResumeController {
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
 
-        model.addAttribute("resumesTBlock", resumeRepo.findAllByType("t-block"));
-        model.addAttribute("resumesVertical", resumeRepo.findAllByType("vertical"));
-//        model.addAttribute("user", new User());
+        List<Resume> resumes = resumeRepo.findAllByUser_Id(user.getId());
+        model.addAttribute("resumes", resumes);
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
-
-
-
         return "resume/index";
     }
 
@@ -54,6 +45,8 @@ public class ResumeController {
                                @RequestParam(name = "resumeType") String type,
                                @RequestParam(name = "resumeTitle") String resumeTitle) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        String pending = "Pending Review.";
+        resume.setStatus("Pending");
         resume.setUser(user);
         resume.setType(type);
         resume.setLink(resumeURL);
@@ -84,14 +77,24 @@ public class ResumeController {
         return resumeRepo.findAllByUser_Id(studentId);
     }
 
+    // placement form submission for resume revision - not an endpoint
     @PostMapping("resume/revision")
-    public String uploadTBlockRevision(@ModelAttribute Resume resume,
-                               @RequestParam(name = "tblockResumeRevisionUpload") String resumeURL,
-                               @RequestParam(name = "tblockResumeRevisionId") long id) {
-
+    public String uploadResumeRevision(@RequestParam(name = "resumeRevisionUpload") String resumeURL,
+                                       @RequestParam(name = "resumeId") long id) {
+        Resume resume = resumeRepo.findById(id);
         resume.setRevision(resumeURL);
+        resume.setStatus("Reviewed!");
         resumeRepo.save(resume);
+        return "redirect:/resume";
+    }
 
+    // placement form submission for resume notes - not an endpoint
+    @PostMapping("resume/notes")
+    public String uploadResumeNotes(@RequestParam(name = "resumeNotesUpload") String resumeNotes,
+                                    @RequestParam(name = "resumeNotesId") long id) {
+        Resume resume = resumeRepo.findById(id);
+        resume.setPlacementNotes(resumeNotes);
+        resumeRepo.save(resume);
         return "redirect:/resume";
     }
 }
