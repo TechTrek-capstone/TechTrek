@@ -45,6 +45,8 @@ public class ResumeController {
                                @RequestParam(name = "resumeType") String type,
                                @RequestParam(name = "resumeTitle") String resumeTitle) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        String pending = "Pending Review.";
+        resume.setStatus("Pending");
         resume.setUser(user);
         resume.setType(type);
         resume.setLink(resumeURL);
@@ -81,6 +83,7 @@ public class ResumeController {
                                        @RequestParam(name = "resumeId") long id) {
         Resume resume = resumeRepo.findById(id);
         resume.setRevision(resumeURL);
+        resume.setStatus("Reviewed!");
         resumeRepo.save(resume);
         return "redirect:/resume";
     }

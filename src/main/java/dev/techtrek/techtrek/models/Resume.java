@@ -27,6 +27,9 @@ public class Resume {
     @Column (name = "title", columnDefinition = "varchar(50) default 'Resume'", nullable = false)
     private String title = "Resume";
 
+    @Column (name = "status")
+    private String status;
+
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;

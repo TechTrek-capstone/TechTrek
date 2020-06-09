@@ -4,6 +4,7 @@ $(document).ready(function () {
     let fsURL;
     let fsTitle;
 
+
     // Progress bar for password strength on registration
     $.strength = function (element, password) {
         var desc = [{
@@ -143,7 +144,7 @@ $(document).ready(function () {
 
                 for (let i = 0; i < data.length; i++) {
                     resumeData +=
-                        "<tr><td><a href='" + data[i].link + "' target=_blank>" + data[i].title + "</a></td>"
+                        "<tr><td class='w-50'><a href='" + data[i].link + "' target=_blank>" + data[i].title + "</a></td>"
                         + "<td>" + data[i].type + "</td>"
                         + "<td><button type='button' class='btn btn-primary uploadResumeRevision' value='" + data[i].id + "'>Upload Revision</button></td>"
                         + "<td><button type='button' class='btn btn-primary uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='" + data[i].id + "'>Upload Notes</button></td></tr>";
