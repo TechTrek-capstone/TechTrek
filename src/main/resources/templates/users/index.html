@@ -18,11 +18,31 @@
         <h1 class="display-3 text-center mt-3" th:text="'Welcome back, ' + ${user.userfirstname} + '!'"></h1>
 
         <div class="row" th:replace="partials/partials :: adminDash" th:if="${user.userPerm == 'admin'}"></div>
-        <div class="row" th:replace="partials/partials :: studentDash" th:if="${user.userPerm == 'student'}"></div>
+<!--        <div class="row" th:replace="partials/partials :: studentDash" th:if="${user.userPerm == 'student'}"></div>-->
 
-        <div class="row" th:replace="partials/jobpartials :: dashJobList" ></div>
+<!--        <div class="row" th:replace="partials/jobpartials :: dashJobList" ></div>-->
 
 
+
+        <div th:if="${user.userPerm == 'student'}">
+            <h1 class="display-4">Recent Listings</h1>
+            <div class="media">
+                <div class="container">
+                    <div th:replace="partials/jobpartials :: jobsListDash" ></div>
+                    <div class="text-right"><a th:href="@{/jobs}"><button class="btn btn-primary btn-lg">See more... <i class="fas fa-arrow-right"></i></button></a></div>
+                </div>
+            </div>
+
+            <hr class="hr-light" />
+
+            <h1 class="display-4">Upcoming Events</h1>
+            <div class="media">
+                <div class="container">
+                    <div th:replace="partials/partials :: eventsListDash" ></div>
+                    <div class="text-right"><a th:href="@{/events}"><button class="btn btn-primary btn-lg">See more... <i class="fas fa-arrow-right"></i></button></a></div>
+                </div>
+            </div>
+        </div>
 
     </main>
 </div>

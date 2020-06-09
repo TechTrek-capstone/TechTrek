@@ -243,7 +243,7 @@
         </table>
 
 
-
+    <div class="row" th:replace="partials/jobpartials :: dashJobList" ></div>
 
 
 </div>
@@ -738,6 +738,41 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
     </div>
 </div>
 
+
+<div th:fragment="eventsListDash" class="row row-cols-sm-1 row-cols-md-2 row-cols-xl-3">
+    <!-- For first 3 events, make a new card that links to individual view-->
+    <div class="col mb-4" th:each="event,iterStat : ${eventsList}" th:if="${iterStat.index}<3">
+        <div class="card h-100 event-card shadow">
+            <a class="text-decoration-none text-reset" th:href="@{|/events/${event.id}|}">
+
+                <!--  CARD IMAGE-->
+                <!-- Placeholder image if no image uploaded -->
+                <img class="card-img-top" style="max-height: 23vh; vertical-align: center; object-fit: cover"
+                     th:if="${event.eventImg == null} OR ${event.eventImg == ''}"
+                     th:src="@{/img/event-placeholder.jpg}" alt="Placeholder event photo">
+
+                <!--   OR    -->
+                <!-- Use FileStack URL if image was uploaded-->
+                <img class="card-img-top" style="max-height: 23vh; vertical-align: center; object-fit: cover"
+                     th:unless="${event.eventImg == null} OR ${event.eventImg == ''}"
+                     th:src="${event.eventImg}" alt="Event photo">
+
+                <!-- CARD BODY -->
+                <div class="card-body">
+
+                    <!--  Event date -->
+                    <h4><span class="badge badge-info rounded-pill" th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Event date</span></h4>
+                    <h6 class="card-subtitle mb-4"><i class="far fa-clock text-black-50"></i> <span th:text="${event.time}" class="text-black-50">Event time</span></h6>
+
+                    <h3 class="card-title" style="text-transform: uppercase" th:text="${event.title}">Event title</h3>
+
+                </div>
+
+                <div class="card-footer bg-transparent"><i class="fas fa-map-marker-alt mr-2"></i><span class="card-text" th:text="${event.location}"></span></div>
+            </a>
+        </div>
+    </div>
+</div>
 
 <!-- Loading SVG -->
 <div class="d-flex justify-content-around flex-wrap w-50-lg" th:fragment="loadingAnimation">
