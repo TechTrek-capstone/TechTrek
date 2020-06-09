@@ -232,7 +232,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">About</label>
                                 <div class="col-lg-9">
-                                    <textarea rows="5" name="bio_summary" class="form-control" type="text"
+                                    <textarea rows="5" name="bio_summary" class="form-control" type="text" maxlength = "1000"
                                            th:text="${user.bioSummary}">
                                     </textarea>
                                 </div>

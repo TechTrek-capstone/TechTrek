@@ -42,7 +42,7 @@ create table if not exists users
 (
     id bigint auto_increment primary key,
     enabled bit NOT NULL DEFAULT 0,
-    bio_summary varchar(1000) not null default '',
+    bio_summary varchar(1000) null default '',
     create_date datetime(6) null,
     email varchar(255) not null,
     username varchar(255) not null,

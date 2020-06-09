@@ -55,8 +55,8 @@ public class User {
     @Column(name = "employment_status")
     private EmploymentStatus employmentStatus = EmploymentStatus.AVAILABLE;
 
-    @Column(name = "bio_summary")
-    private String bioSummary;
+    @Column(columnDefinition = "varchar(1000) default ''", name = "bio_summary")
+    private String bioSummary = "";
 
     @Column(name = "user_website")
     private String userWebsite;
