@@ -13,75 +13,80 @@
     <!-- sidebar-wrapper  -->
     <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
     <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
+    <main class="page-content">
 
-    <div class="container mt-3 mb-3" id="individual-job-listing">
-    <ul class="list-group list-group-flush">
+        <div class="media">
 
-        <!-- IMAGE HEADER FOR EVENT -->
-        <!-- TODO: Add images to events and format as a big 'ol header -->
+            <div class="container mt-3 mb-3" id="individual-job-listing">
+                <ul class="list-group list-group-flush">
 
-        <!-- EVENT TITLE, DATE, TIME, AND LOCATION -->
-        <li class="list-group-item">
+                    <!-- IMAGE HEADER FOR EVENT -->
+                    <img th:unless="${event.eventImg == null} OR ${event.eventImg == ''}" th:src="${event.eventImg}" style="max-height: 300px; vertical-align: center; object-fit: cover"/>
 
-            <!--   Title   -->
-            <h2 class="text-center mb-3" th:text="${event.title}"></h2>
+                    <!-- EVENT TITLE, DATE, TIME, AND LOCATION -->
+                    <li class="list-group-item">
 
-            <!--   Date + Time  -->
-            <h5 class="text-black-50 text-center mb-1"><span th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Event Date</span> | <span class="text-black-50 text-center" th:text="${event.time}">Event Time</span>
-            </h5>
+                        <!--   Title   -->
+                        <h2 class="text-center mb-3" th:text="${event.title}"></h2>
 
-            <!--   Location   -->
-            <a th:href="|http://google.com/maps/place/${event.location}|" target="_blank"><h5 class="text-center" th:text="${event.location}"></h5></a>
-        </li>
+                        <!--   Date + Time  -->
+                        <h5 class="text-black-50 text-center mb-1"><span th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Event Date</span> | <span class="text-black-50 text-center" th:text="${event.time}">Event Time</span>
+                        </h5>
 
-        <!-- EVENT DESCRIPTION -->
-        <li class="list-group-item">
-            <h4>Description</h4>
-            <div class="pl-5" th:utext="${event.description}"></div>
-        </li>
+                        <!--   Location   -->
+                        <a th:href="|http://google.com/maps/place/${event.location}|" target="_blank"><h5 class="text-center" th:text="${event.location}"></h5></a>
+                    </li>
 
-        <!-- RSVP URL LINK -->
-        <li class="list-group-item">
-            <a th:href="@{${event.rsvpUrl}}" target="_blank">
-                <button type="button" class="btn btn-primary btn-lg btn-block">RSVP</button>
-            </a>
-        </li>
-    </ul>
-</div>
+                    <!-- EVENT DESCRIPTION -->
+                    <li class="list-group-item">
+                        <h4>Description</h4>
+                        <div class="pl-5" th:utext="${event.description}"></div>
+                    </li>
 
-<div class="text-center mb-3" th:if="${user.userPerm == 'admin'}">
-    <h2>Placement Team Controls</h2>
+                    <!-- RSVP URL LINK -->
+                    <li class="list-group-item">
+                        <a th:href="@{${event.rsvpUrl}}" target="_blank">
+                            <button type="button" class="btn btn-primary btn-lg btn-block">RSVP</button>
+                        </a>
+                    </li>
+                </ul>
 
-    <a th:href="@{|/events/${event.id}/edit|}"><button type="button" class="btn btn-primary btn-lg">Edit</button></a>
+                <div class="text-center mb-3" th:if="${user.userPerm == 'admin'}">
+                    <h2>Placement Team Controls</h2>
 
-    <button data-toggle="modal" data-target="#modalForEventDelete" class="btn btn-lg btn-danger">Delete</button>
-</div>
+                    <a th:href="@{|/events/${event.id}/edit|}"><button type="button" class="btn btn-primary btn-lg">Edit</button></a>
 
-<!-- Job delete confirmation modal -->
-
-<div class="modal fade" id="modalForEventDelete" tabindex="-1" role="dialog"
-     aria-labelledby="eventDeleteModalLabel"
-     aria-hidden="true" th:if="${user.userPerm == 'admin'}">
-
-    <form th:action="@{'/events/' + ${event.id} + '/delete'}" th:method="POST" th:object="${event}">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title text-center text-danger" id="eventDeleteModalLabel">Warning</h2>
+                    <button data-toggle="modal" data-target="#modalForEventDelete" class="btn btn-lg btn-danger">Delete</button>
                 </div>
-                <div class="modal-body">
-                    <p class="lead text-center">
-                        Deleting this event listing is a permanent action. Please confirm to proceed.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+
+                <!-- Job delete confirmation modal -->
+
+                <div class="modal fade" id="modalForEventDelete" tabindex="-1" role="dialog"
+                     aria-labelledby="eventDeleteModalLabel"
+                     aria-hidden="true" th:if="${user.userPerm == 'admin'}">
+
+                    <form th:action="@{'/events/' + ${event.id} + '/delete'}" th:method="POST" th:object="${event}">
+                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title text-center text-danger" id="eventDeleteModalLabel">Warning</h2>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="lead text-center">
+                                        Deleting this event listing is a permanent action. Please confirm to proceed.
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-danger" name="delete">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
-</div>
+    </main>
 </div>
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
 </body>

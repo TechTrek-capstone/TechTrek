@@ -37,17 +37,17 @@ public class User {
     @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "last_name")
     private String lastName = "";
 
-    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "phone_number")
-    private String phoneNumber = "";
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "github_username")
-    private String githubUsername = "";
+    @Column(name = "github_username")
+    private String githubUsername;
 
-    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "linkedin_username")
-    private String linkedinUsername = "";
+    @Column(name = "linkedin_username")
+    private String linkedinUsername;
 
-    @Column(columnDefinition = "varchar(255) default ''", name = "work_location")
-    private String workLocation = "";
+    @Column(name = "work_location")
+    private String workLocation;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -55,11 +55,11 @@ public class User {
     @Column(name = "employment_status")
     private EmploymentStatus employmentStatus = EmploymentStatus.AVAILABLE;
 
-    @Column(columnDefinition = "varchar(1000) default ''", nullable = false, name = "bio_summary")
+    @Column(columnDefinition = "varchar(1000) default ''", name = "bio_summary")
     private String bioSummary = "";
 
-    @Column(columnDefinition = "varchar(255) default ''", nullable = false, name = "user_website")
-    private String userWebsite = "";
+    @Column(name = "user_website")
+    private String userWebsite;
 
     @Column(name = "profile_pic")
     private String profilePic;
