@@ -78,7 +78,6 @@ VALUES (1, 'HTML5'),
        (50, 'Groovy'),
        (51, 'Material-UI');
 
-INSERT INTO techtrek_db.users (id, bio_summary, create_date, email, employment_status, github_username, enabled, last_name, linkedin_username, modify_date, user_password, phone_number, profile_pic, user_perm, user_website, userfirstname, username, work_location, cohort_id, role_id) VALUES (1, 'test', '2020-06-08 12:48:49.000000', 'purnellbp@gmail.com', 1, 'purnellbp', true, 'Purnell', '', '2020-06-09 02:01:15.877000', '$2a$10$l9iZd31PVwi2uTzAcLvhu.zOTO5K6/E88o/FECf38DdPNjWvOz7TC', '5555555555', 'https://cdn.filestackcontent.com/MR6jTBsiSSK2jFK5gxkN', 'admin', 'http://codeup.com', 'Brian', 'purnellbp', '', 1, null);
 INSERT INTO techtrek_db.users (id, bio_summary, create_date, email, employment_status, github_username, enabled, last_name, linkedin_username, modify_date, user_password, phone_number, profile_pic, user_perm, user_website, userfirstname, username, work_location, cohort_id, role_id) VALUES (2, '', '2020-06-08 14:48:29.701000', 'brian@techtrek.dev', 1, 'purnellbp', true, 'Admin', '', '2020-06-08 14:49:36.211000', '$2a$10$Wbx43Sj.uLqjTK56Bo/sy.OzLF.vn32nEBhM3pkb7GeIxbNalW4Y.', '5556667777', 'https://cdn.filestackcontent.com/MR6jTBsiSSK2jFK5gxkN', 'admin', 'http://codeup.com', 'Joe', 'adminuser', '', 1, null);
 
 INSERT INTO techtrek_db.companies (id, name, logo_img) VALUES (1, 'TechTrek', 'https://cdn.filestackcontent.com/Ue6eT9y3S2On0NM0NEwl');
