@@ -281,32 +281,31 @@
 
 <!--Admin Dash-->
 <div th:fragment="adminDash" th:if="${user.userPerm == 'admin'}">
-    <div class="row">
-        <!--    USER TABLE -->
-        <table id="userListTable"
-                class="table table-hover"
+        <div id="toolbar">
+            <h2 class="card-title">User Data</h2>
+        </div>
+        <table id="userListTable" class="table table-hover w-100"
+               data-toolbar="#toolbar"
                data-toggle="table"
                data-sort-class="table-active"
                data-sortable="true"
                data-height="460"
-               data-show-refresh="true"
-               data-show-toggle="true"
                data-show-columns="true"
                data-search="true"
-               data-show-fullscreen="true"
-               data-toolbar=".btn-primary"
                data-id-field="id"
-               data-select-item-name="id">
+               data-cookie="true"
+               data-cookie-id-table="saveId"
+              >
             <thead>
             <tr>
-                <th></th>
+                <th> - </th>
                 <th data-field="id" data-sortable="true">ID</th>
-                <th data-sortable="true" scope="col">Name</th>
-                <th data-sortable="true" scope="col">Username</th>
-                <th data-sortable="true" scope="col">Email</th>
-                <th data-sortable="true" scope="col">Join Date</th>
-                <th data-sortable="true" scope="col">Phone</th>
-                <th data-sortable="true" scope="col">Cohort</th>
+                <th data-field="fullname" data-sortable="true" scope="col">Name</th>
+                <th data-field="username" data-sortable="true" scope="col">Username</th>
+                <th data-field="email" data-sortable="true" scope="col">Email</th>
+                <th data-field="createDate" data-sortable="true" scope="col">Join Date</th>
+                <th data-field="phoneNumber" data-sortable="true" scope="col">Phone</th>
+                <th data-field="cohort" data-sortable="true" scope="col">Cohort</th>
             </tr>
             </thead>
             <tbody>
@@ -323,74 +322,9 @@
             </tr>
             </tbody>
         </table>
-        <script>
 
-            var $table = $('#userListTable')
-            var $ok = $('#ok')
 
-            $(function () {
-                $ok.click(function () {
-                    $table.bootstrapTable('refresh')
-                })
-            })
-        </script>
-    </div>
 
-    <div class="row">
-
-        <table id="jobsListTable"
-                class="table table-hover"
-               data-toggle="table"
-               data-sort-class="table-active"
-               data-sortable="true"
-               data-height="460"
-               data-show-refresh="true"
-               data-show-toggle="true"
-               data-show-columns="true"
-               data-search="true"
-               data-show-fullscreen="true"
-               data-toolbar=".btn-primary"
-               data-id-field="id"
-               data-select-item-name="id">
-            <thead>
-            <tr>
-                <th></th>
-                <th data-field="id" data-sortable="true">ID</th>
-                <th data-sortable="true" scope="col">Name</th>
-                <th data-sortable="true" scope="col">Username</th>
-                <th data-sortable="true" scope="col">Email</th>
-                <th data-sortable="true" scope="col">Join Date</th>
-                <th data-sortable="true" scope="col">Phone</th>
-                <th data-sortable="true" scope="col">Cohort</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${userList}">
-                <td><p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i
-                        class="fas fa-user-cog color-01"></i></p></td>
-                <td th:text="${user.id}" th:id="${user.id}"></td>
-                <td th:text="${user.getFullName()}"></td>
-                <td th:text="${user.username}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
-                <td th:text="${user.phoneNumber}"></td>
-                <td th:text="${user.getCohort().name}"></td>
-            </tr>
-            </tbody>
-        </table>
-        <script>
-
-            var $table = $('#jobsListTable')
-            var $ok = $('#ok')
-
-            $(function () {
-                $ok.click(function () {
-                    $table.bootstrapTable('refresh')
-                })
-            })
-        </script>
-
-    </div>
 
 
 </div>
@@ -931,6 +865,9 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
     <!--    Bootstrap Tables JS -->
     <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+    <script src="https://unpkg.com/tableexport.jquery.plugin/libs/jsPDF/jspdf.min.js"></script>
+    <script src="https://unpkg.com/tableexport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
     <!--    Custom JS-->
     <script th:src="@{/js/keys.js}"></script>
     <script th:src="@{/js/custom.js}"></script>
@@ -992,6 +929,11 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
                 }
             });
         }
+
+        $(function() {
+            $('#userListTable').bootstrapTable()
+        })
+
     </script>
 </standard_scripts>
 
