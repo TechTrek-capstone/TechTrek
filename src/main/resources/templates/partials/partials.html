@@ -129,23 +129,10 @@
             <div class="sidebar-menu">
                 <ul>
                     <li class="sidebar-dropdown">
-                        <a href="#">
+                        <a th:href="@{/home}">
                             <i class="fa fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li>
-                                    <a th:href="@{/home}"> Main
-                                    </a>
-                                </li>
-                                <li>
-                                    <!-- Update to amdin onyl when roles are up -->
-                                    <a href="#"> Users
-                                        <span class="badge badge-pill badge-success">Admin</span></a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
@@ -318,7 +305,8 @@
                 <td th:text="${user.email}"></td>
                 <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
                 <td th:text="${user.phoneNumber}"></td>
-                <td th:text="${user.getCohort().name}"></td>
+                <td><span th:unless="${user.getCohort() == ''} OR ${user.getCohort() == null}"><span
+                        th:text="${user.getCohort().name}">Cohort name</span></span></td>
             </tr>
             </tbody>
         </table>
