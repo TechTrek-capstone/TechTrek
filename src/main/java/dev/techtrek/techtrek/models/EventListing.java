@@ -43,6 +43,9 @@ public class EventListing {
 
     @Column(name = "is_archived", nullable = false)
     private boolean isArchived;
+
+    @Column(name = "event_img")
+    private String eventImg;
   
 //    @ManyToOne
 //    @JoinColumn (name = "user_id")

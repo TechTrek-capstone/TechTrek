@@ -29,6 +29,21 @@
             </div>
 
             <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="eventImg">Change event picture</label>
+                    <div class="col-lg-9">
+                        <button type="button" id="uploadEventImg" class="btn btn-primary rounded-pill">Choose file</button>
+
+                        <span id="uploadSuccessful" class="ml-1 text-success" style="display: none; font-size: 1.25rem;">
+                            <i class="far fa-check-circle"></i>
+                        </span>
+
+                        <input type="hidden" name="event_img" id="eventImg" th:value="${event.eventImg}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="date">Date</label>
                     <input name="date" type="date" th:value="${#dates.format(event.date, 'yyyy-MM-dd')}"
@@ -72,5 +87,38 @@
     </main>
 </div>
 <standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+
+<script>
+    $("#uploadEventImg").click(function () {
+
+        var placesAutocomplete = places({
+            appId: 'pl91Y2LN2WGM',
+            apiKey: 'e2d6a9188b9819c4d4c2c3ad2bbf150b',
+            container: document.querySelector('#location')
+        });
+        const reconfigurableOptions = {
+            language: 'en', // Receives results in German
+            countries: ['us'], // Search in the United States of America
+            type: 'city', // Search only for cities names
+            aroundLatLngViaIP: false // disable the extra search/boost around the source IP
+        };
+
+        let client = filestack.init("A4cXA0jCTTJGCdD6ep1Btz");
+
+        client
+            .pick({
+                accept: 'image/*',
+                maxFiles: 1
+            })
+            .then(function (result) {
+                let resultJSON = JSON.parse(JSON.stringify(result));
+                let fsURL = resultJSON.filesUploaded[0].url;
+                $("#eventImg").val(fsURL);
+            })
+            .then(function () {
+                $("#uploadSuccessful").show();
+            });
+    });
+</script>
 </body>
 </html>

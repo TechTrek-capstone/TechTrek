@@ -42,7 +42,7 @@ create table if not exists users
 (
     id bigint auto_increment primary key,
     enabled bit NOT NULL DEFAULT 0,
-    bio_summary varchar(1000) not null default '',
+    bio_summary varchar(1000) null default '',
     create_date datetime(6) null,
     email varchar(255) not null,
     username varchar(255) not null,
@@ -89,6 +89,7 @@ create table if not exists event_listings
     rsvp_url varchar(2000) null,
     time varchar(255) null,
     title varchar(255) not null,
+    event_img varchar(255),
     user_id bigint null,
     foreign key (user_id) references users (id)
 );
@@ -108,4 +109,3 @@ create table if not exists job_listings
 #     foreign key (user_id) references users (id),
     foreign key (company_id) references companies (id)
 );
-
