@@ -18,12 +18,12 @@
     <main class="page-content">
 
 
-        <div class="alert alert-warning alert-dismissible fade show w-50" role="alert" >
-            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+<!--        <div th:unless="${resumes.findAllByUser_Id(${user.id}).findAllByStatus('Reviewed!').isEmpty() }" class="alert alert-warning alert-dismissible fade show w-50" role="alert" >-->
+<!--            <strong>Holy guacamole!</strong> You should check in on some of those fields below.-->
+<!--            <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--                <span aria-hidden="true">&times;</span>-->
+<!--            </button>-->
+<!--        </div>-->
 
         <div class="row" th:replace="partials/partials :: adminDash" th:if="${user.userPerm == 'admin'}"></div>
         <div class="row" th:replace="partials/partials :: studentDash" th:if="${user.userPerm == 'student'}"></div>
