@@ -4,7 +4,7 @@
 <!-- ########### Jobs Card ############## -->
 <!--Basic job listing fragment used to show all jobs in cards.-->
 
-
+  
 <!--<div th:fragment="jobsListFrag" class="row row-cols-1 row-cols-md-2" >-->
 <!--    <div class="col mb-4" th:each="job : ${jobs}">-->
 <!--        <div class="card" >-->
@@ -51,8 +51,8 @@
     </div>
 </div>
 
-
-
+ 
+  
 <!-- Job List frag for the dashboard -->
 <div th:fragment="dashJobsListFrag">
     <div class="card">
@@ -96,29 +96,40 @@
             </tr>
             </tbody>
         </table>
+
+      
+      
+<div th:fragment="dashJobList">
+    <div id="jobToolBar">
+        <h2 class="card-title">Job Listings</h2>
     </div>
-
+    <table class="table table-hover w-100"
+           data-toolbar="#jobToolBar"
+           id="jobListTable"
+           data-toggle="table"
+           data-search="true"
+           data-height="460">
+        <thead>
+        <tr>
+            <th data-field="id" data-sortable="true"></th>
+            <th data-field="title" data-sortable="true">Title</th>
+            <th data-field="company" data-sortable="true">Company</th>
+            <th data-field="listingDate">Listing Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="job : ${jobs}">
+            <td><a th:href="@{|/jobs/${job.id}|}" class="nav-link">View</a></td>
+            <td th:text="${job.title}"></td>
+            <td th:text="${job.getCompany().name}"></td>
+            <td th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 
-<!--    <div th:each="job : ${jobs}" class="card mb-5" style="width: 18rem;">-->
-<!--        <a th:href="@{|/jobs/${job.id}|}">-->
 
 
-<!--            <h5 th:text="${job.title}" class="card-title"></h5>-->
 
 
-<!--            <span th:text="${job.getCompany().getName()}">Company</span> | <span-->
-<!--                th:text="${job.location}">Location</span>-->
-
-
-<!--            <p th:utext="${#strings.abbreviate(job.description, 100)}" class="card-text">Description text.</p>-->
-
-
-<!--            <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}">Listing date</span>-->
-
-<!--        </a>-->
-<!--    </div>-->
-
-
-</div>
