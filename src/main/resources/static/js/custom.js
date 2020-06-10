@@ -137,7 +137,6 @@ $(document).ready(function () {
             type: 'GET',
             url: '/resume/student/' + studentId,
             success: [function (data) {
-                console.log(data);
                 let studentResumes = $(".student-resumes");
                 let resumeData;
 
@@ -207,7 +206,7 @@ $(document).on('click', '.resumeNotes', function () {
 
 // PLACEMENT - upload resume notes
 $(document).on('click', '.sendNotes', (function () {
-    $("#resumeNotesUpload").val($("#resumeNotes").val());
+    $("#resumeNotesUpload").val($("#resume-notes").val());
     $("#uploadResumeNotes").submit();
 }));
 

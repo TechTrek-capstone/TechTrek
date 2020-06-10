@@ -38,17 +38,17 @@
 
     <!-- Placement Notes Modal -->
     <div th:fragment="placementNotesModal" class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Enter Notes</h5>
+                <div class="modal-header mx-auto">
+                    <h2 class="modal-title" id="exampleModalLongTitle">Notes</h2>
                 </div>
                 <div class="modal-body">
-                    <textarea id="resumeNotes"></textarea>
+                    <textarea class="form-control" id="resume-notes"></textarea>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer mx-auto">
+                    <button type="submit" class="btn btn-primary sendNotes">Send</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary sendNotes">Send Notes</button>
                 </div>
             </div>
         </div>
@@ -57,14 +57,14 @@
     <!-- Student Notes Modal -->
     <div th:fragment="studentNotesModal" class="modal fade" id="studentNotesModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLabel">Placement Review Notes</h5>
+            <div class="modal-content modal-lg">
+                <div class="modal-header mx-auto">
+                    <h2 class="modal-title" id="exampleModalLabel">Placement Review Notes</h2>
                 </div>
                 <div class="modal-body">
-                    <span class="placement-resume-notes"></span>
+                    <span class="placement-resume-notes form-control"></span>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer mx-auto">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
