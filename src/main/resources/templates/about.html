@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/partials :: head">
+    <title>About</title>
+</head>
+<body>
+
+<div class="text-center">
+    <h1 class="display-2 mt-3 text-muted">About</h1>
+
+    <hr class="hr-light w-75" />
+
+    <div class="card-deck justify-content-around mx-auto" style="width: 90%">
+        <div class="card border-0">
+            <div class="card-body lead">
+                <div class="mb-4 mx-auto" style="overflow: hidden; border-radius: 50%; width: 325px; height: 325px;">
+                    <img th:src="@{/img/kaleb.jpg}" style="width: 325px; height: 325px;" alt="Kaleb Dworsky" />
+                </div>
+
+                <h2 class="card-title mb-1">Kaleb Dworsky</h2>
+                <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>
+
+                <hr class="hr-light w-50">
+
+                <p class="card-text p-3">
+                    Creative and focused professional who enjoys finding practical solutions to coding challenges. My passion for reading and writing allow me to quickly and efficiently produce quality solutions to coding challenges, and my work experience leading a team of professionals is conducive to a team-based, open-minded environment.
+                </p>
+                <div class="justify-content-center" style="font-size: 1.75rem">
+                    <a href="https://alumni.codeup.com/students/816" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                    <a href="https://www.linkedin.com/in/kaleb-dd/" class="mr-1"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/KalebDD" class="mr-1"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-0">
+            <div class="card-body lead">
+                <div class="mb-4 mx-auto" style="overflow: hidden; border-radius: 50%; width: 325px; height: 325px;">
+                    <img th:src="@{/img/danielle.jpg}" style="width: 325px; height: 325px;" alt="Danielle Tobler" />
+                </div>
+
+                <h2 class="card-title mb-1">Danielle Tobler</h2>
+                <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>
+
+                <hr class="hr-light w-50">
+
+                <p class="card-text p-3">
+                    Adaptive Software Developer with a passion for learning. Detailed-oriented and creative, I am a problem-solver at my core. I enjoy the challenges that the unknown presents and am eager to grow my skills through impactful projects and constructive collaboration.
+                </p>
+                <div class="justify-content-center" style="font-size: 1.75rem">
+                    <a href="https://alumni.codeup.com/students/796" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                    <a href="https://www.linkedin.com/in/danielle-tobler/" class="mr-1"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/dmtobler" class="mr-1"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-0">
+            <div class="card-body lead">
+                <div class="mb-4 mx-auto" style="overflow: hidden; border-radius: 50%; width: 325px; height: 325px;">
+                    <img th:src="@{/img/brian.jpg}" style="width: 325px; height: 325px;" alt="Brian Purnell" />
+                </div>
+
+                <h2 class="card-title mb-1">Brian Purnell</h2>
+                <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>
+
+                <hr class="hr-light w-50">
+
+                <p class="card-text p-3">
+                    Full-stack software developer with a background in electronics, oilfield services, and avionics. Experienced leader as a thirteen year veteran in the US Marine Corps. Exceptionally adept in working in fast-paced environments.
+                </p>
+                <div class="justify-content-center" style="font-size: 1.75rem">
+                    <a href="https://alumni.codeup.com/students/797" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                    <a href="https://www.linkedin.com/in/brian-purnell-sanantonio/" class="mr-1"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/purnellbp" class="mr-1"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+</body>
+</html>

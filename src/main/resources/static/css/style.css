@@ -192,3 +192,7 @@ table {
 #resume-notes, .placement-resume-notes {
     height: 300px;
 }
+
+main {
+    font-size: 1rem;
+}
