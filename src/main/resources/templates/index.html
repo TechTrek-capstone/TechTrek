@@ -5,11 +5,13 @@
 
     <meta charset="UTF-8"/>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
     <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/material-kit.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
     <link rel="stylesheet" th:href="@{/css/landing.css}">
 
     <title>TechTrek - Begin your journey</title>
@@ -34,7 +36,8 @@
     </div>
 </header>
 
-<section class="page-header text-center position-relative banner-section" style="background-image: url(img/mountains.jpg);">
+<section class="page-header text-center position-relative banner-section"
+         style="background-image: url(img/mountains.jpg);">
     <div class="container">
         <h1 class="title">START YOUR JOURNEY</h1>
         <h3 class="">Connecting job seekers with the tools they need.</h3>
@@ -50,7 +53,8 @@
                     <p data-aos="fade-up">Landing your first Software Developer role can be daunting. TechTrek was
                         developed by web development graduates to provide job placement resources in a user-friendly,
                         straightforward format.</p>
-                    <p data-aos="fade-up">For placement team members, TechTrek provides a simple tool to keep your job-seeking students and staff members informed of resume changes and career status.</p>
+                    <p data-aos="fade-up">For placement team members, TechTrek provides a simple tool to keep your
+                        job-seeking students and staff members informed of resume changes and career status.</p>
                 </div>
             </div>
         </div>
@@ -62,29 +66,40 @@
                     <h2 class="title mb-4" data-aos="fade-up">Functionality...</h2>
                     <ul class="nav nav-pills nav-pills-rose justify-content-center mt-5" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="pills-edinburgh-tab" data-toggle="pill" href="#pills-resume" role="tab" aria-controls="pills-resume" aria-selected="true" data-aos="fade-up">Resumes</a>
+                            <a class="nav-link active" id="pills-edinburgh-tab" data-toggle="pill" href="#pills-resume"
+                               role="tab" aria-controls="pills-resume" aria-selected="true"
+                               data-aos="fade-up">Resumes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="pills-jobs-tab" data-toggle="pill" href="#pills-jobs" role="tab" aria-controls="pills-jobs" aria-selected="false" data-aos="fade-up" data-aos-delay="150">Job Listings</a>
+                            <a class="nav-link" id="pills-jobs-tab" data-toggle="pill" href="#pills-jobs" role="tab"
+                               aria-controls="pills-jobs" aria-selected="false" data-aos="fade-up" data-aos-delay="150">Job
+                                Listings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="pills-events-tab" data-toggle="pill" href="#pills-events" role="tab" aria-controls="pills-events" aria-selected="false" data-aos="fade-up" data-aos-delay="300">Tech Events</a>
+                            <a class="nav-link" id="pills-events-tab" data-toggle="pill" href="#pills-events" role="tab"
+                               aria-controls="pills-events" aria-selected="false" data-aos="fade-up"
+                               data-aos-delay="300">Tech Events</a>
                         </li>
                     </ul>
                     <div class="tab-content tab-space pb-0">
-                        <div class="tab-pane active" id="pills-resume" role="tabpanel" aria-labelledby="pills-resume-tab">
-                            <p data-aos="fade-up">Your resume is a critical component of your transition to tech. Highlighting your
-                                skills, projects, and prior experience will help you stand out from the crowd. Upload and receive
+                        <div class="tab-pane active" id="pills-resume" role="tabpanel"
+                             aria-labelledby="pills-resume-tab">
+                            <p data-aos="fade-up">Your resume is a critical component of your transition to tech.
+                                Highlighting your
+                                skills, projects, and prior experience will help you stand out from the crowd. Upload
+                                and receive
                                 feedback easily from your placement team with TechTrek's Resume Portal.</p>
                         </div>
                         <div class="tab-pane" id="pills-jobs" role="tabpanel" aria-labelledby="pills-jobs-tab">
                             <p>Never miss a job opportunity with TechTrek's job listings page! Populated by your
-                                placement team, TechTrek only shows openings relevant to your cohort's qualifications. Apply quickly
+                                placement team, TechTrek only shows openings relevant to your cohort's qualifications.
+                                Apply quickly
                                 and effectively with minimal filtering.</p>
                         </div>
                         <div class="tab-pane" id="pills-events" role="tabpanel" aria-labelledby="pills-events-tab">
                             <p>Stay in the loop with TechTrek's event listings! Find out essential information
-                                regarding upcoming Tech Talks, career fairs, networking opportunities, interest groups and more at
+                                regarding upcoming Tech Talks, career fairs, networking opportunities, interest groups
+                                and more at
                                 the click of a mouse.</p>
                         </div>
                     </div>
@@ -92,6 +107,171 @@
             </div>
         </div>
     </section>
+
+    <section class="section text-center">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+                <h2 class="title mb-4" data-aos="fade-up">About Us...</h2>
+            </div>
+        </div>
+        <div class="container">
+
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <div class="row border" data-aos="fade-right">
+                        <div class="col-md-2 m-auto">
+                            <img class="card-img mb-1" th:src="@{/img/kaleb.jpg}" alt="Kaleb Dworsky"/>
+                            <span class="justify-content-center" style="font-size: 1.75rem">
+                                <a href="https://alumni.codeup.com/students/816" class="mr-1"><i
+                                        class="fas fa-chevron-circle-up"
+                                        style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                                <a href="https://www.linkedin.com/in/kaleb-dd/" class="mr-1"><i
+                                        class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/KalebDD" class="mr-1"><i class="fab fa-github"></i></a>
+                            </span>
+                        </div>
+                        <div class="col-md-10">
+                            <h3 class="card-title mb-1">Kaleb Dworsky</h3>
+                            <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>
+                            <hr class="hr-light w-50">
+                            <p class="card-text p-3">
+                                Creative and focused professional who enjoys finding practical solutions to coding
+                                challenges. My passion for reading and writing allow me to quickly and efficiently
+                                produce quality solutions to coding challenges, and my work experience leading a team of
+                                professionals is conducive to a team-based, open-minded environment.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <div class="row border" data-aos="fade-left">
+                        <div class="col-md-10">
+                            <h3 class="card-title mb-1">Danielle Tobler</h3>
+                            <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
+                            <hr class="hr-light w-50">
+                            <p class="card-text p-3">
+                                Adaptive Software Developer with a passion for learning. Detailed-oriented and creative,
+                                I am a problem-solver at my core. I enjoy the challenges that the unknown presents and
+                                am eager to grow my skills through impactful projects and constructive collaboration.
+                            </p>
+                        </div>
+                        <div class="col-md-2 m-auto">
+                            <img class="card-img mb-1" th:src="@{/img/danielle.jpg}" alt="Danielle Tobler"/>
+                            <span class="justify-content-center" style="font-size: 1.75rem">
+                                <a href="https://alumni.codeup.com/students/796" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                                <a href="https://www.linkedin.com/in/danielle-tobler/" class="mr-1"><i class="fab fa-linkedin"></i></a>
+                                 <a href="https://github.com/dmtobler" class="mr-1"><i class="fab fa-github"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <div class="row border" data-aos="fade-right">
+                        <div class="col-md-2 m-auto">
+                            <img class="card-img mb-1" th:src="@{/img/brian.jpg}" alt="Brian Purnell"/>
+                            <span class="justify-content-center" style="font-size: 1.75rem">
+                                <a href="https://alumni.codeup.com/students/797" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                                <a href="https://www.linkedin.com/in/brian-purnell-sanantonio/" class="mr-1"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/purnellbp" class="mr-1"><i class="fab fa-github"></i></a>
+                            </span>
+                        </div>
+                        <div class="col-md-10">
+                            <h3 class="card-title mb-1">Brian Purnell</h3>
+                            <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
+                            <hr class="hr-light w-50">
+                            <p class="card-text p-3">
+                                Full-stack software developer with a background in electronics, oilfield services, and avionics. Experienced leader as a thirteen year veteran in the US Marine Corps. Exceptionally adept in working in fast-paced environments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--old-->
+        <!--        <div class="container">-->
+        <!--            <h2 class="title mb-4" data-aos="fade-up">About Us</h2>-->
+        <!--                <div class="card-deck justify-content-around mx-auto" style="width: 90%">-->
+        <!--                    <div class="card border-0">-->
+        <!--                        <div class="card-body lead">-->
+        <!--                            <div class="mb-4 mx-auto" style="overflow: hidden; border-radius: 50%; width: 325px; height: 325px;">-->
+        <!--                                <img th:src="@{/img/kaleb.jpg}"  alt="Kaleb Dworsky" />-->
+        <!--                            </div>-->
+
+        <!--                                    <h2 class="card-title mb-1">Kaleb Dworsky</h2>-->
+        <!--                                    <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>-->
+
+        <!--                                    <hr class="hr-light w-50">-->
+
+        <!--                                    <p class="card-text p-3">-->
+        <!--                                        Creative and focused professional who enjoys finding practical solutions to coding challenges. My passion for reading and writing allow me to quickly and efficiently produce quality solutions to coding challenges, and my work experience leading a team of professionals is conducive to a team-based, open-minded environment.-->
+        <!--                                    </p>-->
+        <!--                                    <div class="justify-content-center" style="font-size: 1.75rem">-->
+        <!--                                        <a href="https://alumni.codeup.com/students/816" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>-->
+        <!--                                        <a href="https://www.linkedin.com/in/kaleb-dd/" class="mr-1"><i class="fab fa-linkedin"></i></a>-->
+        <!--                                        <a href="https://github.com/KalebDD" class="mr-1"><i class="fab fa-github"></i></a>-->
+        <!--                                    </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                    <div class="card border-0">-->
+        <!--                        <div class="card-body lead">-->
+        <!--                            <div class="mb-4 mx-auto" style="overflow: hidden; border-radius: 50%; width: 325px; height: 325px;">-->
+        <!--                                <img th:src="@{/img/danielle.jpg}"  alt="Danielle Tobler" />-->
+        <!--                            </div>-->
+
+        <!--                            <h2 class="card-title mb-1">Danielle Tobler</h2>-->
+        <!--                            <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>-->
+
+        <!--                            <hr class="hr-light w-50">-->
+
+        <!--                            <p class="card-text p-3">-->
+        <!--                                Adaptive Software Developer with a passion for learning. Detailed-oriented and creative, I am a problem-solver at my core. I enjoy the challenges that the unknown presents and am eager to grow my skills through impactful projects and constructive collaboration.-->
+        <!--                            </p>-->
+        <!--                            <div class="justify-content-center" style="font-size: 1.75rem">-->
+        <!--                                <a href="https://alumni.codeup.com/students/796" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>-->
+        <!--                                <a href="https://www.linkedin.com/in/danielle-tobler/" class="mr-1"><i class="fab fa-linkedin"></i></a>-->
+        <!--                                <a href="https://github.com/dmtobler" class="mr-1"><i class="fab fa-github"></i></a>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                    <div class="card border-0">-->
+        <!--                        <div class="card-body lead">-->
+        <!--                            <div class="mb-4 mx-auto" style="overflow: hidden; border-radius: 5%; width: 225px; height: 225px;">-->
+        <!--                                <img th:src="@{/img/brian.jpg}"  alt="Brian Purnell" class="mx-auto" />-->
+        <!--                            </div>-->
+
+        <!--                            <h2 class="card-title mb-1">Brian Purnell</h2>-->
+        <!--                            <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>-->
+
+        <!--                            <hr class="hr-light w-50">-->
+
+        <!--                            <p class="card-text p-3">-->
+        <!--                                Full-stack software developer with a background in electronics, oilfield services, and avionics. Experienced leader as a thirteen year veteran in the US Marine Corps. Exceptionally adept in working in fast-paced environments.-->
+        <!--                            </p>-->
+        <!--                            <div class="justify-content-center" style="font-size: 1.75rem">-->
+        <!--                                <a href="https://alumni.codeup.com/students/797" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>-->
+        <!--                                <a href="https://www.linkedin.com/in/brian-purnell-sanantonio/" class="mr-1"><i class="fab fa-linkedin"></i></a>-->
+        <!--                                <a href="https://github.com/purnellbp" class="mr-1"><i class="fab fa-github"></i></a>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+
+        <!--                </div>-->
+
+        <!--            </div>-->
+        <!--old       -->
+    </section>
+
+
     <section class="section pb-5">
         <div class="container">
             <div class="landing-text container">
@@ -127,22 +307,25 @@
                 <div sec:authorize="isAuthenticated()" class="landing-buttons container mt-4">
                     <div class="row">
                         <div class="col-sm w-100">
-                            <h4>Logged in: <span class="badge badge-pill badge-success" th:text="${#authentication.principal.username}"></span></h4>
+                            <h4>Logged in: <span class="badge badge-pill badge-success"
+                                                 th:text="${#authentication.principal.username}"></span></h4>
                         </div>
                     </div>
                     <div class="row">
 
                         <div class="col-sm">
                             <a class="text-white" th:href="@{/home}">
-                                <button type="button"  name="Dashboard" class="btn btn-primary w-100">
+                                <button type="button" name="Dashboard" class="btn btn-primary w-100">
                                     Dashboard
-                                </button></a>
+                                </button>
+                            </a>
                         </div>
 
                         <div class="col-sm">
                             <a class="text-white" th:href="@{/logout}">
-                                <button type="button"  name="Logout" class="btn btn-danger w-100">Logout
-                                </button></a>
+                                <button type="button" name="Logout" class="btn btn-danger w-100">Logout
+                                </button>
+                            </a>
                         </div>
 
                     </div>
@@ -158,6 +341,7 @@
     <div class="container text-center">
         <div class="row justify-content-between">
             <div class="col-auto">
+                <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/TechTrek-capstone/TechTrek">
 
 
 
@@ -172,13 +356,11 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/bootstrap-material-design.min.js"></script>
+<script type="text/javascript"
+        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/bootstrap-material-design.min.js"></script>
 <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/material-kit.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script type="text/javascript" th:src="@{/js/landingPage.js}"></script>
-
-
-
 
 
 </body>
