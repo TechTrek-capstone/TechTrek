@@ -19,15 +19,14 @@
 
 
         <h1 class="display-3 text-center mb-3">Resume Portal</h1>
-        <hr class="hr-light w-50 mr-auto mt-0">
 
         <div th:if="${user.userPerm == 'student'}">
 
             <div class="d-flex justify-content-center mb-n4">
                 <!-- Upload TBlock Form -->
                 <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline mr-3 pt-2">
-                    <button type="button" class="badge badge-pill badge-primary uploadTBlockResume"
-                            style="font-size: 1.1rem">
+                    <button type="button" class="badge-pill badge-primary uploadTBlockResume"
+                            style="font-size: 1.1rem" value="tblock">
                         <i class="fas fa-arrow-circle-up"></i>
                         T-Block
                     </button>
@@ -38,7 +37,7 @@
                 <h1>Upload</h1>
                 <!-- Upload Vertical Form -->
                 <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline ml-3 pt-2">
-                    <button type="button" class="badge badge-pill badge-primary uploadVerticalResume"
+                    <button type="button" class="badge-pill badge-primary uploadVerticalResume"
                             style="font-size: 1.1rem">
                         Vertical
                         <i class="fas fa-arrow-circle-up"></i>
