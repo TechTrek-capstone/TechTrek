@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <body>
 
-<!-- Delete Modal -->
+<!-- All Resume Modals -->
 <div th:fragment="resumeModals">
     <div th:fragment="deleteResumeModal" class="modal fade" id="deleteResumeModal" tabindex="-1" role="dialog"
          aria-labelledby="deleteResumeModal"
@@ -37,113 +37,39 @@
     <!-- /end of modal -->
 
     <!-- Placement Notes Modal -->
-    <div th:fragment="notesModal" class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div th:fragment="placementNotesModal" class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Enter Notes</h5>
+                <div class="modal-header mx-auto">
+                    <h2 class="modal-title" id="exampleModalLongTitle">Notes</h2>
                 </div>
                 <div class="modal-body">
-                    <textarea id="resumeNotes"></textarea>
+                    <textarea class="form-control" id="resume-notes"></textarea>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer mx-auto">
+                    <button type="submit" class="btn btn-primary sendNotes">Send</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary sendNotes">Send Notes</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Student Notes Modal -->
-    <div class="modal fade" id="studentNotesModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div th:fragment="studentNotesModal" class="modal fade" id="studentNotesModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLabel">Placement Review Notes</h5>
+            <div class="modal-content modal-lg">
+                <div class="modal-header mx-auto">
+                    <h2 class="modal-title" id="exampleModalLabel">Placement Review Notes</h2>
                 </div>
                 <div class="modal-body">
-                    <span class="placement-resume-notes"></span>
+                    <span class="placement-resume-notes form-control"></span>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer mx-auto">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Student Resume Table -->
-<!--    <div id="toolbar">-->
-<!--        <h2 class="card-title">User Data</h2>-->
-<!--    </div>-->
-<!--    <table id="studentResumeTable" class="table table-hover w-100"-->
-<!--           data-toolbar="#toolbar"-->
-<!--           data-toggle="table"-->
-<!--           data-sort-class="table-active"-->
-<!--           data-sortable="true"-->
-<!--           data-height="460"-->
-<!--           data-show-columns="true"-->
-<!--           data-search="true"-->
-<!--           data-id-field="id"-->
-<!--           data-cookie="true"-->
-<!--           data-cookie-id-table="saveId">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th> -</th>-->
-<!--            <th data-field="id" data-sortable="true">File</th>-->
-<!--            <th data-field="fullname" data-sortable="true" scope="col">Type</th>-->
-<!--            <th data-field="username" data-sortable="true" scope="col">Action</th>-->
-<!--            <th data-field="email" data-sortable="true" scope="col">Revision</th>-->
-<!--            <th data-field="createDate" data-sortable="true" scope="col">Notes</th>-->
-<!--            <th data-field="phoneNumber" data-sortable="true" scope="col">Status</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--            <tr>-->
-<!--    -->
-<!--                <td><span th:text="${resume.title}"></span></td>-->
-<!--    -->
-<!--                <td><div th:text="${resume.type}"></div></td>-->
-<!--    -->
-<!--                <td>-->
-<!--                    &lt;!&ndash; View Uploaded Resume &ndash;&gt;-->
-<!--                    <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem">-->
-<!--                        <i class="fas fa-binoculars"></i>-->
-<!--                    </a>-->
-<!--    -->
-<!--                    &lt;!&ndash; Delete Uploaded Resume &ndash;&gt;-->
-<!--                    <button data-toggle="modal" data-target="#deleteResumeModal"-->
-<!--                            class="btn btn-link text-danger trashcan" style="font-size: 1.5rem"-->
-<!--                            th:data-id="${resume.id}" th:unless="${resume.status == 'Reviewed!'}">-->
-<!--                        <i class="fa fa-trash"></i>-->
-<!--                    </button>-->
-<!--                </td>-->
-<!--    -->
-<!--                &lt;!&ndash; View Resume Revision &ndash;&gt;-->
-<!--                <td>-->
-<!--                    <a th:href="${resume.revision}" target="_blank" style="font-size: 1.5rem"><i-->
-<!--                            class="fas fa-binoculars"></i></a>-->
-<!--                </td>-->
-<!--    -->
-<!--                &lt;!&ndash; Placement Notes &ndash;&gt;-->
-<!--                <td>-->
-<!--                    <button type="button" class="btn btn-primary resumeNotes" data-toggle="modal"-->
-<!--                            data-target="#studentNotesModal" th:value="${resume.placementNotes}" style="font-size: 1.5rem">-->
-<!--                        <i class="fas fa-binoculars"></i>-->
-<!--                    </button>-->
-<!--                </td>-->
-<!--    -->
-<!--                &lt;!&ndash; Resume Status &ndash;&gt;-->
-<!--                <td style="font-size: 1.5rem">-->
-<!--                    <div th:text="${resume.status}" class="status badge badge-pill badge-success"-->
-<!--                         th:if="${resume.status == 'Reviewed!'}"></div>-->
-<!--                    <div th:text="${resume.status}" class="status badge badge-pill badge-warning"-->
-<!--                         th:unless="${resume.status == 'Reviewed!'}"></div>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-
 </body>
 </html>

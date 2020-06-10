@@ -37,6 +37,8 @@ public class ResumeController {
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
 
+        Resume resume = new Resume();
+        model.addAttribute("resume", resume);
         List<Resume> resumes = resumeRepo.findAllByUser_Id(user.getId());
         model.addAttribute("resumes", resumes);
         List<Cohort> cohorts = cohortsRepo.findAll();
@@ -51,7 +53,6 @@ public class ResumeController {
                                @RequestParam(name = "resumeType") String type,
                                @RequestParam(name = "resumeTitle") String resumeTitle) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        String pending = "Pending Review.";
         resume.setStatus("Pending");
         resume.setUser(user);
         resume.setType(type);
@@ -68,7 +69,7 @@ public class ResumeController {
         return "redirect:/resume";
     }
 
-    // Mapping for cohort dropdown - ajax request gets data here
+    // Ajax GET request from the cohorts dropdown. returns list of users to populate 2nd dropdown
     @GetMapping("/resume/{cohortId}")
     @ResponseBody
     public List<User> cohortStudents(@PathVariable long cohortId) {
@@ -76,12 +77,15 @@ public class ResumeController {
         return users.findAllByCohort(cohort);
     }
 
-    // Mapping for student dropdown - ajax request gets data here
+    // Ajax GET request for populating resumes table by cohort
+    @GetMapping("/resume/cohort/{cohortId}")
+    @ResponseBody
+    public List<Resume> allStudentResumes(@PathVariable long cohortId) { return resumeRepo.findAllByCohort_Id(cohortId); }
+
+    // Ajax GET request for populating resumes table by student
     @GetMapping("/resume/student/{studentId}")
     @ResponseBody
-    public List<Resume> studentResumes(@PathVariable long studentId) {
-        return resumeRepo.findAllByUser_Id(studentId);
-    }
+    public List<Resume> studentResumes(@PathVariable long studentId) { return resumeRepo.findAllByUser_Id(studentId); }
 
     // placement form submission for resume revision - not an endpoint
     @PostMapping("resume/revision")

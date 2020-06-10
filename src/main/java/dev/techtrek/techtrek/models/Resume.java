@@ -1,5 +1,6 @@
 package dev.techtrek.techtrek.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -33,4 +34,9 @@ public class Resume {
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn (name = "cohort_id")
+    @JsonManagedReference
+    private Cohort cohort;
 }
