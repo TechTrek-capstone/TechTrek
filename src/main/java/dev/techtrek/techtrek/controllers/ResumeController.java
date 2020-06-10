@@ -37,6 +37,7 @@ public class ResumeController {
         User user = users.getOne(userWithRoles.getId());
         model.addAttribute("user", user);
 
+        System.out.println(user.getCohort());
         Resume resume = new Resume();
         model.addAttribute("resume", resume);
         List<Resume> resumes = resumeRepo.findAllByUser_Id(user.getId());
@@ -52,7 +53,11 @@ public class ResumeController {
                                @RequestParam(name = "resumeURL") String resumeURL,
                                @RequestParam(name = "resumeType") String type,
                                @RequestParam(name = "resumeTitle") String resumeTitle) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User user = users.getOne(userWithRoles.getId());
+
+        resume.setCohort(user.getCohort());
         resume.setStatus("Pending");
         resume.setUser(user);
         resume.setType(type);
