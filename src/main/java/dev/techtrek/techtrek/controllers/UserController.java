@@ -59,6 +59,12 @@ public class UserController {
         return "index";
     }
 
+    // About page
+    @GetMapping("/about")
+    public String showAboutpage(Model model) {
+        return "about";
+    }
+
     // Dashboard view
     @GetMapping("/home")
     public String showDashboard(Model model) {
