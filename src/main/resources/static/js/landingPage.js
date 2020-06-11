@@ -37,9 +37,12 @@ function typeWriter() {
     }
 }
 
+
 setTimeout(function() {
     typeWriter();
 }, 750);
+
+
 
 setTimeout(function() {
     $('#techtrek-subtitle').fadeTo(1000,1.5);

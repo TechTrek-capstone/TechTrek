@@ -2,27 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
-
     <meta charset="UTF-8"/>
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
     <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/material-kit.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
     <link rel="stylesheet" th:href="@{/css/landing.css}">
-
     <title>TechTrek - Begin your journey</title>
-
 </head>
-
 <body>
-
-
+<div th:replace="partials/partials :: allModals"></div>
 <header class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="50">
-    <div class="container justify-content-between">
+    <div class="container justify-content-between" sec:authorize="isAnonymous()">
         <a class="btn btn-rose btn-round" th:href="@{#about}" role="button">
             <strong>Learn More</strong>
         </a>
@@ -30,23 +23,35 @@
         <a class="btn btn-rose btn-round" th:href="@{/login}" role="button" target="_blank">
             <strong>Login</strong>
         </a>
-        <a class="btn btn-rose btn-round" th:href="@{/register}" role="button" target="_blank">
+        <a class="btn btn-rose btn-round"  role="button" target="_blank" name="register"
+           data-toggle="modal"
+           data-target="#registerModal">
             <strong>Register</strong>
         </a>
         </span>
     </div>
-</header>
+    <div class="container justify-content-between" sec:authorize="isAuthenticated()">
+        <a class="btn btn-rose btn-round" th:href="@{#about}" role="button">
+            <strong>Learn More</strong>
+        </a>
+        <span>
+        <a class="btn btn-rose btn-round" th:href="@{/logout}" role="button" target="_blank">
+            <strong>Logout</strong>
+        </a>
+               <a class="btn btn-rose btn-round" th:href="@{/home}" role="button" target="_blank">
+            <strong>Dashboard</strong>
+        </a>
 
-<section class="page-header text-center position-relative banner-section"
+        </span>
+    </div>
+</header>
+<section  class="page-header text-center position-relative banner-section"
          style="background-image: url(img/mountains-2.jpg);">
     <div class="container">
-
         <h1 class="title display-1 my-0"><span id="techtrek-title"></span></h1>
-
         <h3 id="techtrek-subtitle" style="opacity: 0">Connecting developers with the tools they need.</h3>
     </div>
 </section>
-
 <main class="main main-raised" id="about">
     <section class="section text-center">
         <div class="container">
@@ -62,8 +67,6 @@
             </div>
         </div>
     </section>
-
-
     <section class="section text-center">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
@@ -136,9 +139,6 @@
 
         </div>
     </section>
-
-
-
 <!--    <section class="section text-center">-->
 <!--        <div class="container">-->
 <!--            <div class="row justify-content-center">-->
@@ -187,84 +187,12 @@
 <!--            </div>-->
 <!--        </div>-->
 <!--    </section>-->
-
-
-    <section class="section pb-5">
-        <div class="container">
-            <div class="landing-text container">
-
-
-                <!-- Not Authenticated View -->
-                <div sec:authorize="isAnonymous()" class="landing-buttons container mt-4">
-                    <div class="row justify-content-center">
-                        <h2 class="title mb-4" data-aos="fade-up">Begin your journey!</h2>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-sm">
-                            <a class="btn btn-rose btn-round" th:href="@{/login}" name="login" role="button" data-toggle="modal" data-target="#loginModal">
-                                <strong>Login</strong>
-                            </a>
-<!--                            <button type="button" class="btn btn-primary LoginButton w-100" name="login"-->
-<!--                                    data-toggle="modal"-->
-<!--                                    data-target="#loginModal">-->
-<!--                                Login-->
-<!--                            </button>-->
-                        </div>
-                        <div class="col-sm">
-                            <button type="button" class="btn btn-primary registerButton w-100" name="register"
-                                    data-toggle="modal"
-                                    data-target="#registerModal">
-                                Register
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Not Authenticated View -->
-
-
-                <!-- Authenticated View -->
-                <div sec:authorize="isAuthenticated()" class="landing-buttons container mt-4">
-                    <div class="row">
-                        <div class="col-sm w-100">
-                            <h4>Logged in: <span class="badge badge-pill badge-success"
-                                                 th:text="${#authentication.principal.username}"></span></h4>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-sm">
-                            <a class="text-white" th:href="@{/home}">
-                                <button type="button" name="Dashboard" class="btn btn-primary w-100">
-                                    Dashboard
-                                </button>
-                            </a>
-                        </div>
-
-                        <div class="col-sm">
-                            <a class="text-white" th:href="@{/logout}">
-                                <button type="button" name="Logout" class="btn btn-danger w-100">Logout
-                                </button>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- End Authenticated View -->
-
-            </div>
-
-        </div>
-    </section>
 </main>
 <footer class="py-4 page-footer">
     <div class="container text-center">
         <div class="row justify-content-between">
             <div class="col-auto">
                 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/TechTrek-capstone/TechTrek">
-
-
-
             </div>
         </div>
     </div>
@@ -273,6 +201,12 @@
 <button class="btn btn-rose btn-fab btn-fab-mini btn-round position-fixed back-to-top is-hidden">
     <i class="material-icons">keyboard_arrow_up</i>
 </button>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script type="text/javascript"
