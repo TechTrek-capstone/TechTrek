@@ -3,6 +3,10 @@
   --rose: #e91e63;
 }
 
+html {
+  scroll-behavior:smooth
+}
+
 a {
   color: inherit;
 }
@@ -113,4 +117,62 @@ p {
   .card-columns {
     column-count: 2;
   }
+}
+
+
+
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+/* Global */
+/*html{*/
+/*  min-height: 100%;*/
+/*  overflow: hidden;*/
+/*}*/
+/*body{*/
+/*  height: calc(100vh - 8em);*/
+/*  padding: 4em;*/
+/*  color: rgba(255,255,255,.75);*/
+/*  font-family: 'Anonymous Pro', monospace;*/
+/*  background-color: rgb(25,25,25);*/
+/*}*/
+/*.line-1{*/
+/*  position: relative;*/
+/*  top: 50%;*/
+/*  width: 10em;*/
+/*  margin: 0 auto;*/
+/*  border-right: 2px solid rgba(255,255,255,.75);*/
+/*  !*font-size: 180%;*!*/
+/*  text-align: center;*/
+/*  white-space: nowrap;*/
+/*  overflow: hidden;*/
+/*  transform: translateY(-50%);*/
+/*}*/
+
+/* Animation */
+/*.anim-typewriter{*/
+/*  animation: typewriter 2000ms steps(44) 2000ms 1 normal both,*/
+/*  blinkTextCursor 500ms steps(44) infinite normal;*/
+/*}*/
+/*@keyframes typewriter{*/
+/*  from{width: 0;}*/
+/*  to{width: 10em;}*/
+/*}*/
+/*@keyframes blinkTextCursor{*/
+/*  from{border-right-color: rgba(255,255,255,.75);}*/
+/*  to{border-right-color: transparent;}*/
+/*}*/
+
+#techtrek-title {
+  border-right: solid 10px rgba(255, 255, 255, .75);
+  white-space: nowrap;
+  overflow: hidden;
+  animation: animated-cursor 600ms steps(29) infinite;
+}
+
+/* cursor animations */
+
+@keyframes animated-cursor{
+  from{border-right-color: rgba(255,255,255, .75);}
+  to{border-right-color: transparent;}
 }
