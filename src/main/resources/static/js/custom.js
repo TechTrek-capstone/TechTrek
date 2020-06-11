@@ -88,7 +88,7 @@ $(document).ready(function () {
     });
 
     // Ajax GET to populate student dropdown based off of cohort
-    let studentDropdownAJAX = function (cohortId) {
+    function studentDropdownAJAX(cohortId) {
         $.ajax({
             type: 'GET',
             url: '/resume/' + cohortId,
@@ -106,10 +106,10 @@ $(document).ready(function () {
                 alert("Error finding students.");
             }
         });
-    };
+    }
 
     //Ajax GET for resumes (populates table whether only a cohort is selected, or a student)
-    let populateStudentResumesAJAX = function (cohortOrStudent, Id) {
+    function populateResumesTableAJAX(cohortOrStudent, Id) {
         let url = "";
 
         if (cohortOrStudent === "cohort") {
@@ -156,27 +156,27 @@ $(document).ready(function () {
                 alert("Error loading table.");
             }
         });
-    };
+    }
 
     // DROPDOWN - Populate 2nd dropdown and resume for cohort
     $("#cohort-dropdown").change(function () {
         let cohortId = $(this).val();
         studentDropdownAJAX(cohortId);
-        populateStudentResumesAJAX("cohort", cohortId);
+        populateResumesTableAJAX("cohort", cohortId);
     });
 
     // DROPDOWN - populate resume links based off of student dropdown
     $("#student-dropdown").change(function () {
         let studentId = $(this).val();
-        populateStudentResumesAJAX("student", studentId);
+        populateResumesTableAJAX("student", studentId);
     });
 });
 
 // Placement - submit resume revisions
 $(document).on('click', '.uploadResumeRevision', (function () {
     let client = filestack.init(fileStackKey);
-    let btn = $(this);
     let resumeId = $(this).val();
+    let btn = $(this);
     let fsURL;
 
     client
@@ -192,10 +192,9 @@ $(document).on('click', '.uploadResumeRevision', (function () {
         .then(function () {
             // call ajax POST to submit data
             submitResumeRevision(fsURL, resumeId);
-        })
-        .then(function () {
-            btn.after('<i class="fa fa-check-circle ml-2" style="font-size: 1.5rem; color: green"></i>');
-        })
+        }).then(function() {
+            btn.after("<i class='fa fa-check-circle ml-2' style='font-size: 1.5rem; color: green'></i>");
+    })
 }));
 
 // Ajax POST request to submit resume revision
@@ -216,14 +215,17 @@ function submitResumeRevision(fsURL, resumeId) {
     })
 }
 
-// STUDENT - pull up modal, assign values to .sendNotes
+// STUDENT - pull up modal, assign placement notes   html here
 $(document).on('click', '.resumeNotes', function() {
     $(".placement-resume-notes").html($(this).val());
 });
 
-// PLACEMENT - btn pulls up modal - we're assigning the modal's send btn-value to this btn's value (carries resume id)
+let btn;
+// PLACEMENT - btn pulls up modal - we're assigning the modal's send btn-value to this btn's value (resume id)
 $(document).on('click', '.uploadResumeNotes', (function () {
     $("#placementResumeNotesId").val($(this).val());
+    $(".placement-resume-notes").empty();
+    btn = $(this);
 }));
 
 // PLACEMENT - upload resume notes
@@ -231,9 +233,8 @@ $(document).on('click', '.sendNotes', (function () {
     let resumeId = $(this).val();
     let resumeNotes = $("#placement-resume-notes").val();
 
-    submitStudentNotes(resumeNotes, resumeId)
-
-
+    submitStudentNotes(resumeNotes, resumeId);
+    btn.after('<i class="fa fa-check-circle ml-2" style="font-size: 1.5rem; color: green"></i>');
 }));
 
 // PLACEMENT - Ajax POST to submit student notes on their resume
@@ -253,4 +254,3 @@ function submitStudentNotes(resumeNotes, resumeId) {
         data: JSON.stringify(data),
     })
 }
-// $(".uploadResumeNotes").after('<i class="fa fa-check-circle ml-2" style="font-size: 1.5rem; color: green"></i>');
