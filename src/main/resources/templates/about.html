@@ -15,6 +15,17 @@
 
     <title>TechTrek - Begin your journey</title>
 
+    <style>
+        i {
+            color: var(--rose);
+            transition: 200ms;
+        }
+
+        i:hover {
+            color: #8B1C46;
+            transition: 200ms;
+        }
+    </style>
 </head>
 <body>
 
@@ -37,90 +48,78 @@
 
 <section class="section text-center">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-10">
-            <h2 class="title mb-4" data-aos="fade-up">About Us...</h2>
-        </div>
+        <h2 class="title mb-5" data-aos="fade-up">Meet the Team</h2>
     </div>
-    <div class="container">
 
-        <div class="row mb-5">
-            <div class="col-md-12">
-                <div class="row border-0" data-aos="fade-right">
-                    <div class="col-md-2 m-auto">
-                        <img class="card-img mb-3 rounded-circle" th:src="@{/img/kaleb.jpg}" alt="Kaleb Dworsky"/>
-                        <span class="justify-content-center" style="font-size: 1.75rem">
-                                <a href="https://alumni.codeup.com/students/816" class="mr-1"><i
-                                        class="fas fa-chevron-circle-up"
-                                        style="transform: rotate(37deg); display: inline-block;}"></i></a>
-                                <a href="https://www.linkedin.com/in/kaleb-dd/" class="mr-1"><i
-                                        class="fab fa-linkedin"></i></a>
-                                <a href="https://github.com/KalebDD" class="mr-1"><i class="fab fa-github"></i></a>
-                            </span>
-                    </div>
-                    <div class="col-md-10">
-                        <h3 class="card-title mb-1">Kaleb Dworsky</h3>
-                        <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>
-                        <hr class="hr-light w-50">
-                        <p class="card-text p-3">
-                            Creative and focused professional who enjoys finding practical solutions to coding
-                            challenges. My passion for reading and writing allow me to quickly and efficiently
-                            produce quality solutions to coding challenges, and my work experience leading a team of
-                            professionals is conducive to a team-based, open-minded environment.
-                        </p>
-                    </div>
-                </div>
+    <div class="d-flex mx-auto" style="width:85%;">
+
+        <!--    KALEB      -->
+        <div style="width: 33%" data-aos="fade-up">
+            <img class="card-img rounded-circle" style="width: 65%" th:src="@{/img/kaleb.jpg}" alt="Kaleb Dworsky"/>
+
+            <h3 class="card-title mb-1">Kaleb Dworsky</h3>
+            <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
+            <hr class="hr-light w-50">
+            <div class="justify-content-center" style="font-size: 1.75rem">
+                <a href="https://alumni.codeup.com/students/816" class="mr-1"><i
+                        class="fas fa-chevron-circle-up"
+                        style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                <a href="https://www.linkedin.com/in/kaleb-dd/" class="mr-1"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/KalebDD" class="mr-1"><i class="fab fa-github"></i></a>
             </div>
+            <p class="card-text p-3">
+                Creative and focused professional who enjoys finding practical solutions to coding
+                challenges. My passion for reading and writing allow me to quickly and efficiently
+                produce quality solutions to coding challenges, and my work experience leading a team of
+                professionals is conductive to a team-based, open-minded environment.
+            </p>
         </div>
 
 
-        <div class="row mb-5">
-            <div class="col-md-12">
-                <div class="row border-0" data-aos="fade-left">
-                    <div class="col-md-10">
-                        <h3 class="card-title mb-1">Danielle Tobler</h3>
-                        <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
-                        <hr class="hr-light w-50">
-                        <p class="card-text p-3">
-                            Adaptive Software Developer with a passion for learning. Detailed-oriented and creative,
-                            I am a problem-solver at my core. I enjoy the challenges that the unknown presents and
-                            am eager to grow my skills through impactful projects and constructive collaboration.
-                        </p>
-                    </div>
-                    <div class="col-md-2 m-auto">
-                        <img class="card-img mb-3 rounded-circle" th:src="@{/img/danielle.jpg}" alt="Danielle Tobler"/>
-                        <span class="justify-content-center" style="font-size: 1.75rem">
-                                <a href="https://alumni.codeup.com/students/796" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
-                                <a href="https://www.linkedin.com/in/danielle-tobler/" class="mr-1"><i class="fab fa-linkedin"></i></a>
-                                 <a href="https://github.com/dmtobler" class="mr-1"><i class="fab fa-github"></i></a>
-                            </span>
-                    </div>
-                </div>
+
+        <!--    DANIELLE      -->
+        <div style="width: 33%" data-aos="fade-up">
+            <img class="card-img rounded-circle" style="width: 65%" th:src="@{/img/danielle.jpg}" alt="Danielle Tobler"/>
+
+            <h3 class="card-title mb-1">Danielle Tobler</h3>
+            <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
+            <hr class="hr-light w-50">
+            <div class="justify-content-center" style="font-size: 1.75rem">
+                <a href="https://alumni.codeup.com/students/796" class="mr-1"><i
+                        class="fas fa-chevron-circle-up"
+                        style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                <a href="https://www.linkedin.com/in/danielle-tobler/" class="mr-1"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/dmtobler" class="mr-1"><i class="fab fa-github"></i></a>
             </div>
+            <p class="card-text p-3">
+                Adaptive Software Developer with a passion for learning. Detailed-oriented and creative,
+                I am a problem-solver at my core. I enjoy the challenges that the unknown presents and
+                am eager to grow my skills through impactful projects and constructive collaboration.
+            </p>
         </div>
 
 
-        <div class="row mb-5">
-            <div class="col-md-12">
-                <div class="row border-0" data-aos="fade-right">
-                    <div class="col-md-2 m-auto">
-                        <img class="card-img mb-3 rounded-circle" th:src="@{/img/brian.jpg}" alt="Brian Purnell"/>
-                        <span class="justify-content-center" style="font-size: 1.75rem">
-                                <a href="https://alumni.codeup.com/students/797" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
-                                <a href="https://www.linkedin.com/in/brian-purnell-sanantonio/" class="mr-1"><i class="fab fa-linkedin"></i></a>
-                                <a href="https://github.com/purnellbp" class="mr-1"><i class="fab fa-github"></i></a>
-                            </span>
-                    </div>
-                    <div class="col-md-10">
-                        <h3 class="card-title mb-1">Brian Purnell</h3>
-                        <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
-                        <hr class="hr-light w-50">
-                        <p class="card-text p-3">
-                            Full-stack software developer with a background in electronics, oilfield services, and avionics. Experienced leader as a thirteen year veteran in the US Marine Corps. Exceptionally adept in working in fast-paced environments.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--    BRIAN      -->
+        <div style="width: 33%" data-aos="fade-up">
+            <img class="card-img rounded-circle" style="width: 65%" th:src="@{/img/brian.jpg}" alt="Brian Purnell"/>
 
+            <h3 class="card-title mb-1">Brian Purnell</h3>
+            <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
+            <hr class="hr-light w-50">
+            <div class="justify-content-center" style="font-size: 1.75rem">
+                <a href="https://alumni.codeup.com/students/797" class="mr-1"><i
+                        class="fas fa-chevron-circle-up"
+                        style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                <a href="https://www.linkedin.com/in/brian-purnell-sanantonio/" class="mr-1"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/purnellbp" class="mr-1"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="card-text p-3">
+                Full-stack software developer with a background in electronics, oilfield services, and avionics. Experienced leader as a thirteen year veteran in the US Marine Corps. Exceptionally adept in working in fast-paced environments.
+            </p>
+        </div>
     </div>
 </section>
 
