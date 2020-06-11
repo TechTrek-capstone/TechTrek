@@ -47,3 +47,9 @@ setTimeout(function() {
 setTimeout(function() {
     $('#techtrek-subtitle').fadeTo(1000,1.5);
 }, 2000);
+
+$(document).ready(function() {
+    if(window.location.href.indexOf('#register') != -1) {
+        $('#registerModal').modal('show');
+    }
+});

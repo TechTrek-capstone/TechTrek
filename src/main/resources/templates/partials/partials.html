@@ -199,62 +199,63 @@
 
 <!--Admin Dash-->
 <div th:fragment="adminDash" th:if="${user.userPerm == 'admin'}">
-        <div id="toolbar">
-            <h2 class="card-title">User Data</h2>
-        </div>
-        <table id="userListTable" class="table table-hover w-100"
-               data-toolbar="#toolbar"
-               data-toggle="table"
-               data-sort-class="table-active"
-               data-sortable="true"
-               data-height="460"
-               data-show-columns="true"
-               data-search="true"
-               data-id-field="id"
-               data-cookie="true"
-               data-cookie-id-table="saveId"
-              >
-            <thead>
-            <tr>
+    <div id="toolbar">
+        <h2 class="card-title">User Data</h2>
+    </div>
+    <table id="userListTable" class="table table-hover w-100"
+           data-toolbar="#toolbar"
+           data-toggle="table"
+           data-sort-class="table-active"
+           data-sortable="true"
+           data-height="460"
+           data-show-columns="true"
+           data-search="true"
+           data-id-field="id"
+           data-cookie="true"
+           data-cookie-id-table="saveId"
+    >
+        <thead>
+        <tr>
 
-                <th> - </th>
+            <th> -</th>
 
-                <th data-field="id" data-sortable="true" data-visible="false">ID</th>
-                <th data-field="fullname" data-sortable="true" data-visible="true">Name</th>
-                <th data-field="username" data-sortable="true" data-visible="true">Username</th>
-                <th data-field="email" data-sortable="true" data-visible="true">Email</th>
-                <th data-field="phoneNumber" data-sortable="true" data-visible="true">Phone</th>
-                <th data-field="cohort" data-sortable="true" data-visible="true">Cohort</th>
-                <th data-field="userWebsite" data-sortable="true" data-visible="true">User Website</th>
-                <th data-field="createDate" data-sortable="true" data-visible="false" >Join Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${userList}">
+            <th data-field="id" data-sortable="true" data-visible="false">ID</th>
+            <th data-field="fullname" data-sortable="true" data-visible="true">Name</th>
+            <th data-field="username" data-sortable="true" data-visible="true">Username</th>
+            <th data-field="email" data-sortable="true" data-visible="true">Email</th>
+            <th data-field="phoneNumber" data-sortable="true" data-visible="true">Phone</th>
+            <th data-field="cohort" data-sortable="true" data-visible="true">Cohort</th>
+            <th data-field="userWebsite" data-sortable="true" data-visible="true">User Website</th>
+            <th data-field="createDate" data-sortable="true" data-visible="false">Join Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userList}">
 
-                <td><p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i class="fas fa-user-cog color-01"></i></p></td>
+            <td><p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i
+                    class="fas fa-user-cog color-01"></i></p></td>
 
-                <td th:text="${user.id}" th:id="${user.id}"></td>
-                <td th:text="${user.getFullName()}"></td>
-                <td th:text="${user.username}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.phoneNumber}"></td>
-                <td>
+            <td th:text="${user.id}" th:id="${user.id}"></td>
+            <td th:text="${user.getFullName()}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.phoneNumber}"></td>
+            <td>
 
-                    <span th:unless="${user.getCohort() == ''} OR ${user.getCohort() == null}"><span th:text="${user.getCohort().name}">Cohort name</span></span>
+                <span th:unless="${user.getCohort() == ''} OR ${user.getCohort() == null}"><span
+                        th:text="${user.getCohort().name}">Cohort name</span></span>
 
-                </td>
-                <td th:text="${user.userWebsite}"></td>
-                <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
-
-
-
-            </tr>
-            </tbody>
-        </table>
+            </td>
+            <td th:text="${user.userWebsite}"></td>
+            <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
 
 
-    <div class="row" th:replace="partials/jobpartials :: dashJobList" ></div>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="row" th:replace="partials/jobpartials :: dashJobList"></div>
 
 
 </div>
@@ -278,7 +279,7 @@
             </div>
             <div class="modal-body">
 
-<!--                STUDENT FORM START-->
+                <!--                STUDENT FORM START-->
                 <form th:method="POST" th:action="@{'/users/' + ${student.getId()}}" class="w-50 ml-auto mr-auto"
                       id="editUserForm">
 
@@ -286,7 +287,7 @@
                         <div class="custom-control custom-checkbox">
 
                             <label th:for="${student.isEnabled}" th:text=" 'Account Enabled: ' "><b>Account Enabled</b></label>
-                            <input type="checkbox" th:field="*{student.isEnabled}" th:checked="${student.isEnabled}"  />
+                            <input type="checkbox" th:field="*{student.isEnabled}" th:checked="${student.isEnabled}"/>
 
 
                         </div>
@@ -297,15 +298,15 @@
                             <label class="input-group-text" for="userPerm">Options</label>
                         </div>
                         <select class="custom-select" id="userPerm" name="user_perm" th:selected="${student.userPerm}">
-                            <option  value="admin">Administrator</option>
+                            <option value="admin">Administrator</option>
                             <option value="student">Student</option>
                         </select>
                     </div>
 
                     <div class="input-group mb-3">
-                        <select class="custom-select form-control" name="cohort" id="cohort" >
+                        <select class="custom-select form-control" name="cohort" id="cohort">
                             <option th:each="cohort : ${cohorts}" class="dropdown-item"
-                                     th:text="${cohort.name}"
+                                    th:text="${cohort.name}"
                                     th:value="${cohort.id}"></option>
                         </select>
 
@@ -315,7 +316,7 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
 
                 </form>
-<!--                STUDENT FORM END-->
+                <!--                STUDENT FORM END-->
 
             </div>
             <div class="modal-footer">
@@ -337,10 +338,10 @@
 
         <!--  Register Form -->
 
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content mr-auto ml-auto" style="width: auto; border: none; background: none;">
-                <div class="text-center mr-auto ml-auto pt-4 pr-5 pl-5 pb-4 shadow"
-                     style="border: 1px solid lightgray; border-radius: 2rem; background: white">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content">
+                <div class="text-center pt-4 pr-5 pl-5 pb-4 shadow"
+                     style="border: 1px solid lightgray;  background: white">
 
                     <div class="row">
 
@@ -417,33 +418,36 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <input class="form-control" th:field="*{userfirstname}"
-                                               style="border-radius: 3rem; border: 1px solid lightgray" id="firstName"
+                                               id="firstName"
                                                name="userfirstname" type="text" placeholder="First name" required/>
                                     </div>
 
                                     <div class="form-group col">
                                         <input class="form-control" th:field="*{lastName}"
-                                               style="border-radius: 3rem; border: 1px solid lightgray" id="lastName"
+                                               id="lastName"
                                                name="last_name" type="text" placeholder="Last name" required/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <input class="form-control" th:field="*{username}"
-                                           style="border-radius: 3rem; border: 1px solid lightgray" id="username"
+                                           id="username"
                                            name="username" type="text" placeholder="Username" required/>
                                 </div>
 
                                 <div class="form-group">
                                     <input class="form-control" th:field="*{email}"
-                                           style="border-radius: 3rem; border: 1px solid lightgray" id="email"
+                                           id="email"
                                            name="email" type="email" placeholder="Email" required/>
                                 </div>
 
 
-                                <div class="form-group">
-                                    <select class="custom-select form-control" name="cohort" id="cohort"
-                                            style="border-radius: 3rem; border: 1px solid lightgray" required>
+                                <div class="input-group mb-3">
+<!--                                    <div class="input-group-prepend">-->
+<!--                                        <label class="input-group-text" for="cohort">Cohort</label>-->
+<!--                                    </div>-->
+                                    <select class="custom-select" name="cohort" id="cohort"
+                                            required>
                                         <option selected disabled>Cohort</option>
                                         <option th:each="cohort : ${cohorts}" class="dropdown-item"
                                                 th:text="${cohort.name}" th:value="${cohort.id}"></option>
@@ -451,16 +455,27 @@
                                 </div>
 
 
+                                <!--OLD-->
+<!--                                <div class="form-group">-->
+<!--                                    <select class="custom-select form-control" name="cohort" id="cohort"-->
+<!--                                            required>-->
+<!--                                        <option selected disabled><i class="fas fa-caret-down"></i>Cohort</option>-->
+<!--                                        <option th:each="cohort : ${cohorts}" class="dropdown-item"-->
+<!--                                                th:text="${cohort.name}" th:value="${cohort.id}"></option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+                                <!--old-->
+
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <input class="form-control" th:field="*{password}"
-                                               style="border-radius: 3rem; border: 1px solid lightgray" id="pwd"
+                                               id="pwd"
                                                name="password" type="password" placeholder="Password" required/>
                                     </div>
 
                                     <div class="form-group col">
                                         <input class="form-control"
-                                               style="border-radius: 3rem; border: 1px solid lightgray" type="password"
+                                               type="password"
                                                name="confirmPassword" placeholder="Confirm password" required/>
                                     </div>
                                 </div>
@@ -761,14 +776,17 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
                 <div class="card-body">
 
                     <!--  Event date -->
-                    <h4><span class="badge badge-info rounded-pill" th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Event date</span></h4>
-                    <h6 class="card-subtitle mb-4"><i class="far fa-clock text-black-50"></i> <span th:text="${event.time}" class="text-black-50">Event time</span></h6>
+                    <h4><span class="badge badge-info rounded-pill"
+                              th:text="${#dates.format(event.date, 'MM-dd-yyyy')}">Event date</span></h4>
+                    <h6 class="card-subtitle mb-4"><i class="far fa-clock text-black-50"></i> <span
+                            th:text="${event.time}" class="text-black-50">Event time</span></h6>
 
                     <h3 class="card-title" style="text-transform: uppercase" th:text="${event.title}">Event title</h3>
 
                 </div>
 
-                <div class="card-footer bg-transparent"><i class="fas fa-map-marker-alt mr-2"></i><span class="card-text" th:text="${event.location}"></span></div>
+                <div class="card-footer bg-transparent"><i class="fas fa-map-marker-alt mr-2"></i><span
+                        class="card-text" th:text="${event.location}"></span></div>
             </a>
         </div>
     </div>
@@ -899,7 +917,7 @@ L336.568,425.876L336.568,425.876z M427.177,425.876h-9.21l-7.651-13.277v-13.121h1
             });
         }
 
-        $(function() {
+        $(function () {
             $('#userListTable').bootstrapTable();
             $("#studentResumeTable").bootstrapTable();
             $("#placementResumeTable").bootstrapTable();
