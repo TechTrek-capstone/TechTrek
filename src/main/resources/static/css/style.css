@@ -180,12 +180,16 @@ table {
     transition: .2s;
 }
 
-.uploadTBlockResume:hover, .uploadVerticalResume:hover {
-    transform: scale(1.05);
-    transition: .2s;
+.uploadTBlockResume, .uploadVerticalResume {
+    /*background-color: rgb(252, 0, 91);*/
+    /*border-color: rgb(252, 0, 91);*/
 }
 
-.uploadVerticalResume:hover {
+.uploadTBlockResume:hover, .uploadVerticalResume:hover {
+    /*border-color: rgb(252, 0, 91);*/
+    /*background-color: rgb(252, 0, 91);*/
+    transform: scale(1.05);
+    transition: .2s;
     font-size: 1.3rem;
 }
 
@@ -196,6 +200,3 @@ table {
 main {
     font-size: 1rem;
 }
-
-
-

@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
 <head th:replace="partials/partials :: head"/>
 <title>Resume Portal</title>
+<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}"/>
 </head>
 
-<body>
+<body class="resumePage">
 
 <div class="page-wrapper chiller-theme toggled">
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
@@ -24,8 +25,8 @@
 
             <div class="d-flex justify-content-center mb-n4">
                 <!-- Upload TBlock Form -->
-                <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline mr-3 pt-2">
-                    <button type="button" class="badge-pill badge-primary uploadTBlockResume"
+                <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline mr-4 pt-1">
+                    <button type="button" class="btn btn-primary badge-pill uploadTBlockResume"
                             style="font-size: 1.1rem" value="tblock">
                         <i class="fas fa-arrow-circle-up"></i>
                         T-Block
@@ -36,8 +37,8 @@
                 </form>
                 <h1>Upload</h1>
                 <!-- Upload Vertical Form -->
-                <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline ml-3 pt-2">
-                    <button type="button" class="badge-pill badge-primary uploadVerticalResume"
+                <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline ml-4 pt-1">
+                    <button type="button" class="btn btn-primary badge-pill uploadVerticalResume"
                             style="font-size: 1.1rem">
                         Vertical
                         <i class="fas fa-arrow-circle-up"></i>
@@ -74,7 +75,6 @@
 
                         <!-- Filename -->
                         <td>
-                            <span th:text="${resume.title}"></span>
                             <!-- View uploaded File -->
                             <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem">
                                 <i class="fas fa-binoculars pt-1 ml-2"></i>
@@ -85,6 +85,7 @@
                                     th:data-id="${resume.id}" th:unless="${resume.status == 'Reviewed!'}">
                                 <i class="fa fa-trash" style="font-size: 1.5rem"></i>
                             </button>
+                            <span th:text="${resume.title}"></span>
                         </td>
 
                         <td><div th:text="${resume.type}"></div></td>
@@ -449,11 +450,6 @@
                 <tbody class="student-resumes"></tbody>
             </table>
 
-            <!-- Form to submit resume revision -->
-            <form th:action="@{resume/revision}" method="post" id="uploadResumeRevision">
-                <input type="hidden" name="resumeRevisionUpload" id="resumeRevisionUpload">
-                <input type="hidden" name="resumeId" id="resumeId">
-            </form>
 
             <!-- Form to submit resume notes -->
             <form th:action="@{resume/notes}" method="post" id="uploadResumeNotes">
