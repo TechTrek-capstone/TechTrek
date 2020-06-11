@@ -130,22 +130,22 @@ $(document).ready(function () {
                     resumeData +=
                         "<tr><td class='w-50'><a href='" + data[i].link + "' target=_blank>" + data[i].title + "</a></td>"
                         + "<td>" + data[i].type + "</td>"
-                        + "<td><button type='button' class='btn btn-primary uploadResumeRevision' value='" + data[i].id + "'>Upload</button>";
+                        + "<td><button type='button' class='btn uploadResumeRevision' value='" + data[i].id + "'>";
 
                     // if placement has already submitted a revision, checkmark populates here
                     if (data[i].status === "Reviewed!") {
-                        resumeData += "<i class='fa fa-check-circle ml-2' style='font-size: 1.5rem; color: green'></i></td>";
+                        resumeData += "<i class = 'fas fa-check-circle upload-success-circle'></i></button></td>";
                     } else {
-                        resumeData += "</td>";
+                        resumeData += "<i class = 'fas fa-arrow-circle-up need-to-upload'></i></button></td>";
                     }
 
                     // same as above, but just checking for notes
-                    resumeData += "<td><button type='button' class='btn btn-primary uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='" + data[i].id + "'>Upload</button>";
+                    resumeData += "<td><button type='button' class='btn uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='" + data[i].id + "'>";
 
                     if (data[i].placementNotes !== null) {
-                        resumeData += "<i class='fa fa-check-circle ml-2' style='font-size: 1.5rem; color: green'></i></td></tr>";
+                        resumeData += "<i class='fa fa-check-circle upload-success-circle'></i></button></td></tr>";
                     } else {
-                        resumeData += "</td></tr>";
+                        resumeData += "<i class = 'fas fa-arrow-circle-up need-to-upload'></i></button></td></tr>";
                     }
                 }
 
@@ -193,7 +193,7 @@ $(document).on('click', '.uploadResumeRevision', (function () {
             // call ajax POST to submit data
             submitResumeRevision(fsURL, resumeId);
         }).then(function() {
-            btn.after("<i class='fa fa-check-circle ml-2' style='font-size: 1.5rem; color: green'></i>");
+            btn.replaceWith("<button type='button' class='btn uploadResumeRevision' value='"+resumeId+"'><i class='fa fa-check-circle upload-success-circle'></i></button>");
     })
 }));
 
@@ -234,7 +234,7 @@ $(document).on('click', '.sendNotes', (function () {
     let resumeNotes = $("#placement-resume-notes").val();
 
     submitStudentNotes(resumeNotes, resumeId);
-    btn.after('<i class="fa fa-check-circle ml-2" style="font-size: 1.5rem; color: green"></i>');
+    btn.replaceWith("<button type='button' class='btn uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='"+resumeId+"'><i class='fa fa-check-circle upload-success-circle'></i></button>");
 }));
 
 // PLACEMENT - Ajax POST to submit student notes on their resume
