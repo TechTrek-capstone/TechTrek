@@ -450,11 +450,6 @@
                 <tbody class="student-resumes"></tbody>
             </table>
 
-            <!-- Form to submit resume revision -->
-            <form th:action="@{resume/revision}" method="post" id="uploadResumeRevision">
-                <input type="hidden" name="resumeRevisionUpload" id="resumeRevisionUpload">
-                <input type="hidden" name="resumeId" id="resumeId">
-            </form>
 
             <!-- Form to submit resume notes -->
             <form th:action="@{resume/notes}" method="post" id="uploadResumeNotes">

@@ -217,28 +217,9 @@ function submitResumeRevision(fsURL, resumeId) {
     })
 }
 
-// PLACEMENT - upload resume revision
-// $(document).on('click', '.uploadResumeRevision', (function () {
-//     let id = $(this).val();
-//     let client = filestack.init(fileStackKey);
-//
-//     client
-//         .pick({
-//             maxFiles: 1
-//         })
-//         .then(function (result) {
-//             let resultJSON = JSON.parse(JSON.stringify(result));
-//
-//             fsURL = resultJSON.filesUploaded[0].url;
-//             $("#resumeRevisionUpload").val(fsURL);
-//             $("#resumeId").val(id);
-//             $("#uploadResumeRevision").submit();
-//         })
-// }));
-
-// PLACEMENT - upload resume notes
+// PLACEMENT - btn pulls up modal - we're assigning the modal's send btn-value to this btn's value (carries resume id)
 $(document).on('click', '.uploadResumeNotes', (function () {
-    $("#resumeNotesId").val($(this).val());
+    $("#placementResumeNotesId").val($(this).val());
 }));
 
 // PLACEMENT - pull up modal, assign values to .sendNotes
@@ -248,7 +229,7 @@ $(document).on('click', '.resumeNotes', function () {
 
 // PLACEMENT - upload resume notes
 $(document).on('click', '.sendNotes', (function () {
-    $("#resumeNotesUpload").val($("#resume-notes").val());
-    $("#uploadResumeNotes").submit();
+    let resumeId = $(this).val();
+    let resumeNotes = $("#placement-resume-notes")
 }));
 
