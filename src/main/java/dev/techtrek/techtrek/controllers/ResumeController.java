@@ -1,10 +1,7 @@
 package dev.techtrek.techtrek.controllers;
 
 
-import dev.techtrek.techtrek.models.Cohort;
-import dev.techtrek.techtrek.models.Resume;
-import dev.techtrek.techtrek.models.User;
-import dev.techtrek.techtrek.models.UserWithRoles;
+import dev.techtrek.techtrek.models.*;
 import dev.techtrek.techtrek.repositories.*;
 import dev.techtrek.techtrek.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +49,11 @@ public class ResumeController {
                                @RequestParam(name = "resumeURL") String resumeURL,
                                @RequestParam(name = "resumeType") String type,
                                @RequestParam(name = "resumeTitle") String resumeTitle) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserWithRoles userWithRoles = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User user = users.getOne(userWithRoles.getId());
+
+        resume.setCohort(user.getCohort());
         resume.setStatus("Pending");
         resume.setUser(user);
         resume.setType(type);
@@ -89,10 +90,11 @@ public class ResumeController {
 
     // placement form submission for resume revision - not an endpoint
     @PostMapping("resume/revision")
-    public String uploadResumeRevision(@RequestParam(name = "resumeRevisionUpload") String resumeURL,
-                                       @RequestParam(name = "resumeId") long id) {
-        Resume resume = resumeRepo.findById(id);
-        resume.setRevision(resumeURL);
+    @ResponseBody
+    public void uploadResumeRevision(@RequestBody PlacementResumeData data) {
+
+        Resume resume = resumeRepo.findById(data.getResumeId());
+        resume.setRevision(data.getUrlORNotes());
         resume.setStatus("Reviewed!");
         resumeRepo.save(resume);
 
@@ -105,18 +107,14 @@ public class ResumeController {
         mailMessage.setText("Your resume has been reviewed. You can see it here: "  + "https://techtrek.dev/resume");
 
         emailSenderService.sendEmail(mailMessage);
-
-
-        return "redirect:/resume";
     }
 
     // placement form submission for resume notes - not an endpoint
     @PostMapping("resume/notes")
-    public String uploadResumeNotes(@RequestParam(name = "resumeNotesUpload") String resumeNotes,
-                                    @RequestParam(name = "resumeNotesId") long id) {
-        Resume resume = resumeRepo.findById(id);
-        resume.setPlacementNotes(resumeNotes);
+    @ResponseBody
+    public void uploadResumeNotes(@RequestBody PlacementResumeData data) {
+        Resume resume = resumeRepo.findById(data.getResumeId());
+        resume.setPlacementNotes(data.getUrlORNotes());
         resumeRepo.save(resume);
-        return "redirect:/resume";
     }
 }

@@ -5,6 +5,11 @@
 :root {
     box-sizing: border-box;
     --codeup-green: rgb(104, 186, 46);
+    --company-pink: rgb(252, 0, 91);
+    --company-purple: rgb(169, 0, 178);
+    --company-purple-hover: rgb(159, 0, 168);
+    --company-gray: rgb(102, 111, 120);
+    )
 }
 
 /*#landing-container {*/
@@ -180,22 +185,59 @@ table {
     transition: .2s;
 }
 
-.uploadTBlockResume:hover, .uploadVerticalResume:hover {
-    transform: scale(1.05);
-    transition: .2s;
+.uploadTBlockResume, .uploadVerticalResume {
+    background-color: var(--company-purple);
+    border-color: var(--company-purple);
 }
 
-.uploadVerticalResume:hover {
+.uploadTBlockResume:hover, .uploadVerticalResume:hover {
+    background-color: var(--company-purple-hover);
+    border-color: var(--company-purple-hover);
+    transform: scale(1.05);
+    transition: .2s;
     font-size: 1.3rem;
 }
 
-#resume-notes, .placement-resume-notes {
+#resume-notes, #placement-resume-notes {
     height: 300px;
 }
 
+.fa-binoculars {
+    color: var(--company-pink);
+}
+
+.fa-trash {
+    color: var(--company-purple);
+}
+
+.fa-binoculars:hover, .fa-trash:hover {
+    transform: scale(1.5);
+    transition: .2s;
+}
+
+.background-gray-color {
+    color: white;
+    background-color: var(--company-gray);
+}
+
+.upload-success-circle {
+    font-size: 2rem;
+    color: green
+}
+
+.need-to-upload {
+    font-size: 2rem;
+    color: var(--company-gray);
+}
+
+.upload-success-circle:hover, .need-to-upload:hover {
+    transform: scale(1.5);
+    transition: .2s;
+}
+
+#placementResumeNotesId {
+    background-color: var(--company-purple);
+}
 main {
     font-size: 1rem;
 }
-
-
-
