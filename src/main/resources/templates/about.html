@@ -1,86 +1,135 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/partials :: head">
-    <title>About</title>
+<head>
+
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+    <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/material-kit.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
+    <link rel="stylesheet" th:href="@{/css/landing.css}">
+
+    <title>TechTrek - Begin your journey</title>
+
 </head>
 <body>
 
-<div class="text-center">
-    <h1 class="display-2 mt-3 text-muted">About</h1>
+<header class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="50">
+    <div class="container justify-content-between">
+        <a class="btn btn-rose btn-round" th:href="@{/}" role="button">
+            <strong>TechTrek</strong>
+        </a>
+        <span>
+        <a class="btn btn-rose btn-round" th:href="@{/login}" role="button" target="_blank">
+            <strong>Login</strong>
+        </a>
+        <a class="btn btn-rose btn-round" th:href="@{/register}" role="button" target="_blank">
+            <strong>Register</strong>
+        </a>
+        </span>
+    </div>
+</header>
 
-    <hr class="hr-light w-75" />
 
-    <div class="card-deck justify-content-around mx-auto" style="width: 90%">
-        <div class="card border-0">
-            <div class="card-body lead">
-                <div class="mb-4 mx-auto" style="overflow: hidden; border-radius: 50%; width: 325px; height: 325px;">
-                    <img th:src="@{/img/kaleb.jpg}" style="width: 325px; height: 325px;" alt="Kaleb Dworsky" />
-                </div>
+<section class="section text-center">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+            <h2 class="title mb-4" data-aos="fade-up">About Us...</h2>
+        </div>
+    </div>
+    <div class="container">
 
-                <h2 class="card-title mb-1">Kaleb Dworsky</h2>
-                <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>
-
-                <hr class="hr-light w-50">
-
-                <p class="card-text p-3">
-                    Creative and focused professional who enjoys finding practical solutions to coding challenges. My passion for reading and writing allow me to quickly and efficiently produce quality solutions to coding challenges, and my work experience leading a team of professionals is conducive to a team-based, open-minded environment.
-                </p>
-                <div class="justify-content-center" style="font-size: 1.75rem">
-                    <a href="https://alumni.codeup.com/students/816" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
-                    <a href="https://www.linkedin.com/in/kaleb-dd/" class="mr-1"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/KalebDD" class="mr-1"><i class="fab fa-github"></i></a>
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="row border-0" data-aos="fade-right">
+                    <div class="col-md-2 m-auto">
+                        <img class="card-img mb-3 rounded-circle" th:src="@{/img/kaleb.jpg}" alt="Kaleb Dworsky"/>
+                        <span class="justify-content-center" style="font-size: 1.75rem">
+                                <a href="https://alumni.codeup.com/students/816" class="mr-1"><i
+                                        class="fas fa-chevron-circle-up"
+                                        style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                                <a href="https://www.linkedin.com/in/kaleb-dd/" class="mr-1"><i
+                                        class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/KalebDD" class="mr-1"><i class="fab fa-github"></i></a>
+                            </span>
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="card-title mb-1">Kaleb Dworsky</h3>
+                        <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>
+                        <hr class="hr-light w-50">
+                        <p class="card-text p-3">
+                            Creative and focused professional who enjoys finding practical solutions to coding
+                            challenges. My passion for reading and writing allow me to quickly and efficiently
+                            produce quality solutions to coding challenges, and my work experience leading a team of
+                            professionals is conducive to a team-based, open-minded environment.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="card border-0">
-            <div class="card-body lead">
-                <div class="mb-4 mx-auto" style="overflow: hidden; border-radius: 50%; width: 325px; height: 325px;">
-                    <img th:src="@{/img/danielle.jpg}" style="width: 325px; height: 325px;" alt="Danielle Tobler" />
-                </div>
 
-                <h2 class="card-title mb-1">Danielle Tobler</h2>
-                <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>
-
-                <hr class="hr-light w-50">
-
-                <p class="card-text p-3">
-                    Adaptive Software Developer with a passion for learning. Detailed-oriented and creative, I am a problem-solver at my core. I enjoy the challenges that the unknown presents and am eager to grow my skills through impactful projects and constructive collaboration.
-                </p>
-                <div class="justify-content-center" style="font-size: 1.75rem">
-                    <a href="https://alumni.codeup.com/students/796" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
-                    <a href="https://www.linkedin.com/in/danielle-tobler/" class="mr-1"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/dmtobler" class="mr-1"><i class="fab fa-github"></i></a>
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="row border-0" data-aos="fade-left">
+                    <div class="col-md-10">
+                        <h3 class="card-title mb-1">Danielle Tobler</h3>
+                        <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
+                        <hr class="hr-light w-50">
+                        <p class="card-text p-3">
+                            Adaptive Software Developer with a passion for learning. Detailed-oriented and creative,
+                            I am a problem-solver at my core. I enjoy the challenges that the unknown presents and
+                            am eager to grow my skills through impactful projects and constructive collaboration.
+                        </p>
+                    </div>
+                    <div class="col-md-2 m-auto">
+                        <img class="card-img mb-3 rounded-circle" th:src="@{/img/danielle.jpg}" alt="Danielle Tobler"/>
+                        <span class="justify-content-center" style="font-size: 1.75rem">
+                                <a href="https://alumni.codeup.com/students/796" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                                <a href="https://www.linkedin.com/in/danielle-tobler/" class="mr-1"><i class="fab fa-linkedin"></i></a>
+                                 <a href="https://github.com/dmtobler" class="mr-1"><i class="fab fa-github"></i></a>
+                            </span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="card border-0">
-            <div class="card-body lead">
-                <div class="mb-4 mx-auto" style="overflow: hidden; border-radius: 50%; width: 325px; height: 325px;">
-                    <img th:src="@{/img/brian.jpg}" style="width: 325px; height: 325px;" alt="Brian Purnell" />
-                </div>
 
-                <h2 class="card-title mb-1">Brian Purnell</h2>
-                <h5 class="card-subtitle mb-2 text-black-50">Web Developer</h5>
-
-                <hr class="hr-light w-50">
-
-                <p class="card-text p-3">
-                    Full-stack software developer with a background in electronics, oilfield services, and avionics. Experienced leader as a thirteen year veteran in the US Marine Corps. Exceptionally adept in working in fast-paced environments.
-                </p>
-                <div class="justify-content-center" style="font-size: 1.75rem">
-                    <a href="https://alumni.codeup.com/students/797" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
-                    <a href="https://www.linkedin.com/in/brian-purnell-sanantonio/" class="mr-1"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/purnellbp" class="mr-1"><i class="fab fa-github"></i></a>
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="row border-0" data-aos="fade-right">
+                    <div class="col-md-2 m-auto">
+                        <img class="card-img mb-3 rounded-circle" th:src="@{/img/brian.jpg}" alt="Brian Purnell"/>
+                        <span class="justify-content-center" style="font-size: 1.75rem">
+                                <a href="https://alumni.codeup.com/students/797" class="mr-1"><i class="fas fa-chevron-circle-up" style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                                <a href="https://www.linkedin.com/in/brian-purnell-sanantonio/" class="mr-1"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/purnellbp" class="mr-1"><i class="fab fa-github"></i></a>
+                            </span>
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="card-title mb-1">Brian Purnell</h3>
+                        <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
+                        <hr class="hr-light w-50">
+                        <p class="card-text p-3">
+                            Full-stack software developer with a background in electronics, oilfield services, and avionics. Experienced leader as a thirteen year veteran in the US Marine Corps. Exceptionally adept in working in fast-paced environments.</p>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
+</section>
 
-</div>
-
-<standard_scripts th:replace="partials/partials :: footer"></standard_scripts>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script type="text/javascript"
+        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/bootstrap-material-design.min.js"></script>
+<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/material-kit.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript" th:src="@{/js/landingPage.js}"></script>
 </body>
 </html>

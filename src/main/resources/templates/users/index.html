@@ -36,7 +36,7 @@
         <div th:if="${user.userPerm == 'student'}">
             <h1 class="display-4">Recent Listings</h1>
             <div class="media">
-                <div class="container">
+                <div class="container" style="">
                     <div th:replace="partials/jobpartials :: jobsListDash" ></div>
                     <div class="text-right"><a th:href="@{/jobs}"><button class="btn btn-primary btn-lg">See more... <i class="fas fa-arrow-right"></i></button></a></div>
                 </div>
