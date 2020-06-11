@@ -17,7 +17,7 @@
     <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
     <main class="page-content">
 
-        <h1 class="display-3 text-center mt-3" th:text="'Welcome back, ' + ${user.userfirstname} + '!'"></h1>
+        <h3 class="display-3 text-center mt-3" th:text="'Welcome back, ' + ${user.userfirstname} + '!'"></h3>
 
 <!--        <div th:unless="${resumes.findAllByUser_Id(${user.id}).findAllByStatus('Reviewed!').isEmpty() }" class="alert alert-warning alert-dismissible fade show w-50" role="alert" >-->
 <!--            <strong>Holy guacamole!</strong> You should check in on some of those fields below.-->
@@ -36,7 +36,7 @@
         <div th:if="${user.userPerm == 'student'}">
             <h1 class="display-4">Recent Listings</h1>
             <div class="media">
-                <div class="container">
+                <div class="container" style="">
                     <div th:replace="partials/jobpartials :: jobsListDash" ></div>
                     <div class="text-right"><a th:href="@{/jobs}"><button class="btn btn-primary btn-lg">See more... <i class="fas fa-arrow-right"></i></button></a></div>
                 </div>

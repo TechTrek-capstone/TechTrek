@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+    <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/material-kit.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
+    <link rel="stylesheet" th:href="@{/css/landing.css}">
+
+    <title>TechTrek - Begin your journey</title>
+
+    <style>
+        i {
+            color: var(--rose);
+            transition: 200ms;
+        }
+
+        i:hover {
+            color: #8B1C46;
+            transition: 200ms;
+        }
+    </style>
+</head>
+<body>
+
+<header class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="50">
+    <div class="container justify-content-between">
+        <a class="btn btn-rose btn-round" th:href="@{/}" role="button">
+            <strong>TechTrek</strong>
+        </a>
+        <span>
+        <a class="btn btn-rose btn-round" th:href="@{/login}" role="button" target="_blank">
+            <strong>Login</strong>
+        </a>
+        <a class="btn btn-rose btn-round" th:href="@{/register}" role="button" target="_blank">
+            <strong>Register</strong>
+        </a>
+        </span>
+    </div>
+</header>
+
+
+<section class="section text-center">
+    <div class="row justify-content-center">
+        <h2 class="title mb-5" data-aos="fade-up">Meet the Team</h2>
+    </div>
+
+    <div class="d-flex mx-auto" style="width:85%;">
+
+        <!--    KALEB      -->
+        <div style="width: 33%" data-aos="fade-up">
+            <img class="card-img rounded-circle" style="width: 65%" th:src="@{/img/kaleb.jpg}" alt="Kaleb Dworsky"/>
+
+            <h3 class="card-title mb-1">Kaleb Dworsky</h3>
+            <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
+            <hr class="hr-light w-50">
+            <div class="justify-content-center" style="font-size: 1.75rem">
+                <a href="https://alumni.codeup.com/students/816" class="mr-1"><i
+                        class="fas fa-chevron-circle-up"
+                        style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                <a href="https://www.linkedin.com/in/kaleb-dd/" class="mr-1"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/KalebDD" class="mr-1"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="card-text p-3">
+                Creative and focused professional who enjoys finding practical solutions to coding
+                challenges. My passion for reading and writing allow me to quickly and efficiently
+                produce quality solutions to coding challenges, and my work experience leading a team of
+                professionals is conductive to a team-based, open-minded environment.
+            </p>
+        </div>
+
+
+
+        <!--    DANIELLE      -->
+        <div style="width: 33%" data-aos="fade-up">
+            <img class="card-img rounded-circle" style="width: 65%" th:src="@{/img/danielle.jpg}" alt="Danielle Tobler"/>
+
+            <h3 class="card-title mb-1">Danielle Tobler</h3>
+            <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
+            <hr class="hr-light w-50">
+            <div class="justify-content-center" style="font-size: 1.75rem">
+                <a href="https://alumni.codeup.com/students/796" class="mr-1"><i
+                        class="fas fa-chevron-circle-up"
+                        style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                <a href="https://www.linkedin.com/in/danielle-tobler/" class="mr-1"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/dmtobler" class="mr-1"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="card-text p-3">
+                Adaptive Software Developer with a passion for learning. Detailed-oriented and creative,
+                I am a problem-solver at my core. I enjoy the challenges that the unknown presents and
+                am eager to grow my skills through impactful projects and constructive collaboration.
+            </p>
+        </div>
+
+
+        <!--    BRIAN      -->
+        <div style="width: 33%" data-aos="fade-up">
+            <img class="card-img rounded-circle" style="width: 65%" th:src="@{/img/brian.jpg}" alt="Brian Purnell"/>
+
+            <h3 class="card-title mb-1">Brian Purnell</h3>
+            <h5 class="card-subtitle mb-2 text-black-50">Software Developer</h5>
+            <hr class="hr-light w-50">
+            <div class="justify-content-center" style="font-size: 1.75rem">
+                <a href="https://alumni.codeup.com/students/797" class="mr-1"><i
+                        class="fas fa-chevron-circle-up"
+                        style="transform: rotate(37deg); display: inline-block;}"></i></a>
+                <a href="https://www.linkedin.com/in/brian-purnell-sanantonio/" class="mr-1"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/purnellbp" class="mr-1"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="card-text p-3">
+                Full-stack software developer with a background in electronics, oilfield services, and avionics. Experienced leader as a thirteen year veteran in the US Marine Corps. Exceptionally adept in working in fast-paced environments.
+            </p>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script type="text/javascript"
+        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/bootstrap-material-design.min.js"></script>
+<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/material-kit.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="text/javascript" th:src="@{/js/landingPage.js}"></script>
+</body>
+</html>

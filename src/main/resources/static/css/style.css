@@ -40,7 +40,7 @@
 }
 
 .landing-buttons {
-    background-color: #FFF;
+    background-color: #3c4858;
     padding: 1rem;
     border-radius: 1rem;
     border: 1px solid lightgray;
@@ -197,6 +197,6 @@ table {
     height: 300px;
 }
 
-.resumePage > p {
-    font-size: 6rem;
+main {
+    font-size: 1rem;
 }

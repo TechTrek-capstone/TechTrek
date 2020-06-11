@@ -7,8 +7,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -58,6 +58,12 @@ public class UserController {
         model.addAttribute("cohorts", cohorts);
         model.addAttribute("user", new User());
         return "index";
+    }
+
+    // About page
+    @GetMapping("/about")
+    public String showAboutpage(Model model) {
+        return "about";
     }
 
     // Dashboard view
@@ -159,19 +165,24 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public String showUserById(@PathVariable long id, Model model) {
+
         model.addAttribute("student", users.getUserById(id));
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
+        model.addAttribute("user_perm", users.getUserById(id).getUserPerm());
+        model.addAttribute("isEnabled", users.getUserById(id).getIsEnabled());
 
         return "partials/partials :: userModalContents";
     }
 
+
+
     @PostMapping("/users/{id}")
     public String editUserData(
-           @PathVariable long id,
+            @PathVariable long id,
             @RequestParam(name = "cohort") Cohort cohort,
             @RequestParam(name = "user_perm") String userPerm,
-            @RequestParam(name = "enabled") Boolean isEnabled
+            @RequestParam(value = "isEnabled") Boolean isEnabled
     ) {
         User student = users.getUserById(id);
         student.setCohort(cohort);
@@ -179,6 +190,8 @@ public class UserController {
         student.setIsEnabled(isEnabled);
 
         users.save(student);
+
+
         return "redirect:/home";
     }
 

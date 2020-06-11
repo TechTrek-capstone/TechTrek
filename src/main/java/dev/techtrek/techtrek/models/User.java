@@ -118,6 +118,13 @@ public class User {
         this.isEnabled = b;
     }
 
+    public Cohort getCohort() {
+        System.out.println("Getting Cohort");
+        return cohort;
+    }
 
-
+    public void setCohort(Cohort cohort) {
+        System.out.println("Setting Cohort");
+        this.cohort = cohort;
+    }
 }
