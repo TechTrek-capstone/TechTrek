@@ -216,28 +216,40 @@
               >
             <thead>
             <tr>
+
                 <th> - </th>
-                <th data-field="id" data-sortable="true">ID</th>
-                <th data-field="fullname" data-sortable="true" scope="col">Name</th>
-                <th data-field="username" data-sortable="true" scope="col">Username</th>
-                <th data-field="email" data-sortable="true" scope="col">Email</th>
-                <th data-field="createDate" data-sortable="true" scope="col">Join Date</th>
-                <th data-field="phoneNumber" data-sortable="true" scope="col">Phone</th>
-                <th data-field="cohort" data-sortable="true" scope="col">Cohort</th>
+
+                <th data-field="id" data-sortable="true" data-visible="false">ID</th>
+                <th data-field="fullname" data-sortable="true" data-visible="true">Name</th>
+                <th data-field="username" data-sortable="true" data-visible="true">Username</th>
+                <th data-field="email" data-sortable="true" data-visible="true">Email</th>
+                <th data-field="phoneNumber" data-sortable="true" data-visible="true">Phone</th>
+                <th data-field="cohort" data-sortable="true" data-visible="true">Cohort</th>
+                <th data-field="userWebsite" data-sortable="true" data-visible="true">User Website</th>
+                <th data-field="createDate" data-sortable="true" data-visible="false" >Join Date</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${userList}">
-                <td><p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i
-                        class="fas fa-user-cog color-01"></i></p></td>
+
+                <td><p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i class="fas fa-user-cog color-01"></i></p></td>
+
                 <td th:text="${user.id}" th:id="${user.id}"></td>
                 <td th:text="${user.getFullName()}"></td>
                 <td th:text="${user.username}"></td>
                 <td th:text="${user.email}"></td>
-                <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
                 <td th:text="${user.phoneNumber}"></td>
-                <td><span th:unless="${user.getCohort() == ''} OR ${user.getCohort() == null}"><span
-                        th:text="${user.getCohort().name}">Cohort name</span></span></td>
+                <td>
+
+<!--                    <span th:if="${user.getCohort() == ''} OR ${user.getCohort() == null}"><span>No Cohort Assigned</span></span>-->
+                    <span th:unless="${user.getCohort() == ''} OR ${user.getCohort() == null}"><span th:text="${user.getCohort().name}">Cohort name</span></span>
+
+                </td>
+                <td th:text="${user.userWebsite}"></td>
+                <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
+
+
+
             </tr>
             </tbody>
         </table>
@@ -245,73 +257,11 @@
 
     <div class="row" th:replace="partials/jobpartials :: dashJobList" ></div>
 
-  
-  
-<!--     <div id="toolbar">
-        <h2 class="card-title">User Data</h2>
-    </div>
-    <table id="userListTable" class="table table-hover w-100"
-           data-toolbar="#toolbar"
-           data-toggle="table"
-           data-sort-class="table-active"
-           data-sortable="true"
-           data-height="460"
-           data-show-columns="true"
-           data-search="true"
-           data-id-field="id"
-           data-cookie="true"
-           data-cookie-id-table="saveId"
-    >
-        <thead>
-        <tr>
-            <th> -</th>
-            <th data-field="id" data-sortable="true">ID</th>
-            <th data-field="fullname" data-sortable="true" scope="col">Name</th>
-            <th data-field="username" data-sortable="true" scope="col">Username</th>
-            <th data-field="email" data-sortable="true" scope="col">Email</th>
-            <th data-field="createDate" data-sortable="true" scope="col">Join Date</th>
-            <th data-field="phoneNumber" data-sortable="true" scope="col">Phone</th>
-            <th data-field="cohort" data-sortable="true" scope="col">Cohort</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${userList}">
-            <td><p class="m-auto" th:onclick="'javascript:openStudentModal(\'' + ${user.id} + '\');' "><i
-                    class="fas fa-user-cog color-01"></i></p></td>
-            <td th:text="${user.id}" th:id="${user.id}"></td>
-            <td th:text="${user.getFullName()}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${#dates.format(user.createDate, 'MM-dd-yyyy')}">
-            <td th:text="${user.phoneNumber}"></td>
-            <td><span th:unless="${user.getCohort() == ''} OR ${user.getCohort() == null}"><span
-                    th:text="${user.getCohort().name}">Cohort name</span></span></td>
-        </tr>
-        </tbody>
-    </table> -->
 
 </div>
 
 <!--Student Dash-->
-<div th:fragment="studentDash" th:if="${user.userPerm == 'student'}">
-
-
-    <!--        <tbody>-->
-    <!--        <tr th:if="${resumes.isEmpty() || resumes.isNull()} ">-->
-    <!--            <td>No resumes to display for this user.</td>-->
-    <!--        </tr>-->
-
-    <!--        <tr th:unless="${resumes.isEmpty()}" th:each="resume : ${resumes}">-->
-    <!--            <td>-->
-    <!--                <a th:href="${resume.link}" target="_blank">-->
-    <!--                    <span th:text="${resume.title} + ' '"></span>-->
-    <!--                </a>-->
-    <!--                <small class="text-muted" th:text="'(' + ${resume.type + ')'}"></small>-->
-    <!--            </td>-->
-    <!--        </tr>-->
-    <!--        </tbody>-->
-    <!--    </table>-->
-</div>
+<div th:fragment="studentDash" th:if="${user.userPerm == 'student'}"></div>
 
 
 <!-- All Modals -->
@@ -328,6 +278,8 @@
                 </button>
             </div>
             <div class="modal-body">
+
+<!--                STUDENT FORM START-->
                 <form th:method="POST" th:action="@{'/users/' + ${student.getId()}}" class="w-50 ml-auto mr-auto"
                       id="editUserForm">
 
@@ -348,22 +300,24 @@
                             <option value="student">Student</option>
                         </select>
                     </div>
-
+                    <div>
+                        <span>No Cohort Assigned</span>
+                    </div>
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="cohort">Cohort</label>
-                        </div>
-                        <span th:unless="${student.cohort == null}">
-                        <select class="custom-select form-control" name="cohort" id="cohort">
+                        <select class="custom-select form-control" name="cohort" id="cohort" >
                             <option th:each="cohort : ${cohorts}" class="dropdown-item"
-                                    th:selected="${cohort.id == student.cohort.getId()}" th:text="${cohort.name}"
+                                     th:text="${cohort.name}"
                                     th:value="${cohort.id}"></option>
                         </select>
-                        </span>
+
+
                     </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
 
                 </form>
+<!--                STUDENT FORM END-->
+
             </div>
             <div class="modal-footer">
 

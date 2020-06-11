@@ -54,6 +54,7 @@ public class UserAccountController {
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
             user.setUserPerm("student");
+            user.setEnabled(false);
             users.save(user);
 
             ConfirmationToken confirmationToken = new ConfirmationToken(user);

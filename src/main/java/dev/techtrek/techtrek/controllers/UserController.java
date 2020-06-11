@@ -173,17 +173,19 @@ public class UserController {
 
     @PostMapping("/users/{id}")
     public String editUserData(
-           @PathVariable long id,
+            @PathVariable long id,
             @RequestParam(name = "cohort") Cohort cohort,
             @RequestParam(name = "user_perm") String userPerm,
             @RequestParam(name = "enabled") Boolean isEnabled
     ) {
         User student = users.getUserById(id);
+        System.out.println("################### \n\n\nCohort passed is: " + cohort + "\n\n\n ###################");
         student.setCohort(cohort);
         student.setUserPerm(userPerm);
         student.setIsEnabled(isEnabled);
-
         users.save(student);
+
+
         return "redirect:/home";
     }
 
