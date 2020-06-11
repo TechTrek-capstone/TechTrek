@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    let resumeId = null;
+    // globally scoped variables for student resume submissions
     let fsURL;
     let fsTitle;
 
@@ -89,7 +89,7 @@ $(document).ready(function () {
     });
 
     // Ajax GET to populate student dropdown based off of cohort
-    let studentDropdownAJAX = function(cohortId) {
+    let studentDropdownAJAX = function (cohortId) {
         $.ajax({
             type: 'GET',
             url: '/resume/' + cohortId,
@@ -110,13 +110,13 @@ $(document).ready(function () {
     };
 
     //Ajax GET for resumes (populates table whether only a cohort is selected, or a student)
-    let populateStudentResumesAJAX = function(cohortOrStudent, Id) {
+    let populateStudentResumesAJAX = function (cohortOrStudent, Id) {
         let url = "";
 
         if (cohortOrStudent === "cohort") {
-            url = 'resume/cohort/'+Id;
+            url = 'resume/cohort/' + Id;
         } else {
-            url = 'resume/student/'+Id;
+            url = 'resume/student/' + Id;
         }
 
         $.ajax({
@@ -131,7 +131,7 @@ $(document).ready(function () {
                     resumeData +=
                         "<tr><td class='w-50'><a href='" + data[i].link + "' target=_blank>" + data[i].title + "</a></td>"
                         + "<td>" + data[i].type + "</td>"
-                        + "<td><button type='button' class='btn btn-primary uploadResumeRevision' value='"+ data[i].id + "'>Upload</button>";
+                        + "<td><button type='button' class='btn btn-primary uploadResumeRevision' value='" + data[i].id + "'>Upload</button>";
 
                     // if placement has already submitted a revision, checkmark populates here
                     if (data[i].status === "Reviewed!") {
@@ -173,10 +173,12 @@ $(document).ready(function () {
     });
 });
 
-// PLACEMENT - upload resume revision
+// Placement - submit resume revisions
 $(document).on('click', '.uploadResumeRevision', (function () {
-    let id = $(this).val();
     let client = filestack.init(fileStackKey);
+    let btn = $(this);
+    let resumeId = $(this).val();
+    let fsURL;
 
     client
         .pick({
@@ -186,13 +188,55 @@ $(document).on('click', '.uploadResumeRevision', (function () {
             let resultJSON = JSON.parse(JSON.stringify(result));
 
             fsURL = resultJSON.filesUploaded[0].url;
-            $("#resumeRevisionUpload").val(fsURL);
-            $("#resumeId").val(id);
-            $("#uploadResumeRevision").submit();
+
+        })
+        .then(function(){
+            // call ajax POST to submit data
+            submitResumeRevision(fsURL, resumeId);
+        })
+        .then(function() {
+            btn.after('<i class="fa fa-check-circle ml-2" style="font-size: 1.5rem; color: green"></i>');
         })
 }));
 
+// Ajax POST request to submit resume revision
+function submitResumeRevision(fsURL, resumeId) {
+    let data = {
+        fsURL : fsURL,
+        resumeId : resumeId
+    };
+    let token = $("meta[name='_csrf']").attr("content");
+
+    $.ajax({
+        type: "POST",
+        url: "resume/revision",
+        headers: {"X-CSRF-TOKEN": token},
+        contentType : 'application/json; charset=utf-8',
+        dataType : 'json',
+        data: JSON.stringify(data)
+    })
+}
+
 // PLACEMENT - upload resume revision
+// $(document).on('click', '.uploadResumeRevision', (function () {
+//     let id = $(this).val();
+//     let client = filestack.init(fileStackKey);
+//
+//     client
+//         .pick({
+//             maxFiles: 1
+//         })
+//         .then(function (result) {
+//             let resultJSON = JSON.parse(JSON.stringify(result));
+//
+//             fsURL = resultJSON.filesUploaded[0].url;
+//             $("#resumeRevisionUpload").val(fsURL);
+//             $("#resumeId").val(id);
+//             $("#uploadResumeRevision").submit();
+//         })
+// }));
+
+// PLACEMENT - upload resume notes
 $(document).on('click', '.uploadResumeNotes', (function () {
     $("#resumeNotesId").val($(this).val());
 }));

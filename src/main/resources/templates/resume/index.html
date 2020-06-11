@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
 <head th:replace="partials/partials :: head"/>
 <title>Resume Portal</title>
+<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}"/>
 </head>
 
 <body>
