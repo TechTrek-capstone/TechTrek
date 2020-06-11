@@ -241,7 +241,6 @@
                 <td th:text="${user.phoneNumber}"></td>
                 <td>
 
-<!--                    <span th:if="${user.getCohort() == ''} OR ${user.getCohort() == null}"><span>No Cohort Assigned</span></span>-->
                     <span th:unless="${user.getCohort() == ''} OR ${user.getCohort() == null}"><span th:text="${user.getCohort().name}">Cohort name</span></span>
 
                 </td>
@@ -285,9 +284,11 @@
 
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
-                            <input name="enabled" type="checkbox" class="custom-control-input" id="enabled"
-                                   th:checked="${student.isEnabled}" th:value="true">
-                            <label class="custom-control-label" for="enabled"><b>Account Enabled</b></label>
+
+                            <label th:for="${student.isEnabled}" th:text=" 'Account Enabled: ' "><b>Account Enabled</b></label>
+                            <input type="checkbox" th:field="*{student.isEnabled}" th:checked="${student.isEnabled}"  />
+
+
                         </div>
                     </div>
 
@@ -296,13 +297,11 @@
                             <label class="input-group-text" for="userPerm">Options</label>
                         </div>
                         <select class="custom-select" id="userPerm" name="user_perm" th:selected="${student.userPerm}">
-                            <option value="admin">Administrator</option>
+                            <option  value="admin">Administrator</option>
                             <option value="student">Student</option>
                         </select>
                     </div>
-                    <div>
-                        <span>No Cohort Assigned</span>
-                    </div>
+
                     <div class="input-group mb-3">
                         <select class="custom-select form-control" name="cohort" id="cohort" >
                             <option th:each="cohort : ${cohorts}" class="dropdown-item"

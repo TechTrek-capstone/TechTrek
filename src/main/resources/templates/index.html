@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
     <link rel="stylesheet" th:href="@{/css/landing.css}">
+    <link rel="icon" type="image/png" th:href="@{/img/favicon-16x16.png}" sizes="16x16">
+    <link rel="icon" type="image/png" th:href="@{/img/favicon-32x32}" sizes="32x32">
+    <link rel="apple-touch-icon" th:href="@{/img/apple-touch-icon.png}">
     <title>TechTrek - Begin your journey</title>
 </head>
 <body>
@@ -20,10 +23,10 @@
             <strong>Learn More</strong>
         </a>
         <span>
-        <a class="btn btn-rose btn-round" th:href="@{/login}" role="button" target="_blank">
+        <a class="btn btn-rose btn-round" th:href="@{/login}" role="button">
             <strong>Login</strong>
         </a>
-        <a class="btn btn-rose btn-round"  role="button" target="_blank" name="register"
+        <a class="btn btn-rose btn-round" role="button" href="#"
            data-toggle="modal"
            data-target="#registerModal">
             <strong>Register</strong>
@@ -45,7 +48,7 @@
         </span>
     </div>
 </header>
-<section  class="page-header text-center position-relative banner-section"
+<section class="page-header text-center position-relative banner-section"
          style="background-image: url(img/mountains-2.jpg);">
     <div class="container">
         <h1 class="title display-1 my-0"><span id="techtrek-title"></span></h1>
@@ -79,8 +82,8 @@
                 <div class="col-md-12">
                     <div class="row border-0" data-aos="fade-right">
                         <div class="col-md-4 m-auto" style="display: flex; align-items: center;">
-                            <div style="width:300px; height: 300px; border-radius:50%; background: var(--rose)">
-                                <div class="m-auto" th:replace="partials/svgpartials :: resumeIcon" ></div>
+                            <div style="width:300px; height: 300px; border-radius:50%; background: var(--rose);">
+                                <div class="mx-auto" th:replace="partials/svgpartials :: resumeIcon"></div>
                             </div>
                         </div>
                         <div class="col-md-8 my-auto pl-5">
@@ -88,7 +91,9 @@
                             <hr class="hr-light w-50">
                             <p class="card-text">
                                 Your resume is a critical component of your transition to tech.
-                                Highlighting your skills, projects, and prior experience will help you stand out from the crowd. Upload and receive feedback easily from your placement team with TechTrek's Resume Portal.
+                                Highlighting your skills, projects, and prior experience will help you stand out from
+                                the crowd. Upload and receive feedback easily from your placement team with TechTrek's
+                                Resume Portal.
                             </p>
                         </div>
                     </div>
@@ -104,12 +109,13 @@
                             <hr class="hr-light w-50">
                             <p class="card-text">
                                 Never miss a job opportunity with TechTrek's job listings page! Populated by your
-                                placement team, TechTrek only shows openings relevant to your cohort's qualifications. Apply quickly and effectively with minimal filtering.
+                                placement team, TechTrek only shows openings relevant to your cohort's qualifications.
+                                Apply quickly and effectively with minimal filtering.
                             </p>
                         </div>
                         <div class="col-md-4 m-auto" style="display: flex; align-items: center;">
                             <div style="width:300px; height: 300px; border-radius:50%; background: var(--rose)">
-                                <div class="m-auto" th:replace="partials/svgpartials :: jobIcon" ></div>
+                                <div class="m-auto" th:replace="partials/svgpartials :: jobIcon"></div>
                             </div>
                         </div>
                     </div>
@@ -117,12 +123,12 @@
             </div>
 
 
-            <div class="row" style="margin-bottom: 4rem">
+            <div class="row pb-5" style="margin-bottom: 4rem">
                 <div class="col-md-12">
                     <div class="row border-0" data-aos="fade-right">
                         <div class="col-md-4 m-auto" style="display: flex; align-items: center;">
                             <div style="width:300px; height: 300px; border-radius:50%; background: var(--rose)">
-                                <div class="m-auto" th:replace="partials/svgpartials :: eventIcon" ></div>
+                                <div class="m-auto" th:replace="partials/svgpartials :: eventIcon"></div>
                             </div>
                         </div>
                         <div class="col-md-8 my-auto pl-5">
@@ -130,7 +136,8 @@
                             <hr class="hr-light w-50">
                             <p class="card-text">
                                 Stay in the loop with TechTrek's event listings! Find out essential information
-                                regarding upcoming Tech Talks, career fairs, networking opportunities, interest groups and more at the click of a mouse.
+                                regarding upcoming Tech Talks, career fairs, networking opportunities, interest groups
+                                and more at the click of a mouse.
                             </p>
                         </div>
                     </div>
@@ -139,60 +146,20 @@
 
         </div>
     </section>
-<!--    <section class="section text-center">-->
-<!--        <div class="container">-->
-<!--            <div class="row justify-content-center">-->
-<!--                <div class="col-12 col-md-10">-->
-<!--                    <h2 class="title mb-4" data-aos="fade-up">Functionality...</h2>-->
-<!--                    <ul class="nav nav-pills nav-pills-rose justify-content-center mt-5" role="tablist">-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link active" id="pills-edinburgh-tab" data-toggle="pill" href="#pills-resume"-->
-<!--                               role="tab" aria-controls="pills-resume" aria-selected="true"-->
-<!--                               data-aos="fade-up">Resumes</a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" id="pills-jobs-tab" data-toggle="pill" href="#pills-jobs" role="tab"-->
-<!--                               aria-controls="pills-jobs" aria-selected="false" data-aos="fade-up" data-aos-delay="150">Job-->
-<!--                                Listings</a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" id="pills-events-tab" data-toggle="pill" href="#pills-events" role="tab"-->
-<!--                               aria-controls="pills-events" aria-selected="false" data-aos="fade-up"-->
-<!--                               data-aos-delay="300">Tech Events</a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                    <div class="tab-content tab-space pb-0">-->
-<!--                        <div class="tab-pane active" id="pills-resume" role="tabpanel"-->
-<!--                             aria-labelledby="pills-resume-tab">-->
-<!--                            <p data-aos="fade-up">Your resume is a critical component of your transition to tech.-->
-<!--                                Highlighting your-->
-<!--                                skills, projects, and prior experience will help you stand out from the crowd. Upload-->
-<!--                                and receive-->
-<!--                                feedback easily from your placement team with TechTrek's Resume Portal.</p>-->
-<!--                        </div>-->
-<!--                        <div class="tab-pane" id="pills-jobs" role="tabpanel" aria-labelledby="pills-jobs-tab">-->
-<!--                            <p>Never miss a job opportunity with TechTrek's job listings page! Populated by your-->
-<!--                                placement team, TechTrek only shows openings relevant to your cohort's qualifications.-->
-<!--                                Apply quickly-->
-<!--                                and effectively with minimal filtering.</p>-->
-<!--                        </div>-->
-<!--                        <div class="tab-pane" id="pills-events" role="tabpanel" aria-labelledby="pills-events-tab">-->
-<!--                            <p>Stay in the loop with TechTrek's event listings! Find out essential information-->
-<!--                                regarding upcoming Tech Talks, career fairs, networking opportunities, interest groups-->
-<!--                                and more at-->
-<!--                                the click of a mouse.</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
 </main>
-<footer class="py-4 page-footer">
+<footer class="page-footer">
     <div class="container text-center">
         <div class="row justify-content-between">
             <div class="col-auto">
-                <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/TechTrek-capstone/TechTrek">
+                <img alt="GitHub last commit"
+                     src="https://img.shields.io/github/last-commit/TechTrek-capstone/TechTrek">
+            </div>
+            <div class="row d-flex justify-content-center" style="font-size: 1.25rem">
+                <a href="/about" class="mr-3">About us</a> <span class="mr-3">&bull;</span>
+
+                <a href="https://github.com/TechTrek-capstone/TechTrek" class="mr-3">Github</a> <span class="mr-3">&bull;</span>
+
+                <a href="https://www.codeup.com">Codeup</a>
             </div>
         </div>
     </div>

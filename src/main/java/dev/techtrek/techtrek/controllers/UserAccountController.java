@@ -88,6 +88,8 @@ public class UserAccountController {
             User user = users.findByEmailIgnoreCase(token.getUser().getEmail());
             user.setEnabled(true);
             users.save(user);
+
+
             modelAndView.setViewName("accountVerified");
         }
         else

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -164,25 +165,30 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public String showUserById(@PathVariable long id, Model model) {
+
         model.addAttribute("student", users.getUserById(id));
         List<Cohort> cohorts = cohortsRepo.findAll();
         model.addAttribute("cohorts", cohorts);
+        model.addAttribute("user_perm", users.getUserById(id).getUserPerm());
+        model.addAttribute("isEnabled", users.getUserById(id).getIsEnabled());
 
         return "partials/partials :: userModalContents";
     }
+
+
 
     @PostMapping("/users/{id}")
     public String editUserData(
             @PathVariable long id,
             @RequestParam(name = "cohort") Cohort cohort,
             @RequestParam(name = "user_perm") String userPerm,
-            @RequestParam(name = "enabled") Boolean isEnabled
+            @RequestParam(value = "isEnabled") Boolean isEnabled
     ) {
         User student = users.getUserById(id);
-        System.out.println("################### \n\n\nCohort passed is: " + cohort + "\n\n\n ###################");
         student.setCohort(cohort);
         student.setUserPerm(userPerm);
         student.setIsEnabled(isEnabled);
+
         users.save(student);
 
 
