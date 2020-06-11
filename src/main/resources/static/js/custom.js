@@ -4,7 +4,6 @@ $(document).ready(function () {
     let fsURL;
     let fsTitle;
 
-
     // Progress bar for password strength on registration
     $.strength = function (element, password) {
         var desc = [{
@@ -190,11 +189,11 @@ $(document).on('click', '.uploadResumeRevision', (function () {
             fsURL = resultJSON.filesUploaded[0].url;
 
         })
-        .then(function(){
+        .then(function () {
             // call ajax POST to submit data
             submitResumeRevision(fsURL, resumeId);
         })
-        .then(function() {
+        .then(function () {
             btn.after('<i class="fa fa-check-circle ml-2" style="font-size: 1.5rem; color: green"></i>');
         })
 }));
@@ -202,8 +201,8 @@ $(document).on('click', '.uploadResumeRevision', (function () {
 // Ajax POST request to submit resume revision
 function submitResumeRevision(fsURL, resumeId) {
     let data = {
-        fsURL : fsURL,
-        resumeId : resumeId
+        urlORNotes: fsURL,
+        resumeId: resumeId
     };
     let token = $("meta[name='_csrf']").attr("content");
 
@@ -211,25 +210,47 @@ function submitResumeRevision(fsURL, resumeId) {
         type: "POST",
         url: "resume/revision",
         headers: {"X-CSRF-TOKEN": token},
-        contentType : 'application/json; charset=utf-8',
-        dataType : 'json',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
         data: JSON.stringify(data)
     })
 }
+
+// STUDENT - pull up modal, assign values to .sendNotes
+$(document).on('click', '.resumeNotes', function() {
+    $(".placement-resume-notes").html($(this).val());
+});
 
 // PLACEMENT - btn pulls up modal - we're assigning the modal's send btn-value to this btn's value (carries resume id)
 $(document).on('click', '.uploadResumeNotes', (function () {
     $("#placementResumeNotesId").val($(this).val());
 }));
 
-// PLACEMENT - pull up modal, assign values to .sendNotes
-$(document).on('click', '.resumeNotes', function () {
-    $(".placement-resume-notes").html($(this).val());
-});
-
 // PLACEMENT - upload resume notes
 $(document).on('click', '.sendNotes', (function () {
     let resumeId = $(this).val();
-    let resumeNotes = $("#placement-resume-notes")
+    let resumeNotes = $("#placement-resume-notes").val();
+
+    submitStudentNotes(resumeNotes, resumeId)
+
+
 }));
 
+// PLACEMENT - Ajax POST to submit student notes on their resume
+function submitStudentNotes(resumeNotes, resumeId) {
+    let token = $("meta[name='_csrf']").attr("content");
+    let data = {
+        urlORNotes: resumeNotes,
+        resumeId: resumeId
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "resume/notes",
+        headers: {"X-CSRF-TOKEN": token},
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify(data),
+    })
+}
+// $(".uploadResumeNotes").after('<i class="fa fa-check-circle ml-2" style="font-size: 1.5rem; color: green"></i>');

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PlacementResumeData {
-    public String fsURL;
+    public String urlORNotes;
     public long resumeId;
 
 }

@@ -115,7 +115,7 @@ public class ResumeController {
     public void uploadResumeRevision(@RequestBody PlacementResumeData data) {
 
         Resume resume = resumeRepo.findById(data.getResumeId());
-        resume.setRevision(data.getFsURL());
+        resume.setRevision(data.getUrlORNotes());
         resume.setStatus("Reviewed!");
         resumeRepo.save(resume);
 
@@ -130,13 +130,20 @@ public class ResumeController {
         emailSenderService.sendEmail(mailMessage);
     }
 
-    // placement form submission for resume notes - not an endpoint
     @PostMapping("resume/notes")
-    public String uploadResumeNotes(@RequestParam(name = "resumeNotesUpload") String resumeNotes,
-                                    @RequestParam(name = "resumeNotesId") long id) {
-        Resume resume = resumeRepo.findById(id);
-        resume.setPlacementNotes(resumeNotes);
+    @ResponseBody
+    public void uploadResumeNotes(@RequestBody PlacementResumeData data) {
+        Resume resume = resumeRepo.findById(data.getResumeId());
+        resume.setPlacementNotes(data.getUrlORNotes());
         resumeRepo.save(resume);
-        return "redirect:/resume";
     }
+    // placement form submission for resume notes - not an endpoint
+//    @PostMapping("resume/notes")
+//    public String uploadResumeNotes(@RequestParam(name = "resumeNotesUpload") String resumeNotes,
+//                                    @RequestParam(name = "resumeNotesId") long id) {
+//        Resume resume = resumeRepo.findById(id);
+//        resume.setPlacementNotes(resumeNotes);
+//        resumeRepo.save(resume);
+//        return "redirect:/resume";
+//    }
 }
