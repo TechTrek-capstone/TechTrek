@@ -23,10 +23,10 @@
 
         <div th:if="${user.userPerm == 'student'}">
 
-            <div class="d-flex justify-content-center mb-n4">
+            <div id="toolbar">
                 <!-- Upload TBlock Form -->
                 <form th:action="@{/resume}" th:method="POST" id="resumeUploadTBlock" class="d-inline mr-4 pt-1">
-                    <button type="button" class="btn btn-primary badge-pill uploadTBlockResume"
+                    <button type="button" class="btn btn-primary uploadTBlockResume"
                             style="font-size: 1.1rem" value="tblock">
                         <i class="fas fa-arrow-circle-up"></i>
                         T-Block
@@ -35,13 +35,12 @@
                     <input type="hidden" name="resumeTitle" class="resumeTitle"/>
                     <input type="hidden" name="resumeType" value="t-block"/>
                 </form>
-                <h1>Upload</h1>
                 <!-- Upload Vertical Form -->
                 <form th:action="@{/resume}" th:method="POST" id="resumeUploadVertical" class="d-inline ml-4 pt-1">
-                    <button type="button" class="btn btn-primary badge-pill uploadVerticalResume"
+                    <button type="button" class="btn btn-primary uploadVerticalResume"
                             style="font-size: 1.1rem">
-                        Vertical
                         <i class="fas fa-arrow-circle-up"></i>
+                        Vertical
                     </button>
                     <input type="hidden" name="resumeURL" class="resumeURL"/>
                     <input type="hidden" name="resumeTitle" class="resumeTitle"/>
@@ -76,12 +75,12 @@
                         <!-- Filename -->
                         <td>
                             <!-- View uploaded File -->
-                            <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem">
-                                <i class="fas fa-binoculars pt-1 ml-2"></i>
+                            <a th:href="${resume.link}" target="_blank" style="font-size: 1.5rem; text-decoration: none">
+                                <i class="fas fa-binoculars pt-1 mx-2"></i>
                             </a>
                             <!-- Delete uploaded File -->
                             <button data-toggle="modal" data-target="#deleteResumeModal"
-                                    class="btn btn-link text-danger trashcan mt-n2"
+                                    class="btn btn-link text-danger trashcan mt-n2 ml-n2"
                                     th:data-id="${resume.id}" th:unless="${resume.status == 'Reviewed!'}">
                                 <i class="fa fa-trash" style="font-size: 1.5rem"></i>
                             </button>
@@ -108,7 +107,7 @@
                         <td class="text-center" style="font-size: 1rem">
                             <div th:text="${resume.status}" class="status badge badge-pill badge-success"
                                  th:if="${resume.status == 'Reviewed!'}" style="font-size: 1.2rem"></div>
-                            <div th:text="${resume.status}" class="status badge badge-pill badge-warning"
+                            <div th:text="${resume.status}" class="status badge badge-pill background-gray-color"
                                  th:unless="${resume.status == 'Reviewed!'}" style="font-size: 1.2rem"></div>
                         </td>
                     </tr>
@@ -117,7 +116,7 @@
             </table>
 
             <!-- Resume tips/tricks. download for example resume -->
-            <h1 class="text-center my-5">Resume Builder Tips</h1>
+            <h1 class="text-left my-5">Resume Builder Tips</h1>
 
             <p class="ml-3">
                 During your time at Codeup, you will build at least 2 different types of resumes, a “T-Block” and a
@@ -452,10 +451,10 @@
 
 
             <!-- Form to submit resume notes -->
-            <form th:action="@{resume/notes}" method="post" id="uploadResumeNotes">
-                <input type="hidden" name="resumeNotesUpload" id="resumeNotesUpload">
-                <input type="hidden" name="resumeNotesId" id="resumeNotesId">
-            </form>
+<!--            <form th:action="@{resume/notes}" method="post" id="uploadResumeNotes">-->
+<!--                <input type="hidden" name="resumeNotesUpload" id="resumeNotesUpload">-->
+<!--                <input type="hidden" name="resumeNotesId" id="resumeNotesId">-->
+<!--            </form>-->
         </div>
     </main>
 </div>
