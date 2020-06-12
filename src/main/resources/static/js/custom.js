@@ -96,11 +96,19 @@ $(document).ready(function () {
         modal.find('#deleteResumeId').val(resumeId); // sets the modal's hidden input to resumeId, let's the controller know which resume to delete
     });
 
+    // View Notes Modal
+    $("#studentNotesModal").on('show.bs.modal', function (e) {
+        let button = $(e.relatedTarget); // Button that triggered the modal
+        let placementNotes = button.data('notes'); // Extract info from data-* attributes
+
+        // Update the modal's content
+        let modal = $(this);
+        modal.find('.placement-resume-notes').html(placementNotes);
+    });
+
 
 
     // ################# PLACEMENT FUNCTIONS START #####################
-
-
 
     // DROPDOWN - populate 2nd dropdown and resume table for cohort
     $("#cohort-dropdown").change(function () {
@@ -171,14 +179,14 @@ $(document).ready(function () {
                     + "<td>" + data[i].type + "</td>"
                     + "<td><button type='button' class='btn uploadResumeRevision' value='" + data[i].id + "'>";
 
-                    // if placement has already submitted a revision, checkmark populates here
-                    let btnCheck1 = addGreenCheckOrGrayArrow(data[i].revision, resumeData);
+
+                    let btnCheck1 = addGreenCheckOrGrayArrow(data[i].revision, resumeData); // if placement has already submitted a revision, checkmark populates here
                     resumeData = btnCheck1;
 
                     resumeData += "<td><button type='button' class='btn uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='" + data[i].id + "'>";
 
-                    // same as above, but just checking for notes
-                    let btnCheck2 = addGreenCheckOrGrayArrow(data[i].placementNotes, resumeData);
+
+                    let btnCheck2 = addGreenCheckOrGrayArrow(data[i].placementNotes, resumeData); // same as above, but just checking for notes
                     resumeData = btnCheck2;
 
                     studentResumes.empty(); // empty the table
@@ -248,11 +256,6 @@ function submitResumeRevision(fsURL, resumeId) {
         data: JSON.stringify(data)
     })
 }
-
-// STUDENT - pull up modal, assign placement notes   html here
-$(document).on('click', '.resumeNotes', function () {
-    $(".placement-resume-notes").html($(this).val());
-});
 
 let btn;
 // PLACEMENT - btn pulls up #msgModal - we're assigning the modal's send btn-value to this btn's value (resume id)
