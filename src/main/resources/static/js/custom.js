@@ -1,9 +1,10 @@
 $(document).ready(function () {
 
-    // globally scoped variables for student resume submissions
+    // Globally-scoped variables for student resume submissions
     let fsURL;
     let fsTitle;
 
+    // START PROGRESS BAR #####################################
     // Progress bar for password strength on registration
     $.strength = function (element, password) {
         var desc = [{
@@ -51,11 +52,14 @@ $(document).ready(function () {
             $.strength($("#progress-bar"), $(this).val());
         });
     });
+    // END PROGRESS BAR ####################################
 
-    // Upload resume on btn click
+
+
+    // Student resume upload on tblock / vertical btn click
     $(".uploadTBlockResume, .uploadVerticalResume").click(function () {
         let client = filestack.init(fileStackKey);
-        let resumeType = $(this).val();
+        let resumeType = $(this).val(); // get type of resume from btn value
 
         client
             .pick({
@@ -63,28 +67,34 @@ $(document).ready(function () {
             })
             .then(function (result) {
                 let resultJSON = JSON.parse(JSON.stringify(result));
-                // store resume url in variable, pass that variable as a value to the view
-                fsURL = resultJSON.filesUploaded[0].url;
-                fsTitle = resultJSON.filesUploaded[0].filename;
-                $(".resumeURL").val(fsURL);
-                $(".resumeTitle").val(fsTitle);
 
-                if (resumeType === "tblock") {
-                    $("#resumeUploadTBlock").submit();
-                } else {
-                    $("#resumeUploadVertical").submit();
-                }
+                fsURL = resultJSON.filesUploaded[0].url; // store resume url in variable
+                fsTitle = resultJSON.filesUploaded[0].filename; // same as above, but with the filename
+
+                $(".resumeURL").val(fsURL); // pass variable value to '.resumeURL' for form submission
+                $(".resumeTitle").val(fsTitle); // same as above, but with filename
+
+                uploadStudentResume(resumeType); // call upload function
             })
     });
 
+    // Upload resume - functions checks the type of resume, and submits the appropriate form
+    function uploadStudentResume(resumeType) {
+        if (resumeType === "tblock") {
+            $("#resumeUploadTBlock").submit();
+        } else {
+            $("#resumeUploadVertical").submit();
+        }
+    }
+
     // Delete Resume Modal
     $('#deleteResumeModal').on('show.bs.modal', function (e) {
-        var button = $(e.relatedTarget); // Button that triggered the modal
-        var resumeId = button.data('id'); // Extract info from data-* attributes
+        let button = $(e.relatedTarget); // Button that triggered the modal
+        let resumeId = button.data('id'); // Extract info from data-* attributes
 
         // Update the modal's content
-        var modal = $(this);
-        modal.find('#deleteResumeId').val(resumeId);
+        let modal = $(this);
+        modal.find('#deleteResumeId').val(resumeId); // sets the modal's hidden input to resumeId, let's the controller know which resume to delete
     });
 
     // Ajax GET to populate student dropdown based off of cohort
