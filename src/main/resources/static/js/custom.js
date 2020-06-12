@@ -221,10 +221,9 @@ $(document).on('click', '.resumeNotes', function() {
 });
 
 let btn;
-// PLACEMENT - btn pulls up modal - we're assigning the modal's send btn-value to this btn's value (resume id)
+// PLACEMENT - btn pulls up #msgModal - we're assigning the modal's send btn-value to this btn's value (resume id)
 $(document).on('click', '.uploadResumeNotes', (function () {
     $("#placementResumeNotesId").val($(this).val());
-    $(".placement-resume-notes").empty();
     btn = $(this);
 }));
 
@@ -232,9 +231,11 @@ $(document).on('click', '.uploadResumeNotes', (function () {
 $(document).on('click', '.sendNotes', (function () {
     let resumeId = $(this).val();
     let resumeNotes = $("#placement-resume-notes").val();
+    $("#placement-resume-notes").val('');
 
     submitStudentNotes(resumeNotes, resumeId);
     btn.replaceWith("<button type='button' class='btn uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='"+resumeId+"'><i class='fa fa-check-circle upload-success-circle'></i></button>");
+
 }));
 
 // PLACEMENT - Ajax POST to submit student notes on their resume

@@ -198,10 +198,6 @@ table {
     font-size: 1.3rem;
 }
 
-#resume-notes, #placement-resume-notes {
-    height: 300px;
-}
-
 .fa-binoculars {
     color: var(--company-pink);
 }
