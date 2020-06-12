@@ -4,7 +4,7 @@ $(document).ready(function () {
     let fsURL;
     let fsTitle;
 
-    // START PROGRESS BAR #####################################
+    // ################### START PROGRESS BAR ######################
     // Progress bar for password strength on registration
     $.strength = function (element, password) {
         var desc = [{
@@ -52,8 +52,7 @@ $(document).ready(function () {
             $.strength($("#progress-bar"), $(this).val());
         });
     });
-    // END PROGRESS BAR ####################################
-
+    // #################### END PROGRESS BAR #########################
 
 
     // Student resume upload on tblock / vertical btn click
@@ -78,7 +77,7 @@ $(document).ready(function () {
             })
     });
 
-    // Upload resume - functions checks the type of resume, and submits the appropriate form
+    // Upload resume - function checks the type of resume, and submits the appropriate form
     function uploadStudentResume(resumeType) {
         if (resumeType === "tblock") {
             $("#resumeUploadTBlock").submit();
@@ -95,6 +94,25 @@ $(document).ready(function () {
         // Update the modal's content
         let modal = $(this);
         modal.find('#deleteResumeId').val(resumeId); // sets the modal's hidden input to resumeId, let's the controller know which resume to delete
+    });
+
+
+
+    // ################# PLACEMENT FUNCTIONS START #####################
+
+
+
+    // DROPDOWN - populate 2nd dropdown and resume table for cohort
+    $("#cohort-dropdown").change(function () {
+        let cohortId = $(this).val();
+        studentDropdownAJAX(cohortId);
+        populateResumesTable("cohort", cohortId);
+    });
+
+    // DROPDOWN - populates resume table based off of student dropdown
+    $("#student-dropdown").change(function () {
+        let studentId = $(this).val();
+        populateResumesTable("student", studentId);
     });
 
     // Ajax GET to populate student dropdown based off of cohort
@@ -119,8 +137,10 @@ $(document).ready(function () {
         });
     }
 
+
+    // ################# RENDER TABLE ########################
     // function is called when either the cohort or student dropdown is selected
-    function populateResumesTableAJAX(cohortOrStudent, Id) {
+    function populateResumesTable(cohortOrStudent, Id) {
 
         let url = "";
         // figuring out which dropdown was clicked, and setting the appropriate url
@@ -129,60 +149,61 @@ $(document).ready(function () {
         } else {
             url = 'resume/student/' + Id;
         }
+        resumesTableAjaxGET(url); // call function to populate the resume table
+    }
 
-        // Ajax GET to populate table
+    // ################# HTML FORMATTING FOR TABLE COMES FROM HERE #######################
+    function resumesTableAjaxGET(url) {
         $.ajax({
             type: 'GET',
             url: url,
             success: function (data) {
-                let studentResumes = $(".student-resumes");
-                let resumeData;
-
+                let studentResumes = $(".student-resumes"); // targeting the t-body
+                let resumeData; // resetting our data to pass into the table
 
                 for (let i = 0; i < data.length; i++) {
                     resumeData +=
-                        "<tr><td class='w-50'><a href='" + data[i].link + "' target=_blank>" + data[i].title + "</a></td>"
-                        + "<td>" + data[i].type + "</td>"
-                        + "<td><button type='button' class='btn uploadResumeRevision' value='" + data[i].id + "'>";
+
+                    // html generation starts here - creating 1 row
+                    // LINK and FILENAME -> TYPE -> UPLOAD REVISION BTN -> UPLOAD NOTES BTN
+
+                    "<tr><td class='w-50'><a href='" + data[i].link + "' target=_blank>" + data[i].title + "</a></td>"
+                    + "<td>" + data[i].type + "</td>"
+                    + "<td><button type='button' class='btn uploadResumeRevision' value='" + data[i].id + "'>";
 
                     // if placement has already submitted a revision, checkmark populates here
-                    if (data[i].status === "Reviewed!") {
-                        resumeData += "<i class = 'fas fa-check-circle upload-success-circle'></i></button></td>";
-                    } else {
-                        resumeData += "<i class = 'fas fa-arrow-circle-up need-to-upload'></i></button></td>";
-                    }
+                    let btnCheck1 = addGreenCheckOrGrayArrow(data[i].revision, resumeData);
+                    resumeData = btnCheck1;
 
-                    // same as above, but just checking for notes
                     resumeData += "<td><button type='button' class='btn uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='" + data[i].id + "'>";
 
-                    if (data[i].placementNotes !== null) {
-                        resumeData += "<i class='fa fa-check-circle upload-success-circle'></i></button></td></tr>";
-                    } else {
-                        resumeData += "<i class = 'fas fa-arrow-circle-up need-to-upload'></i></button></td></tr>";
-                    }
-                }
+                    // same as above, but just checking for notes
+                    let btnCheck2 = addGreenCheckOrGrayArrow(data[i].placementNotes, resumeData);
+                    resumeData = btnCheck2;
 
-                studentResumes.empty();
-                studentResumes.append(resumeData);
+                    studentResumes.empty(); // empty the table
+                    studentResumes.append(resumeData); // add updated data to the table
+                }
             },
             error: function () {
                 alert("Error loading table.");
             }
-        });
+        })
     }
 
-    // DROPDOWN - Populate 2nd dropdown and resume for cohort
-    $("#cohort-dropdown").change(function () {
-        let cohortId = $(this).val();
-        studentDropdownAJAX(cohortId);
-        populateResumesTableAJAX("cohort", cohortId);
-    });
+    // Changes icon based on db values
+    function addGreenCheckOrGrayArrow(val, resumeData) {
+        let iconCheck = resumeData;
 
-    // DROPDOWN - populate resume links based off of student dropdown
-    $("#student-dropdown").change(function () {
-        let studentId = $(this).val();
-        populateResumesTableAJAX("student", studentId);
-    });
+        if (val !== null) {
+            // if there's something in the db for the val passed in, icon becomes green checkmark
+            iconCheck += "<i class = 'fas fa-check-circle upload-success-circle'></i></button></td>";
+        } else {
+            // if nothing in db, icon becomes gray upload arrow
+            iconCheck += "<i class = 'fas fa-arrow-circle-up need-to-upload'></i></button></td>";
+        }
+        return iconCheck;
+    }
 });
 
 // Placement - submit resume revisions
@@ -205,8 +226,8 @@ $(document).on('click', '.uploadResumeRevision', (function () {
         .then(function () {
             // call ajax POST to submit data
             submitResumeRevision(fsURL, resumeId);
-        }).then(function() {
-            btn.replaceWith("<button type='button' class='btn uploadResumeRevision' value='"+resumeId+"'><i class='fa fa-check-circle upload-success-circle'></i></button>");
+        }).then(function () {
+        btn.replaceWith("<button type='button' class='btn uploadResumeRevision' value='" + resumeId + "'><i class='fa fa-check-circle upload-success-circle'></i></button>");
     })
 }));
 
@@ -229,7 +250,7 @@ function submitResumeRevision(fsURL, resumeId) {
 }
 
 // STUDENT - pull up modal, assign placement notes   html here
-$(document).on('click', '.resumeNotes', function() {
+$(document).on('click', '.resumeNotes', function () {
     $(".placement-resume-notes").html($(this).val());
 });
 
@@ -247,7 +268,7 @@ $(document).on('click', '.sendNotes', (function () {
     $("#placement-resume-notes").val('');
 
     submitStudentNotes(resumeNotes, resumeId);
-    btn.replaceWith("<button type='button' class='btn uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='"+resumeId+"'><i class='fa fa-check-circle upload-success-circle'></i></button>");
+    btn.replaceWith("<button type='button' class='btn uploadResumeNotes' data-toggle='modal' data-target='#msgModal' value='" + resumeId + "'><i class='fa fa-check-circle upload-success-circle'></i></button>");
 
 }));
 
