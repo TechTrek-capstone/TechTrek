@@ -103,14 +103,15 @@ $(document).ready(function () {
             type: 'GET',
             url: '/resume/' + cohortId,
             success: [function (data) {
-                let student = $("#student-dropdown"), option = "<option disabled selected>Select Student</option>";
+                let student = $("#student-dropdown"), option = "<option disabled selected>Select Student</option>"; // targeting student dropdown
 
                 for (let i = 0; i < data.length; i++) {
+                    // generating the html for our view - every option has a value with the student's id
                     option += "<option value='" + data[i].id + "'>" + data[i].userfirstname + ' ' + data[i].lastName + "</option>";
                 }
 
-                student.empty();
-                student.append(option);
+                student.empty(); // emptying the dropdown so we don't create duplicate entries
+                student.append(option); // appending the options to our student dropdown
             }],
             error: function () {
                 alert("Error finding students.");
@@ -118,20 +119,22 @@ $(document).ready(function () {
         });
     }
 
-    //Ajax GET for resumes (populates table whether only a cohort is selected, or a student)
+    // function is called when either the cohort or student dropdown is selected
     function populateResumesTableAJAX(cohortOrStudent, Id) {
-        let url = "";
 
+        let url = "";
+        // figuring out which dropdown was clicked, and setting the appropriate url
         if (cohortOrStudent === "cohort") {
             url = 'resume/cohort/' + Id;
         } else {
             url = 'resume/student/' + Id;
         }
 
+        // Ajax GET to populate table
         $.ajax({
             type: 'GET',
             url: url,
-            success: [function (data) {
+            success: function (data) {
                 let studentResumes = $(".student-resumes");
                 let resumeData;
 
@@ -161,7 +164,7 @@ $(document).ready(function () {
 
                 studentResumes.empty();
                 studentResumes.append(resumeData);
-            }],
+            },
             error: function () {
                 alert("Error loading table.");
             }
