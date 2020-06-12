@@ -103,7 +103,7 @@
                                 <div id="userInfoBlock">
                                     <!-- Email -->
                                     <span th:unless="${user.email == ''} OR ${user.email == null}">
-                                        <strong>Email: </strong><span th:text="${user.email}"></span>
+                                        <strong>Email: </strong><a class="text-decoration-none" th:href="'mailto:' + ${user.email}"><span th:text="${user.email}"></span></a>
                                     </span>
 
                                     <!-- Phone number -->
