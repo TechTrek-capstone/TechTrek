@@ -14,8 +14,6 @@
     <nav th:replace="partials/partials :: studentNav" th:if="${user.userPerm == 'student'}"></nav>
     <nav th:replace="partials/partials :: adminNav" th:if="${user.userPerm == 'admin'}"></nav>
     <main class="page-content">
-
-
         <div class="media">
             <img class="align-self-start mr-3" style="max-width:10rem;"
                  th:if="${job.getCompany().getLogoImg() == null} OR ${job.getCompany().getLogoImg() == ''}"
@@ -31,35 +29,21 @@
                 </span>
                 <p> Listed: <span th:text="${#dates.format(job.listingDate, 'MM-dd-yyyy')}"></span></p>
 
-                <p th:utext="${job.description}">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu
-                    leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                <p th:utext="${job.description}"></p>
             </div>
-            <!--            <a th:href="@{${job.applyUrl}}" target="_blank">-->
-            <!--                <button type="button" class="btn btn-primary btn-lg btn-block">Apply</button>-->
-            <!--            </a>-->
-            <!--            <a th:href="@{|/jobs/${job.id}/edit|}" th:if="${user.userPerm == 'admin'}">-->
-            <!--                <button type="button" class="btn btn-primary btn-lg">Edit</button>-->
-            <!--            </a>-->
-
-            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="btn-group mr-2" role="group" aria-label="First group">
-                    <a th:href="@{${job.applyUrl}}" target="_blank">
+            <div class="btn-toolbar" >
+                <div class="btn-group mr-2">
+                    <a th:href="@{${job.applyUrl}}" target="_blank" class="text-decoration-none">
                         <button type="button" class="btn btn-primary">APPLY</button>
                     </a>
-
-
                 </div>
-                <div class="btn-group mr-2" role="group" aria-label="Second group" th:if="${user.userPerm == 'admin'}">
-                    <a th:href="@{|/jobs/${job.id}/edit|}">
+                <div class=" mr-2" th:if="${user.userPerm == 'admin'}">
+                    <a th:href="@{|/jobs/${job.id}/edit|}" class="text-decoration-none">
                         <button type="button" class="btn btn-secondary">EDIT</button>
                     </a>
-                    <button data-toggle="modal" data-target="#modalForJobDelete" type="button" class="btn btn-danger">
-                        DELETE
-                    </button>
+                    <button data-toggle="modal" data-target="#modalForJobDelete" type="button" class="btn btn-danger ">DELETE</button>
                 </div>
-
             </div>
-
         </div>
         <!--        <button th:if="${user.userPerm == 'admin'}" data-toggle="modal" data-target="#modalForJobDelete"-->
         <!--                class="dropdown-item btn btn-lg btn-danger">Delete-->
